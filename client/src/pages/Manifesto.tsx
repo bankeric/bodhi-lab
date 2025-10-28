@@ -4,14 +4,22 @@ export default function Manifesto() {
       <article className="space-y-12 font-serif [&_p]:text-justify [&_li]:text-justify [&_h1]:font-serif [&_h2]:font-serif [&_h3]:font-serif">
         {/* Title Section */}
         <header className="text-center space-y-6 pb-8 border-b-2 border-border">
-          <h1 className="font-serif text-3xl md:text-4xl font-bold text-foreground leading-tight uppercase tracking-wide" data-testid="heading-manifesto-title">
+          <h1 className="font-serif text-4xl md:text-5xl font-bold text-foreground leading-tight" data-testid="heading-manifesto-title">
             Awakening Ecosystem: The Manifesto
           </h1>
-          <p className="font-serif text-base md:text-lg text-foreground pt-4" data-testid="text-manifesto-subtitle">
+          <p className="font-serif text-lg md:text-xl text-foreground italic pt-2" data-testid="text-manifesto-subtitle">
             An Agentic Social Network for Collective Awakening
           </p>
-          <p className="font-serif text-base text-foreground" data-testid="text-organization">
-            Giác Ngộ Initiative, 2025
+          <div className="space-y-1 pt-4">
+            <p className="font-serif text-base text-foreground" data-testid="text-organization">
+              Giác Ngộ Initiative
+            </p>
+            <p className="font-serif text-base text-foreground" data-testid="text-lab">
+              Dharma Technology Lab
+            </p>
+          </div>
+          <p className="font-serif text-base text-foreground pt-2" data-testid="text-date">
+            January 2025
           </p>
         </header>
 
