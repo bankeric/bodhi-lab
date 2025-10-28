@@ -40,12 +40,12 @@ export function DocsNav({ navigation, activeSection, onSectionClick }: DocsNavPr
     <div className="h-full flex flex-col">
       <div className="p-4 border-b space-y-4">
         <Link href="/">
-          <a className="flex items-center gap-2 group" data-testid="link-home">
+          <div className="flex items-center gap-2 group cursor-pointer" data-testid="link-home">
             <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center group-hover-elevate transition-all">
               <Sparkles className="w-4 h-4 text-primary" />
             </div>
             <span className="font-serif text-lg font-bold text-primary">Giác Ngộ</span>
-          </a>
+          </div>
         </Link>
         
         <div className="relative">
@@ -108,14 +108,14 @@ export function DocsNav({ navigation, activeSection, onSectionClick }: DocsNavPr
         </div>
         <div className="space-y-1">
           <Link href="/community">
-            <a className="block font-serif text-sm text-foreground hover:text-primary transition-colors">
+            <span className="block font-serif text-sm text-foreground hover:text-primary transition-colors cursor-pointer">
               Community
-            </a>
+            </span>
           </Link>
           <Link href="/library">
-            <a className="block font-serif text-sm text-foreground hover:text-primary transition-colors">
+            <span className="block font-serif text-sm text-foreground hover:text-primary transition-colors cursor-pointer">
               Library
-            </a>
+            </span>
           </Link>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { DocsNav } from "@/components/DocsNav";
-import { AgentCard } from "@/components/AgentCard";
+import { CompactAgentCard } from "@/components/CompactAgentCard";
 import { AgentDialog } from "@/components/AgentDialog";
 import { PricingTable } from "@/components/PricingTable";
 import { Button } from "@/components/ui/button";
@@ -153,16 +153,16 @@ export default function AgentsDocs() {
                   Agent Models
                 </h2>
                 <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">
-                  Each Buddhist agent is carefully designed with specific system prompts, methodologies, and purposes. Select an agent that resonates with your current path.
+                  Each Buddhist agent is carefully designed with specific system prompts, methodologies, and purposes. Select an agent to view full details.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {buddhistAgents.map((agent) => (
-                  <AgentCard
+                  <CompactAgentCard
                     key={agent.id}
                     agent={agent}
-                    onViewDetails={handleViewDetails}
+                    onClick={handleViewDetails}
                   />
                 ))}
               </div>
