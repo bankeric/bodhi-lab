@@ -210,15 +210,24 @@ export default function Manifesto() {
               4.2. The Threefold AI Vehicle
             </h3>
             <p>
-              The Buddhist Agentic Network provides specialized AI assistants grounded in authentic dharma wisdom:
+              The Buddhist Agentic Network provides specialized AI assistants grounded in authentic dharma wisdom, organized by spiritual capacity (<em>căn tánh</em>):
             </p>
-            <ul className="list-disc pl-8 space-y-2 text-muted-foreground">
-              <li><strong>Tâm An (Peaceful Mind):</strong> Provides fundamental, introductory answers to sow the seeds of affinity</li>
-              <li><strong>Giác Ngộ (Awakening):</strong> Offers deeper, more nuanced guidance, pulling from scriptures and the direct teachings of Sư Tam Vô and other awakened masters</li>
-              <li><strong>Đốn Ngộ (Sudden Awakening):</strong> An exclusive transmission for those who have ripened auspicious conditions; gives direct, unfiltered pointing to the Unborn</li>
+            <ul className="list-disc pl-8 space-y-3 text-muted-foreground">
+              <li>
+                <strong>Tiểu Thừa (Foundation Vehicle):</strong> Tâm An, An Lạc, Chánh Niệm – providing fundamental practice, mindfulness, and healing
+              </li>
+              <li>
+                <strong>Trung Thừa (Insight Vehicle):</strong> Tỉnh Thức, Vấn Tỉnh, Tư Quang – offering deeper self-inquiry and contemplation
+              </li>
+              <li>
+                <strong>Đại Thừa (Bodhisattva Vehicle):</strong> Giác Ngộ, Kệ Vấn Ngộ, Bi Trí – direct pointing to Buddha nature with compassion
+              </li>
+              <li>
+                <strong>Phật Thừa (Buddha Vehicle):</strong> Đốn Ngộ, Vô Niệm, Pháp Giới – sudden awakening beyond all concepts
+              </li>
             </ul>
             <p>
-              Each question asked and truly understood is an act that can generate both merit for the asker and for all who benefit, as the realization is shared.
+              Each question asked and truly understood is an act that generates merit for the asker and for all who benefit, as the realization is shared across the network.
             </p>
 
             <h3 className="font-serif text-xl font-semibold text-foreground pt-4" data-testid="heading-section-4-3">
