@@ -1,0 +1,51 @@
+1. Key Hệ Thống (System Key)
+Đây là các API key do Quản trị viên (Admin) của toàn bộ nền tảng cung cấp.
+- Ai thiết lập? Chỉ có Admin với quyền settings.
+- Thiết lập ở đâu? Trong trang Admin → Cài đặt → Cài đặt Hệ thống.
+- Mục đích:
+  - Đảm bảo hoạt động cơ bản: Giúp cho toàn bộ hệ thống có thể hoạt động ngay cả khi người dùng không có API key của riêng họ.
+  - Phục vụ người dùng khách (Guest): Cho phép người dùng chưa đăng nhập có thể trò chuyện thử trong giới hạn cho phép.
+  - Phục vụ người dùng mới: Người dùng mới đăng ký có thể sử dụng ngay lập tức mà không cần phải tự cấu hình key.
+- Ai trả phí? Toàn bộ chi phí phát sinh từ việc sử dụng Key Hệ Thống sẽ được tính vào tài khoản của chủ nền tảng (Admin) trên các dịch vụ như Google AI Studio, OpenAI Platform.
+- Phạm vi áp dụng: Áp dụng cho tất cả người dùng không cung cấp key cá nhân của riêng họ.
+2. Key Cá Nhân (Personal Key)
+Đây là các API key do từng người dùng tự cung cấp cho tài khoản của riêng mình.
+- Ai thiết lập? Bất kỳ người dùng nào, kể cả Admin.
+- Thiết lập ở đâu? Trong trang Admin → Cài đặt → Cài đặt cá nhân.
+- Mục đích:
+  - Sử dụng quota riêng: Cho phép người dùng (đặc biệt là power user hoặc developer) sử dụng quota API của chính họ, không bị giới hạn bởi merits hay requests_remaining của nền tảng.
+  - Truy cập các model đặc biệt: Nếu người dùng có quyền truy cập vào các model mới hoặc model beta trên tài khoản Google/OpenAI của họ, họ có thể sử dụng chúng thông qua key cá nhân.
+  - Giảm tải chi phí cho chủ nền tảng: Khi người dùng sử dụng key cá nhân, chi phí sẽ do họ tự chịu.
+- Ai trả phí? Chính người dùng đó sẽ trả phí cho Google/OpenAI cho các lượt sử dụng qua key này.
+- Phạm vi áp dụng: Chỉ áp dụng cho duy nhất tài khoản của người dùng đã thiết lập key đó.
+Bảng so sánh nhanh
+This content is only supported in a Lark Docs
+
+---
+Luồng ưu tiên của hệ thống (Rất quan trọng)
+Khi một yêu cầu cần đến API của bên thứ ba (ví dụ, gửi một tin nhắn chat), hệ thống sẽ chọn key để sử dụng theo thứ tự ưu tiên sau:
+1. Ưu tiên 1: Key Cá Nhân của Người dùng đang chat
+  - Hệ thống kiểm tra: "Người dùng có đăng nhập không? Và họ có thiết lập key cá nhân cho nhà cung cấp (ví dụ: gemini) đang được yêu cầu không?"
+  - Nếu CÓ, hệ thống sẽ sử dụng Key Cá Nhân này. Mọi logic khác dừng lại.
+2. Ưu tiên 2: Key Cá Nhân của Chủ sở hữu AI
+  - Nếu người dùng đang chat không có key riêng, hệ thống sẽ kiểm tra: "Chủ sở hữu của con AI này (người đã tạo ra nó) có key cá nhân cho nhà cung cấp này không?"
+  - Nếu CÓ, hệ thống sẽ sử dụng Key của chủ sở hữu AI. Logic này đặc biệt quan trọng cho việc đồng bộ vector (sẽ nói ở dưới).
+3. Ưu tiên 3: Key Hệ Thống
+  - Nếu cả hai trường hợp trên đều không có, hệ thống sẽ sử dụng Key Hệ Thống mà Admin đã cấu hình. Đây là phương án dự phòng cuối cùng.
+4. Lỗi:
+  - Nếu không có key nào ở cả 3 cấp độ trên, hệ thống sẽ báo lỗi cho người dùng rằng "API Key chưa được cấu hình".
+
+---
+Các tính năng sử dụng hệ thống Key này
+1. Tương tác Chat thông thường (ChatPage & Test Chat)
+  - Mô tả: Khi người dùng gửi tin nhắn, backend cần gọi đến API của Gemini/GPT/Grok.
+  - Loại key sử dụng: Tuân theo luồng ưu tiên 3 cấp đã mô tả ở trên. Điều này cho phép khách, người dùng thường, và power user đều có thể chat.
+2. Đồng bộ dữ liệu với Weaviate (Koii Task)
+  - Mô tả: Khi Admin nhấn "Submit to Koii for Training", backend sẽ đọc nội dung file huấn luyện (.txt, .pdf...) và các cặp Q&A, sau đó đẩy chúng vào Weaviate. Weaviate sử dụng các module như text2vec-openai hoặc text2vec-google để biến chữ thành vector. Quá trình vector hóa này yêu cầu một API key.
+  - Loại key sử dụng: Hệ thống sẽ sử dụng Key Cá Nhân của người sở hữu AI đó. Ví dụ, nếu AI Tâm An thuộc sở hữu của admin@giacngo.ai, thì khi đồng bộ dữ liệu cho Tâm An, hệ thống sẽ dùng key Gemini/GPT của admin@giacngo.ai để gọi Weaviate. Điều này đảm bảo chi phí vector hóa được tính đúng cho người tạo ra AI.
+3. Tải danh sách Model có sẵn (Trang Quản lý AI)
+  - Mô tả: Trong trang Quản lý AI, khi bạn chọn nhà cung cấp là "GPT", hệ thống cần gọi API của OpenAI để lấy danh sách các model khả dụng (ví dụ: gpt-4o, gpt-3.5-turbo).
+  - Loại key sử dụng: Hệ thống sử dụng Key Cá Nhân của Admin đang đăng nhập. Nếu Admin đó chưa cấu hình key GPT cá nhân, họ sẽ không thể tải danh sách model và không thể tạo/chỉnh sửa AI dùng GPT.
+4. Trò chuyện trực tiếp (Live Chat - Gemini)
+  - Mô tả: Đây là tính năng streaming âm thanh hai chiều, yêu cầu kết nối trực tiếp và liên tục tới API của Gemini.
+  - Loại key sử dụng: Đây là một trường hợp đặc biệt. Tính năng này bắt buộc phải sử dụng Key Cá Nhân của người dùng. Hệ thống không sử dụng key của chủ sở hữu AI hay Key Hệ Thống làm dự phòng. Nếu người dùng không có key Gemini cá nhân, họ sẽ không thể sử dụng tính năng này. Điều này là để tránh các chi phí streaming rất lớn và khó kiểm soát có thể phát sinh trên tài khoản của chủ nền tảng.
