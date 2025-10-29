@@ -31,7 +31,7 @@ export function DocsLayout({ children }: DocsLayoutProps) {
       title: "Merit Economy",
       icon: Coins,
       children: [
-        { id: "dao", title: "The Awakened DAO", href: "/docs/manifesto#section-4-4" },
+        { id: "dao", title: "The Mandala of Merit", href: "/docs/manifesto#section-4-4" },
         { id: "tokenomics", title: "Merit Tokenomics", href: "/docs/manifesto#section-5-2" },
         { id: "unraveling", title: "Path of Unraveling", href: "/docs/manifesto#section-6" },
       ],
