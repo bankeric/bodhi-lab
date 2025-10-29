@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 import { CompactAgentCard } from "@/components/CompactAgentCard";
 import { AgentDialog } from "@/components/AgentDialog";
-import { Search, Filter } from "lucide-react";
+import { Search, ChevronDown } from "lucide-react";
 import { buddhistAgents, vehicleInfo, type BuddhistAgent, type BuddhistVehicle } from "@shared/buddhistAgents";
 
 export default function AgentModels() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedVehicle, setSelectedVehicle] = useState<BuddhistVehicle | "all">("all");
+  const [selectedVehicles, setSelectedVehicles] = useState<Set<BuddhistVehicle>>(new Set());
   const [selectedAgent, setSelectedAgent] = useState<BuddhistAgent | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [vehicleFilterOpen, setVehicleFilterOpen] = useState(true);
 
   const filteredAgents = buddhistAgents.filter(agent => {
     const matchesSearch = 
@@ -19,7 +20,7 @@ export default function AgentModels() {
       agent.purpose.toLowerCase().includes(searchQuery.toLowerCase()) ||
       agent.monastery?.toLowerCase().includes(searchQuery.toLowerCase());
     
-    const matchesVehicle = selectedVehicle === "all" || agent.vehicle === selectedVehicle;
+    const matchesVehicle = selectedVehicles.size === 0 || selectedVehicles.has(agent.vehicle);
     
     return matchesSearch && matchesVehicle;
   });
@@ -29,8 +30,19 @@ export default function AgentModels() {
     setDialogOpen(true);
   };
 
-  const vehicleOptions: Array<{ value: BuddhistVehicle | "all", label: string }> = [
-    { value: "all", label: "All Vehicles" },
+  const toggleVehicle = (vehicle: BuddhistVehicle) => {
+    setSelectedVehicles(prev => {
+      const next = new Set(prev);
+      if (next.has(vehicle)) {
+        next.delete(vehicle);
+      } else {
+        next.add(vehicle);
+      }
+      return next;
+    });
+  };
+
+  const vehicleOptions: Array<{ value: BuddhistVehicle, label: string }> = [
     { value: "tiểu-thừa", label: "Tiểu Thừa" },
     { value: "trung-thừa", label: "Trung Thừa" },
     { value: "đại-thừa", label: "Đại Thừa" },
@@ -38,86 +50,102 @@ export default function AgentModels() {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto px-8 py-16 space-y-8">
-      <div className="space-y-4">
-        <h1 className="font-serif text-4xl font-semibold text-foreground" data-testid="heading-agent-models">
-          Agent Models
+    <div className="min-h-screen">
+      {/* Header Section - Centered */}
+      <div className="text-center py-16 px-8 space-y-6 max-w-3xl mx-auto">
+        <h1 className="font-serif text-4xl md:text-5xl font-bold text-foreground" data-testid="heading-agent-models">
+          Discover Your Agent
         </h1>
-        <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">
-          Explore Buddhist AI agents from monasteries and centers across traditions. Each agent is carefully designed with specific system prompts and methodologies. Select an agent to view full details.
+        <p className="font-serif text-base md:text-lg text-muted-foreground leading-relaxed">
+          Explore Buddhist AI agents from monasteries and centers across traditions. Each agent is carefully designed with specific system prompts and methodologies.
         </p>
-      </div>
 
-      <div className="space-y-4">
-        <div className="relative">
+        {/* Centered Search Bar */}
+        <div className="relative max-w-xl mx-auto">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input
             type="text"
-            placeholder="Search agents by name, purpose, or monastery..."
+            placeholder="Search agents..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10"
+            className="pl-10 font-serif"
             data-testid="input-search-agents"
           />
         </div>
-
-        <div className="flex items-center gap-2 flex-wrap">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Filter className="w-4 h-4" />
-            <span>Filter by vehicle:</span>
-          </div>
-          {vehicleOptions.map(option => (
-            <Badge
-              key={option.value}
-              variant={selectedVehicle === option.value ? "default" : "outline"}
-              className="cursor-pointer hover-elevate"
-              onClick={() => setSelectedVehicle(option.value)}
-              data-testid={`filter-vehicle-${option.value}`}
-            >
-              {option.label}
-            </Badge>
-          ))}
-        </div>
       </div>
 
-      {selectedVehicle !== "all" && (
-        <div className="p-6 rounded-lg border" style={{ 
-          backgroundColor: `${vehicleInfo[selectedVehicle].color}10`,
-          borderColor: `${vehicleInfo[selectedVehicle].color}40`
-        }}>
-          <h3 className="font-serif text-lg font-semibold mb-2">
-            {vehicleInfo[selectedVehicle].name} · {vehicleInfo[selectedVehicle].nameEn}
-          </h3>
-          <p className="text-sm text-muted-foreground">
-            {vehicleInfo[selectedVehicle].description}
-          </p>
-        </div>
-      )}
+      {/* Main Content - Sidebar + Grid */}
+      <div className="max-w-7xl mx-auto px-8 pb-16">
+        <div className="flex gap-8">
+          {/* Left Sidebar - Filters */}
+          <aside className="w-64 flex-shrink-0">
+            <div className="space-y-6 sticky top-8">
+              <h3 className="font-serif text-lg font-semibold text-foreground">
+                Filter Agents
+              </h3>
 
-      <div>
-        <div className="flex items-center justify-between mb-4">
-          <p className="text-sm text-muted-foreground">
-            {filteredAgents.length} {filteredAgents.length === 1 ? 'agent' : 'agents'} found
-          </p>
-        </div>
+              {/* Vehicle Filter */}
+              <div className="space-y-3">
+                <button
+                  onClick={() => setVehicleFilterOpen(!vehicleFilterOpen)}
+                  className="flex items-center justify-between w-full font-serif text-sm font-medium text-foreground hover-elevate"
+                  data-testid="button-toggle-vehicle-filter"
+                >
+                  <span>Buddhist Vehicle</span>
+                  <ChevronDown className={`w-4 h-4 transition-transform ${vehicleFilterOpen ? 'rotate-180' : ''}`} />
+                </button>
+                
+                {vehicleFilterOpen && (
+                  <div className="space-y-3 pl-1">
+                    {vehicleOptions.map(option => (
+                      <div key={option.value} className="flex items-center space-x-2">
+                        <Checkbox
+                          id={`vehicle-${option.value}`}
+                          checked={selectedVehicles.has(option.value)}
+                          onCheckedChange={() => toggleVehicle(option.value)}
+                          data-testid={`filter-vehicle-${option.value}`}
+                        />
+                        <label
+                          htmlFor={`vehicle-${option.value}`}
+                          className="font-serif text-sm text-foreground cursor-pointer"
+                        >
+                          {option.label}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </aside>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {filteredAgents.map((agent) => (
-            <CompactAgentCard
-              key={agent.id}
-              agent={agent}
-              onClick={handleViewDetails}
-            />
-          ))}
-        </div>
+          {/* Right Side - Agent Grid */}
+          <div className="flex-1 space-y-6">
+            <div className="flex items-center justify-between">
+              <p className="font-serif text-sm text-muted-foreground">
+                {filteredAgents.length} {filteredAgents.length === 1 ? 'agent' : 'agents'} found
+              </p>
+            </div>
 
-        {filteredAgents.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground">
-              No agents found matching your search criteria.
-            </p>
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+              {filteredAgents.map((agent) => (
+                <CompactAgentCard
+                  key={agent.id}
+                  agent={agent}
+                  onClick={handleViewDetails}
+                />
+              ))}
+            </div>
+
+            {filteredAgents.length === 0 && (
+              <div className="text-center py-16">
+                <p className="font-serif text-muted-foreground">
+                  No agents found matching your search criteria.
+                </p>
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
 
       <AgentDialog
