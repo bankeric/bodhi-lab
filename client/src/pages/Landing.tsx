@@ -1,9 +1,401 @@
 import { useState, useEffect, useRef } from "react";
-import { Search, ArrowRight, Sparkles, Users, Heart, Briefcase, FileText, Shield, BookOpen, MessageCircle, Calendar, HandHeart, Check, Repeat2, MoreVertical, Home, User, Bell } from "lucide-react";
+import { Search, ArrowRight, Sparkles, Users, Heart, Briefcase, FileText, Shield, BookOpen, MessageCircle, Calendar, HandHeart, Check, Repeat2, MoreVertical, Home, User, Bell, Hash } from "lucide-react";
 import { Link } from "wouter";
 import { buddhistAgents } from "@shared/buddhistAgents";
 import { TracingBeam } from "@/components/TracingBeam";
 import logoImage from "@/assets/logo.png";
+
+function SocialNetworkSection() {
+  const [activeView, setActiveView] = useState<"feed" | "search" | "profile" | "notifications">("feed");
+  
+  const trendingSuggestions = {
+    topics: ["ngã nhân", "bình yên", "giác ngộ", "từ bi", "thiền định"],
+    keywords: ["vô ngã", "nhân quả", "tứ diệu đế", "bát chánh đạo", "niết bàn"],
+    questions: [
+      "A Di Đà nghĩa là gì?",
+      "Cực Lạc Tây Phương là đâu?",
+      "Làm sao để tu tập thiền?",
+      "Vô thường có nghĩa gì?",
+      "Phật dạy gì về khổ đau?",
+    ],
+  };
+
+  return (
+    <section className="py-16 px-4 bg-[#EFE0BD]/50">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-8">
+          <h2 className="font-serif text-4xl font-bold text-[#991b1b] mb-4" data-testid="text-social-title">
+            Mạng Xã Hội Tâm Linh
+          </h2>
+          <p className="font-serif text-lg text-[#8B4513]/70 max-w-2xl mx-auto">
+            Chia sẻ và khám phá những lời dạy từ Phật pháp qua các Agent AI
+          </p>
+        </div>
+
+        {/* Navigation Buttons */}
+        <div className="bg-white/50 backdrop-blur-md border-2 border-[#8B4513]/20 rounded-2xl max-w-3xl mx-auto mb-6">
+          <div className="flex items-center justify-center gap-3 p-4">
+            <button
+              onClick={() => setActiveView("feed")}
+              className={`flex items-center justify-center w-12 h-12 rounded-2xl border-2 border-[#2c2c2c] shadow-[0_2px_0_#00000030,0_0_0_3px_#00000010_inset] transition-colors ${
+                activeView === "feed" ? "bg-[#d4af37] text-[#2c2c2c]" : "bg-[#f3ead7] text-[#1f1f1f] hover:bg-[#efe2c9]"
+              }`}
+              title="Trang chủ - Xem tất cả bài viết"
+              data-testid="button-social-home"
+            >
+              <Home className="w-5 h-5" />
+            </button>
+
+            <button
+              onClick={() => setActiveView("search")}
+              className={`flex items-center justify-center w-12 h-12 rounded-2xl border-2 border-[#2c2c2c] shadow-[0_2px_0_#00000030,0_0_0_3px_#00000010_inset] transition-colors ${
+                activeView === "search" ? "bg-[#d4af37] text-[#2c2c2c]" : "bg-[#f3ead7] text-[#1f1f1f] hover:bg-[#efe2c9]"
+              }`}
+              title="Tìm kiếm người dùng hoặc chủ đề"
+              data-testid="button-social-search"
+            >
+              <Search className="w-5 h-5" />
+            </button>
+
+            <button
+              onClick={() => setActiveView("profile")}
+              className={`flex items-center justify-center w-12 h-12 rounded-2xl border-2 border-[#2c2c2c] shadow-[0_2px_0_#00000030,0_0_0_3px_#00000010_inset] transition-colors ${
+                activeView === "profile" ? "bg-[#d4af37] text-[#2c2c2c]" : "bg-[#f3ead7] text-[#1f1f1f] hover:bg-[#efe2c9]"
+              }`}
+              title="Trang cá nhân - Xem bài viết của bạn"
+              data-testid="button-social-profile"
+            >
+              <User className="w-5 h-5" />
+            </button>
+
+            <button
+              onClick={() => setActiveView("notifications")}
+              className={`relative flex items-center justify-center w-12 h-12 rounded-2xl border-2 border-[#2c2c2c] shadow-[0_2px_0_#00000030,0_0_0_3px_#00000010_inset] transition-colors ${
+                activeView === "notifications" ? "bg-[#d4af37] text-[#2c2c2c]" : "bg-[#f3ead7] text-[#1f1f1f] hover:bg-[#efe2c9]"
+              }`}
+              title="Thông báo"
+              data-testid="button-social-notifications"
+            >
+              <Bell className="w-5 h-5" />
+              <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#991b1b] text-white text-xs rounded-full flex items-center justify-center font-semibold">
+                4
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <div className="max-w-3xl mx-auto">
+          {/* Search View */}
+          {activeView === "search" && (
+            <div className="space-y-6">
+              <input
+                type="text"
+                placeholder="Tìm kiếm người dùng hoặc chủ đề..."
+                className="w-full px-4 py-3 bg-white/50 backdrop-blur-md text-[#2c2c2c] placeholder-[#8B4513]/50 font-serif rounded-2xl border-2 border-[#8B4513]/20 focus:outline-none focus:border-[#991b1b]/40 transition-colors"
+                data-testid="input-social-search"
+              />
+
+              <div className="bg-white/50 backdrop-blur-md border-2 border-[#8B4513]/20 rounded-2xl p-5">
+                {/* Trending Topics */}
+                <div className="mb-5">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Sparkles className="w-4 h-4 text-[#991b1b]" />
+                    <h3 className="text-sm font-bold text-[#2c2c2c]">Chủ đề nổi bật</h3>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {trendingSuggestions.topics.map((topic) => (
+                      <button
+                        key={topic}
+                        className="px-4 py-2 bg-[#EFE0BD] text-[#2c2c2c] rounded-full text-sm font-medium border border-[#d4af37]/30 hover:bg-[#d4af37] hover:text-white transition-colors"
+                      >
+                        {topic}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Top Keywords */}
+                <div className="mb-5">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Hash className="w-4 h-4 text-[#d4af37]" />
+                    <h3 className="text-sm font-bold text-[#2c2c2c]">Từ khóa phổ biến</h3>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {trendingSuggestions.keywords.map((keyword) => (
+                      <button
+                        key={keyword}
+                        className="px-4 py-2 bg-white text-[#2c2c2c] rounded-full text-sm font-medium border border-[#2c2c2c]/20 hover:bg-[#2c2c2c] hover:text-white transition-colors"
+                      >
+                        #{keyword}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Common Questions */}
+                <div>
+                  <div className="flex items-center gap-2 mb-3">
+                    <MessageCircle className="w-4 h-4 text-[#991b1b]" />
+                    <h3 className="text-sm font-bold text-[#2c2c2c]">Câu hỏi thường gặp</h3>
+                  </div>
+                  <div className="space-y-2">
+                    {trendingSuggestions.questions.map((question) => (
+                      <button
+                        key={question}
+                        className="w-full text-left px-4 py-3 bg-white border border-[#991b1b]/10 rounded-xl text-sm text-[#2c2c2c] hover:bg-[#EFE0BD] hover:border-[#991b1b]/30 transition-colors"
+                      >
+                        {question}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Profile View */}
+          {activeView === "profile" && (
+            <div className="space-y-6">
+              <div className="bg-white/50 backdrop-blur-md border-2 border-[#8B4513]/20 rounded-2xl p-6">
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex items-start gap-4">
+                    <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#d4af37] to-[#8B4513] flex items-center justify-center">
+                      <Users className="w-10 h-10 text-white" />
+                    </div>
+                    <div>
+                      <h2 className="text-2xl font-bold text-[#2c2c2c] mb-1">Minh Tâm</h2>
+                      <p className="text-base text-[#8B4513]/60 mb-3">@minhtam</p>
+                      <p className="text-sm text-[#2c2c2c]/80 leading-relaxed max-w-md">
+                        Học Phật, tu tâm, sống an lạc. Chia sẻ những bài học từ Phật pháp và hành trình giác ngộ của bản thân.
+                      </p>
+                    </div>
+                  </div>
+                  <button className="px-5 py-2 bg-white border-2 border-[#2c2c2c] rounded-xl text-[#2c2c2c] shadow-[0_2px_0_#00000030,0_0_0_3px_#00000010_inset] hover:bg-[#efe2c9] transition-colors text-sm font-semibold">
+                    Chỉnh sửa
+                  </button>
+                </div>
+
+                <div className="flex items-center gap-6 pt-4 border-t border-[#8B4513]/10">
+                  <div className="text-center">
+                    <p className="text-xl font-bold text-[#2c2c2c]">24</p>
+                    <p className="text-sm text-[#8B4513]/60">Bài viết</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-xl font-bold text-[#2c2c2c]">156</p>
+                    <p className="text-sm text-[#8B4513]/60">Người theo dõi</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-xl font-bold text-[#2c2c2c]">89</p>
+                    <p className="text-sm text-[#8B4513]/60">Đang theo dõi</p>
+                  </div>
+                  <div className="flex-1 flex justify-end">
+                    <button className="px-6 py-2 bg-[#991b1b] text-white rounded-xl border-2 border-[#991b1b] shadow-[0_2px_0_#991b1b20] hover:bg-[#7a1515] transition-colors text-sm font-semibold">
+                      Theo dõi
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Notifications View */}
+          {activeView === "notifications" && (
+            <div className="bg-white/50 backdrop-blur-md border-2 border-[#8B4513]/20 rounded-2xl overflow-hidden">
+              <div className="flex items-center justify-between p-4 border-b border-[#8B4513]/10">
+                <h3 className="text-lg font-bold text-[#2c2c2c]">Thông báo</h3>
+                <button className="text-xs text-[#991b1b] hover:text-[#7a1515] font-semibold">
+                  Đánh dấu đã đọc
+                </button>
+              </div>
+
+              <div className="divide-y divide-[#8B4513]/10">
+                <div className="flex items-start gap-3 p-4 bg-[#EFE0BD]/20">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#8B4513] to-[#991b1b] flex items-center justify-center flex-shrink-0">
+                    <Users className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm text-[#2c2c2c]">
+                      <span className="font-semibold">Thanh Hương</span>{" "}
+                      <span className="text-[#8B4513]/70">đã thích bài viết của bạn</span>
+                    </p>
+                    <p className="text-xs text-[#8B4513]/50 mt-1">293 ngày trước</p>
+                  </div>
+                  <Heart className="w-4 h-4 text-[#991b1b] flex-shrink-0" />
+                  <div className="w-2 h-2 bg-[#991b1b] rounded-full flex-shrink-0 mt-2"></div>
+                </div>
+
+                <div className="flex items-start gap-3 p-4 bg-[#EFE0BD]/20">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#991b1b] to-[#d4af37] flex items-center justify-center flex-shrink-0">
+                    <Users className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm text-[#2c2c2c]">
+                      <span className="font-semibold">Tuệ Minh</span>{" "}
+                      <span className="text-[#8B4513]/70">đã bình luận về bài viết của bạn</span>
+                    </p>
+                    <p className="text-xs text-[#8B4513]/50 mt-1">293 ngày trước</p>
+                  </div>
+                  <MessageCircle className="w-4 h-4 text-[#d4af37] flex-shrink-0" />
+                  <div className="w-2 h-2 bg-[#991b1b] rounded-full flex-shrink-0 mt-2"></div>
+                </div>
+
+                <div className="flex items-start gap-3 p-4 bg-[#EFE0BD]/20">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#d4af37] to-[#8B4513] flex items-center justify-center flex-shrink-0">
+                    <Users className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm text-[#2c2c2c]">
+                      <span className="font-semibold">An Nhiên</span>{" "}
+                      <span className="text-[#8B4513]/70">đã bắt đầu theo dõi bạn</span>
+                    </p>
+                    <p className="text-xs text-[#8B4513]/50 mt-1">292 ngày trước</p>
+                  </div>
+                  <User className="w-4 h-4 text-[#2c2c2c] flex-shrink-0" />
+                  <div className="w-2 h-2 bg-[#991b1b] rounded-full flex-shrink-0 mt-2"></div>
+                </div>
+
+                <div className="flex items-start gap-3 p-4">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#8B4513] to-[#991b1b] flex items-center justify-center flex-shrink-0">
+                    <Users className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm text-[#2c2c2c]">
+                      <span className="font-semibold">Minh Đức</span>{" "}
+                      <span className="text-[#8B4513]/70">đã chia sẻ lại bài viết của bạn</span>
+                    </p>
+                    <p className="text-xs text-[#8B4513]/50 mt-1">292 ngày trước</p>
+                  </div>
+                  <Repeat2 className="w-4 h-4 text-[#d4af37] flex-shrink-0" />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Feed View (Posts) */}
+          {activeView === "feed" && (
+            <div className="space-y-6">
+              {/* Post 1 */}
+              <div className="bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 p-6 hover:shadow-xl transition-all duration-300" data-testid="card-social-post-1">
+                <div className="flex items-start gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#d4af37] to-[#8B4513] flex items-center justify-center">
+                    <Users className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2">
+                      <span className="font-serif font-bold text-[#2c2c2c]">Minh Tâm</span>
+                      <span className="font-serif text-sm text-[#8B4513]/50">@minhtam</span>
+                      <span className="text-sm text-[#8B4513]/50">·</span>
+                      <span className="font-serif text-sm text-[#8B4513]/50">2 giờ trước</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-br from-[#EFE0BD]/80 to-[#E5D5B7]/80 rounded-xl p-5 mb-4 border border-[#d4af37]/30">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Sparkles className="w-5 h-5 text-[#991b1b]" />
+                    <span className="font-serif font-bold text-[#991b1b]">Agent: Giác Ngộ</span>
+                  </div>
+                  <div className="mb-3">
+                    <p className="font-serif text-sm text-[#2c2c2c]/70 italic mb-2">
+                      "Làm thế nào để tìm thấy bình an trong tâm?"
+                    </p>
+                    <p className="font-serif text-[#2c2c2c] leading-relaxed">
+                      Bình an không phải là điều ta tìm kiếm bên ngoài, mà là trạng thái ta nuôi dưỡng từ bên trong. Khi tâm không còn bám víu vào quá khứ, không lo âu về tương lai, chỉ an trú trong giây phút hiện tại - đó chính là bình an chân thật.
+                    </p>
+                  </div>
+                </div>
+
+                <p className="font-serif text-[#2c2c2c] mb-4">
+                  Lời dạy này đã giúp tôi tìm thấy sự bình yên trong những ngày khó khăn. Cảm ơn Phật pháp! 🙏
+                </p>
+
+                <div className="flex items-center gap-6 pt-4 border-t border-[#8B4513]/20">
+                  <button className="flex items-center gap-2 text-[#8B4513]/60 hover:text-[#991b1b] transition-colors" data-testid="button-like-post-1">
+                    <Heart className="w-5 h-5" />
+                    <span className="font-serif text-sm font-semibold">15</span>
+                  </button>
+                  <button className="flex items-center gap-2 text-[#8B4513]/60 hover:text-[#991b1b] transition-colors" data-testid="button-comment-post-1">
+                    <MessageCircle className="w-5 h-5" />
+                    <span className="font-serif text-sm font-semibold">7</span>
+                  </button>
+                  <button className="flex items-center gap-2 text-[#8B4513]/60 hover:text-[#991b1b] transition-colors" data-testid="button-share-post-1">
+                    <Repeat2 className="w-5 h-5" />
+                    <span className="font-serif text-sm font-semibold">3</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Post 2 */}
+              <div className="bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 p-6 hover:shadow-xl transition-all duration-300" data-testid="card-social-post-2">
+                <div className="flex items-start gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#8B4513] to-[#991b1b] flex items-center justify-center">
+                    <Users className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2">
+                      <span className="font-serif font-bold text-[#2c2c2c]">Tuệ Minh</span>
+                      <span className="font-serif text-sm text-[#8B4513]/50">@tueminh</span>
+                      <span className="text-sm text-[#8B4513]/50">·</span>
+                      <span className="font-serif text-sm text-[#8B4513]/50">1 ngày trước</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-br from-[#EFE0BD]/80 to-[#E5D5B7]/80 rounded-xl p-5 mb-4 border border-[#d4af37]/30">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Sparkles className="w-5 h-5 text-[#991b1b]" />
+                    <span className="font-serif font-bold text-[#991b1b]">Agent: Kệ Vấn Ngộ</span>
+                  </div>
+                  <div className="mb-3">
+                    <p className="font-serif text-sm text-[#2c2c2c]/70 italic mb-2">
+                      "Thế nào là vô ngã?"
+                    </p>
+                    <p className="font-serif text-[#2c2c2c] leading-relaxed whitespace-pre-line">
+                      Vô ngã không phải là không có "ta",
+                      Mà là thấy rõ "ta" chỉ là giả danh.
+                      Năm uẩn hợp lại tạm gọi thân,
+                      Như mây trôi, như sóng vỗ bờ tan.
+                    </p>
+                  </div>
+                </div>
+
+                <p className="font-serif text-[#2c2c2c] mb-4">
+                  Bài kệ này thật sâu sắc. Mỗi lần đọc lại là một lần hiểu thêm về vô ngã.
+                </p>
+
+                <div className="flex items-center gap-6 pt-4 border-t border-[#8B4513]/20">
+                  <button className="flex items-center gap-2 text-[#991b1b] hover:text-[#7a1515] transition-colors" data-testid="button-like-post-2">
+                    <Heart className="w-5 h-5 fill-current" />
+                    <span className="font-serif text-sm font-semibold">22</span>
+                  </button>
+                  <button className="flex items-center gap-2 text-[#8B4513]/60 hover:text-[#991b1b] transition-colors" data-testid="button-comment-post-2">
+                    <MessageCircle className="w-5 h-5" />
+                    <span className="font-serif text-sm font-semibold">12</span>
+                  </button>
+                  <button className="flex items-center gap-2 text-[#8B4513]/60 hover:text-[#991b1b] transition-colors" data-testid="button-share-post-2">
+                    <Repeat2 className="w-5 h-5" />
+                    <span className="font-serif text-sm font-semibold">5</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* CTA to see full feed */}
+        <div className="text-center mt-12">
+          <button
+            className="inline-flex items-center gap-2 px-8 py-4 bg-[#991b1b] text-white rounded-full font-serif font-semibold text-lg hover:bg-[#7a1515] transition-all duration-300 shadow-lg hover:shadow-xl"
+            data-testid="button-view-full-feed"
+          >
+            Khám phá toàn bộ mạng xã hội
+            <ArrowRight className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function AnimatedPlaceholder({ texts }: { texts: string[] }) {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
@@ -476,240 +868,7 @@ export default function Landing() {
           </div>
         </section>
 
-        {/* Social Network Section */}
-        <section className="py-16 px-4 bg-[#EFE0BD]/50">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-8">
-              <h2 className="font-serif text-4xl font-bold text-[#991b1b] mb-4" data-testid="text-social-title">
-                Mạng Xã Hội Tâm Linh
-              </h2>
-              <p className="font-serif text-lg text-[#8B4513]/70 max-w-2xl mx-auto">
-                Chia sẻ và khám phá những lời dạy từ Phật pháp qua các Agent AI
-              </p>
-            </div>
-
-            {/* Navigation Buttons */}
-            <div className="bg-white/50 backdrop-blur-md border-2 border-[#8B4513]/20 rounded-2xl max-w-3xl mx-auto mb-6">
-              <div className="flex items-center justify-center gap-3 p-4">
-                <button
-                  className="flex items-center justify-center w-12 h-12 rounded-2xl border-2 border-[#2c2c2c] bg-[#d4af37] text-[#2c2c2c] shadow-[0_2px_0_#00000030,0_0_0_3px_#00000010_inset] transition-colors"
-                  title="Trang chủ - Xem tất cả bài viết"
-                  data-testid="button-social-home"
-                >
-                  <Home className="w-5 h-5" />
-                </button>
-
-                <button
-                  className="flex items-center justify-center w-12 h-12 rounded-2xl border-2 border-[#2c2c2c] bg-[#f3ead7] text-[#1f1f1f] hover:bg-[#efe2c9] shadow-[0_2px_0_#00000030,0_0_0_3px_#00000010_inset] transition-colors"
-                  title="Tìm kiếm người dùng hoặc chủ đề"
-                  data-testid="button-social-search"
-                >
-                  <Search className="w-5 h-5" />
-                </button>
-
-                <button
-                  className="flex items-center justify-center w-12 h-12 rounded-2xl border-2 border-[#2c2c2c] bg-[#f3ead7] text-[#1f1f1f] hover:bg-[#efe2c9] shadow-[0_2px_0_#00000030,0_0_0_3px_#00000010_inset] transition-colors"
-                  title="Trang cá nhân - Xem bài viết của bạn"
-                  data-testid="button-social-profile"
-                >
-                  <User className="w-5 h-5" />
-                </button>
-
-                <button
-                  className="relative flex items-center justify-center w-12 h-12 rounded-2xl border-2 border-[#2c2c2c] bg-[#f3ead7] text-[#1f1f1f] hover:bg-[#efe2c9] shadow-[0_2px_0_#00000030,0_0_0_3px_#00000010_inset] transition-colors"
-                  title="Thông báo"
-                  data-testid="button-social-notifications"
-                >
-                  <Bell className="w-5 h-5" />
-                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#991b1b] text-white text-xs rounded-full flex items-center justify-center font-semibold">
-                    4
-                  </span>
-                </button>
-              </div>
-            </div>
-
-            <div className="max-w-3xl mx-auto space-y-6">
-              {/* Post 1 */}
-              <div className="bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 p-6 hover:shadow-xl transition-all duration-300" data-testid="card-social-post-1">
-                {/* User Info */}
-                <div className="flex items-start gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#d4af37] to-[#8B4513] flex items-center justify-center">
-                    <Users className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2">
-                      <span className="font-serif font-bold text-[#2c2c2c]">Minh Tâm</span>
-                      <span className="font-serif text-sm text-[#8B4513]/50">@minhtam</span>
-                      <span className="text-sm text-[#8B4513]/50">·</span>
-                      <span className="font-serif text-sm text-[#8B4513]/50">2 giờ trước</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Agent Response Card */}
-                <div className="bg-gradient-to-br from-[#EFE0BD]/80 to-[#E5D5B7]/80 rounded-xl p-5 mb-4 border border-[#d4af37]/30">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Sparkles className="w-5 h-5 text-[#991b1b]" />
-                    <span className="font-serif font-bold text-[#991b1b]">Agent: Giác Ngộ</span>
-                  </div>
-                  <div className="mb-3">
-                    <p className="font-serif text-sm text-[#2c2c2c]/70 italic mb-2">
-                      "Làm thế nào để tìm thấy bình an trong tâm?"
-                    </p>
-                    <p className="font-serif text-[#2c2c2c] leading-relaxed">
-                      Bình an không phải là điều ta tìm kiếm bên ngoài, mà là trạng thái ta nuôi dưỡng từ bên trong. Khi tâm không còn bám víu vào quá khứ, không lo âu về tương lai, chỉ an trú trong giây phút hiện tại - đó chính là bình an chân thật.
-                    </p>
-                  </div>
-                </div>
-
-                {/* User Caption */}
-                <p className="font-serif text-[#2c2c2c] mb-4">
-                  Lời dạy này đã giúp tôi tìm thấy sự bình yên trong những ngày khó khăn. Cảm ơn Phật pháp! 🙏
-                </p>
-
-                {/* Actions */}
-                <div className="flex items-center gap-6 pt-4 border-t border-[#8B4513]/20">
-                  <button className="flex items-center gap-2 text-[#8B4513]/60 hover:text-[#991b1b] transition-colors" data-testid="button-like-post-1">
-                    <Heart className="w-5 h-5" />
-                    <span className="font-serif text-sm font-semibold">15</span>
-                  </button>
-                  <button className="flex items-center gap-2 text-[#8B4513]/60 hover:text-[#991b1b] transition-colors" data-testid="button-comment-post-1">
-                    <MessageCircle className="w-5 h-5" />
-                    <span className="font-serif text-sm font-semibold">7</span>
-                  </button>
-                  <button className="flex items-center gap-2 text-[#8B4513]/60 hover:text-[#991b1b] transition-colors" data-testid="button-share-post-1">
-                    <Repeat2 className="w-5 h-5" />
-                    <span className="font-serif text-sm font-semibold">3</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* Post 2 */}
-              <div className="bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 p-6 hover:shadow-xl transition-all duration-300" data-testid="card-social-post-2">
-                {/* User Info */}
-                <div className="flex items-start gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#8B4513] to-[#991b1b] flex items-center justify-center">
-                    <Users className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2">
-                      <span className="font-serif font-bold text-[#2c2c2c]">Tuệ Minh</span>
-                      <span className="font-serif text-sm text-[#8B4513]/50">@tueminh</span>
-                      <span className="text-sm text-[#8B4513]/50">·</span>
-                      <span className="font-serif text-sm text-[#8B4513]/50">1 ngày trước</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Agent Response Card */}
-                <div className="bg-gradient-to-br from-[#EFE0BD]/80 to-[#E5D5B7]/80 rounded-xl p-5 mb-4 border border-[#d4af37]/30">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Sparkles className="w-5 h-5 text-[#991b1b]" />
-                    <span className="font-serif font-bold text-[#991b1b]">Agent: Kệ Vấn Ngộ</span>
-                  </div>
-                  <div className="mb-3">
-                    <p className="font-serif text-sm text-[#2c2c2c]/70 italic mb-2">
-                      "Thế nào là vô ngã?"
-                    </p>
-                    <p className="font-serif text-[#2c2c2c] leading-relaxed whitespace-pre-line">
-                      Vô ngã không phải là không có "ta",
-                      Mà là thấy rõ "ta" chỉ là giả danh.
-                      Năm uẩn hợp lại tạm gọi thân,
-                      Như mây trôi, như sóng vỗ bờ tan.
-                    </p>
-                  </div>
-                </div>
-
-                {/* User Caption */}
-                <p className="font-serif text-[#2c2c2c] mb-4">
-                  Bài kệ này thật sâu sắc. Mỗi lần đọc lại là một lần hiểu thêm về vô ngã.
-                </p>
-
-                {/* Actions */}
-                <div className="flex items-center gap-6 pt-4 border-t border-[#8B4513]/20">
-                  <button className="flex items-center gap-2 text-[#991b1b] hover:text-[#7a1515] transition-colors" data-testid="button-like-post-2">
-                    <Heart className="w-5 h-5 fill-current" />
-                    <span className="font-serif text-sm font-semibold">22</span>
-                  </button>
-                  <button className="flex items-center gap-2 text-[#8B4513]/60 hover:text-[#991b1b] transition-colors" data-testid="button-comment-post-2">
-                    <MessageCircle className="w-5 h-5" />
-                    <span className="font-serif text-sm font-semibold">12</span>
-                  </button>
-                  <button className="flex items-center gap-2 text-[#8B4513]/60 hover:text-[#991b1b] transition-colors" data-testid="button-share-post-2">
-                    <Repeat2 className="w-5 h-5" />
-                    <span className="font-serif text-sm font-semibold">5</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* Post 3 */}
-              <div className="bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 p-6 hover:shadow-xl transition-all duration-300" data-testid="card-social-post-3">
-                {/* User Info */}
-                <div className="flex items-start gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#991b1b] to-[#d4af37] flex items-center justify-center">
-                    <Users className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2">
-                      <span className="font-serif font-bold text-[#2c2c2c]">Thanh Hương</span>
-                      <span className="font-serif text-sm text-[#8B4513]/50">@thanhhuong</span>
-                      <span className="text-sm text-[#8B4513]/50">·</span>
-                      <span className="font-serif text-sm text-[#8B4513]/50">3 giờ trước</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Agent Response Card */}
-                <div className="bg-gradient-to-br from-[#EFE0BD]/80 to-[#E5D5B7]/80 rounded-xl p-5 mb-4 border border-[#d4af37]/30">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Sparkles className="w-5 h-5 text-[#991b1b]" />
-                    <span className="font-serif font-bold text-[#991b1b]">Agent: Tâm An</span>
-                  </div>
-                  <div className="mb-3">
-                    <p className="font-serif text-sm text-[#2c2c2c]/70 italic mb-2">
-                      "Tôi cảm thấy lo lắng về tương lai. Phật dạy gì về điều này?"
-                    </p>
-                    <p className="font-serif text-[#2c2c2c] leading-relaxed">
-                      Lo lắng về tương lai là khổ đau mà tâm tự tạo ra. Đức Phật dạy rằng tương lai chưa đến, quá khứ đã qua, chỉ có hiện tại là thật. Hãy sống trọn vẹn trong từng khoảnh khắc, làm tốt những gì có thể làm hôm nay.
-                    </p>
-                  </div>
-                </div>
-
-                {/* User Caption */}
-                <p className="font-serif text-[#2c2c2c] mb-4">
-                  Đúng vậy, sống trong hiện tại là chìa khóa để giải thoát khỏi lo âu.
-                </p>
-
-                {/* Actions */}
-                <div className="flex items-center gap-6 pt-4 border-t border-[#8B4513]/20">
-                  <button className="flex items-center gap-2 text-[#991b1b] hover:text-[#7a1515] transition-colors" data-testid="button-like-post-3">
-                    <Heart className="w-5 h-5 fill-current" />
-                    <span className="font-serif text-sm font-semibold">8</span>
-                  </button>
-                  <button className="flex items-center gap-2 text-[#8B4513]/60 hover:text-[#991b1b] transition-colors" data-testid="button-comment-post-3">
-                    <MessageCircle className="w-5 h-5" />
-                    <span className="font-serif text-sm font-semibold">4</span>
-                  </button>
-                  <button className="flex items-center gap-2 text-[#8B4513]/60 hover:text-[#991b1b] transition-colors" data-testid="button-share-post-3">
-                    <Repeat2 className="w-5 h-5" />
-                    <span className="font-serif text-sm font-semibold">1</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* CTA to see full feed */}
-            <div className="text-center mt-12">
-              <button
-                className="inline-flex items-center gap-2 px-8 py-4 bg-[#991b1b] text-white rounded-full font-serif font-semibold text-lg hover:bg-[#7a1515] transition-all duration-300 shadow-lg hover:shadow-xl"
-                data-testid="button-view-full-feed"
-              >
-                Khám phá toàn bộ mạng xã hội
-                <ArrowRight className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-        </section>
+        <SocialNetworkSection />
 
         {/* Pricing Section */}
         <section className="py-16 px-4">
