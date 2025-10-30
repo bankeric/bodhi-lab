@@ -152,7 +152,7 @@ export default function Discovery() {
               data-testid={`button-explore-center-${center.id}`}
             >
               <Sparkles className="w-3 h-3" />
-              Khám phá
+              Cúng dường
             </button>
           </div>
         </div>
