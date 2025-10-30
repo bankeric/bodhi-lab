@@ -20,6 +20,24 @@ import avatar11 from "@assets/Master Shi HengYi_1761842289239.jpg";
 import avatar12 from "@assets/3bacb184-32f1-4538-91c4-375a56b5ea47_1761842289239.jpg";
 import avatar13 from "@assets/6bed521b-69ca-4b5d-a603-9d2361bff5f7_1761842289240.jpg";
 
+// Buddhist artwork for agent cards
+import agentArt1 from "@assets/3_1761844028297.png";
+import agentArt2 from "@assets/15_1761844089890.png";
+import agentArt3 from "@assets/4_1761844089892.png";
+import agentArt4 from "@assets/32_1761844089890.png";
+import agentArt5 from "@assets/19_1761844089892.png";
+import agentArt6 from "@assets/5_1761844089893.png";
+
+// Mapping of agent IDs to artwork images (first 6 featured agents)
+const agentArtwork: Record<string, string> = {
+  "tam-an": agentArt1,
+  "giac-ngo": agentArt2,
+  "don-ngo": agentArt3,
+  "tinh-thuc": agentArt4,
+  "ke-van-ngo": agentArt5,
+  "van-tinh": agentArt6,
+};
+
 function SocialNetworkSection() {
   const [activeView, setActiveView] = useState<"feed" | "search" | "profile" | "notifications">("feed");
   
@@ -930,20 +948,12 @@ export default function Landing() {
                   className="group bg-white/50 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#8B4513]/20 hover:border-[#991b1b]/40 transition-all duration-300 hover:shadow-xl"
                   data-testid={`card-community-agent-${agent.id}`}
                 >
-                  <div
-                    className="relative h-32 overflow-hidden"
-                    style={{
-                      background: `linear-gradient(135deg, ${agent.accentColor}20 0%, ${agent.accentColor}40 100%)`,
-                    }}
-                  >
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div
-                        className="w-20 h-20 rounded-full flex items-center justify-center border-4 border-white shadow-lg transition-transform group-hover:scale-110"
-                        style={{ backgroundColor: agent.accentColor }}
-                      >
-                        <Sparkles className="w-10 h-10 text-white" />
-                      </div>
-                    </div>
+                  <div className="relative h-32 overflow-hidden">
+                    <img 
+                      src={agentArtwork[agent.id]} 
+                      alt={agent.name}
+                      className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                    />
                   </div>
 
                   <div className="p-6 space-y-4">
