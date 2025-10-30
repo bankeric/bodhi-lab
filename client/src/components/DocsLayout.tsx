@@ -77,7 +77,7 @@ export function DocsLayout({ children }: DocsLayoutProps) {
             </button>
             <div className="flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-primary" />
-              <span className="font-serif text-lg font-bold text-primary">Buddhist Agents</span>
+              <span className="font-serif text-base sm:text-lg font-bold text-primary">An Agentic Social Network for Collective Awakening</span>
             </div>
           </div>
           <div className="flex items-center gap-2">
