@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { ChevronDown, Search, Sparkles } from "lucide-react";
+import { ChevronDown, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import logoImage from "@/assets/logo.png";
 
 interface NavSection {
   id: string;
@@ -37,12 +38,9 @@ export function DocsNav({ navigation }: DocsNavProps) {
   return (
     <div className="h-full flex flex-col">
       <div className="p-4 border-b space-y-4">
-        <Link href="/docs/overview">
-          <div className="flex items-center gap-2 group cursor-pointer" data-testid="link-home">
-            <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center group-hover-elevate transition-all">
-              <Sparkles className="w-4 h-4 text-primary" />
-            </div>
-            <span className="font-serif text-lg font-bold text-primary">Giác Ngộ</span>
+        <Link href="/">
+          <div className="flex items-center cursor-pointer" data-testid="link-home">
+            <img src={logoImage} alt="Giác Ngộ" className="h-8" />
           </div>
         </Link>
         
