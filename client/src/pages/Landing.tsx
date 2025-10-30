@@ -1390,149 +1390,193 @@ export default function Landing() {
           </div>
         )}
 
-        {/* Our Services Section */}
+        {/* Pricing Section */}
         <section id="services" className="py-16 px-4 bg-[#EFE0BD]/50">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="font-serif text-4xl font-bold text-[#991b1b] mb-4" data-testid="text-services-title">
-                Our Services
+                Pricing
               </h2>
               <p className="font-serif text-lg text-[#8B4513]/70 max-w-2xl mx-auto">
-                Flexible engagement models to meet your temple's needs—from rapid prototyping to full platform deployment
+                Choose the plan that best serves your sangha—from exploration to enterprise-scale deployment
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Start a Sprint */}
-              <div className="bg-white/50 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#8B4513]/20 hover:shadow-xl transition-all duration-300" data-testid="card-service-sprint">
-                <div className="p-8">
-                  <div className="flex items-center justify-center mb-6">
-                    <div className="w-16 h-16 rounded-full bg-[#991b1b]/10 flex items-center justify-center">
-                      <Sparkles className="w-8 h-8 text-[#991b1b]" />
-                    </div>
-                  </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {/* Seeker (Free) */}
+              <div className="bg-white/50 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#8B4513]/20 hover:shadow-xl transition-all duration-300" data-testid="card-pricing-seeker">
+                <div className="p-6">
                   <div className="text-center mb-6">
-                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">Start a Sprint</h3>
-                    <p className="font-serif text-sm text-[#8B4513]/70 mb-4">Rapid Prototyping & Validation</p>
+                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">Seeker</h3>
+                    <div className="flex items-baseline justify-center gap-1 mb-2">
+                      <span className="font-serif text-4xl font-bold text-[#991b1b]">US$0</span>
+                    </div>
+                    <p className="font-serif text-sm text-[#8B4513]/70 mb-4">Small sanghas and independent practitioners exploring digital tools</p>
                   </div>
 
-                  <ul className="space-y-4 mb-8">
-                    <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Scope your idea in 5 days</span>
+                  <ul className="space-y-3 mb-6">
+                    <li className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                      <span className="font-serif text-xs text-[#2c2c2c]">Access to a single project with basic templates</span>
                     </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Fixed-price quote delivered</span>
+                    <li className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                      <span className="font-serif text-xs text-[#2c2c2c]">Up to 100 messages/month through AI guides</span>
                     </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Prototype in 2-4 weeks</span>
+                    <li className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                      <span className="font-serif text-xs text-[#2c2c2c]">Basic library of open Dharma resources</span>
                     </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Perfect for new projects</span>
+                    <li className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                      <span className="font-serif text-xs text-[#2c2c2c]">1 admin user</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                      <span className="font-serif text-xs text-[#2c2c2c]">5% donation processing fee</span>
                     </li>
                   </ul>
 
                   <button
-                    className="w-full px-6 py-3 bg-white border-2 border-[#991b1b] rounded-xl text-[#991b1b] font-serif font-semibold hover:bg-[#991b1b] hover:text-white transition-all duration-300"
-                    data-testid="button-start-sprint"
+                    className="w-full px-4 py-2.5 bg-white border-2 border-[#991b1b] rounded-xl text-[#991b1b] font-serif font-semibold hover:bg-[#991b1b] hover:text-white transition-all duration-300 text-sm"
+                    data-testid="button-subscribe-seeker"
                   >
                     Get Started
                   </button>
                 </div>
               </div>
 
-              {/* Hire a Pod - Featured */}
-              <div className="bg-white/50 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#991b1b] hover:shadow-2xl transition-all duration-300 relative" data-testid="card-service-pod">
-                <div className="absolute top-0 left-0 right-0 bg-[#991b1b] text-white text-center py-2 font-serif text-sm font-semibold">
+              {/* Practitioner Pod - Featured */}
+              <div className="bg-white/50 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#991b1b] hover:shadow-2xl transition-all duration-300 relative" data-testid="card-pricing-practitioner">
+                <div className="absolute top-0 left-0 right-0 bg-[#991b1b] text-white text-center py-2 font-serif text-xs font-semibold">
                   Most Popular
                 </div>
-                <div className="p-8 pt-12">
-                  <div className="flex items-center justify-center mb-6">
-                    <div className="w-16 h-16 rounded-full bg-[#991b1b]/10 flex items-center justify-center">
-                      <Users className="w-8 h-8 text-[#991b1b]" />
-                    </div>
-                  </div>
+                <div className="p-6 pt-10">
                   <div className="text-center mb-6">
-                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">Hire a Pod</h3>
-                    <p className="font-serif text-sm text-[#8B4513]/70 mb-4">Dedicated Sacred Technology Team</p>
+                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">Practitioner Pod</h3>
+                    <div className="flex items-baseline justify-center gap-1 mb-2">
+                      <span className="font-serif text-4xl font-bold text-[#991b1b]">US$49</span>
+                      <span className="font-serif text-[#8B4513]/70">/month</span>
+                    </div>
+                    <p className="font-serif text-sm text-[#8B4513]/70 mb-4">Temples and centres ready to digitise day‑to‑day operations</p>
                   </div>
 
-                  <ul className="space-y-4 mb-8">
-                    <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Full-stack pod (FE, BE, QA, PM)</span>
+                  <ul className="space-y-3 mb-6">
+                    <li className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                      <span className="font-serif text-xs text-[#2c2c2c]">Unlimited messages and full access to all agents</span>
                     </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">AI/Web3 specialists optional</span>
+                    <li className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                      <span className="font-serif text-xs text-[#2c2c2c]">White‑label modules for donations, events & library</span>
                     </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Weekly demos & strict QA</span>
+                    <li className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                      <span className="font-serif text-xs text-[#2c2c2c]">Priority support and bug fixes</span>
                     </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">ISO 9001/27001 processes</span>
+                    <li className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                      <span className="font-serif text-xs text-[#2c2c2c]">Up to 5 admin users and 500 active devotees</span>
                     </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Hit production with integrity</span>
+                    <li className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                      <span className="font-serif text-xs text-[#2c2c2c]">Reduced donation fee (2%)</span>
                     </li>
                   </ul>
 
                   <button
-                    className="w-full px-6 py-3 bg-[#991b1b] rounded-xl text-white font-serif font-semibold hover:bg-[#7a1515] transition-all duration-300 shadow-md"
-                    data-testid="button-hire-pod"
+                    className="w-full px-4 py-2.5 bg-[#991b1b] rounded-xl text-white font-serif font-semibold hover:bg-[#7a1515] transition-all duration-300 shadow-md text-sm"
+                    data-testid="button-subscribe-practitioner"
                   >
-                    Hire Your Team
+                    Subscribe Now
                   </button>
                 </div>
               </div>
 
-              {/* Deploy Platform */}
-              <div className="bg-white/50 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#8B4513]/20 hover:shadow-xl transition-all duration-300" data-testid="card-service-deploy">
-                <div className="p-8">
-                  <div className="flex items-center justify-center mb-6">
-                    <div className="w-16 h-16 rounded-full bg-[#991b1b]/10 flex items-center justify-center">
-                      <Shield className="w-8 h-8 text-[#991b1b]" />
-                    </div>
-                  </div>
+              {/* Sangha Community */}
+              <div className="bg-white/50 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#8B4513]/20 hover:shadow-xl transition-all duration-300" data-testid="card-pricing-sangha">
+                <div className="p-6">
                   <div className="text-center mb-6">
-                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">Deploy Platform</h3>
-                    <p className="font-serif text-sm text-[#8B4513]/70 mb-4">White-Label with Full Infrastructure</p>
+                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">Sangha Community</h3>
+                    <div className="flex items-baseline justify-center gap-1 mb-2">
+                      <span className="font-serif text-4xl font-bold text-[#991b1b]">US$149</span>
+                      <span className="font-serif text-[#8B4513]/70">/month</span>
+                    </div>
+                    <p className="font-serif text-sm text-[#8B4513]/70 mb-4">Large monasteries or regional organisations needing multi‑member coordination</p>
                   </div>
 
-                  <ul className="space-y-4 mb-8">
-                    <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Decentralized infrastructure</span>
+                  <ul className="space-y-3 mb-6">
+                    <li className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                      <span className="font-serif text-xs text-[#2c2c2c]">All Practitioner Pod features</span>
                     </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Elastic compute (scales to zero)</span>
+                    <li className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                      <span className="font-serif text-xs text-[#2c2c2c]">Multiple pods/sites under one account</span>
                     </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Censorship-resistant hosting</span>
+                    <li className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                      <span className="font-serif text-xs text-[#2c2c2c]">Custom domain and branding</span>
                     </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Monitoring & quarterly hardening</span>
+                    <li className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                      <span className="font-serif text-xs text-[#2c2c2c]">Advanced analytics dashboards</span>
                     </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">One-click deployment</span>
+                    <li className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                      <span className="font-serif text-xs text-[#2c2c2c]">Custom AI agent training</span>
                     </li>
                   </ul>
 
                   <button
-                    className="w-full px-6 py-3 bg-white border-2 border-[#991b1b] rounded-xl text-[#991b1b] font-serif font-semibold hover:bg-[#991b1b] hover:text-white transition-all duration-300"
-                    data-testid="button-deploy-platform"
+                    className="w-full px-4 py-2.5 bg-white border-2 border-[#991b1b] rounded-xl text-[#991b1b] font-serif font-semibold hover:bg-[#991b1b] hover:text-white transition-all duration-300 text-sm"
+                    data-testid="button-subscribe-sangha"
                   >
-                    Learn More
+                    Subscribe Now
+                  </button>
+                </div>
+              </div>
+
+              {/* Mandala Network */}
+              <div className="bg-white/50 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#8B4513]/20 hover:shadow-xl transition-all duration-300" data-testid="card-pricing-mandala">
+                <div className="p-6">
+                  <div className="text-center mb-6">
+                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">Mandala Network</h3>
+                    <div className="flex items-baseline justify-center gap-1 mb-2">
+                      <span className="font-serif text-2xl font-bold text-[#991b1b]">Custom</span>
+                    </div>
+                    <p className="font-serif text-xs text-[#8B4513]/60 mb-2">(starting at US$299/month)</p>
+                    <p className="font-serif text-sm text-[#8B4513]/70 mb-4">National or transnational sangha networks and federations</p>
+                  </div>
+
+                  <ul className="space-y-3 mb-6">
+                    <li className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                      <span className="font-serif text-xs text-[#2c2c2c]">Everything in Sangha Community</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                      <span className="font-serif text-xs text-[#2c2c2c]">Bespoke development & unlimited projects</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                      <span className="font-serif text-xs text-[#2c2c2c]">Dedicated success manager & 24×7 support</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                      <span className="font-serif text-xs text-[#2c2c2c]">Private on‑premises deployment options</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                      <span className="font-serif text-xs text-[#2c2c2c]">Governance tools for multiple councils</span>
+                    </li>
+                  </ul>
+
+                  <button
+                    className="w-full px-4 py-2.5 bg-white border-2 border-[#991b1b] rounded-xl text-[#991b1b] font-serif font-semibold hover:bg-[#991b1b] hover:text-white transition-all duration-300 text-sm"
+                    data-testid="button-contact-mandala"
+                  >
+                    Contact Us
                   </button>
                 </div>
               </div>
