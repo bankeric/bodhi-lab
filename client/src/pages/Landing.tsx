@@ -40,7 +40,7 @@ function SocialNetworkSection() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8">
           <h2 className="font-serif text-4xl font-bold text-[#991b1b] mb-4" data-testid="text-social-title">
-            Mạng Xã Hội Tâm Linh
+            Mạng Xã Hội Tỉnh Thức
           </h2>
           <p className="font-serif text-lg text-[#8B4513]/70 max-w-2xl mx-auto">
             Chia sẻ và khám phá những lời dạy từ Phật pháp qua các Agent AI
