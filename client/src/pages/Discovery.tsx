@@ -10,46 +10,48 @@ export default function Discovery() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
   const categories = [
-    { id: "all", label: "Tất cả", icon: "🤖" },
-    { id: "healing", label: "Chữa lành", icon: "💚" },
-    { id: "enlightenment", label: "Giác ngộ", icon: "✨" },
-    { id: "inquiry", label: "Tự vấn", icon: "🔍" },
-    { id: "awakening", label: "Tỉnh thức", icon: "🌅" },
+    { id: "all", label: "Tất cả", icon: "🏛️" },
+    { id: "monastery", label: "Chùa Chiền", icon: "🏯" },
+    { id: "meditation-center", label: "Thiền Viện", icon: "🧘" },
+    { id: "temple", label: "Đền Tháp", icon: "⛩️" },
+    { id: "retreat-center", label: "Trung Tâm Tu Tập", icon: "🌄" },
   ];
 
-  const getAgentCategory = (purpose: string): string => {
-    const lowerPurpose = purpose.toLowerCase();
-    if (lowerPurpose.includes("healing") || lowerPurpose.includes("chữa lành") || lowerPurpose.includes("stress") || lowerPurpose.includes("peace")) {
-      return "healing";
+  const getCenterCategory = (monastery: string | undefined): string => {
+    if (!monastery) return "meditation-center";
+    const lower = monastery.toLowerCase();
+    if (lower.includes("chùa") || lower.includes("tự")) {
+      return "monastery";
     }
-    if (lowerPurpose.includes("enlightenment") || lowerPurpose.includes("giác ngộ") || lowerPurpose.includes("awakening")) {
-      return "enlightenment";
+    if (lower.includes("thiền viện") || lower.includes("thiền tông")) {
+      return "meditation-center";
     }
-    if (lowerPurpose.includes("inquiry") || lowerPurpose.includes("questioning") || lowerPurpose.includes("tự vấn")) {
-      return "inquiry";
+    if (lower.includes("đền") || lower.includes("tháp")) {
+      return "temple";
     }
-    if (lowerPurpose.includes("mindfulness") || lowerPurpose.includes("chánh niệm") || lowerPurpose.includes("awareness")) {
-      return "awakening";
+    if (lower.includes("trung tâm") || lower.includes("center")) {
+      return "retreat-center";
     }
-    return "healing";
+    return "meditation-center";
   };
 
   const filteredAgents = buddhistAgents.filter((agent) => {
     const matchesSearch =
       agent.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       agent.tagline.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      agent.purpose.toLowerCase().includes(searchQuery.toLowerCase());
+      agent.purpose.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (agent.monastery && agent.monastery.toLowerCase().includes(searchQuery.toLowerCase()));
 
-    const agentCategory = getAgentCategory(agent.purpose);
-    const matchesCategory = selectedCategory === "all" || agentCategory === selectedCategory;
+    const centerCategory = getCenterCategory(agent.monastery);
+    const matchesCategory = selectedCategory === "all" || centerCategory === selectedCategory;
 
     return matchesSearch && matchesCategory;
   });
 
   const AgentCard = ({ agent }: { agent: typeof buddhistAgents[0] }) => {
-    const category = getAgentCategory(agent.purpose);
+    const category = getCenterCategory(agent.monastery);
     const categoryLabel = categories.find((c) => c.id === category)?.label || "Khác";
-    const categoryIcon = categories.find((c) => c.id === category)?.icon || "🤖";
+    const categoryIcon = categories.find((c) => c.id === category)?.icon || "🏛️";
 
     return (
       <Link href="/docs/models">
@@ -115,7 +117,7 @@ export default function Discovery() {
                 data-testid={`button-explore-discovery-${agent.id}`}
               >
                 <Sparkles className="w-4 h-4" />
-                Khám phá Agent
+                Tìm hiểu thêm
               </button>
             </div>
           </motion.div>
@@ -175,10 +177,10 @@ export default function Discovery() {
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-12">
                 <h1 className="font-serif text-5xl md:text-6xl font-bold mb-6 text-[#991b1b]" data-testid="text-discovery-title">
-                  Chợ Agent Phật Giáo
+                  Khám Phá Cộng Đồng
                 </h1>
                 <p className="font-serif text-xl text-[#8B4513]/70 max-w-2xl mx-auto mb-8">
-                  Khám phá các AI Agent được huấn luyện bởi các tổ chức Phật giáo trên toàn thế giới
+                  Kết nối với các chùa chiền, thiền viện, và trung tâm tu tập Phật giáo khắp nơi trên thế giới
                 </p>
 
                 <div className="max-w-2xl mx-auto mb-8">
@@ -188,7 +190,7 @@ export default function Discovery() {
                       type="text"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder="Tìm kiếm agent theo tên, mục đích, hoặc mô tả..."
+                      placeholder="Tìm kiếm cộng đồng, chùa chiền, thiền viện..."
                       className="flex-1 bg-transparent outline-none text-base font-serif text-[#8B4513] placeholder:text-[#8B4513]/50"
                       data-testid="input-discovery-search"
                     />
@@ -217,7 +219,7 @@ export default function Discovery() {
 
               <div className="mb-6">
                 <p className="font-serif text-lg text-[#8B4513]/70">
-                  Tìm thấy <span className="font-bold text-[#991b1b]">{filteredAgents.length}</span> agent
+                  Tìm thấy <span className="font-bold text-[#991b1b]">{filteredAgents.length}</span> cộng đồng
                 </p>
               </div>
 
@@ -229,8 +231,8 @@ export default function Discovery() {
 
               {filteredAgents.length === 0 && (
                 <div className="text-center py-16">
-                  <div className="text-6xl mb-4">🔍</div>
-                  <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">Không tìm thấy agent</h3>
+                  <div className="text-6xl mb-4">🏯</div>
+                  <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">Không tìm thấy cộng đồng</h3>
                   <p className="font-serif text-lg text-[#8B4513]/70">
                     Thử tìm kiếm với từ khóa khác hoặc chọn danh mục khác
                   </p>
