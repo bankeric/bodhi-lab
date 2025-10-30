@@ -54,14 +54,17 @@ function SocialNetworkSection() {
   };
 
   return (
-    <section id="awaken-feed" className="py-16 px-4 bg-[#EFE0BD]/50">
+    <section id="awaken-feed" className="py-16 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8">
           <h2 className="font-serif text-4xl font-bold text-[#991b1b] mb-4" data-testid="text-social-title">
-            Mạng Xã Hội Tỉnh Thức
+            Engage Your Sangha
           </h2>
-          <p className="font-serif text-lg text-[#8B4513]/70 max-w-2xl mx-auto">
-            Chia sẻ và khám phá những lời dạy từ Phật pháp qua các Agent AI
+          <p className="font-serif text-lg text-[#8B4513]/70 max-w-2xl mx-auto mb-4">
+            White-label community platform to connect your practitioners, share Dharma talks, and foster mindful discussions
+          </p>
+          <p className="font-serif text-sm text-[#8B4513]/60 max-w-2xl mx-auto italic">
+            Interactive demo below shows how your temple's custom-branded community will look and function for your sangha
           </p>
         </div>
 
@@ -824,7 +827,7 @@ export default function Landing() {
                 }`}
                 data-testid="text-hero-title"
               >
-                Bodhi Lab
+                Bodhi Technology Lab
               </h1>
               <p
                 className={`font-serif text-xl text-[#8B4513]/70 text-center mb-12 max-w-2xl mx-auto transition-all duration-500 ${
@@ -832,80 +835,56 @@ export default function Landing() {
                 }`}
                 data-testid="text-hero-subtitle"
               >
-                Awakening Agentic Social Network
+                Awaken Technology for the Dharma-Ending Age
+              </p>
+              <p
+                className={`font-serif text-base text-[#8B4513]/60 text-center mb-8 max-w-2xl mx-auto transition-all duration-500 ${
+                  searchFocused ? "opacity-0 -translate-y-10" : "opacity-100 translate-y-0"
+                }`}
+                data-testid="text-hero-description"
+              >
+                A studio-first builder hub for Buddhist organisations. We partner with temples, monasteries, and meditation centres to create sacred technology that serves the Dharma, not the market.
               </p>
 
-              <form
-                onSubmit={handleSearch}
-                className={`relative transition-all duration-500 ${searchFocused ? "scale-110" : "scale-100"}`}
-              >
-                <div className="relative group">
-                  <div
-                    className={`absolute -inset-0.5 bg-gradient-to-r rounded-full opacity-0 transition-all duration-300 ${
-                      searchFocused ? "from-[#991b1b]/20 to-[#8B4513]/20 opacity-100 blur-sm" : ""
-                    }`}
-                  ></div>
-                  <div className="relative">
-                    <input
-                      ref={searchInputRef}
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      onFocus={() => setSearchFocused(true)}
-                      onBlur={() => setSearchFocused(false)}
-                      placeholder={searchFocused ? "" : "Hỏi về Phật pháp, tu tập, và con đường giác ngộ..."}
-                      className="font-serif h-16 w-full pl-16 pr-32 rounded-full bg-white/50 backdrop-blur-md border border-[#8B4513]/30 text-[#8B4513] placeholder:text-[#8B4513]/50 focus:border-[#991b1b] focus:ring-2 focus:ring-[#991b1b]/20 transition-all duration-300 outline-none"
-                      data-testid="input-search"
-                    />
-                    {searchFocused && searchQuery === "" && (
-                      <div className="absolute left-16 top-1/2 transform -translate-y-1/2 text-[#8B4513]/50 pointer-events-none font-serif">
-                        <AnimatedPlaceholder
-                          texts={[
-                            "Giác Ngộ nghĩa là gì?",
-                            "Làm sao để thành Phật?",
-                            "Làm sao để thoát mọi khổ đau?",
-                            "Làm sao để tìm thấy hạnh phúc mãi mãi?",
-                          ]}
-                        />
-                      </div>
-                    )}
-                    <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 h-5 w-5 text-[#8B4513]/50" />
-                    <div className="absolute right-4 top-1/2 transform -translate-y-1/2 flex items-center gap-2">
-                      <span className="font-serif text-xs px-1.5 py-0.5 rounded bg-[#991b1b]/20 text-[#991b1b] border border-[#991b1b]/30">
-                        AI
-                      </span>
-                      <div className="font-serif text-sm text-[#8B4513]/50 border-r border-[#8B4513]/20 pr-4 pl-2">
-                        + Chat
-                      </div>
-                      <button
-                        type="submit"
-                        className="h-10 w-10 rounded-full bg-[#991b1b] hover:bg-[#8B4513] transition-all duration-300 hover:scale-105 flex items-center justify-center"
-                        data-testid="button-search-submit"
-                      >
-                        <ArrowRight className="h-5 w-5 text-[#EFE0BD]" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </form>
+              <div className={`flex flex-wrap justify-center gap-4 transition-all duration-500 ${searchFocused ? "opacity-0 translate-y-10" : "opacity-100 translate-y-0"}`}>
+                <a
+                  href="#services"
+                  className="font-serif px-8 py-4 rounded-xl bg-[#991b1b] hover:bg-[#8B4513] text-white font-semibold shadow-lg transition-all duration-300 hover:scale-105 flex items-center gap-2"
+                  data-testid="button-start-sprint"
+                >
+                  Start a Sprint
+                  <ArrowRight className="h-5 w-5" />
+                </a>
+                <a
+                  href="#capabilities"
+                  className="font-serif px-8 py-4 rounded-xl bg-white/50 backdrop-blur-md hover:bg-white/70 text-[#991b1b] font-semibold border-2 border-[#8B4513]/20 transition-all duration-300 hover:scale-105"
+                  data-testid="button-explore-platform"
+                >
+                  Explore Platform
+                </a>
+              </div>
 
               <div
-                className={`flex flex-wrap justify-center gap-4 mt-8 transition-all duration-500 ${
+                className={`flex flex-wrap justify-center gap-6 mt-8 transition-all duration-500 ${
                   searchFocused ? "opacity-0 translate-y-10" : "opacity-100 translate-y-0"
                 }`}
               >
-                {popularQuestions.map((question, index) => (
-                  <button
-                    key={index}
-                    className="font-serif px-4 py-2 rounded-full bg-white/30 hover:bg-white/50 backdrop-blur-md border border-[#8B4513]/20 transition-colors text-[#8B4513]"
-                    onClick={() => {
-                      setSearchQuery(question.name);
-                      handleSearch();
-                    }}
-                    data-testid={`button-question-${index}`}
-                  >
-                    {question.name}
-                  </button>
-                ))}
+                <div className="flex items-center gap-2 text-[#8B4513]/70 font-serif text-sm">
+                  <Check className="w-4 h-4 text-[#991b1b]" />
+                  <span>Custom Branding</span>
+                </div>
+                <div className="flex items-center gap-2 text-[#8B4513]/70 font-serif text-sm">
+                  <Check className="w-4 h-4 text-[#991b1b]" />
+                  <span>AI-Powered Tools</span>
+                </div>
+                <div className="flex items-center gap-2 text-[#8B4513]/70 font-serif text-sm">
+                  <Check className="w-4 h-4 text-[#991b1b]" />
+                  <span>Decentralized Infrastructure</span>
+                </div>
+                <div className="flex items-center gap-2 text-[#8B4513]/70 font-serif text-sm">
+                  <Check className="w-4 h-4 text-[#991b1b]" />
+                  <span>Censorship Resistant</span>
+                </div>
               </div>
             </div>
 
@@ -915,121 +894,152 @@ export default function Landing() {
               }`}
             >
               <div className="text-center">
-                <div className="font-serif text-3xl font-bold text-[#991b1b]">12+</div>
-                <div className="font-serif text-[#8B4513]/50 text-sm">Buddhist AI Agents</div>
+                <div className="font-serif text-3xl font-bold text-[#991b1b]">200+</div>
+                <div className="font-serif text-[#8B4513]/50 text-sm">Engineers & Monastics</div>
               </div>
               <div className="text-center">
-                <div className="font-serif text-3xl font-bold text-[#991b1b]">20K+</div>
-                <div className="font-serif text-[#8B4513]/50 text-sm">Conversations</div>
+                <div className="font-serif text-3xl font-bold text-[#991b1b]">ISO</div>
+                <div className="font-serif text-[#8B4513]/50 text-sm">9001/27001 Certified</div>
               </div>
               <div className="text-center">
-                <div className="font-serif text-3xl font-bold text-[#991b1b]">24/7</div>
-                <div className="font-serif text-[#8B4513]/50 text-sm">Available</div>
+                <div className="font-serif text-3xl font-bold text-[#991b1b]">Global</div>
+                <div className="font-serif text-[#8B4513]/50 text-sm">Decentralized Network</div>
               </div>
             </div>
           </section>
 
-          {/* Community Agents Section */}
-          <section className="py-16 px-4 bg-[#EFE0BD]/50">
+          {/* Platform Capabilities Section */}
+          <section id="capabilities" className="py-16 px-4 bg-[#EFE0BD]/50">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="font-serif text-4xl font-bold text-[#991b1b] mb-4" data-testid="text-agents-title">
-                Agents từ Cộng Đồng
+              <h2 className="font-serif text-4xl font-bold text-[#991b1b] mb-4" data-testid="text-capabilities-title">
+                Platform Capabilities
               </h2>
               <p className="font-serif text-lg text-[#8B4513]/70 max-w-2xl mx-auto">
-                Khám phá các AI Agent được phát triển bởi các chùa chiền, thiền viện và trung tâm tu tập khắp nơi
+                White-label tools designed to help your temple thrive, self-fund, and preserve your lineage with dignity and sovereignty
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-              {buddhistAgents.slice(0, 6).map((agent) => (
-                <div
-                  key={agent.id}
-                  className="group bg-white/50 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#8B4513]/20 hover:border-[#991b1b]/40 transition-all duration-300 hover:shadow-xl"
-                  data-testid={`card-community-agent-${agent.id}`}
-                >
-                  <div className="relative h-32 overflow-hidden">
-                    <img 
-                      src={agentArtwork[agent.id]} 
-                      alt={agent.name}
-                      className="w-full h-full object-cover transition-transform group-hover:scale-105"
-                    />
+              {/* Custom Branding */}
+              <div className="group bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 hover:border-[#991b1b]/40 transition-all duration-300 hover:shadow-xl p-6 space-y-4" data-testid="card-capability-branding">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-xl bg-[#991b1b]/10 flex items-center justify-center">
+                    <Sparkles className="w-6 h-6 text-[#991b1b]" />
                   </div>
-
-                  <div className="p-6 space-y-4">
-                    <div>
-                      <h3 className="font-serif text-xl font-bold text-[#2c2c2c] mb-2">
-                        {agent.name}
-                      </h3>
-                      <p className="font-serif text-sm italic text-[#991b1b] font-semibold mb-3">
-                        {agent.tagline}
-                      </p>
-                      <p className="font-serif text-sm text-[#2c2c2c]/70 line-clamp-2">
-                        {agent.purpose}
-                      </p>
-                    </div>
-
-                    <div className="flex items-center justify-between pt-4 border-t border-[#8B4513]/20">
-                      <div className="flex items-center gap-2">
-                        <span
-                          className="px-2 py-1 rounded-lg text-xs font-mono font-semibold"
-                          style={{
-                            backgroundColor: `${agent.accentColor}20`,
-                            color: agent.accentColor,
-                          }}
-                        >
-                          {agent.model}
-                        </span>
-                      </div>
-                      {agent.monastery && (
-                        <div className="text-xs font-serif text-[#8B4513]/60 truncate max-w-[150px]">
-                          {agent.monastery}
-                        </div>
-                      )}
-                    </div>
-
-                    {agent.users !== undefined && agent.likes !== undefined && (
-                      <div className="flex items-center gap-4 text-sm text-[#8B4513]/60">
-                        <div className="flex items-center gap-1">
-                          <Users className="w-4 h-4" />
-                          <span className="font-serif">{agent.users >= 1000 ? `${(agent.users / 1000).toFixed(1)}K` : agent.users}</span>
-                        </div>
-                        <span>·</span>
-                        <div className="flex items-center gap-1">
-                          <Heart className="w-4 h-4" />
-                          <span className="font-serif">{agent.likes}</span>
-                        </div>
-                      </div>
-                    )}
-
-                    <Link href="/docs/models">
-                      <a>
-                        <button
-                          className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#991b1b] text-white rounded-xl hover:bg-[#7a1515] transition-colors font-serif font-semibold text-sm shadow-md"
-                          data-testid={`button-explore-${agent.id}`}
-                        >
-                          <Sparkles className="w-4 h-4" />
-                          Khám phá Agent
-                        </button>
-                      </a>
-                    </Link>
-                  </div>
+                  <h3 className="font-serif text-xl font-bold text-[#2c2c2c]">Custom Branding</h3>
                 </div>
-              ))}
+                <p className="font-serif text-sm text-[#2c2c2c]/70">
+                  Easily adapt the interface to your monastery's identity. Upload logos, choose color palettes, and map custom domains. Pre-loaded themes evoke Buddhist serenity.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-2 py-1 rounded-lg text-xs font-sans bg-[#991b1b]/10 text-[#991b1b]">Logo Upload</span>
+                  <span className="px-2 py-1 rounded-lg text-xs font-sans bg-[#991b1b]/10 text-[#991b1b]">Custom Domain</span>
+                  <span className="px-2 py-1 rounded-lg text-xs font-sans bg-[#991b1b]/10 text-[#991b1b]">Theme Builder</span>
+                </div>
+              </div>
+
+              {/* Donation Tools */}
+              <div className="group bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 hover:border-[#991b1b]/40 transition-all duration-300 hover:shadow-xl p-6 space-y-4" data-testid="card-capability-donation">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-xl bg-[#991b1b]/10 flex items-center justify-center">
+                    <HandHeart className="w-6 h-6 text-[#991b1b]" />
+                  </div>
+                  <h3 className="font-serif text-xl font-bold text-[#2c2c2c]">Donation Tools</h3>
+                </div>
+                <p className="font-serif text-sm text-[#2c2c2c]/70">
+                  Accept one-time or recurring dāna via cards, bank transfers, or QR codes. Frame contributions as acts of generosity with optional sutra quotes and merit dedication.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-2 py-1 rounded-lg text-xs font-sans bg-[#991b1b]/10 text-[#991b1b]">Recurring</span>
+                  <span className="px-2 py-1 rounded-lg text-xs font-sans bg-[#991b1b]/10 text-[#991b1b]">QR Codes</span>
+                  <span className="px-2 py-1 rounded-lg text-xs font-sans bg-[#991b1b]/10 text-[#991b1b]">Anonymous</span>
+                </div>
+              </div>
+
+              {/* Event Calendar */}
+              <div className="group bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 hover:border-[#991b1b]/40 transition-all duration-300 hover:shadow-xl p-6 space-y-4" data-testid="card-capability-events">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-xl bg-[#991b1b]/10 flex items-center justify-center">
+                    <Calendar className="w-6 h-6 text-[#991b1b]" />
+                  </div>
+                  <h3 className="font-serif text-xl font-bold text-[#2c2c2c]">Event & Reminder Calendar</h3>
+                </div>
+                <p className="font-serif text-sm text-[#2c2c2c]/70">
+                  Schedule temple rituals, group meditations, or retreats with ease. Automated push reminders, RSVP tracking, and pre-set templates for important days like Vesak.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-2 py-1 rounded-lg text-xs font-sans bg-[#991b1b]/10 text-[#991b1b]">Recurring Events</span>
+                  <span className="px-2 py-1 rounded-lg text-xs font-sans bg-[#991b1b]/10 text-[#991b1b]">RSVP</span>
+                  <span className="px-2 py-1 rounded-lg text-xs font-sans bg-[#991b1b]/10 text-[#991b1b]">Reminders</span>
+                </div>
+              </div>
+
+              {/* AI Guidance */}
+              <div className="group bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 hover:border-[#991b1b]/40 transition-all duration-300 hover:shadow-xl p-6 space-y-4" data-testid="card-capability-ai">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-xl bg-[#991b1b]/10 flex items-center justify-center">
+                    <MessageCircle className="w-6 h-6 text-[#991b1b]" />
+                  </div>
+                  <h3 className="font-serif text-xl font-bold text-[#2c2c2c]">Compassionate AI Guidance</h3>
+                </div>
+                <p className="font-serif text-sm text-[#2c2c2c]/70">
+                  Configurable AI agents with your own knowledge bases. Select doctrinal modes like Zen, Pure Land, or Theravāda. Voice or text queries return curated sutra references.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-2 py-1 rounded-lg text-xs font-sans bg-[#991b1b]/10 text-[#991b1b]">Custom Knowledge</span>
+                  <span className="px-2 py-1 rounded-lg text-xs font-sans bg-[#991b1b]/10 text-[#991b1b]">Voice & Text</span>
+                  <span className="px-2 py-1 rounded-lg text-xs font-sans bg-[#991b1b]/10 text-[#991b1b]">Multi-Tradition</span>
+                </div>
+              </div>
+
+              {/* Document Library */}
+              <div className="group bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 hover:border-[#991b1b]/40 transition-all duration-300 hover:shadow-xl p-6 space-y-4" data-testid="card-capability-library">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-xl bg-[#991b1b]/10 flex items-center justify-center">
+                    <BookOpen className="w-6 h-6 text-[#991b1b]" />
+                  </div>
+                  <h3 className="font-serif text-xl font-bold text-[#2c2c2c]">Document & Resource Library</h3>
+                </div>
+                <p className="font-serif text-sm text-[#2c2c2c]/70">
+                  Organize sutras, chants, commentaries, and audio/video files in a searchable library. Set access controls, enable offline access, and track versioning for updated translations.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-2 py-1 rounded-lg text-xs font-sans bg-[#991b1b]/10 text-[#991b1b]">Searchable</span>
+                  <span className="px-2 py-1 rounded-lg text-xs font-sans bg-[#991b1b]/10 text-[#991b1b]">Offline Access</span>
+                  <span className="px-2 py-1 rounded-lg text-xs font-sans bg-[#991b1b]/10 text-[#991b1b]">Version Control</span>
+                </div>
+              </div>
+
+              {/* Community Forum */}
+              <div className="group bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 hover:border-[#991b1b]/40 transition-all duration-300 hover:shadow-xl p-6 space-y-4" data-testid="card-capability-forum">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-xl bg-[#991b1b]/10 flex items-center justify-center">
+                    <Users className="w-6 h-6 text-[#991b1b]" />
+                  </div>
+                  <h3 className="font-serif text-xl font-bold text-[#2c2c2c]">Community Forum</h3>
+                </div>
+                <p className="font-serif text-sm text-[#2c2c2c]/70">
+                  Optional moderated discussion area for members to ask questions, share reflections, and form study groups. Pre-built Right Speech guidelines and anonymous posting options.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-2 py-1 rounded-lg text-xs font-sans bg-[#991b1b]/10 text-[#991b1b]">Moderated</span>
+                  <span className="px-2 py-1 rounded-lg text-xs font-sans bg-[#991b1b]/10 text-[#991b1b]">Study Groups</span>
+                  <span className="px-2 py-1 rounded-lg text-xs font-sans bg-[#991b1b]/10 text-[#991b1b]">Anonymous</span>
+                </div>
+              </div>
             </div>
 
             <div className="text-center">
-              <Link href="/docs/models">
-                <a>
-                  <button
-                    className="inline-flex items-center gap-2 px-8 py-4 bg-white/50 backdrop-blur-md border-2 border-[#991b1b] rounded-full text-[#991b1b] font-serif font-semibold text-lg hover:bg-[#991b1b] hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl"
-                    data-testid="button-view-all-agents"
-                  >
-                    Xem tất cả {buddhistAgents.length} Agents
-                    <ArrowRight className="w-5 h-5" />
-                  </button>
-                </a>
-              </Link>
+              <a href="#services">
+                <button
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-white/50 backdrop-blur-md border-2 border-[#991b1b] rounded-full text-[#991b1b] font-serif font-semibold text-lg hover:bg-[#991b1b] hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl"
+                  data-testid="button-view-services"
+                >
+                  Explore Our Services
+                  <ArrowRight className="w-5 h-5" />
+                </button>
+              </a>
             </div>
           </div>
         </section>
@@ -1377,145 +1387,149 @@ export default function Landing() {
           </div>
         )}
 
-        {/* Pricing Section */}
-        <section id="pricing" className="py-16 px-4">
+        {/* Our Services Section */}
+        <section id="services" className="py-16 px-4 bg-[#EFE0BD]/50">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="font-serif text-4xl font-bold text-[#991b1b] mb-4" data-testid="text-pricing-title">
-                Pricing
+              <h2 className="font-serif text-4xl font-bold text-[#991b1b] mb-4" data-testid="text-services-title">
+                Our Services
               </h2>
               <p className="font-serif text-lg text-[#8B4513]/70 max-w-2xl mx-auto">
-                Lựa chọn gói phù hợp với hành trình tu tập của bạn
+                Flexible engagement models to meet your temple's needs—from rapid prototyping to full platform deployment
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Free Tier */}
-              <div className="bg-white/50 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#8B4513]/20 hover:shadow-xl transition-all duration-300" data-testid="card-pricing-free">
+              {/* Start a Sprint */}
+              <div className="bg-white/50 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#8B4513]/20 hover:shadow-xl transition-all duration-300" data-testid="card-service-sprint">
                 <div className="p-8">
-                  <div className="text-center mb-6">
-                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">Cư Sĩ</h3>
-                    <p className="font-serif text-sm text-[#8B4513]/70 mb-4">Lay Practitioner</p>
-                    <div className="flex items-baseline justify-center gap-1">
-                      <span className="font-serif text-5xl font-bold text-[#991b1b]">Free</span>
+                  <div className="flex items-center justify-center mb-6">
+                    <div className="w-16 h-16 rounded-full bg-[#991b1b]/10 flex items-center justify-center">
+                      <Sparkles className="w-8 h-8 text-[#991b1b]" />
                     </div>
+                  </div>
+                  <div className="text-center mb-6">
+                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">Start a Sprint</h3>
+                    <p className="font-serif text-sm text-[#8B4513]/70 mb-4">Rapid Prototyping & Validation</p>
                   </div>
 
                   <ul className="space-y-4 mb-8">
                     <li className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-[#2c2c2c]">Truy cập cơ bản các Agent</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Scope your idea in 5 days</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-[#2c2c2c]">100 tin nhắn/tháng</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Fixed-price quote delivered</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-[#2c2c2c]">Tham gia cộng đồng</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Prototype in 2-4 weeks</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-[#2c2c2c]">Thư viện kinh điển cơ bản</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Perfect for new projects</span>
                     </li>
                   </ul>
 
                   <button
                     className="w-full px-6 py-3 bg-white border-2 border-[#991b1b] rounded-xl text-[#991b1b] font-serif font-semibold hover:bg-[#991b1b] hover:text-white transition-all duration-300"
-                    data-testid="button-subscribe-free"
+                    data-testid="button-start-sprint"
                   >
-                    Bắt đầu ngay
+                    Get Started
                   </button>
                 </div>
               </div>
 
-              {/* Pro Tier - Featured */}
-              <div className="bg-white/50 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#991b1b] hover:shadow-2xl transition-all duration-300 relative" data-testid="card-pricing-pro">
+              {/* Hire a Pod - Featured */}
+              <div className="bg-white/50 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#991b1b] hover:shadow-2xl transition-all duration-300 relative" data-testid="card-service-pod">
                 <div className="absolute top-0 left-0 right-0 bg-[#991b1b] text-white text-center py-2 font-serif text-sm font-semibold">
-                  Phổ biến nhất
+                  Most Popular
                 </div>
                 <div className="p-8 pt-12">
-                  <div className="text-center mb-6">
-                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">Hành Giả</h3>
-                    <p className="font-serif text-sm text-[#8B4513]/70 mb-4">Devoted Practitioner</p>
-                    <div className="flex items-baseline justify-center gap-1">
-                      <span className="font-serif text-5xl font-bold text-[#991b1b]">$19</span>
-                      <span className="font-serif text-[#8B4513]/70">/tháng</span>
+                  <div className="flex items-center justify-center mb-6">
+                    <div className="w-16 h-16 rounded-full bg-[#991b1b]/10 flex items-center justify-center">
+                      <Users className="w-8 h-8 text-[#991b1b]" />
                     </div>
+                  </div>
+                  <div className="text-center mb-6">
+                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">Hire a Pod</h3>
+                    <p className="font-serif text-sm text-[#8B4513]/70 mb-4">Dedicated Sacred Technology Team</p>
                   </div>
 
                   <ul className="space-y-4 mb-8">
                     <li className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-[#2c2c2c]">Không giới hạn tin nhắn</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Full-stack pod (FE, BE, QA, PM)</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-[#2c2c2c]">Truy cập toàn bộ Agent</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">AI/Web3 specialists optional</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-[#2c2c2c]">Ưu tiên hỗ trợ</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Weekly demos & strict QA</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-[#2c2c2c]">Thư viện kinh điển đầy đủ</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">ISO 9001/27001 processes</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-[#2c2c2c]">Tạo Agent cá nhân</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Hit production with integrity</span>
                     </li>
                   </ul>
 
                   <button
                     className="w-full px-6 py-3 bg-[#991b1b] rounded-xl text-white font-serif font-semibold hover:bg-[#7a1515] transition-all duration-300 shadow-md"
-                    data-testid="button-subscribe-pro"
+                    data-testid="button-hire-pod"
                   >
-                    Đăng ký ngay
+                    Hire Your Team
                   </button>
                 </div>
               </div>
 
-              {/* Enterprise Tier */}
-              <div className="bg-white/50 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#8B4513]/20 hover:shadow-xl transition-all duration-300" data-testid="card-pricing-enterprise">
+              {/* Deploy Platform */}
+              <div className="bg-white/50 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#8B4513]/20 hover:shadow-xl transition-all duration-300" data-testid="card-service-deploy">
                 <div className="p-8">
-                  <div className="text-center mb-6">
-                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">Tăng Đoàn</h3>
-                    <p className="font-serif text-sm text-[#8B4513]/70 mb-4">Sangha Community</p>
-                    <div className="flex items-baseline justify-center gap-1">
-                      <span className="font-serif text-5xl font-bold text-[#991b1b]">$99</span>
-                      <span className="font-serif text-[#8B4513]/70">/tháng</span>
+                  <div className="flex items-center justify-center mb-6">
+                    <div className="w-16 h-16 rounded-full bg-[#991b1b]/10 flex items-center justify-center">
+                      <Shield className="w-8 h-8 text-[#991b1b]" />
                     </div>
+                  </div>
+                  <div className="text-center mb-6">
+                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">Deploy Platform</h3>
+                    <p className="font-serif text-sm text-[#8B4513]/70 mb-4">White-Label with Full Infrastructure</p>
                   </div>
 
                   <ul className="space-y-4 mb-8">
                     <li className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-[#2c2c2c]">Tất cả tính năng Hành Giả</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Decentralized infrastructure</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-[#2c2c2c]">Hỗ trợ nhiều thành viên</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Elastic compute (scales to zero)</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-[#2c2c2c]">API tùy chỉnh</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Censorship-resistant hosting</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-[#2c2c2c]">Đào tạo Agent riêng</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Monitoring & quarterly hardening</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-[#2c2c2c]">Tư vấn chuyên sâu</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">One-click deployment</span>
                     </li>
                   </ul>
 
                   <button
                     className="w-full px-6 py-3 bg-white border-2 border-[#991b1b] rounded-xl text-[#991b1b] font-serif font-semibold hover:bg-[#991b1b] hover:text-white transition-all duration-300"
-                    data-testid="button-subscribe-enterprise"
+                    data-testid="button-deploy-platform"
                   >
-                    Liên hệ
+                    Learn More
                   </button>
                 </div>
               </div>
@@ -1527,39 +1541,28 @@ export default function Landing() {
         <footer className="border-t border-[#8B4513]/20 py-8 bg-[#EFE0BD]/50 backdrop-blur-sm">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <span className="font-serif font-bold text-[#991b1b]">Bodhi Lab</span>
+              <span className="font-serif font-bold text-[#991b1b]">Bodhi Technology Lab</span>
               <div className="flex gap-6">
-                <Link href="/docs/models">
-                  <a className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
-                    Agent Models
-                  </a>
-                </Link>
                 <a 
-                  href="#awaken-feed" 
+                  href="#capabilities" 
                   className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors"
                 >
-                  Awaken Feed
+                  Platform
                 </a>
                 <a 
-                  href="#dharma-radio" 
+                  href="#services" 
                   className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors"
                 >
-                  Dharma Radio
+                  Services
                 </a>
-                <a 
-                  href="#pricing" 
-                  className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors"
-                >
-                  Pricing
-                </a>
-                <Link href="/discovery">
-                  <a className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
-                    Discovery
-                  </a>
-                </Link>
                 <Link href="/docs/manifesto">
                   <a className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
-                    Docs
+                    Manifesto
+                  </a>
+                </Link>
+                <Link href="/docs/tech-stack">
+                  <a className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
+                    Tech Stack
                   </a>
                 </Link>
               </div>

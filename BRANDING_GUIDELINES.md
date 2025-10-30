@@ -4,9 +4,36 @@
 
 **Project Name**: Bodhi Lab (Bodhi Technology Lab)  
 **Full Name**: Bodhi Technology Lab  
-**Purpose**: A bilingual (Vietnamese/English) Buddhist AI agent platform for spiritual technology and merit cultivation
+**Purpose**: A studio-first builder hub for Buddhist organisations—providing sacred technology solutions, AI agents, and white-label platforms to temples, monasteries, and meditation centres worldwide
 
-**Core Philosophy**: Technical precision meets spiritual intention—combining modern AI capabilities with timeless Buddhist wisdom in a warm, contemplative digital environment.
+**Core Philosophy**: Technical precision meets spiritual intention—we partner with monks, nuns, and Buddhist communities to build fast, righteous technology that serves the Dharma, not the market.
+
+## Target Audience
+
+**Primary**: Temples, monasteries, meditation centres, and Buddhist organisations seeking digital transformation
+**Secondary**: Monastic leaders, Dharma teachers, and sangha administrators
+**Geography**: Global, with bilingual Vietnamese/English support
+
+## Mission
+
+1. **Recreate Electronic Mandalas of the Buddhas** - Unite the global sangha in real-time awakening through digital platforms
+2. **Flourish with Sovereignty and Dignity** - Help temples thrive, self-fund, and preserve lineages with technology that strengthens autonomy
+3. **Respond to Digital Afflictions** - Offer antidotes to the Dharma-ending age: digital Bodhi that cultivates mindfulness, compassion, and insight
+
+## Principles
+
+- **Build Fast and Righteous**: Technology serves Dharma, not the market; we move quickly without sacrificing ethics
+- **No Use, No Build**: If a tool doesn't directly cut suffering, we don't make it
+- **Presence Over Metrics**: Success means the tool is no longer needed; inner transformation matters more than engagement statistics
+- **Transparency, Not Exploitation**: User data is sovereign; no surveillance, manipulation, or hidden agendas
+- **Censorship Resistance**: Dharma must never be silenced by worldly powers
+
+## Service Offerings
+
+1. **Sacred Pods**: Dedicated teams (frontend, backend, QA, PM, AI specialists) for your temple's needs
+2. **White-Label Platforms**: Custom branding, donation tools, event calendars, AI guidance, document libraries
+3. **Sprint & Deploy**: Weekly demos, strict QA, feature flags, monitoring, and quarterly hardening
+4. **Decentralized Infrastructure**: Elastic, censorship-resistant compute that scales to zero when idle
 
 ---
 
