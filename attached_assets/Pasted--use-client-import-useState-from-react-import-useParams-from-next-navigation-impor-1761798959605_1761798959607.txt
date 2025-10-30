@@ -1,0 +1,801 @@
+"use client"
+
+import { useState } from "react"
+import { useParams } from "next/navigation"
+import { motion } from "framer-motion"
+import Image from "next/image"
+import {
+  MapPin,
+  Users,
+  Star,
+  Globe,
+  Phone,
+  Mail,
+  CalendarIcon,
+  BookOpen,
+  Bot,
+  Heart,
+  ArrowLeft,
+  Clock,
+  Video,
+  FileText,
+  Download,
+  DollarSign,
+} from "lucide-react"
+import Link from "next/link"
+
+interface Center {
+  id: string
+  rank: number
+  name: string
+  description: string
+  type: "monastery" | "meditation-center" | "temple" | "buddhist-center" | "retreat-center"
+  location: string
+  country: string
+  image: string
+  members: number
+  rating: number
+  status: "open" | "closed" | "retreat" | "by-appointment"
+  featured: boolean
+  website?: string
+  phone?: string
+  email?: string
+  tags: string[]
+  about?: {
+    fullDescription: string
+    founded: string
+    tradition: string
+    teachers: string[]
+    facilities: string[]
+  }
+}
+
+export default function CenterDetailPage() {
+  const params = useParams()
+  const centerId = params.id as string
+  const [activeTab, setActiveTab] = useState<"about" | "dharma-talk" | "calendar" | "library" | "agents" | "donation">(
+    "about",
+  )
+
+  // Mock data - in real app, fetch from API
+  const centers: Center[] = [
+    {
+      id: "1",
+      rank: 1,
+      name: "Làng Mai (Plum Village)",
+      description:
+        "Tu viện Phật giáo Thiền phái Lâm Tế do Thiền sư Thích Nhất Hạnh sáng lập. Nơi thực hành chánh niệm và hòa bình nội tâm.",
+      type: "monastery",
+      location: "Dordogne",
+      country: "Pháp",
+      image: "/plum-village-monastery.jpg",
+      members: 15000,
+      rating: 4.9,
+      status: "open",
+      featured: true,
+      website: "https://plumvillage.org",
+      phone: "+33 5 53 58 48 58",
+      email: "info@plumvillage.org",
+      tags: ["Thiền", "Chánh niệm", "Thích Nhất Hạnh", "Tu tập"],
+      about: {
+        fullDescription:
+          "Làng Mai là một tu viện Phật giáo Thiền phái Lâm Tế được thành lập bởi Thiền sư Thích Nhất Hạnh vào năm 1982. Đây là nơi thực hành chánh niệm, hòa bình nội tâm và sống chậm. Tu viện có nhiều chương trình tu tập cho người Việt và quốc tế, bao gồm các khóa tu ngắn hạn và dài hạn. Làng Mai cũng là nơi đào tạo các tu sĩ và giáo viên chánh niệm.",
+        founded: "1982",
+        tradition: "Thiền Lâm Tế",
+        teachers: ["Thiền sư Thích Nhất Hạnh", "Sư cô Chân Không", "Thầy Pháp Hữu"],
+        facilities: ["Thiền đường", "Nhà ăn chay", "Thư viện", "Vườn thiền", "Nhà khách"],
+      },
+    },
+    // Add more centers as needed
+  ]
+
+  const center = centers.find((c) => c.id === centerId) || centers[0]
+
+  const tabs = [
+    { id: "about", label: "Giới thiệu", icon: BookOpen },
+    { id: "dharma-talk", label: "Pháp Thoại", icon: Video },
+    { id: "calendar", label: "Lịch", icon: CalendarIcon },
+    { id: "library", label: "Thư viện", icon: FileText },
+    { id: "agents", label: "AI Agents", icon: Bot },
+    { id: "donation", label: "Cúng dường", icon: Heart },
+  ]
+
+  const getStatusBadge = (status: Center["status"]) => {
+    switch (status) {
+      case "open":
+        return (
+          <div className="flex items-center gap-1 px-3 py-1.5 bg-green-500/20 text-green-700 rounded-lg text-sm font-semibold">
+            <div className="w-2 h-2 bg-green-500 rounded-full" />
+            Đang mở
+          </div>
+        )
+      case "closed":
+        return (
+          <div className="flex items-center gap-1 px-3 py-1.5 bg-red-500/20 text-red-700 rounded-lg text-sm font-semibold">
+            <div className="w-2 h-2 bg-red-500 rounded-full" />
+            Đóng cửa
+          </div>
+        )
+      case "retreat":
+        return (
+          <div className="flex items-center gap-1 px-3 py-1.5 bg-[#991b1b]/20 text-[#991b1b] rounded-lg text-sm font-semibold">
+            <Clock className="w-4 h-4" />
+            Đang tu tập
+          </div>
+        )
+      case "by-appointment":
+        return (
+          <div className="flex items-center gap-1 px-3 py-1.5 bg-[#2c2c2c]/20 text-[#2c2c2c] rounded-lg text-sm font-semibold">
+            <Clock className="w-4 h-4" />
+            Theo lịch hẹn
+          </div>
+        )
+    }
+  }
+
+  return (
+    <div className="min-h-screen bg-[#EFE0BD] font-serif">
+      {/* Header with Cover Image */}
+      <div className="relative h-64 bg-gradient-to-br from-[#2c2c2c] to-[#4a4a4a]">
+        <div className="absolute inset-0 bg-gradient-to-t from-[#2c2c2c] to-transparent z-10" />
+        <Image
+          src={center.image || "/placeholder.svg"}
+          alt={center.name}
+          fill
+          style={{ objectFit: "cover", opacity: 0.8 }}
+          className="z-0"
+        />
+
+        {/* Back Button */}
+        <Link
+          href="/discovery"
+          className="absolute top-6 left-6 flex items-center gap-2 px-4 py-2 bg-[#f3ead7] text-[#2c2c2c] rounded-xl
+            border-2 border-[#2c2c2c] shadow-[0_2px_0_#00000030] hover:bg-[#efe2c9] transition-colors font-semibold z-20"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Quay lại
+        </Link>
+
+        {/* Rank Badge */}
+        <div className="absolute top-6 right-6 bg-[#991b1b] text-white px-4 py-2 rounded-full text-lg font-bold shadow-lg z-20">
+          #{center.rank}
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 -mt-16 relative z-10">
+        {/* Info Card */}
+        <div className="bg-[#f3ead7] border-2 border-[#2c2c2c] rounded-2xl p-8 shadow-[0_4px_0_#00000030] mb-6">
+          <div className="flex flex-col lg:flex-row gap-6">
+            {/* Left: Main Info */}
+            <div className="flex-1">
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <h1 className="text-4xl font-bold text-[#2c2c2c] mb-2">{center.name}</h1>
+                  <p className="text-lg font-serif text-[#2c2c2c]/70">{center.description}</p>
+                </div>
+                {getStatusBadge(center.status)}
+              </div>
+
+              {/* Stats */}
+              <div className="flex flex-wrap gap-6 mb-6">
+                <div className="flex items-center gap-2 text-[#2c2c2c]">
+                  <Users className="w-5 h-5" />
+                  <span className="font-semibold">{center.members.toLocaleString()} thành viên</span>
+                </div>
+                <div className="flex items-center gap-2 text-[#2c2c2c]">
+                  <Star className="w-5 h-5 fill-[#d4af37] text-[#d4af37]" />
+                  <span className="font-semibold">{center.rating} / 5.0</span>
+                </div>
+                <div className="flex items-center gap-2 text-[#2c2c2c]">
+                  <MapPin className="w-5 h-5" />
+                  <span className="font-semibold">
+                    {center.location}, {center.country}
+                  </span>
+                </div>
+              </div>
+
+              {/* Tags */}
+              <div className="flex flex-wrap gap-2">
+                {center.tags.map((tag, index) => (
+                  <span
+                    key={index}
+                    className="px-3 py-1.5 bg-[#991b1b]/10 text-[#991b1b] rounded-lg text-sm font-semibold"
+                  >
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: Contact Info */}
+            <div className="lg:w-80 bg-white border-2 border-[#2c2c2c]/20 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-[#2c2c2c] mb-4">Liên hệ</h3>
+              <div className="space-y-3">
+                {center.website && (
+                  <a
+                    href={center.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 text-[#2c2c2c] hover:text-[#991b1b] transition-colors"
+                  >
+                    <Globe className="w-5 h-5" />
+                    <span className="text-sm font-serif">Trang web</span>
+                  </a>
+                )}
+                {center.phone && (
+                  <a
+                    href={`tel:${center.phone}`}
+                    className="flex items-center gap-3 text-[#2c2c2c] hover:text-[#991b1b] transition-colors"
+                  >
+                    <Phone className="w-5 h-5" />
+                    <span className="text-sm font-serif">{center.phone}</span>
+                  </a>
+                )}
+                {center.email && (
+                  <a
+                    href={`mailto:${center.email}`}
+                    className="flex items-center gap-3 text-[#2c2c2c] hover:text-[#991b1b] transition-colors"
+                  >
+                    <Mail className="w-5 h-5" />
+                    <span className="text-sm font-serif">{center.email}</span>
+                  </a>
+                )}
+              </div>
+
+              {/* CTA Button */}
+              <button
+                className="w-full mt-6 px-6 py-3 bg-[#991b1b] text-white rounded-xl
+                  border-2 border-[#2c2c2c] shadow-[0_2px_0_#00000030]
+                  hover:bg-[#7a1515] transition-colors font-bold text-base"
+              >
+                Tham gia cộng đồng
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Tabs */}
+        <div className="bg-[#f3ead7] border-2 border-[#2c2c2c] rounded-2xl overflow-hidden shadow-[0_4px_0_#00000030]">
+          {/* Tab Navigation */}
+          <div className="flex items-center gap-2 p-2 border-b-2 border-[#2c2c2c]/20 overflow-x-auto">
+            {tabs.map((tab) => {
+              const Icon = tab.icon
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id as any)}
+                  className={`flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all whitespace-nowrap
+                    ${
+                      activeTab === tab.id
+                        ? "bg-[#991b1b] text-white border-2 border-[#2c2c2c] shadow-[0_2px_0_#00000030]"
+                        : "bg-transparent text-[#2c2c2c] hover:bg-[#EFE0BD]"
+                    }`}
+                >
+                  <Icon className="w-4 h-4" />
+                  <span className="font-semibold text-sm">{tab.label}</span>
+                </button>
+              )
+            })}
+          </div>
+
+          {/* Tab Content */}
+          <div className="p-8">
+            {/* About Tab */}
+            {activeTab === "about" && (
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
+                <div>
+                  <h2 className="text-2xl font-bold text-[#2c2c2c] mb-4">Về {center.name}</h2>
+                  <p className="text-base font-serif text-[#2c2c2c]/80 leading-relaxed">
+                    {center.about?.fullDescription}
+                  </p>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="bg-white border-2 border-[#2c2c2c]/20 rounded-xl p-6">
+                    <h3 className="text-lg font-bold text-[#2c2c2c] mb-3">Thông tin</h3>
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <span className="text-[#2c2c2c]/60">Thành lập:</span>
+                        <span className="font-semibold">{center.about?.founded}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-[#2c2c2c]/60">Truyền thống:</span>
+                        <span className="font-semibold">{center.about?.tradition}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-[#2c2c2c]/60">Thành viên:</span>
+                        <span className="font-semibold">{center.members.toLocaleString()}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-white border-2 border-[#2c2c2c]/20 rounded-xl p-6">
+                    <h3 className="text-lg font-bold text-[#2c2c2c] mb-3">Giáo viên</h3>
+                    <ul className="space-y-2">
+                      {center.about?.teachers.map((teacher, index) => (
+                        <li key={index} className="flex items-center gap-2 text-[#2c2c2c]">
+                          <div className="w-2 h-2 bg-[#991b1b] rounded-full" />
+                          <span className="font-serif">{teacher}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="bg-white border-2 border-[#2c2c2c]/20 rounded-xl p-6">
+                  <h3 className="text-lg font-bold text-[#2c2c2c] mb-3">Cơ sở vật chất</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {center.about?.facilities.map((facility, index) => (
+                      <span
+                        key={index}
+                        className="px-3 py-1.5 bg-[#EFE0BD] border border-[#2c2c2c]/20 rounded-lg text-sm font-serif"
+                      >
+                        {facility}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {/* Dharma Talk Tab */}
+            {activeTab === "dharma-talk" && (
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
+                <h2 className="text-2xl font-bold text-[#2c2c2c] mb-4">Pháp Thoại</h2>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  {[
+                    {
+                      title: "Thiền Chánh Niệm Cơ Bản",
+                      description: "Khóa học nhập môn về thiền chánh niệm và thực hành hàng ngày",
+                      lessons: 12,
+                      duration: "6 tuần",
+                      level: "Cơ bản",
+                    },
+                    {
+                      title: "Kinh Kim Cương",
+                      description: "Giảng giải chi tiết về Kinh Kim Cương và ứng dụng trong đời sống",
+                      lessons: 8,
+                      duration: "4 tuần",
+                      level: "Trung cấp",
+                    },
+                    {
+                      title: "Thiền Hành",
+                      description: "Thực hành thiền hành và kết nối với thiên nhiên",
+                      lessons: 6,
+                      duration: "3 tuần",
+                      level: "Cơ bản",
+                    },
+                    {
+                      title: "Tứ Niệm Xứ",
+                      description: "Nghiên cứu sâu về Tứ Niệm Xứ trong kinh Đại Niệm Xứ",
+                      lessons: 16,
+                      duration: "8 tuần",
+                      level: "Nâng cao",
+                    },
+                  ].map((course, index) => (
+                    <div
+                      key={index}
+                      className="bg-white border-2 border-[#2c2c2c]/20 rounded-xl p-6 hover:border-[#991b1b] transition-colors cursor-pointer"
+                    >
+                      <div className="flex items-start justify-between mb-3">
+                        <h3 className="text-lg font-bold text-[#2c2c2c]">{course.title}</h3>
+                        <span className="px-2 py-1 bg-[#991b1b]/10 text-[#991b1b] rounded-lg text-xs font-semibold">
+                          {course.level}
+                        </span>
+                      </div>
+                      <p className="text-sm font-serif text-[#2c2c2c]/70 mb-4">{course.description}</p>
+                      <div className="flex items-center gap-4 text-sm text-[#2c2c2c]/60">
+                        <span>{course.lessons} bài học</span>
+                        <span>•</span>
+                        <span>{course.duration}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
+            {/* Calendar Tab */}
+            {activeTab === "calendar" && (
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
+                <h2 className="text-2xl font-bold text-[#2c2c2c] mb-4">Lịch sự kiện</h2>
+
+                <div className="space-y-4">
+                  {[
+                    {
+                      date: "15/11/2024",
+                      time: "19:00 - 21:00",
+                      title: "Thiền buổi tối",
+                      type: "Thường xuyên",
+                      location: "Thiền đường chính",
+                    },
+                    {
+                      date: "18/11/2024",
+                      time: "09:00 - 17:00",
+                      title: "Khóa tu một ngày",
+                      type: "Đặc biệt",
+                      location: "Tu viện",
+                    },
+                    {
+                      date: "22/11/2024",
+                      time: "20:00 - 21:30",
+                      title: "Pháp thoại: Kinh Kim Cương",
+                      type: "Pháp thoại",
+                      location: "Online & Trực tiếp",
+                    },
+                    {
+                      date: "25/11/2024",
+                      time: "06:00 - 07:00",
+                      title: "Thiền hành buổi sáng",
+                      type: "Thường xuyên",
+                      location: "Vườn thiền",
+                    },
+                  ].map((event, index) => (
+                    <div
+                      key={index}
+                      className="bg-white border-2 border-[#2c2c2c]/20 rounded-xl p-6 hover:border-[#991b1b] transition-colors"
+                    >
+                      <div className="flex items-start gap-4">
+                        <div className="bg-[#991b1b] text-white rounded-xl p-3 text-center min-w-[80px]">
+                          <div className="text-2xl font-bold">{event.date.split("/")[0]}</div>
+                          <div className="text-xs">Tháng {event.date.split("/")[1]}</div>
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-start justify-between mb-2">
+                            <h3 className="text-lg font-bold text-[#2c2c2c]">{event.title}</h3>
+                            <span className="px-2 py-1 bg-[#EFE0BD] border border-[#2c2c2c]/20 rounded-lg text-xs font-semibold">
+                              {event.type}
+                            </span>
+                          </div>
+                          <div className="space-y-1 text-sm text-[#2c2c2c]/60">
+                            <div className="flex items-center gap-2">
+                              <Clock className="w-4 h-4" />
+                              <span>{event.time}</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <MapPin className="w-4 h-4" />
+                              <span>{event.location}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
+            {/* Library Tab */}
+            {activeTab === "library" && (
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
+                <h2 className="text-2xl font-bold text-[#2c2c2c] mb-4">Thư viện</h2>
+
+                <div className="grid md:grid-cols-3 gap-6">
+                  {[
+                    {
+                      title: "Kinh Kim Cương",
+                      type: "PDF",
+                      size: "2.5 MB",
+                      downloads: 1250,
+                      category: "Kinh điển",
+                    },
+                    {
+                      title: "Hướng dẫn thiền Vipassana",
+                      type: "PDF",
+                      size: "1.8 MB",
+                      downloads: 890,
+                      category: "Hướng dẫn",
+                    },
+                    {
+                      title: "Pháp thoại Thầy Nhất Hạnh",
+                      type: "Audio",
+                      size: "45 MB",
+                      downloads: 2100,
+                      category: "Pháp thoại",
+                    },
+                    {
+                      title: "Kinh Đại Niệm Xứ",
+                      type: "PDF",
+                      size: "3.2 MB",
+                      downloads: 670,
+                      category: "Kinh điển",
+                    },
+                    {
+                      title: "Thiền hành cơ bản",
+                      type: "Video",
+                      size: "120 MB",
+                      downloads: 1540,
+                      category: "Video",
+                    },
+                    {
+                      title: "Tâm kinh Bát Nhã",
+                      type: "PDF",
+                      size: "1.2 MB",
+                      downloads: 1890,
+                      category: "Kinh điển",
+                    },
+                  ].map((resource, index) => (
+                    <div
+                      key={index}
+                      className="bg-white border-2 border-[#2c2c2c]/20 rounded-xl p-6 hover:border-[#991b1b] transition-colors cursor-pointer"
+                    >
+                      <div className="flex items-start justify-between mb-3">
+                        <FileText className="w-8 h-8 text-[#991b1b]" />
+                        <span className="px-2 py-1 bg-[#EFE0BD] border border-[#2c2c2c]/20 rounded-lg text-xs font-semibold">
+                          {resource.type}
+                        </span>
+                      </div>
+                      <h3 className="text-base font-bold text-[#2c2c2c] mb-2">{resource.title}</h3>
+                      <p className="text-sm text-[#2c2c2c]/60 mb-3">{resource.category}</p>
+                      <div className="flex items-center justify-between text-xs text-[#2c2c2c]/60 mb-4">
+                        <span>{resource.size}</span>
+                        <span>{resource.downloads} tải xuống</span>
+                      </div>
+                      <button
+                        className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[#991b1b] text-white rounded-xl
+                          border-2 border-[#2c2c2c] shadow-[0_2px_0_#00000030] hover:bg-[#7a1515] transition-colors font-semibold text-sm"
+                      >
+                        <Download className="w-4 h-4" />
+                        Tải xuống
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
+            {/* Agents Tab */}
+            {activeTab === "agents" && (
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
+                <h2 className="text-2xl font-bold text-[#2c2c2c] mb-4">AI Agents</h2>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  {[
+                    {
+                      name: "Thiền Sư AI",
+                      description: "Agent hỗ trợ thực hành thiền và trả lời câu hỏi về Phật pháp",
+                      model: "GPT-4o",
+                      price: "Miễn phí",
+                      uses: 5200,
+                    },
+                    {
+                      name: "Kinh Điển Bot",
+                      description: "Tìm kiếm và giải thích các đoạn kinh Phật giáo",
+                      model: "GPT-4o-mini",
+                      price: "Miễn phí",
+                      uses: 3800,
+                    },
+                    {
+                      name: "Pháp Thoại Assistant",
+                      description: "Tóm tắt và phân tích các bài pháp thoại",
+                      model: "GPT-4o",
+                      price: "$5/tháng",
+                      uses: 1200,
+                    },
+                    {
+                      name: "Thiền Hành Guide",
+                      description: "Hướng dẫn thực hành thiền hành và chánh niệm",
+                      model: "GPT-4o-mini",
+                      price: "Miễn phí",
+                      uses: 2900,
+                    },
+                  ].map((agent, index) => (
+                    <div
+                      key={index}
+                      className="bg-white border-2 border-[#2c2c2c]/20 rounded-xl p-6 hover:border-[#991b1b] transition-colors"
+                    >
+                      <div className="flex items-start justify-between mb-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 bg-[#991b1b]/10 rounded-xl flex items-center justify-center">
+                            <Bot className="w-6 h-6 text-[#991b1b]" />
+                          </div>
+                          <div>
+                            <h3 className="text-lg font-bold text-[#2c2c2c]">{agent.name}</h3>
+                            <span className="text-xs text-[#2c2c2c]/60">{agent.model}</span>
+                          </div>
+                        </div>
+                        <span
+                          className={`px-3 py-1 rounded-lg text-sm font-semibold ${
+                            agent.price === "Miễn phí"
+                              ? "bg-green-500/20 text-green-700"
+                              : "bg-[#991b1b]/20 text-[#991b1b]"
+                          }`}
+                        >
+                          {agent.price}
+                        </span>
+                      </div>
+                      <p className="text-sm font-serif text-[#2c2c2c]/70 mb-4">{agent.description}</p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-[#2c2c2c]/60">{agent.uses.toLocaleString()} lượt sử dụng</span>
+                        <button
+                          className="px-4 py-2 bg-[#991b1b] text-white rounded-xl
+                            border-2 border-[#2c2c2c] shadow-[0_2px_0_#00000030] hover:bg-[#7a1515] transition-colors font-semibold text-sm"
+                        >
+                          Sử dụng
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
+            {/* Donation Tab */}
+            {activeTab === "donation" && (
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
+                <div className="text-center mb-8">
+                  <h2 className="text-3xl font-bold text-[#2c2c2c] mb-3">Hồi Hướng Công Đức</h2>
+                  <p className="text-lg font-serif text-[#2c2c2c]/70 italic">
+                    The Act of Returning: Dedicating Merit to All Beings
+                  </p>
+                </div>
+
+                {/* Introduction Card */}
+                <div className="bg-white border-2 border-[#2c2c2c]/20 rounded-xl p-8 mb-8">
+                  <div className="flex items-start gap-4 mb-6">
+                    <Heart className="w-12 h-12 text-[#991b1b] flex-shrink-0 mt-1" />
+                    <div>
+                      <h3 className="text-xl font-bold text-[#2c2c2c] mb-3">An Offering of Merit (Công Đức)</h3>
+                      <p className="text-base font-serif text-[#2c2c2c]/80 leading-relaxed mb-4">
+                        This is more than a donation. It is a practice of selfless offering.
+                      </p>
+                      <div className="space-y-3 text-[15px] font-serif text-[#2c2c2c]/70 leading-relaxed">
+                        <div className="flex gap-3">
+                          <span className="text-[#991b1b] font-bold">•</span>
+                          <div>
+                            <strong className="text-[#2c2c2c]">Your Action:</strong> By giving without expectation of
+                            personal reward, you are performing the act of <strong>Hồi Hướng Công Đức</strong>—the
+                            selfless dedication of intrinsic merit.
+                          </div>
+                        </div>
+                        <div className="flex gap-3">
+                          <span className="text-[#991b1b] font-bold">•</span>
+                          <div>
+                            <strong className="text-[#2c2c2c]">The Intention:</strong> This merit is not for one, but
+                            for all. It is dedicated to the liberation and awakening of all beings.
+                          </div>
+                        </div>
+                        <div className="flex gap-3">
+                          <span className="text-[#991b1b] font-bold">•</span>
+                          <div>
+                            <strong className="text-[#2c2c2c]">The Result:</strong> You are planting a seed of
+                            awakening, free from the bonds of cause and effect that govern worldly blessings.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Supporting the Work Section */}
+                <div className="bg-[#f3ead7] border-l-4 border-[#991b1b] rounded-r-xl p-8 mb-8">
+                  <h3 className="text-xl font-bold text-[#2c2c2c] mb-4">Supporting the Work of Awakening (Phật Sự)</h3>
+                  <p className="text-base font-serif text-[#2c2c2c]/80 leading-relaxed mb-6">
+                    100% of your offering directly supports the continuation of the Dharma in this world. Your
+                    contribution is used exclusively for:
+                  </p>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="bg-white border border-[#2c2c2c]/20 rounded-lg p-4">
+                      <h4 className="font-bold text-[#2c2c2c] mb-2">🙏 Sustaining the Sangha</h4>
+                      <p className="text-sm font-serif text-[#2c2c2c]/70">
+                        Providing for masters and practitioners who dedicate their lives to holding and transmitting the
+                        teachings.
+                      </p>
+                    </div>
+                    <div className="bg-white border border-[#2c2c2c]/20 rounded-lg p-4">
+                      <h4 className="font-bold text-[#2c2c2c] mb-2">📖 Spreading the Dharma</h4>
+                      <p className="text-sm font-serif text-[#2c2c2c]/70">
+                        Funding the creation and sharing of teachings, texts, and digital resources to reach all who are
+                        searching.
+                      </p>
+                    </div>
+                    <div className="bg-white border border-[#2c2c2c]/20 rounded-lg p-4">
+                      <h4 className="font-bold text-[#2c2c2c] mb-2">🏛️ Maintaining Sacred Space</h4>
+                      <p className="text-sm font-serif text-[#2c2c2c]/70">
+                        Ensuring our physical and digital sanctuaries remain pure, accessible, and conducive to
+                        practice.
+                      </p>
+                    </div>
+                    <div className="bg-white border border-[#2c2c2c]/20 rounded-lg p-4">
+                      <h4 className="font-bold text-[#2c2c2c] mb-2">🪷 Acts of True Compassion</h4>
+                      <p className="text-sm font-serif text-[#2c2c2c]/70">
+                        Enabling projects that alleviate suffering and guide others toward the path of liberation.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Donation Tiers */}
+                <div>
+                  <h3 className="text-xl font-bold text-[#2c2c2c] mb-4 text-center">Choose Your Offering</h3>
+                  <div className="grid md:grid-cols-3 gap-6 mb-8">
+                    {[
+                      {
+                        amount: "100.000đ",
+                        title: "Hỗ trợ cơ bản",
+                        description: "Giúp duy trì hoạt động hàng ngày",
+                        icon: "🙏",
+                      },
+                      {
+                        amount: "500.000đ",
+                        title: "Hỗ trợ trung bình",
+                        description: "Hỗ trợ các khóa tu và pháp thoại",
+                        icon: "🌸",
+                        popular: true,
+                      },
+                      {
+                        amount: "1.000.000đ",
+                        title: "Hỗ trợ lớn",
+                        description: "Đóng góp vào các dự án phát triển",
+                        icon: "🪷",
+                      },
+                    ].map((tier, index) => (
+                      <div
+                        key={index}
+                        className={`bg-white border-2 rounded-xl p-6 text-center relative ${
+                          tier.popular ? "border-[#991b1b] shadow-[0_4px_0_#991b1b30]" : "border-[#2c2c2c]/20"
+                        }`}
+                      >
+                        {tier.popular && (
+                          <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#991b1b] text-white px-3 py-1 rounded-full text-xs font-bold">
+                            Phổ biến nhất
+                          </div>
+                        )}
+                        <div className="text-4xl mb-3">{tier.icon}</div>
+                        <div className="text-3xl font-bold text-[#991b1b] mb-2">{tier.amount}</div>
+                        <h4 className="text-lg font-bold text-[#2c2c2c] mb-3">{tier.title}</h4>
+                        <p className="text-sm font-serif text-[#2c2c2c]/70 mb-4">{tier.description}</p>
+                        <button
+                          className="w-full px-4 py-2 bg-[#991b1b] text-white rounded-xl
+                          border-2 border-[#2c2c2c] shadow-[0_2px_0_#00000030] hover:bg-[#7a1515] transition-colors font-semibold"
+                        >
+                          Cúng dường
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Custom Amount */}
+                <div className="bg-[#EFE0BD] border-2 border-[#2c2c2c]/20 rounded-xl p-6">
+                  <h4 className="text-lg font-bold text-[#2c2c2c] mb-3">Hoặc cúng dường số tiền tùy ý</h4>
+                  <p className="text-sm font-serif text-[#2c2c2c]/70 mb-4">
+                    Your offering arises from the non-seeking Mind, a pure expression of generosity that is boundless
+                    and unconditioned.
+                  </p>
+                  <div className="flex gap-3">
+                    <input
+                      type="number"
+                      placeholder="Nhập số tiền (VNĐ)"
+                      className="flex-1 px-4 py-3 bg-white border-2 border-[#2c2c2c]/20 rounded-xl outline-none
+                        focus:border-[#991b1b] transition-colors font-serif"
+                    />
+                    <button
+                      className="px-6 py-3 bg-[#991b1b] text-white rounded-xl
+                        border-2 border-[#2c2c2c] shadow-[0_2px_0_#00000030] hover:bg-[#7a1515] transition-colors font-semibold whitespace-nowrap"
+                    >
+                      <DollarSign className="w-5 h-5 inline mr-2" />
+                      Cúng dường
+                    </button>
+                  </div>
+                </div>
+
+                {/* Closing Message */}
+                <div className="bg-white border-2 border-[#2c2c2c]/20 rounded-xl p-6 text-center">
+                  <p className="text-base font-serif text-[#2c2c2c]/80 italic leading-relaxed">
+                    "To give is to let go. To offer is to return to the source. This act is dedicated entirely to the
+                    awakening of all sentient beings, creating ripples of liberation that extend far beyond this single
+                    moment."
+                  </p>
+                  <p className="text-sm text-[#2c2c2c]/60 mt-4">🙏 Namo Amitabha Buddha 🙏</p>
+                </div>
+              </motion.div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
