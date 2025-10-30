@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
-import { Search, ArrowRight } from "lucide-react";
+import { Search, ArrowRight, Sparkles, Users, Heart } from "lucide-react";
 import { Link } from "wouter";
+import { buddhistAgents } from "@shared/buddhistAgents";
 
 function TracingBeam({ children, className }: { children: React.ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -356,6 +357,119 @@ export default function Landing() {
             </div>
           </section>
         </TracingBeam>
+
+        {/* Community Agents Section */}
+        <section className="py-16 px-4 bg-[#EFE0BD]/50">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="font-serif text-4xl font-bold text-[#991b1b] mb-4" data-testid="text-agents-title">
+                Agents từ Cộng Đồng
+              </h2>
+              <p className="font-serif text-lg text-[#8B4513]/70 max-w-2xl mx-auto">
+                Khám phá các AI Agent được phát triển bởi các chùa chiền, thiền viện và trung tâm tu tập khắp nơi
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              {buddhistAgents.slice(0, 6).map((agent) => (
+                <div
+                  key={agent.id}
+                  className="group bg-white/50 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#8B4513]/20 hover:border-[#991b1b]/40 transition-all duration-300 hover:shadow-xl"
+                  data-testid={`card-community-agent-${agent.id}`}
+                >
+                  <div
+                    className="relative h-32 overflow-hidden"
+                    style={{
+                      background: `linear-gradient(135deg, ${agent.accentColor}20 0%, ${agent.accentColor}40 100%)`,
+                    }}
+                  >
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div
+                        className="w-20 h-20 rounded-full flex items-center justify-center border-4 border-white shadow-lg transition-transform group-hover:scale-110"
+                        style={{ backgroundColor: agent.accentColor }}
+                      >
+                        <Sparkles className="w-10 h-10 text-white" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-6 space-y-4">
+                    <div>
+                      <h3 className="font-serif text-xl font-bold text-[#2c2c2c] mb-2">
+                        {agent.name}
+                      </h3>
+                      <p className="font-serif text-sm italic text-[#991b1b] font-semibold mb-3">
+                        {agent.tagline}
+                      </p>
+                      <p className="font-serif text-sm text-[#2c2c2c]/70 line-clamp-2">
+                        {agent.purpose}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center justify-between pt-4 border-t border-[#8B4513]/20">
+                      <div className="flex items-center gap-2">
+                        <span
+                          className="px-2 py-1 rounded-lg text-xs font-mono font-semibold"
+                          style={{
+                            backgroundColor: `${agent.accentColor}20`,
+                            color: agent.accentColor,
+                          }}
+                        >
+                          {agent.model}
+                        </span>
+                      </div>
+                      {agent.monastery && (
+                        <div className="text-xs font-serif text-[#8B4513]/60 truncate max-w-[150px]">
+                          {agent.monastery}
+                        </div>
+                      )}
+                    </div>
+
+                    {agent.users !== undefined && agent.likes !== undefined && (
+                      <div className="flex items-center gap-4 text-sm text-[#8B4513]/60">
+                        <div className="flex items-center gap-1">
+                          <Users className="w-4 h-4" />
+                          <span className="font-serif">{agent.users >= 1000 ? `${(agent.users / 1000).toFixed(1)}K` : agent.users}</span>
+                        </div>
+                        <span>·</span>
+                        <div className="flex items-center gap-1">
+                          <Heart className="w-4 h-4" />
+                          <span className="font-serif">{agent.likes}</span>
+                        </div>
+                      </div>
+                    )}
+
+                    <Link href="/docs/models">
+                      <a>
+                        <button
+                          className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#991b1b] text-white rounded-xl hover:bg-[#7a1515] transition-colors font-serif font-semibold text-sm shadow-md"
+                          data-testid={`button-explore-${agent.id}`}
+                        >
+                          <Sparkles className="w-4 h-4" />
+                          Khám phá Agent
+                        </button>
+                      </a>
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="text-center">
+              <Link href="/docs/models">
+                <a>
+                  <button
+                    className="inline-flex items-center gap-2 px-8 py-4 bg-white/50 backdrop-blur-md border-2 border-[#991b1b] rounded-full text-[#991b1b] font-serif font-semibold text-lg hover:bg-[#991b1b] hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl"
+                    data-testid="button-view-all-agents"
+                  >
+                    Xem tất cả {buddhistAgents.length} Agents
+                    <ArrowRight className="w-5 h-5" />
+                  </button>
+                </a>
+              </Link>
+            </div>
+          </div>
+        </section>
 
         <footer className="border-t border-[#8B4513]/20 py-8 bg-[#EFE0BD]/50 backdrop-blur-sm">
           <div className="container mx-auto px-4">
