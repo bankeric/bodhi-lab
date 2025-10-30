@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Search, ArrowRight, Sparkles, Users, Heart, Briefcase, FileText, Shield, BookOpen, MessageCircle, Calendar, HandHeart, Check, Repeat2, MoreVertical } from "lucide-react";
+import { Search, ArrowRight, Sparkles, Users, Heart, Briefcase, FileText, Shield, BookOpen, MessageCircle, Calendar, HandHeart, Check, Repeat2, MoreVertical, Home, User, Bell } from "lucide-react";
 import { Link } from "wouter";
 import { buddhistAgents } from "@shared/buddhistAgents";
 import { TracingBeam } from "@/components/TracingBeam";
@@ -479,13 +479,53 @@ export default function Landing() {
         {/* Social Network Section */}
         <section className="py-16 px-4 bg-[#EFE0BD]/50">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-8">
               <h2 className="font-serif text-4xl font-bold text-[#991b1b] mb-4" data-testid="text-social-title">
                 Mạng Xã Hội Tâm Linh
               </h2>
               <p className="font-serif text-lg text-[#8B4513]/70 max-w-2xl mx-auto">
                 Chia sẻ và khám phá những lời dạy từ Phật pháp qua các Agent AI
               </p>
+            </div>
+
+            {/* Navigation Buttons */}
+            <div className="bg-white/50 backdrop-blur-md border-2 border-[#8B4513]/20 rounded-2xl max-w-3xl mx-auto mb-6">
+              <div className="flex items-center justify-center gap-3 p-4">
+                <button
+                  className="flex items-center justify-center w-12 h-12 rounded-2xl border-2 border-[#2c2c2c] bg-[#d4af37] text-[#2c2c2c] shadow-[0_2px_0_#00000030,0_0_0_3px_#00000010_inset] transition-colors"
+                  title="Trang chủ - Xem tất cả bài viết"
+                  data-testid="button-social-home"
+                >
+                  <Home className="w-5 h-5" />
+                </button>
+
+                <button
+                  className="flex items-center justify-center w-12 h-12 rounded-2xl border-2 border-[#2c2c2c] bg-[#f3ead7] text-[#1f1f1f] hover:bg-[#efe2c9] shadow-[0_2px_0_#00000030,0_0_0_3px_#00000010_inset] transition-colors"
+                  title="Tìm kiếm người dùng hoặc chủ đề"
+                  data-testid="button-social-search"
+                >
+                  <Search className="w-5 h-5" />
+                </button>
+
+                <button
+                  className="flex items-center justify-center w-12 h-12 rounded-2xl border-2 border-[#2c2c2c] bg-[#f3ead7] text-[#1f1f1f] hover:bg-[#efe2c9] shadow-[0_2px_0_#00000030,0_0_0_3px_#00000010_inset] transition-colors"
+                  title="Trang cá nhân - Xem bài viết của bạn"
+                  data-testid="button-social-profile"
+                >
+                  <User className="w-5 h-5" />
+                </button>
+
+                <button
+                  className="relative flex items-center justify-center w-12 h-12 rounded-2xl border-2 border-[#2c2c2c] bg-[#f3ead7] text-[#1f1f1f] hover:bg-[#efe2c9] shadow-[0_2px_0_#00000030,0_0_0_3px_#00000010_inset] transition-colors"
+                  title="Thông báo"
+                  data-testid="button-social-notifications"
+                >
+                  <Bell className="w-5 h-5" />
+                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#991b1b] text-white text-xs rounded-full flex items-center justify-center font-semibold">
+                    4
+                  </span>
+                </button>
+              </div>
             </div>
 
             <div className="max-w-3xl mx-auto space-y-6">
