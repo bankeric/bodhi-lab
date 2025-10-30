@@ -14,6 +14,21 @@ export function DocsLayout({ children }: DocsLayoutProps) {
 
   const navigation = [
     {
+      id: "overview",
+      title: "Bodhi Technology Lab",
+      icon: BookOpen,
+      children: [
+        { id: "mission", title: "Our Mission", href: "/docs/overview#mission" },
+        { id: "principles", title: "Our Principles", href: "/docs/overview#principles" },
+        { id: "methods", title: "Our Methods", href: "/docs/overview#methods" },
+        { id: "capabilities", title: "Platform Capabilities", href: "/docs/overview#capabilities" },
+        { id: "why-partner", title: "Why Partner", href: "/docs/overview#why-partner" },
+        { id: "infrastructure", title: "Sustainable Infrastructure", href: "/docs/overview#infrastructure" },
+        { id: "join", title: "Join the Lab", href: "/docs/overview#join" },
+        { id: "fourth-grace", title: "The Fourth Grace Mandala", href: "/docs/overview#fourth-grace" },
+      ],
+    },
+    {
       id: "manifesto",
       title: "The Manifesto",
       icon: BookOpen,
@@ -56,7 +71,6 @@ export function DocsLayout({ children }: DocsLayoutProps) {
       title: "Agents",
       icon: Bot,
       children: [
-        { id: "overview", title: "Overview", href: "/docs/overview" },
         { id: "models", title: "Agent Models", href: "/docs/models" },
         { id: "quick-start", title: "Quick Start", href: "/docs/quick-start" },
         { id: "pricing", title: "Token Pricing", href: "/docs/pricing" },
@@ -78,7 +92,7 @@ export function DocsLayout({ children }: DocsLayoutProps) {
             </button>
             <div className="flex items-center gap-2">
               <img src={sutraIcon} alt="Sutra" className="w-6 h-6" />
-              <span className="font-serif text-base sm:text-lg font-bold text-primary">An Agentic Social Network for Collective Awakening</span>
+              <span className="font-serif text-base sm:text-lg font-bold text-primary">Bodhi Technology Lab</span>
             </div>
           </div>
           <div className="flex items-center gap-2">
