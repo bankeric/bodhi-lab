@@ -113,100 +113,29 @@ export default function CenterDetail() {
               
               {/* Dropdown Menu */}
               <div className="absolute top-full left-0 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out transform group-hover:translate-y-0 -translate-y-2">
-                <div className="bg-gradient-to-br from-[#EFE0BD] to-[#E5D5B7] backdrop-blur-xl border border-[#8B4513]/30 rounded-3xl shadow-2xl overflow-hidden w-[850px]"
+                <div className="bg-gradient-to-br from-[#EFE0BD] to-[#E5D5B7] backdrop-blur-xl border border-[#8B4513]/30 rounded-3xl shadow-2xl overflow-hidden w-[250px]"
                   style={{ boxShadow: 'inset 0 1px 2px rgba(139, 69, 19, 0.1), 0 20px 60px rgba(139, 69, 19, 0.15)' }}>
-                  <div className="grid grid-cols-4 divide-x divide-[#8B4513]/15">
-                    {/* Organization Column */}
-                    <div className="p-6">
-                      <h3 className="font-serif font-bold text-[#991b1b] mb-5 text-xs uppercase tracking-wider flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-full bg-[#991b1b]/10 flex items-center justify-center">
-                          <Briefcase className="w-3.5 h-3.5 text-[#991b1b]" />
-                        </div>
-                        Organization
-                      </h3>
-                      <div className="space-y-3">
-                        <a href="#" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-career">
-                          <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
-                          Career
-                        </a>
-                        <a href="#" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-terms">
-                          <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
-                          Terms
-                        </a>
-                        <a href="#" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-privacy">
-                          <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
-                          Privacy
-                        </a>
+                  <div className="p-6">
+                    <h3 className="font-serif font-bold text-[#991b1b] mb-5 text-xs uppercase tracking-wider flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-full bg-[#991b1b]/10 flex items-center justify-center">
+                        <Briefcase className="w-3.5 h-3.5 text-[#991b1b]" />
                       </div>
+                      Company
+                    </h3>
+                    <div className="space-y-3">
+                      <a href="#" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-career">
+                        <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
+                        Career
+                      </a>
+                      <a href="#" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-terms">
+                        <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
+                        Terms
+                      </a>
+                      <a href="#" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-privacy">
+                        <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
+                        Privacy
+                      </a>
                     </div>
-                    
-                    {/* Library Column */}
-                    <div className="p-6 bg-[#8B4513]/5">
-                      <h3 className="font-serif font-bold text-[#991b1b] mb-5 text-xs uppercase tracking-wider flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-full bg-[#991b1b]/10 flex items-center justify-center">
-                          <BookOpen className="w-3.5 h-3.5 text-[#991b1b]" />
-                        </div>
-                        Library
-                      </h3>
-                      <div className="space-y-3">
-                        <a href="#" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-sutra">
-                          <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
-                          Sutra
-                        </a>
-                        <a href="#" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-verse">
-                          <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
-                          Verse
-                        </a>
-                        <a href="#" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-stories">
-                          <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
-                          Stories
-                        </a>
-                        <a href="#" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-qa">
-                          <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
-                          Q&A
-                        </a>
-                      </div>
-                    </div>
-                    
-                    {/* Community Column */}
-                    <div className="p-6">
-                      <h3 className="font-serif font-bold text-[#991b1b] mb-5 text-xs uppercase tracking-wider flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-full bg-[#991b1b]/10 flex items-center justify-center">
-                          <Calendar className="w-3.5 h-3.5 text-[#991b1b]" />
-                        </div>
-                        Community
-                      </h3>
-                      <div className="space-y-3">
-                        <a href="#" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-dharma-calendar">
-                          <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
-                          Dharma Calendar
-                        </a>
-                      </div>
-                    </div>
-                    
-                    {/* Donation Column */}
-                    <div className="p-6 bg-[#8B4513]/5">
-                      <h3 className="font-serif font-bold text-[#991b1b] mb-5 text-xs uppercase tracking-wider flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-full bg-[#991b1b]/10 flex items-center justify-center">
-                          <HandHeart className="w-3.5 h-3.5 text-[#991b1b]" />
-                        </div>
-                        Donation
-                      </h3>
-                      <div className="space-y-3">
-                        <a href="#" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-donation">
-                          <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
-                          Support Us
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Footer CTA */}
-                  <div className="border-t border-[#8B4513]/15 p-4 bg-gradient-to-r from-[#991b1b]/5 to-[#8B4513]/5">
-                    <a href="#" className="flex items-center justify-center gap-2 px-6 py-2.5 bg-[#991b1b] text-white rounded-full hover:bg-[#7a1515] transition-all duration-300 hover:scale-105 shadow-lg font-serif font-semibold text-sm" data-testid="button-support-sangha">
-                      <Sparkles className="w-4 h-4" />
-                      Support the Sangha
-                    </a>
                   </div>
                 </div>
               </div>
