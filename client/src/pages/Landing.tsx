@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Search, ArrowRight, Sparkles, Users, Heart, Briefcase, FileText, Shield, BookOpen, MessageCircle, Calendar, HandHeart, Check, Repeat2, MoreVertical, Home, User, Bell, Hash, Radio, Clock } from "lucide-react";
+import { Search, ArrowRight, Sparkles, Users, Heart, Briefcase, FileText, Shield, BookOpen, MessageCircle, Calendar, HandHeart, Check, Repeat2, MoreVertical, Home, User, Bell, Hash, Radio, Clock, X, Mic, Hand, Share2 } from "lucide-react";
 import { Link } from "wouter";
 import { buddhistAgents } from "@shared/buddhistAgents";
 import { TracingBeam } from "@/components/TracingBeam";
@@ -570,6 +570,7 @@ export default function Landing() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchFocused, setSearchFocused] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const [selectedRadio, setSelectedRadio] = useState<string | null>(null);
 
   const handleSearch = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -994,7 +995,11 @@ export default function Landing() {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Live Radio 1 */}
-                <div className="bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 p-6 hover:shadow-xl transition-all duration-300" data-testid="card-radio-live-1">
+                <div 
+                  onClick={() => setSelectedRadio("live-1")}
+                  className="bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 p-6 hover:shadow-xl transition-all duration-300 cursor-pointer" 
+                  data-testid="card-radio-live-1"
+                >
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2 px-3 py-1 bg-red-500 text-white rounded-full text-xs font-semibold">
                       <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
@@ -1029,7 +1034,11 @@ export default function Landing() {
                 </div>
 
                 {/* Live Radio 2 */}
-                <div className="bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 p-6 hover:shadow-xl transition-all duration-300" data-testid="card-radio-live-2">
+                <div 
+                  onClick={() => setSelectedRadio("live-2")}
+                  className="bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 p-6 hover:shadow-xl transition-all duration-300 cursor-pointer" 
+                  data-testid="card-radio-live-2"
+                >
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2 px-3 py-1 bg-red-500 text-white rounded-full text-xs font-semibold">
                       <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
@@ -1072,7 +1081,11 @@ export default function Landing() {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Scheduled Radio 1 */}
-                <div className="bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 p-6 hover:shadow-xl transition-all duration-300" data-testid="card-radio-scheduled-1">
+                <div 
+                  onClick={() => setSelectedRadio("scheduled-1")}
+                  className="bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 p-6 hover:shadow-xl transition-all duration-300 cursor-pointer" 
+                  data-testid="card-radio-scheduled-1"
+                >
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2 px-3 py-1 bg-[#8B4513]/20 text-[#2c2c2c] rounded-full text-xs font-semibold">
                       <Clock className="w-3 h-3" />
@@ -1106,7 +1119,11 @@ export default function Landing() {
                 </div>
 
                 {/* Scheduled Radio 2 */}
-                <div className="bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 p-6 hover:shadow-xl transition-all duration-300" data-testid="card-radio-scheduled-2">
+                <div 
+                  onClick={() => setSelectedRadio("scheduled-2")}
+                  className="bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 p-6 hover:shadow-xl transition-all duration-300 cursor-pointer" 
+                  data-testid="card-radio-scheduled-2"
+                >
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2 px-3 py-1 bg-[#8B4513]/20 text-[#2c2c2c] rounded-full text-xs font-semibold">
                       <Clock className="w-3 h-3" />
@@ -1142,6 +1159,146 @@ export default function Landing() {
             </div>
           </div>
         </section>
+
+        {/* Dharma Radio Modal */}
+        {selectedRadio && (
+          <div 
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            onClick={() => setSelectedRadio(null)}
+          >
+            <div 
+              className="bg-[#f3ead7] border-2 border-[#2c2c2c] rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-[0_6px_0_#00000030]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal Header */}
+              <div className="p-6 border-b-2 border-[#8B4513]/20">
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-2">
+                      {selectedRadio.startsWith("live") && (
+                        <div className="flex items-center gap-2 px-3 py-1 bg-red-500 text-white rounded-full text-xs font-semibold">
+                          <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                          LIVE
+                        </div>
+                      )}
+                      <div className="flex items-center gap-1 text-[#8B4513]/60">
+                        <Users className="w-4 h-4" />
+                        <span className="text-sm font-semibold">
+                          {selectedRadio === "live-1" ? "18" : selectedRadio === "live-2" ? "15" : "0"}
+                        </span>
+                      </div>
+                    </div>
+                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">
+                      {selectedRadio === "live-1" && "Thiền Định và Tâm An"}
+                      {selectedRadio === "live-2" && "Kinh Kim Cương - Giảng Giải"}
+                      {selectedRadio === "scheduled-1" && "Vô Ngã và Giải Thoát"}
+                      {selectedRadio === "scheduled-2" && "Niệm Phật A Di Đà"}
+                    </h3>
+                    <p className="font-serif text-sm text-[#8B4513]/70">
+                      {selectedRadio === "live-1" && "Thảo luận về thực hành thiền định hàng ngày"}
+                      {selectedRadio === "live-2" && "Giảng giải chi tiết về Kinh Kim Cương"}
+                      {selectedRadio === "scheduled-1" && "Khám phá khái niệm vô ngã trong Phật giáo"}
+                      {selectedRadio === "scheduled-2" && "Hướng dẫn thực hành niệm Phật"}
+                    </p>
+                  </div>
+                  <button 
+                    onClick={() => setSelectedRadio(null)}
+                    className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-[#8B4513]/10 transition-colors"
+                    data-testid="button-close-radio-modal"
+                  >
+                    <X className="w-5 h-5 text-[#2c2c2c]" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Host Avatar */}
+              <div className="flex flex-col items-center py-8 border-b-2 border-[#8B4513]/20">
+                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#d4af37] to-[#8B4513] flex items-center justify-center mb-3 relative">
+                  <Users className="w-12 h-12 text-white" />
+                  <div className="absolute -bottom-1 px-3 py-1 bg-[#991b1b] text-white rounded-full text-xs font-semibold">
+                    Host
+                  </div>
+                </div>
+                <p className="font-serif font-semibold text-[#2c2c2c] text-lg">
+                  {selectedRadio === "live-1" || selectedRadio === "scheduled-2" ? "Thầy Minh Tuệ" : 
+                   selectedRadio === "live-2" ? "Cô Thanh Hương" : "Thầy Giác Minh"}
+                </p>
+              </div>
+
+              {/* Speakers */}
+              <div className="p-6 border-b-2 border-[#8B4513]/20">
+                <h4 className="font-serif text-xs uppercase tracking-wider text-[#8B4513]/60 mb-4 text-center">
+                  SPEAKERS (5)
+                </h4>
+                <div className="flex justify-center gap-4 flex-wrap">
+                  {[
+                    { name: "Cô Thanh Hương", color: "from-[#8B4513] to-[#991b1b]" },
+                    { name: "Anh Minh Đức", color: "from-[#991b1b] to-[#d4af37]" },
+                    { name: "Chị Hồng Nhung", color: "from-[#d4af37] to-[#8B4513]" },
+                    { name: "Anh Quang Minh", color: "from-[#8B4513] to-[#d4af37]" },
+                    { name: "Chị Phương Anh", color: "from-[#991b1b] to-[#8B4513]" },
+                  ].map((speaker, idx) => (
+                    <div key={idx} className="flex flex-col items-center">
+                      <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${speaker.color} flex items-center justify-center mb-1`}>
+                        <Users className="w-6 h-6 text-white" />
+                      </div>
+                      <p className="font-serif text-xs text-[#2c2c2c] text-center max-w-[60px] truncate">
+                        {speaker.name}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Listeners */}
+              <div className="p-6">
+                <h4 className="font-serif text-xs uppercase tracking-wider text-[#8B4513]/60 mb-4 text-center">
+                  LISTENERS (12)
+                </h4>
+                <div className="grid grid-cols-6 gap-3">
+                  {[
+                    "Chị Lan Anh", "Anh Tuấn", "Chị Mai", "Anh Hùng", "Chị Linh", "Anh Đức",
+                    "Chị Hương", "Anh Nam", "Chị Trang", "Anh Khoa", "Chị Ngọc", "Anh Bình"
+                  ].map((name, idx) => (
+                    <div key={idx} className="flex flex-col items-center">
+                      <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${
+                        idx % 3 === 0 ? "from-[#8B4513] to-[#991b1b]" :
+                        idx % 3 === 1 ? "from-[#d4af37] to-[#8B4513]" :
+                        "from-[#991b1b] to-[#d4af37]"
+                      } flex items-center justify-center`}>
+                        <User className="w-5 h-5 text-white" />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Control Buttons */}
+              <div className="p-6 bg-[#EFE0BD]/50 border-t-2 border-[#8B4513]/20">
+                <div className="flex items-center justify-center gap-3">
+                  <button className="flex items-center justify-center w-12 h-12 rounded-full bg-white border-2 border-[#2c2c2c] hover:bg-[#8B4513]/10 transition-colors" data-testid="button-radio-mic">
+                    <Mic className="w-5 h-5 text-[#2c2c2c]" />
+                  </button>
+                  <button className="flex items-center justify-center w-12 h-12 rounded-full bg-white border-2 border-[#2c2c2c] hover:bg-[#8B4513]/10 transition-colors" data-testid="button-radio-hand">
+                    <Hand className="w-5 h-5 text-[#2c2c2c]" />
+                  </button>
+                  <button className="flex items-center justify-center w-12 h-12 rounded-full bg-white border-2 border-[#2c2c2c] hover:bg-[#8B4513]/10 transition-colors" data-testid="button-radio-like">
+                    <Heart className="w-5 h-5 text-[#2c2c2c]" />
+                  </button>
+                  <button className="flex items-center justify-center w-12 h-12 rounded-full bg-white border-2 border-[#2c2c2c] hover:bg-[#8B4513]/10 transition-colors" data-testid="button-radio-chat">
+                    <MessageCircle className="w-5 h-5 text-[#2c2c2c]" />
+                  </button>
+                  <button className="flex items-center justify-center w-12 h-12 rounded-full bg-white border-2 border-[#2c2c2c] hover:bg-[#8B4513]/10 transition-colors" data-testid="button-radio-share">
+                    <Share2 className="w-5 h-5 text-[#2c2c2c]" />
+                  </button>
+                  <button className="flex items-center justify-center w-12 h-12 rounded-full bg-[#991b1b] border-2 border-[#991b1b] hover:bg-[#7a1515] transition-colors" data-testid="button-radio-leave">
+                    <X className="w-5 h-5 text-white" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Pricing Section */}
         <section className="py-16 px-4">

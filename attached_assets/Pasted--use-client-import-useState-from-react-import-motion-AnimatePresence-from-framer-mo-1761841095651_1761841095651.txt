@@ -1,0 +1,631 @@
+"use client"
+
+import { useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import {
+  Radio,
+  Users,
+  Clock,
+  Search,
+  Plus,
+  X,
+  Mic,
+  MicOff,
+  Heart,
+  Hand,
+  MessageCircle,
+  Share2,
+  Settings,
+  LogOut,
+  UserPlus,
+  UserMinus,
+} from "lucide-react"
+
+interface DharmaRadio {
+  id: string
+  title: string
+  description: string
+  hostId: string
+  hostName: string
+  hostAvatar: string
+  status: "live" | "scheduled" | "ended"
+  startTime: Date
+  endTime?: Date
+  participantsCount: number
+  tags: string[]
+  coverImage?: string
+}
+
+interface Participant {
+  id: string
+  userId: string
+  name: string
+  avatar: string
+  role: "host" | "speaker" | "listener"
+  isSpeaking: boolean
+}
+
+export default function DharmaRadioPage() {
+  const [searchQuery, setSearchQuery] = useState("")
+  const [selectedRadio, setSelectedRadio] = useState<DharmaRadio | null>(null)
+  const [showCreateModal, setShowCreateModal] = useState(false)
+  const [isMuted, setIsMuted] = useState(false)
+  const [handRaised, setHandRaised] = useState(false)
+  const [showChat, setShowChat] = useState(false)
+  const [userRole, setUserRole] = useState<"host" | "speaker" | "listener">("listener")
+  const [language, setLanguage] = useState<"vi" | "en">("vi")
+
+  // Mock data
+  const liveRadios: DharmaRadio[] = [
+    {
+      id: "1",
+      title: "Thiền Định và Tâm An",
+      description: "Thảo luận về thực hành thiền định hàng ngày",
+      hostId: "host1",
+      hostName: "Thầy Minh Tuệ",
+      hostAvatar: "/buddhist-monk.jpg",
+      status: "live",
+      startTime: new Date(Date.now() - 3600000),
+      participantsCount: 234,
+      tags: ["Thiền", "Tâm An", "Thực Hành"],
+    },
+    {
+      id: "2",
+      title: "Kinh Kim Cương - Giảng Giải",
+      description: "Giảng giải chi tiết về Kinh Kim Cương",
+      hostId: "host2",
+      hostName: "Cô Thanh Hương",
+      hostAvatar: "/meditation-woman.jpg",
+      status: "live",
+      startTime: new Date(Date.now() - 1800000),
+      participantsCount: 156,
+      tags: ["Kinh Điển", "Giảng Giải"],
+    },
+  ]
+
+  const scheduledRadios: DharmaRadio[] = [
+    {
+      id: "3",
+      title: "Vô Ngã và Giải Thoát",
+      description: "Khám phá khái niệm vô ngã trong Phật giáo",
+      hostId: "host3",
+      hostName: "Thầy Giác Minh",
+      hostAvatar: "/zen-master.jpg",
+      status: "scheduled",
+      startTime: new Date(Date.now() + 7200000),
+      participantsCount: 0,
+      tags: ["Vô Ngã", "Triết Học"],
+    },
+    {
+      id: "4",
+      title: "Niệm Phật A Di Đà",
+      description: "Hướng dẫn thực hành niệm Phật",
+      hostId: "host1",
+      hostName: "Thầy Minh Tuệ",
+      hostAvatar: "/buddhist-monk.jpg",
+      status: "scheduled",
+      startTime: new Date(Date.now() + 10800000),
+      participantsCount: 0,
+      tags: ["Niệm Phật", "Tịnh Độ"],
+    },
+  ]
+
+  const participants: Participant[] = [
+    {
+      id: "1",
+      userId: "host1",
+      name: "Thầy Minh Tuệ",
+      avatar: "/buddhist-monk.jpg",
+      role: "host",
+      isSpeaking: true,
+    },
+    {
+      id: "2",
+      userId: "speaker1",
+      name: "Cô Thanh Hương",
+      avatar: "/meditation-woman.jpg",
+      role: "speaker",
+      isSpeaking: false,
+    },
+    {
+      id: "3",
+      userId: "speaker2",
+      name: "Anh Minh Đức",
+      avatar: "/zen-master.jpg",
+      role: "speaker",
+      isSpeaking: true,
+    },
+    {
+      id: "4",
+      userId: "speaker3",
+      name: "Chị Hồng Nhung",
+      avatar: "/buddhist-woman.jpg",
+      role: "speaker",
+      isSpeaking: false,
+    },
+    {
+      id: "5",
+      userId: "speaker4",
+      name: "Anh Quang Minh",
+      avatar: "/buddhist-man-meditation.jpg",
+      role: "speaker",
+      isSpeaking: false,
+    },
+    {
+      id: "6",
+      userId: "speaker5",
+      name: "Chị Phương Anh",
+      avatar: "/asian-woman-peaceful.jpg",
+      role: "speaker",
+      isSpeaking: false,
+    },
+    {
+      id: "7",
+      userId: "listener1",
+      name: "Chị Lan Anh",
+      avatar: "/woman-1.png",
+      role: "listener",
+      isSpeaking: false,
+    },
+    {
+      id: "8",
+      userId: "listener2",
+      name: "Anh Tuấn",
+      avatar: "/man-1.png",
+      role: "listener",
+      isSpeaking: false,
+    },
+    {
+      id: "9",
+      userId: "listener3",
+      name: "Chị Mai",
+      avatar: "/woman-2.png",
+      role: "listener",
+      isSpeaking: false,
+    },
+    {
+      id: "10",
+      userId: "listener4",
+      name: "Anh Hùng",
+      avatar: "/man-2.png",
+      role: "listener",
+      isSpeaking: false,
+    },
+    {
+      id: "11",
+      userId: "listener5",
+      name: "Chị Linh",
+      avatar: "/woman-3.png",
+      role: "listener",
+      isSpeaking: false,
+    },
+    {
+      id: "12",
+      userId: "listener6",
+      name: "Anh Đức",
+      avatar: "/man-3.jpg",
+      role: "listener",
+      isSpeaking: false,
+    },
+    {
+      id: "13",
+      userId: "listener7",
+      name: "Chị Hương",
+      avatar: "/woman-4.jpg",
+      role: "listener",
+      isSpeaking: false,
+    },
+    {
+      id: "14",
+      userId: "listener8",
+      name: "Anh Nam",
+      avatar: "/man-4.jpg",
+      role: "listener",
+      isSpeaking: false,
+    },
+    {
+      id: "15",
+      userId: "listener9",
+      name: "Chị Trang",
+      avatar: "/woman-5.jpg",
+      role: "listener",
+      isSpeaking: false,
+    },
+    {
+      id: "16",
+      userId: "listener10",
+      name: "Anh Khoa",
+      avatar: "/man-5.jpg",
+      role: "listener",
+      isSpeaking: false,
+    },
+    {
+      id: "17",
+      userId: "listener11",
+      name: "Chị Ngọc",
+      avatar: "/woman-6.jpg",
+      role: "listener",
+      isSpeaking: false,
+    },
+    {
+      id: "18",
+      userId: "listener12",
+      name: "Anh Bình",
+      avatar: "/man-6.jpg",
+      role: "listener",
+      isSpeaking: false,
+    },
+  ]
+
+  const getTimeUntilStart = (startTime: Date) => {
+    const diff = startTime.getTime() - Date.now()
+    const hours = Math.floor(diff / 3600000)
+    const minutes = Math.floor((diff % 3600000) / 60000)
+    return `${hours}h ${minutes}m`
+  }
+
+  const RadioCard = ({ radio }: { radio: DharmaRadio }) => (
+    <motion.div
+      whileHover={{ scale: 1.02 }}
+      onClick={() => setSelectedRadio(radio)}
+      className="bg-[#f3ead7] border-2 border-[#2c2c2c] rounded-2xl p-5 shadow-[0_2px_0_#00000030,0_0_0_0_3px_#00000010_inset]
+        hover:shadow-[0_3px_0_#00000040,0_0_0_0_3px_#00000015_inset] transition-all cursor-pointer"
+    >
+      {/* Status Badge */}
+      <div className="flex items-center justify-between mb-3">
+        {radio.status === "live" ? (
+          <div className="flex items-center gap-2 px-3 py-1 bg-red-500 text-white rounded-full text-xs font-semibold">
+            <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+            LIVE
+          </div>
+        ) : (
+          <div className="flex items-center gap-2 px-3 py-1 bg-[#2c2c2c]/20 text-[#2c2c2c] rounded-full text-xs font-semibold">
+            <Clock className="w-3 h-3" />
+            {getTimeUntilStart(radio.startTime)}
+          </div>
+        )}
+        <div className="flex items-center gap-1 text-[#2c2c2c]/60">
+          <Users className="w-4 h-4" />
+          <span className="text-sm font-semibold">{radio.participantsCount}</span>
+        </div>
+      </div>
+
+      {/* Title & Description */}
+      <h3 className="text-lg font-serif font-bold text-[#2c2c2c] mb-2">{radio.title}</h3>
+      <p className="text-sm font-serif text-[#2c2c2c]/70 mb-4 line-clamp-2">{radio.description}</p>
+
+      {/* Host Info */}
+      <div className="flex items-center gap-3 mb-3">
+        <img
+          src={radio.hostAvatar || "/placeholder.svg"}
+          alt={radio.hostName}
+          className="w-10 h-10 rounded-full border-2 border-[#991b1b]"
+        />
+        <div>
+          <p className="text-sm font-serif font-semibold text-[#2c2c2c]">{radio.hostName}</p>
+          <p className="text-xs font-serif text-[#2c2c2c]/60">Host</p>
+        </div>
+      </div>
+
+      {/* Tags */}
+      <div className="flex flex-wrap gap-2">
+        {radio.tags.map((tag, index) => (
+          <span
+            key={index}
+            className="px-2 py-1 bg-[#991b1b]/10 text-[#991b1b] rounded-lg text-xs font-serif font-semibold"
+          >
+            #{tag}
+          </span>
+        ))}
+      </div>
+    </motion.div>
+  )
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-background/20 to-background/40 font-serif">
+      {/* Header */}
+      <header className="bg-[#f3ead7] border-b-2 border-[#2c2c2c] shadow-[0_2px_0_#00000030]">
+        <div className="max-w-7xl mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Radio className="w-8 h-8 text-[#991b1b]" />
+              <h1 className="text-2xl font-bold text-[#991b1b]">Dharma Radio</h1>
+            </div>
+
+            <div className="flex items-center gap-3">
+              {/* Search */}
+              <div className="hidden md:flex items-center gap-2 bg-white border-2 border-[#2c2c2c] rounded-xl px-4 py-2">
+                <Search className="w-4 h-4 text-[#2c2c2c]/60" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Tìm kiếm..."
+                  className="bg-transparent outline-none text-sm font-serif text-[#2c2c2c] w-48"
+                />
+              </div>
+
+              {/* Create Button */}
+              <button
+                onClick={() => setShowCreateModal(true)}
+                className="flex items-center gap-2 px-4 py-2 bg-[#991b1b] text-white rounded-xl
+                  border-2 border-[#2c2c2c] shadow-[0_2px_0_#00000030,0_0_0_3px_#00000010_inset]
+                  hover:bg-[#7a1515] transition-colors font-semibold text-sm"
+              >
+                <Plus className="w-4 h-4" />
+                <span className="hidden md:inline">Tạo Radio</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="max-w-7xl mx-auto px-4 py-8">
+        {/* Live Now Section */}
+        <section className="mb-12">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse" />
+            <h2 className="text-2xl font-bold text-[#991b1b]">Đang Phát Trực Tiếp</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {liveRadios.map((radio) => (
+              <RadioCard key={radio.id} radio={radio} />
+            ))}
+          </div>
+        </section>
+
+        {/* Scheduled Section */}
+        <section>
+          <div className="flex items-center gap-3 mb-6">
+            <Clock className="w-6 h-6 text-[#2c2c2c]" />
+            <h2 className="text-2xl font-bold text-[#2c2c2c]">Sắp Diễn Ra</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {scheduledRadios.map((radio) => (
+              <RadioCard key={radio.id} radio={radio} />
+            ))}
+          </div>
+        </section>
+      </main>
+
+      {/* Voice Room Modal */}
+      <AnimatePresence>
+        {selectedRadio && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            onClick={() => setSelectedRadio(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-[#f3ead7] border-2 border-[#2c2c2c] rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto
+                shadow-[0_6px_0_#00000030]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Room Header */}
+              <div className="p-6 border-b-2 border-[#2c2c2c]/20">
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      {selectedRadio.status === "live" && (
+                        <div className="flex items-center gap-2 px-3 py-1 bg-red-500 text-white rounded-full text-xs font-semibold">
+                          <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+                          LIVE
+                        </div>
+                      )}
+                      <div className="flex items-center gap-1 text-[#2c2c2c]/60">
+                        <Users className="w-4 h-4" />
+                        <span className="text-sm font-semibold">{participants.length}</span>
+                      </div>
+                    </div>
+                    <h2 className="text-xl font-bold text-[#2c2c2c] mb-2">{selectedRadio.title}</h2>
+                    <p className="text-sm text-[#2c2c2c]/70">{selectedRadio.description}</p>
+                  </div>
+                  <button
+                    onClick={() => setSelectedRadio(null)}
+                    className="p-2 hover:bg-[#2c2c2c]/10 rounded-full transition-colors"
+                  >
+                    <X className="w-5 h-5 text-[#2c2c2c]" />
+                  </button>
+                </div>
+
+                {/* Participants - Redesigned Layout */}
+                <div className="p-8">
+                  <div className="space-y-8">
+                    {/* Host Section - Center Top */}
+                    <div className="flex justify-center">
+                      {participants
+                        .filter((p) => p.role === "host")
+                        .map((participant) => (
+                          <motion.div
+                            key={participant.id}
+                            animate={participant.isSpeaking ? { scale: [1, 1.05, 1] } : {}}
+                            transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY }}
+                            className="flex flex-col items-center gap-2"
+                          >
+                            <div className="relative">
+                              <img
+                                src={participant.avatar || "/placeholder.svg"}
+                                alt={participant.name}
+                                className="w-24 h-24 rounded-full border-4 border-[#991b1b]"
+                              />
+                              {participant.isSpeaking && (
+                                <div className="absolute inset-0 rounded-full border-4 border-[#991b1b] animate-ping opacity-75" />
+                              )}
+                              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-[#991b1b] text-white px-3 py-1 rounded-full text-xs font-semibold">
+                                Host
+                              </div>
+                            </div>
+                            <p className="text-sm font-semibold text-[#2c2c2c] text-center">{participant.name}</p>
+                          </motion.div>
+                        ))}
+                    </div>
+
+                    {/* Speakers Section - Horizontal Row */}
+                    <div>
+                      <p className="text-xs text-[#2c2c2c]/60 mb-4 text-center font-semibold uppercase tracking-wide">
+                        Speakers ({participants.filter((p) => p.role === "speaker").length})
+                      </p>
+                      <div className="flex flex-wrap justify-center gap-6">
+                        {participants
+                          .filter((p) => p.role === "speaker")
+                          .map((participant) => (
+                            <motion.div
+                              key={participant.id}
+                              animate={participant.isSpeaking ? { scale: [1, 1.05, 1] } : {}}
+                              transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY }}
+                              className="flex flex-col items-center gap-2"
+                            >
+                              <div className="relative">
+                                <img
+                                  src={participant.avatar || "/placeholder.svg"}
+                                  alt={participant.name}
+                                  className="w-20 h-20 rounded-full border-3 border-[#d4af37]"
+                                />
+                                {participant.isSpeaking && (
+                                  <div className="absolute inset-0 rounded-full border-3 border-[#d4af37] animate-ping opacity-75" />
+                                )}
+                                <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 bg-[#d4af37] text-[#2c2c2c] p-1.5 rounded-full">
+                                  <Mic className="w-3 h-3" />
+                                </div>
+                              </div>
+                              <p className="text-xs font-medium text-[#2c2c2c] text-center max-w-[80px] truncate">
+                                {participant.name}
+                              </p>
+                            </motion.div>
+                          ))}
+                      </div>
+                    </div>
+
+                    {/* Listeners Section - Grid Layout */}
+                    <div>
+                      <p className="text-xs text-[#2c2c2c]/60 mb-4 text-center font-semibold uppercase tracking-wide">
+                        Listeners ({participants.filter((p) => p.role === "listener").length})
+                      </p>
+                      <div className="grid grid-cols-6 gap-4 justify-items-center">
+                        {participants
+                          .filter((p) => p.role === "listener")
+                          .map((participant) => (
+                            <div key={participant.id} className="flex flex-col items-center gap-1">
+                              <img
+                                src={participant.avatar || "/placeholder.svg"}
+                                alt={participant.name}
+                                className="w-14 h-14 rounded-full border-2 border-[#2c2c2c]/30 opacity-80 hover:opacity-100 transition-opacity"
+                              />
+                              <p className="text-xs text-[#2c2c2c]/70 text-center max-w-[60px] truncate">
+                                {participant.name}
+                              </p>
+                            </div>
+                          ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom Controls */}
+                <div className="p-6 border-t-2 border-[#2c2c2c]/20 bg-[#EFE0BD]">
+                  <div className="flex items-center justify-center gap-4">
+                    {/* Mic Toggle */}
+                    <button
+                      onClick={() => setIsMuted(!isMuted)}
+                      className={`p-4 rounded-full border-2 border-[#2c2c2c] shadow-[0_2px_0_#00000030,0_0_0_3px_#00000010_inset]
+                        transition-colors ${
+                          isMuted
+                            ? "bg-red-500 text-white hover:bg-red-600"
+                            : "bg-[#f3ead7] text-[#2c2c2c] hover:bg-[#efe2c9]"
+                        }`}
+                    >
+                      {isMuted ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
+                    </button>
+
+                    {/* Raise Hand */}
+                    <button
+                      onClick={() => setHandRaised(!handRaised)}
+                      className={`p-4 rounded-full border-2 border-[#2c2c2c] shadow-[0_2px_0_#00000030,0_0_0_3px_#00000010_inset]
+                        transition-colors ${
+                          handRaised ? "bg-[#d4af37] text-white" : "bg-[#f3ead7] text-[#2c2c2c] hover:bg-[#efe2c9]"
+                        }`}
+                    >
+                      <Hand className="w-5 h-5" />
+                    </button>
+
+                    {/* React */}
+                    <button
+                      className="p-4 rounded-full bg-[#f3ead7] text-[#2c2c2c] border-2 border-[#2c2c2c]
+                        shadow-[0_2px_0_#00000030,0_0_0_3px_#00000010_inset] hover:bg-[#efe2c9] transition-colors"
+                    >
+                      <Heart className="w-5 h-5" />
+                    </button>
+
+                    {/* Chat */}
+                    <button
+                      onClick={() => setShowChat(!showChat)}
+                      className="p-4 rounded-full bg-[#f3ead7] text-[#2c2c2c] border-2 border-[#2c2c2c]
+                        shadow-[0_2px_0_#00000030,0_0_0_3px_#00000010_inset] hover:bg-[#efe2c9] transition-colors"
+                    >
+                      <MessageCircle className="w-5 h-5" />
+                    </button>
+
+                    {/* Share */}
+                    <button
+                      className="p-4 rounded-full bg-[#f3ead7] text-[#2c2c2c] border-2 border-[#2c2c2c]
+                        shadow-[0_2px_0_#00000030,0_0_0_3px_#00000010_inset] hover:bg-[#efe2c9] transition-colors"
+                    >
+                      <Share2 className="w-5 h-5" />
+                    </button>
+
+                    {/* Leave */}
+                    <button
+                      onClick={() => setSelectedRadio(null)}
+                      className="p-4 rounded-full bg-red-500 text-white border-2 border-[#2c2c2c]
+                        shadow-[0_2px_0_#00000030,0_0_0_3px_#00000010_inset] hover:bg-red-600 transition-colors"
+                    >
+                      <LogOut className="w-5 h-5" />
+                    </button>
+                  </div>
+
+                  {/* Host Controls (if user is host) */}
+                  {userRole === "host" && (
+                    <div className="mt-4 pt-4 border-t-2 border-[#2c2c2c]/20">
+                      <p className="text-xs text-[#2c2c2c]/60 mb-3 text-center font-semibold">Host Controls</p>
+                      <div className="flex items-center justify-center gap-3">
+                        <button
+                          className="flex items-center gap-2 px-4 py-2 bg-[#f3ead7] text-[#2c2c2c] rounded-xl
+                            border-2 border-[#2c2c2c] shadow-[0_2px_0_#00000030,0_0_0_3px_#00000010_inset]
+                            hover:bg-[#efe2c9] transition-colors text-sm font-semibold"
+                        >
+                          <UserPlus className="w-4 h-4" />
+                          Approve
+                        </button>
+                        <button
+                          className="flex items-center gap-2 px-4 py-2 bg-[#f3ead7] text-[#2c2c2c] rounded-xl
+                            border-2 border-[#2c2c2c] shadow-[0_2px_0_#00000030,0_0_0_3px_#00000010_inset]
+                            hover:bg-[#efe2c9] transition-colors text-sm font-semibold"
+                        >
+                          <UserMinus className="w-4 h-4" />
+                          Remove
+                        </button>
+                        <button
+                          className="flex items-center gap-2 px-4 py-2 bg-[#f3ead7] text-[#2c2c2c] rounded-xl
+                            border-2 border-[#2c2c2c] shadow-[0_2px_0_#00000030,0_0_0_3px_#00000010_inset]
+                            hover:bg-[#efe2c9] transition-colors text-sm font-semibold"
+                        >
+                          <Settings className="w-4 h-4" />
+                          Settings
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+  )\
+}
