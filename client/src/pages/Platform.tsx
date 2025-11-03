@@ -59,7 +59,7 @@ function SocialNetworkSection() {
           <div className="flex items-center justify-center gap-3 mb-4">
             <Users className="w-8 h-8 text-[#991b1b]" />
             <h2 className="font-serif text-4xl font-bold text-[#991b1b]" data-testid="text-social-title">
-              Community Forum
+              Engage Your Sangha
             </h2>
           </div>
           <p className="font-serif text-lg text-[#8B4513]/70 max-w-2xl mx-auto mb-4">

@@ -118,8 +118,8 @@ Preferred communication style: Simple, everyday language.
 
 **Six Platform Capability Sections**:
 
-1. **Community Forum** (`#awaken-feed`)
-   - Updated title from "Engage Your Sangha" to "Community Forum"
+1. **Engage Your Sangha** (`#awaken-feed`)
+   - Community Forum section with enhanced B2B messaging
    - Feature cards: Right Speech Moderation (AI-assisted flagging), Study Groups & Circles (sutra study), Anonymous Posting (sensitive questions)
    - Includes interactive social feed demo with Vietnamese sample content
    - Data-testid: card-forum-moderation, card-forum-study-groups, card-forum-anonymous
