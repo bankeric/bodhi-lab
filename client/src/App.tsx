@@ -17,6 +17,9 @@ import Overview from "@/pages/Overview";
 import AgentModels from "@/pages/AgentModels";
 import QuickStart from "@/pages/QuickStart";
 import TokenPricing from "@/pages/TokenPricing";
+import Career from "@/pages/Career";
+import Privacy from "@/pages/Privacy";
+import Terms from "@/pages/Terms";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -26,6 +29,9 @@ function Router() {
       <Route path="/platform" component={Platform} />
       <Route path="/discovery" component={Discovery} />
       <Route path="/center/:id" component={CenterDetail} />
+      <Route path="/career" component={Career} />
+      <Route path="/privacy" component={Privacy} />
+      <Route path="/terms" component={Terms} />
       <Route path="/docs/manifesto">
         <DocsLayout>
           <Manifesto />
