@@ -3,6 +3,9 @@ import { Link } from "wouter";
 import { Search, Sparkles, Users, Heart, MessageCircle, Repeat2, Home, User, Bell, Hash, Radio, Clock, X, Mic, Hand, Share2, Briefcase, ArrowRight, MapPin, Calendar, Award, Flame, CheckCircle2, UserPlus, ThumbsUp, BookOpen, Megaphone, CalendarClock } from "lucide-react";
 import { TracingBeam } from "@/components/TracingBeam";
 import { buddhistAgents } from "@shared/buddhistAgents";
+import { apiRequest } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
+import DonationCheckout from "@/components/DonationCheckout";
 
 // Buddhist practitioner avatars
 import avatar1 from "@assets/download (4)_1761842289234.jpg";
@@ -881,6 +884,62 @@ export default function Platform() {
   const [selectedRadio, setSelectedRadio] = useState<string | null>(null);
   const [donationAmount, setDonationAmount] = useState<number | null>(500000);
   const [customAmount, setCustomAmount] = useState<string>("");
+  const [showCheckout, setShowCheckout] = useState(false);
+  const [clientSecret, setClientSecret] = useState<string>("");
+  const [isCreatingPayment, setIsCreatingPayment] = useState(false);
+  const { toast } = useToast();
+
+  const handleDonationSubmit = async () => {
+    if (!donationAmount || donationAmount < 1000) {
+      toast({
+        title: "Số tiền không hợp lệ",
+        description: "Vui lòng nhập số tiền tối thiểu 1.000 đ",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsCreatingPayment(true);
+    
+    try {
+      const response = await apiRequest("POST", "/api/create-payment-intent", { 
+        amount: donationAmount 
+      });
+      const data = await response.json();
+      
+      if (data.clientSecret) {
+        setClientSecret(data.clientSecret);
+        setShowCheckout(true);
+      } else {
+        throw new Error("No client secret received");
+      }
+    } catch (error: any) {
+      toast({
+        title: "Lỗi kết nối",
+        description: error.message || "Không thể kết nối đến dịch vụ thanh toán. Vui lòng thử lại.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsCreatingPayment(false);
+    }
+  };
+
+  const handleDonationSuccess = () => {
+    setShowCheckout(false);
+    setClientSecret("");
+    setDonationAmount(500000);
+    setCustomAmount("");
+    
+    toast({
+      title: "Cúng dường thành công! 🙏",
+      description: "Cảm ơn lòng từ bi của bạn. Công đức được hồi hướng cho tất cả chúng sinh.",
+    });
+  };
+
+  const handleCloseCheckout = () => {
+    setShowCheckout(false);
+    setClientSecret("");
+  };
 
   return (
     <div className="min-h-screen bg-[#EFE0BD] text-[#8B4513] overflow-x-hidden">
@@ -1388,8 +1447,13 @@ export default function Platform() {
 
                     {/* Submit Button */}
                     <div className="text-center">
-                      <button className="px-12 py-4 bg-gradient-to-r from-[#991b1b] to-[#7a1515] text-white font-serif font-bold text-lg rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300" data-testid="button-submit-donation">
-                        Cúng dường
+                      <button 
+                        onClick={handleDonationSubmit}
+                        disabled={isCreatingPayment || !donationAmount}
+                        className="px-12 py-4 bg-gradient-to-r from-[#991b1b] to-[#7a1515] text-white font-serif font-bold text-lg rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:hover:scale-100 disabled:cursor-not-allowed" 
+                        data-testid="button-submit-donation"
+                      >
+                        {isCreatingPayment ? "Đang xử lý..." : "Cúng dường"}
                       </button>
                     </div>
                   </div>
@@ -2152,6 +2216,14 @@ export default function Platform() {
           </div>
         </footer>
       </div>
+
+      <DonationCheckout
+        isOpen={showCheckout}
+        amount={donationAmount || 0}
+        clientSecret={clientSecret}
+        onClose={handleCloseCheckout}
+        onSuccess={handleDonationSuccess}
+      />
     </div>
   );
 }
