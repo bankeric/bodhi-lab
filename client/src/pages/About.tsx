@@ -1,5 +1,8 @@
 import { Link } from "wouter";
-import { Heart, Users, Sparkles, Target, Globe, Code, Briefcase } from "lucide-react";
+import lotusIcon from "@assets/44_1762155616660.png";
+import bellIcon from "@assets/Bell_no_bg (1)_1762155616660.png";
+import buddhaIcon from "@assets/2_1762155709385.png";
+import sutraIcon from "@assets/Wordless Sutra Icon - Sumi-e Style_1762155698128.png";
 
 export default function About() {
   return (
@@ -43,7 +46,7 @@ export default function About() {
           <div className="text-center mb-16">
             <div className="flex items-center justify-center gap-3 mb-6">
               <div className="w-16 h-16 rounded-full bg-[#991b1b]/10 flex items-center justify-center">
-                <Heart className="w-8 h-8 text-[#991b1b]" />
+                <img src={lotusIcon} alt="Lotus" className="w-8 h-8 object-contain" />
               </div>
             </div>
             <h1 className="font-serif text-5xl md:text-6xl font-bold text-[#991b1b] mb-6" data-testid="text-about-title">
@@ -58,7 +61,7 @@ export default function About() {
           <div className="bg-white/50 backdrop-blur-md rounded-3xl border-2 border-[#8B4513]/20 p-8 md:p-12 mb-12" data-testid="section-mission">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 rounded-xl bg-[#991b1b]/10 flex items-center justify-center">
-                <Target className="w-6 h-6 text-[#991b1b]" />
+                <img src={bellIcon} alt="Bell" className="w-6 h-6 object-contain" />
               </div>
               <h2 className="font-serif text-3xl font-bold text-[#991b1b]">Our Mission</h2>
             </div>
@@ -74,7 +77,7 @@ export default function About() {
           <div className="bg-white/50 backdrop-blur-md rounded-3xl border-2 border-[#8B4513]/20 p-8 md:p-12 mb-12" data-testid="section-values">
             <div className="flex items-center gap-3 mb-8">
               <div className="w-12 h-12 rounded-xl bg-[#991b1b]/10 flex items-center justify-center">
-                <Sparkles className="w-6 h-6 text-[#991b1b]" />
+                <img src={buddhaIcon} alt="Buddha" className="w-6 h-6 object-contain" />
               </div>
               <h2 className="font-serif text-3xl font-bold text-[#991b1b]">Our Values</h2>
             </div>
@@ -114,7 +117,7 @@ export default function About() {
           <div className="bg-white/50 backdrop-blur-md rounded-3xl border-2 border-[#8B4513]/20 p-8 md:p-12 mb-12" data-testid="section-what-we-do">
             <div className="flex items-center gap-3 mb-8">
               <div className="w-12 h-12 rounded-xl bg-[#991b1b]/10 flex items-center justify-center">
-                <Code className="w-6 h-6 text-[#991b1b]" />
+                <img src={sutraIcon} alt="Sutra" className="w-6 h-6 object-contain" />
               </div>
               <h2 className="font-serif text-3xl font-bold text-[#991b1b]">What We Build</h2>
             </div>
@@ -154,7 +157,7 @@ export default function About() {
           <div className="bg-gradient-to-br from-[#991b1b]/10 to-[#8B4513]/10 rounded-3xl border-2 border-[#991b1b]/30 p-8 md:p-12 mb-12" data-testid="section-team">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 rounded-xl bg-[#991b1b]/10 flex items-center justify-center">
-                <Users className="w-6 h-6 text-[#991b1b]" />
+                <img src={lotusIcon} alt="Lotus" className="w-6 h-6 object-contain" />
               </div>
               <h2 className="font-serif text-3xl font-bold text-[#2c2c2c]">Our Team</h2>
             </div>
@@ -170,7 +173,7 @@ export default function About() {
           <div className="bg-white/50 backdrop-blur-md rounded-3xl border-2 border-[#8B4513]/20 p-8 md:p-12 mb-12" data-testid="section-reach">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 rounded-xl bg-[#991b1b]/10 flex items-center justify-center">
-                <Globe className="w-6 h-6 text-[#991b1b]" />
+                <img src={bellIcon} alt="Bell" className="w-6 h-6 object-contain" />
               </div>
               <h2 className="font-serif text-3xl font-bold text-[#991b1b]">Global Reach, Local Care</h2>
             </div>
