@@ -174,15 +174,25 @@ Preferred communication style: Simple, everyday language.
 - Interactive elements and key content blocks marked for testing
 - No duplicate testids across entire Platform page
 
-### Legal Pages (Career, Privacy, Terms)
+### Company Pages (About, Career, Privacy, Terms)
 
-**Recent Changes (November 3, 2025)**: Added three professional legal pages accessible via dropdown menu under the company logo in both Landing and Platform pages.
+**Recent Changes (November 3, 2025)**: Added four professional company pages accessible via dropdown menu under the company logo in both Landing and Platform pages.
 
-**Page Structure**: All legal pages follow consistent Buddhist spiritual aesthetic with warm color palette (#991b1b, #8B4513, #EFE0BD), serif typography, and professional B2B-appropriate content.
+**Page Structure**: All company pages follow consistent Buddhist spiritual aesthetic with warm color palette (#991b1b, #8B4513, #EFE0BD), serif typography, and professional B2B-appropriate content.
 
-**Three Legal Pages**:
+**Four Company Pages**:
 
-1. **Career Page** (`/career`)
+1. **About Page** (`/about`)
+   - Company mission, values, and story of Bodhi Technology Lab
+   - Mission section: Preserving and propagating Buddha-Dharma in the digital age
+   - Values section: Respect for Tradition, Temple Sovereignty, Transparency & Ethics, Accessible Technology
+   - What We Build: Community Platforms, AI Buddhist Agents, Donation Infrastructure, Digital Libraries
+   - Team section: Distributed team of engineers, designers, and Buddhist practitioners
+   - Global Reach section: Serving Buddhist communities worldwide with local customization
+   - CTA section with links to Platform and Career pages
+   - Data-testid attributes for all sections and interactive elements
+
+2. **Career Page** (`/career`)
    - Job opportunities at Bodhi Technology Lab
    - Contact email: talent@boddhilab.io
    - Four open positions: Senior Full-Stack Engineer, AI/ML Engineer, Product Designer, DevOps Engineer
@@ -191,14 +201,14 @@ Preferred communication style: Simple, everyday language.
    - Application process with 5 steps from submission to onboarding
    - Data-testid attributes for all interactive elements and content sections
 
-2. **Privacy Policy Page** (`/privacy`)
+3. **Privacy Policy Page** (`/privacy`)
    - Contact email: privacy@boddhilab.io
    - Comprehensive privacy policy covering data collection, usage, sharing, security
    - Sections: Our Commitment, Information Collection, Data Usage, Data Sharing, Security, User Rights, Cookies, Children's Privacy, International Transfers, Changes to Policy
    - Emphasizes no tracking, no data sales, Buddhist ethics-aligned privacy practices
    - Data-testid attributes for all major sections
 
-3. **Terms of Service Page** (`/terms`)
+4. **Terms of Service Page** (`/terms`)
    - Contact email: privacy@boddhilab.io (legal inquiries)
    - Comprehensive terms covering service usage, acceptable use, AI agent guidelines, IP, payments, termination
    - 13 major sections including Acceptance, Eligibility, Account Responsibilities, Acceptable Use, AI Guidelines, IP, Payment Terms, Termination, Disclaimers, Indemnification, Dispute Resolution, Changes to Terms, Miscellaneous
@@ -206,10 +216,10 @@ Preferred communication style: Simple, everyday language.
    - Data-testid attributes for all sections
 
 **Navigation Integration**:
-- All three pages accessible via dropdown menu under "Company" in header
+- All four pages accessible via dropdown menu under "Company" in header
 - Dropdown appears on hover over "Bodhi Technology Lab" brand name in both Landing.tsx and Platform.tsx
-- Consistent footer with cross-links to all three legal pages
-- Routes registered in App.tsx at `/career`, `/privacy`, `/terms`
+- Consistent footer with cross-links to all company pages (About link appears first and underlined in footer)
+- Routes registered in App.tsx at `/about`, `/career`, `/privacy`, `/terms`
 
 **Design Consistency**:
 - All pages use warm parchment background (#EFE0BD) with gradient overlays
