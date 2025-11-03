@@ -116,31 +116,31 @@ Preferred communication style: Simple, everyday language.
 
 **Platform Page Structure**: Located at `/platform`, the page showcases white-label technology solutions with detailed feature cards designed to convert B2B customers. Each section follows a consistent pattern: Icon + Title + Description + Feature Cards (3-column responsive grid) + Interactive Demo/Examples.
 
-**Six Platform Capability Sections**:
+**Six Platform Capability Sections** (in order):
 
-1. **Engage Your Sangha** (`#awaken-feed`)
-   - Community Forum section with enhanced B2B messaging
-   - Feature cards: Right Speech Moderation (AI-assisted flagging), Study Groups & Circles (sutra study), Anonymous Posting (sensitive questions)
-   - Includes interactive social feed demo with Vietnamese sample content
-   - Data-testid: card-forum-moderation, card-forum-study-groups, card-forum-anonymous
+1. **Document & Resource Library** (`#library`)
+   - Searchable library with full-text search across PDFs
+   - Access control with role-based permissions
+   - Offline download capabilities and version history
+   - Data-testid: card-library-search, card-library-access, card-library-offline
 
-2. **Custom Branding** (`#branding`)
+2. **Donation Tools** (`#donation-tools`)
+   - Recurring donations with multiple payment cycles
+   - Multiple payment methods (QR codes, cards, bank transfers)
+   - Merit dedication and anonymous giving options
+   - Data-testid: card-recurring-dana, card-payment-methods, card-merit-dedication
+
+3. **Custom Branding** (`#custom-branding`)
    - Logo & visual identity upload with theme builder
    - Domain & white-labeling with SSL certificates
    - Sovereignty messaging emphasizing temple control over data and branding
    - Data-testid: card-branding-logo, card-branding-domain, card-branding-sovereignty
 
-3. **Donation Tools** (`#donations`)
-   - Recurring donations with multiple payment cycles
-   - Multiple payment methods (QR codes, cards, bank transfers)
-   - Merit dedication and anonymous giving options
-   - Data-testid: card-donation-recurring, card-donation-payment, card-donation-merit
-
-4. **Document & Resource Library** (`#library`)
-   - Searchable library with full-text search across PDFs
-   - Access control with role-based permissions
-   - Offline download capabilities and version history
-   - Data-testid: card-library-search, card-library-access, card-library-offline
+4. **Engage Your Sangha** (`#awaken-feed`)
+   - Community Forum section with enhanced B2B messaging
+   - Feature cards: Right Speech Moderation (AI-assisted flagging), Study Groups & Circles (sutra study), Anonymous Posting (sensitive questions)
+   - Includes interactive social feed demo with Vietnamese sample content
+   - Data-testid: card-forum-moderation, card-forum-study-groups, card-forum-anonymous
 
 5. **Events & Reminder Calendar** (`#dharma-radio`)
    - Smart scheduling with recurring event templates (Vesak, Uposatha)
