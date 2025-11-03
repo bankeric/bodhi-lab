@@ -1,5 +1,6 @@
 import { Link } from "wouter";
-import { FileText, Mail } from "lucide-react";
+import sutraIcon from "@assets/Wordless Sutra Icon - Sumi-e Style_1762155698128.png";
+import bellIcon from "@assets/Bell_no_bg (1)_1762155616660.png";
 
 export default function Terms() {
   return (
@@ -38,7 +39,7 @@ export default function Terms() {
         <section className="py-20 px-4">
           <div className="max-w-4xl mx-auto text-center">
             <div className="flex items-center justify-center gap-3 mb-6">
-              <FileText className="w-12 h-12 text-[#991b1b]" />
+              <img src={sutraIcon} alt="Sutra" className="w-12 h-12 object-contain" />
             </div>
             <h1 className="font-serif text-5xl md:text-6xl font-bold text-[#991b1b] mb-6" data-testid="text-terms-title">
               Terms of Service
@@ -321,7 +322,7 @@ export default function Terms() {
 
             {/* Contact */}
             <div className="bg-gradient-to-br from-[#991b1b]/10 to-[#8B4513]/10 rounded-2xl border-2 border-[#991b1b]/30 p-8 text-center" data-testid="section-contact">
-              <Mail className="w-12 h-12 text-[#991b1b] mx-auto mb-4" />
+              <img src={bellIcon} alt="Bell" className="w-12 h-12 object-contain mx-auto mb-4" />
               <h2 className="font-serif text-3xl font-bold text-[#991b1b] mb-4">Questions About These Terms?</h2>
               <p className="font-serif text-[#2c2c2c] mb-6">
                 If you have questions or need clarification about these Terms of Service, we're here to help.
