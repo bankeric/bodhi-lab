@@ -968,96 +968,94 @@ export default function Platform() {
         </header>
 
         <TracingBeam className="pt-24">
-          <SocialNetworkSection />
-
-          {/* Custom Branding Section */}
-          <section id="custom-branding" className="py-16 px-4 bg-[#EFE0BD]/50">
+          {/* Document & Resource Library Section */}
+          <section id="resource-library" className="py-16 px-4 bg-[#EFE0BD]/50">
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-12">
                 <div className="flex items-center justify-center gap-3 mb-4">
-                  <Sparkles className="w-8 h-8 text-[#991b1b]" />
-                  <h2 className="font-serif text-4xl font-bold text-[#991b1b]" data-testid="text-branding-title">
-                    Custom Branding
+                  <BookOpen className="w-8 h-8 text-[#991b1b]" />
+                  <h2 className="font-serif text-4xl font-bold text-[#991b1b]" data-testid="text-library-title">
+                    Document & Resource Library
                   </h2>
                 </div>
                 <p className="font-serif text-lg text-[#8B4513]/70 max-w-2xl mx-auto mb-4">
-                  Transform the platform into a seamless extension of your monastery's identity
+                  Organize your temple's sutras, chants, teachings, and media in a searchable, accessible digital library
                 </p>
                 <p className="font-serif text-sm text-[#8B4513]/60 max-w-3xl mx-auto italic">
-                  Every temple has a unique lineage and aesthetic—your platform should reflect that dignity
+                  Preserve your lineage's wisdom for future generations with version control and offline access
                 </p>
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-                {/* Logo & Visual Identity */}
-                <div className="bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 p-8 hover:shadow-xl transition-all duration-300" data-testid="card-logo-upload">
+                {/* Searchable Library */}
+                <div className="bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 p-8 hover:shadow-xl transition-all duration-300" data-testid="card-searchable-library">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-12 h-12 rounded-xl bg-[#991b1b]/10 flex items-center justify-center">
-                      <Sparkles className="w-6 h-6 text-[#991b1b]" />
+                      <Search className="w-6 h-6 text-[#991b1b]" />
                     </div>
-                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c]">Logo & Visual Identity</h3>
+                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c]">Searchable Library</h3>
                   </div>
                   <p className="font-serif text-sm text-[#2c2c2c]/70 mb-6">
-                    Upload your monastery's logo, dharma wheel, or lineage seal. Choose from temple-inspired color palettes or create custom themes that resonate with your tradition—Zen minimalism, Tibetan vibrancy, or Pure Land serenity.
+                    Upload sutras, commentaries, chant sheets, audio dharma talks, and video recordings. Tag by tradition, teacher, topic, or language. Full-text search helps members find exactly what they need.
                   </p>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Upload SVG, PNG logos with transparent backgrounds</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Support for PDF, EPUB, audio (MP3), video (MP4)</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Pre-built Buddhist aesthetic themes (Lotus, Bodhi, Zen Garden)</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Full-text search across all documents</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Custom color palette generator with accessibility checks</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Custom tagging system by topic, teacher, lineage</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Font pairing for sutras, headings, and body text</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Multi-language support for translations</span>
                     </li>
                   </ul>
                   <div className="flex flex-wrap gap-2">
-                    <span className="px-3 py-1 bg-[#991b1b]/10 text-[#991b1b] rounded-full text-xs font-semibold">Logo Upload</span>
-                    <span className="px-3 py-1 bg-[#991b1b]/10 text-[#991b1b] rounded-full text-xs font-semibold">Theme Builder</span>
-                    <span className="px-3 py-1 bg-[#991b1b]/10 text-[#991b1b] rounded-full text-xs font-semibold">Color Palettes</span>
+                    <span className="px-3 py-1 bg-[#991b1b]/10 text-[#991b1b] rounded-full text-xs font-semibold">Full-text Search</span>
+                    <span className="px-3 py-1 bg-[#991b1b]/10 text-[#991b1b] rounded-full text-xs font-semibold">Multi-format</span>
+                    <span className="px-3 py-1 bg-[#991b1b]/10 text-[#991b1b] rounded-full text-xs font-semibold">Tagging</span>
                   </div>
                 </div>
 
-                {/* Domain & White-labeling */}
-                <div className="bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 p-8 hover:shadow-xl transition-all duration-300" data-testid="card-domain-mapping">
+                {/* Access Control & Version Control */}
+                <div className="bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 p-8 hover:shadow-xl transition-all duration-300" data-testid="card-access-control">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-12 h-12 rounded-xl bg-[#991b1b]/10 flex items-center justify-center">
-                      <MapPin className="w-6 h-6 text-[#991b1b]" />
+                      <Award className="w-6 h-6 text-[#991b1b]" />
                     </div>
-                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c]">Domain & White-labeling</h3>
+                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c]">Access Control & Versioning</h3>
                   </div>
                   <p className="font-serif text-sm text-[#2c2c2c]/70 mb-6">
-                    Map your custom domain (e.g., platform.yourtemple.org) with automatic SSL certificates. Remove all external branding—this becomes your platform, serving your sangha under your monastery's trusted name.
+                    Set permissions for public, members-only, or ordained-only content. Track updates to sutras and commentaries with version history—perfect for evolving translations or teacher revisions.
                   </p>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Custom domain mapping with DNS guidance</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Granular access control (public, members, ordained)</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Automatic SSL/TLS certificates for secure connections</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Version history for all documents</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Complete white-labeling (no Bodhi Tech branding visible)</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Offline download for retreats without internet</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Custom email domains for notifications (@yourtemple.org)</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Analytics on most-accessed resources</span>
                     </li>
                   </ul>
                   <div className="flex flex-wrap gap-2">
-                    <span className="px-3 py-1 bg-[#991b1b]/10 text-[#991b1b] rounded-full text-xs font-semibold">Custom Domain</span>
-                    <span className="px-3 py-1 bg-[#991b1b]/10 text-[#991b1b] rounded-full text-xs font-semibold">SSL Included</span>
-                    <span className="px-3 py-1 bg-[#991b1b]/10 text-[#991b1b] rounded-full text-xs font-semibold">White-label</span>
+                    <span className="px-3 py-1 bg-[#991b1b]/10 text-[#991b1b] rounded-full text-xs font-semibold">Access Control</span>
+                    <span className="px-3 py-1 bg-[#991b1b]/10 text-[#991b1b] rounded-full text-xs font-semibold">Offline Access</span>
+                    <span className="px-3 py-1 bg-[#991b1b]/10 text-[#991b1b] rounded-full text-xs font-semibold">Versioning</span>
                   </div>
                 </div>
               </div>
@@ -1066,13 +1064,13 @@ export default function Platform() {
                 <div className="flex flex-col lg:flex-row items-center gap-6">
                   <div className="flex-shrink-0">
                     <div className="w-16 h-16 rounded-full bg-[#991b1b]/20 flex items-center justify-center">
-                      <Award className="w-8 h-8 text-[#991b1b]" />
+                      <BookOpen className="w-8 h-8 text-[#991b1b]" />
                     </div>
                   </div>
                   <div className="flex-1 text-center lg:text-left">
-                    <h3 className="font-serif text-xl font-bold text-[#2c2c2c] mb-2">Sovereignty Through Design</h3>
+                    <h3 className="font-serif text-xl font-bold text-[#2c2c2c] mb-2">Digital Dharma Preservation</h3>
                     <p className="font-serif text-sm text-[#8B4513]/70">
-                      Your monastery maintains complete visual sovereignty. Members experience your platform as a natural extension of your physical temple—building trust, familiarity, and deeper engagement with the Dharma under your lineage's guidance.
+                      In the Dharma-Ending Age, preserving authentic teachings is paramount. Your library becomes a living archive—accessible to current sangha members and safeguarded for future generations. Host rare commentaries, lineage-specific practices, and local teacher wisdom that might otherwise be lost.
                     </p>
                   </div>
                 </div>
@@ -1199,94 +1197,94 @@ export default function Platform() {
             </div>
           </section>
 
-          {/* Document & Resource Library Section */}
-          <section id="resource-library" className="py-16 px-4 bg-[#EFE0BD]/50">
+          {/* Custom Branding Section */}
+          <section id="custom-branding" className="py-16 px-4 bg-[#EFE0BD]/50">
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-12">
                 <div className="flex items-center justify-center gap-3 mb-4">
-                  <BookOpen className="w-8 h-8 text-[#991b1b]" />
-                  <h2 className="font-serif text-4xl font-bold text-[#991b1b]" data-testid="text-library-title">
-                    Document & Resource Library
+                  <Sparkles className="w-8 h-8 text-[#991b1b]" />
+                  <h2 className="font-serif text-4xl font-bold text-[#991b1b]" data-testid="text-branding-title">
+                    Custom Branding
                   </h2>
                 </div>
                 <p className="font-serif text-lg text-[#8B4513]/70 max-w-2xl mx-auto mb-4">
-                  Organize your temple's sutras, chants, teachings, and media in a searchable, accessible digital library
+                  Transform the platform into a seamless extension of your monastery's identity
                 </p>
                 <p className="font-serif text-sm text-[#8B4513]/60 max-w-3xl mx-auto italic">
-                  Preserve your lineage's wisdom for future generations with version control and offline access
+                  Every temple has a unique lineage and aesthetic—your platform should reflect that dignity
                 </p>
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-                {/* Searchable Library */}
-                <div className="bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 p-8 hover:shadow-xl transition-all duration-300" data-testid="card-searchable-library">
+                {/* Logo & Visual Identity */}
+                <div className="bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 p-8 hover:shadow-xl transition-all duration-300" data-testid="card-logo-upload">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-12 h-12 rounded-xl bg-[#991b1b]/10 flex items-center justify-center">
-                      <Search className="w-6 h-6 text-[#991b1b]" />
+                      <Sparkles className="w-6 h-6 text-[#991b1b]" />
                     </div>
-                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c]">Searchable Library</h3>
+                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c]">Logo & Visual Identity</h3>
                   </div>
                   <p className="font-serif text-sm text-[#2c2c2c]/70 mb-6">
-                    Upload sutras, commentaries, chant sheets, audio dharma talks, and video recordings. Tag by tradition, teacher, topic, or language. Full-text search helps members find exactly what they need.
+                    Upload your monastery's logo, dharma wheel, or lineage seal. Choose from temple-inspired color palettes or create custom themes that resonate with your tradition—Zen minimalism, Tibetan vibrancy, or Pure Land serenity.
                   </p>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Support for PDF, EPUB, audio (MP3), video (MP4)</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Upload SVG, PNG logos with transparent backgrounds</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Full-text search across all documents</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Pre-built Buddhist aesthetic themes (Lotus, Bodhi, Zen Garden)</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Custom tagging system by topic, teacher, lineage</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Custom color palette generator with accessibility checks</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Multi-language support for translations</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Font pairing for sutras, headings, and body text</span>
                     </li>
                   </ul>
                   <div className="flex flex-wrap gap-2">
-                    <span className="px-3 py-1 bg-[#991b1b]/10 text-[#991b1b] rounded-full text-xs font-semibold">Full-text Search</span>
-                    <span className="px-3 py-1 bg-[#991b1b]/10 text-[#991b1b] rounded-full text-xs font-semibold">Multi-format</span>
-                    <span className="px-3 py-1 bg-[#991b1b]/10 text-[#991b1b] rounded-full text-xs font-semibold">Tagging</span>
+                    <span className="px-3 py-1 bg-[#991b1b]/10 text-[#991b1b] rounded-full text-xs font-semibold">Logo Upload</span>
+                    <span className="px-3 py-1 bg-[#991b1b]/10 text-[#991b1b] rounded-full text-xs font-semibold">Theme Builder</span>
+                    <span className="px-3 py-1 bg-[#991b1b]/10 text-[#991b1b] rounded-full text-xs font-semibold">Color Palettes</span>
                   </div>
                 </div>
 
-                {/* Access Control & Version Control */}
-                <div className="bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 p-8 hover:shadow-xl transition-all duration-300" data-testid="card-access-control">
+                {/* Domain & White-labeling */}
+                <div className="bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 p-8 hover:shadow-xl transition-all duration-300" data-testid="card-domain-mapping">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-12 h-12 rounded-xl bg-[#991b1b]/10 flex items-center justify-center">
-                      <Award className="w-6 h-6 text-[#991b1b]" />
+                      <MapPin className="w-6 h-6 text-[#991b1b]" />
                     </div>
-                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c]">Access Control & Versioning</h3>
+                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c]">Domain & White-labeling</h3>
                   </div>
                   <p className="font-serif text-sm text-[#2c2c2c]/70 mb-6">
-                    Set permissions for public, members-only, or ordained-only content. Track updates to sutras and commentaries with version history—perfect for evolving translations or teacher revisions.
+                    Map your custom domain (e.g., platform.yourtemple.org) with automatic SSL certificates. Remove all external branding—this becomes your platform, serving your sangha under your monastery's trusted name.
                   </p>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Granular access control (public, members, ordained)</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Custom domain mapping with DNS guidance</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Version history for all documents</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Automatic SSL/TLS certificates for secure connections</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Offline download for retreats without internet</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Complete white-labeling (no Bodhi Tech branding visible)</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                      <span className="font-serif text-sm text-[#2c2c2c]">Analytics on most-accessed resources</span>
+                      <span className="font-serif text-sm text-[#2c2c2c]">Custom email domains for notifications (@yourtemple.org)</span>
                     </li>
                   </ul>
                   <div className="flex flex-wrap gap-2">
-                    <span className="px-3 py-1 bg-[#991b1b]/10 text-[#991b1b] rounded-full text-xs font-semibold">Access Control</span>
-                    <span className="px-3 py-1 bg-[#991b1b]/10 text-[#991b1b] rounded-full text-xs font-semibold">Offline Access</span>
-                    <span className="px-3 py-1 bg-[#991b1b]/10 text-[#991b1b] rounded-full text-xs font-semibold">Versioning</span>
+                    <span className="px-3 py-1 bg-[#991b1b]/10 text-[#991b1b] rounded-full text-xs font-semibold">Custom Domain</span>
+                    <span className="px-3 py-1 bg-[#991b1b]/10 text-[#991b1b] rounded-full text-xs font-semibold">SSL Included</span>
+                    <span className="px-3 py-1 bg-[#991b1b]/10 text-[#991b1b] rounded-full text-xs font-semibold">White-label</span>
                   </div>
                 </div>
               </div>
@@ -1295,19 +1293,21 @@ export default function Platform() {
                 <div className="flex flex-col lg:flex-row items-center gap-6">
                   <div className="flex-shrink-0">
                     <div className="w-16 h-16 rounded-full bg-[#991b1b]/20 flex items-center justify-center">
-                      <BookOpen className="w-8 h-8 text-[#991b1b]" />
+                      <Award className="w-8 h-8 text-[#991b1b]" />
                     </div>
                   </div>
                   <div className="flex-1 text-center lg:text-left">
-                    <h3 className="font-serif text-xl font-bold text-[#2c2c2c] mb-2">Digital Dharma Preservation</h3>
+                    <h3 className="font-serif text-xl font-bold text-[#2c2c2c] mb-2">Sovereignty Through Design</h3>
                     <p className="font-serif text-sm text-[#8B4513]/70">
-                      In the Dharma-Ending Age, preserving authentic teachings is paramount. Your library becomes a living archive—accessible to current sangha members and safeguarded for future generations. Host rare commentaries, lineage-specific practices, and local teacher wisdom that might otherwise be lost.
+                      Your monastery maintains complete visual sovereignty. Members experience your platform as a natural extension of your physical temple—building trust, familiarity, and deeper engagement with the Dharma under your lineage's guidance.
                     </p>
                   </div>
                 </div>
               </div>
             </div>
           </section>
+
+          <SocialNetworkSection />
 
           {/* Dharma Radio Section - Events & Reminder Calendar */}
           <section id="dharma-radio" className="py-16 px-4">
