@@ -173,3 +173,49 @@ Preferred communication style: Simple, everyday language.
 - All feature cards include unique data-testid attributes following pattern: card-{section}-{feature}
 - Interactive elements and key content blocks marked for testing
 - No duplicate testids across entire Platform page
+
+### Legal Pages (Career, Privacy, Terms)
+
+**Recent Changes (November 3, 2025)**: Added three professional legal pages accessible via dropdown menu under the company logo in both Landing and Platform pages.
+
+**Page Structure**: All legal pages follow consistent Buddhist spiritual aesthetic with warm color palette (#991b1b, #8B4513, #EFE0BD), serif typography, and professional B2B-appropriate content.
+
+**Three Legal Pages**:
+
+1. **Career Page** (`/career`)
+   - Job opportunities at Bodhi Technology Lab
+   - Contact email: talent@boddhilab.io
+   - Four open positions: Senior Full-Stack Engineer, AI/ML Engineer, Product Designer, DevOps Engineer
+   - Culture section highlighting intentional work, distributed team, contemplative tech practices
+   - Benefits section with competitive compensation, retreat support, flexible hours, learning budget
+   - Application process with 5 steps from submission to onboarding
+   - Data-testid attributes for all interactive elements and content sections
+
+2. **Privacy Policy Page** (`/privacy`)
+   - Contact email: privacy@boddhilab.io
+   - Comprehensive privacy policy covering data collection, usage, sharing, security
+   - Sections: Our Commitment, Information Collection, Data Usage, Data Sharing, Security, User Rights, Cookies, Children's Privacy, International Transfers, Changes to Policy
+   - Emphasizes no tracking, no data sales, Buddhist ethics-aligned privacy practices
+   - Data-testid attributes for all major sections
+
+3. **Terms of Service Page** (`/terms`)
+   - Contact email: privacy@boddhilab.io (legal inquiries)
+   - Comprehensive terms covering service usage, acceptable use, AI agent guidelines, IP, payments, termination
+   - 13 major sections including Acceptance, Eligibility, Account Responsibilities, Acceptable Use, AI Guidelines, IP, Payment Terms, Termination, Disclaimers, Indemnification, Dispute Resolution, Changes to Terms, Miscellaneous
+   - Professional legal language balanced with Buddhist spiritual tone
+   - Data-testid attributes for all sections
+
+**Navigation Integration**:
+- All three pages accessible via dropdown menu under "Company" in header
+- Dropdown appears on hover over "Bodhi Technology Lab" brand name in both Landing.tsx and Platform.tsx
+- Consistent footer with cross-links to all three legal pages
+- Routes registered in App.tsx at `/career`, `/privacy`, `/terms`
+
+**Design Consistency**:
+- All pages use warm parchment background (#EFE0BD) with gradient overlays
+- Sticky header with backdrop blur matching main site
+- Hero sections with Lucide React icons (Briefcase, Shield, FileText)
+- Content sections with white/50 backdrop-blur cards
+- Consistent font hierarchy: serif for headings and body, sans-serif for UI elements
+- All email links styled with underline and #991b1b color
+- Buddhist spiritual messaging balanced with professional B2B legal content
