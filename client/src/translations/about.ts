@@ -12,19 +12,19 @@ export const aboutTranslations = {
     values: {
       title: "Our Core Values",
       tradition: {
-        title: "🙏 Respect for Tradition",
+        title: "Respect for Tradition",
         text: "Technology is the vehicle, Dharma is the driver. Just a skillful means, never a replacement. We honor the 2,500-year lineage of Buddhist wisdom with deep respect for contemplative practice and authentic transmission."
       },
       sovereignty: {
-        title: "🌸 Temple Sovereignty",
+        title: "Temple Sovereignty",
         text: "Monasteries free, not bound by digital chains. Temples should own their data, control their branding, and maintain independence from external platforms. We provide white-label solutions that put temples in full control of their digital presence."
       },
       ethics: {
-        title: "💎 Clarity & Alignment with Dharma",
+        title: "Clarity & Alignment with Dharma",
         text: "No enticement for money, no deception of mind. No hidden fees, no data exploitation, no surveillance capitalism. We operate with the same ethical principles that guide Buddhist communities—transparency, honesty, and genuine care for practitioner welfare."
       },
       accessible: {
-        title: "🪷 Equality for All Beings",
+        title: "Equality for All Beings",
         text: "Tools ready at birth, anyone can use them. Dharma should be available to all beings, regardless of technical expertise or financial means. We build intuitive tools with pricing tiers that accommodate small meditation groups and large monastery networks alike."
       }
     },
@@ -96,19 +96,19 @@ export const aboutTranslations = {
     values: {
       title: "Phật Giá Trị Cốt Lõi",
       tradition: {
-        title: "🙏 Kính Truyền Thống",
+        title: "Kính Truyền Thống",
         text: "Công nghệ là xe, Phật Pháp là người cầm lái. Chỉ là phương tiện, không dám thay thay. Chúng tôi tôn vinh dòng truyền thừa trí tuệ Phật giáo 2.500 năm với sự tôn trọng sâu sắc đối với thực hành thiền quán và truyền thừa xác thực."
       },
       sovereignty: {
-        title: "🌸 Chủ Quyền Tăng Đoàn",
+        title: "Chủ Quyền Tăng Đoàn",
         text: "Thầy Chùa tự tại, không bị số xiềng giam. Các tu viện nên sở hữu dữ liệu, kiểm soát thương hiệu và duy trì sự độc lập khỏi các nền tảng bên ngoài. Chúng tôi cung cấp các giải pháp nhãn trắng đặt chùa chiền vào quyền kiểm soát hoàn toàn sự hiện diện kỹ thuật số."
       },
       ethics: {
-        title: "💎 Rõ Ràng & Thuận Đạo",
+        title: "Rõ Ràng & Thuận Đạo",
         text: "Không dụ dỗ tiền, không lừa gạt tâm. Không có phí ẩn, không khai thác dữ liệu, không chủ nghĩa tư bản giám sát. Chúng tôi hoạt động với các nguyên tắc đạo đức giống như hướng dẫn các cộng đồng Phật giáo—minh bạch, trung thực và quan tâm thực sự đến phúc lợi hành giả."
       },
       accessible: {
-        title: "🪷 Bình Đẳng Chúng Sanh",
+        title: "Bình Đẳng Chúng Sanh",
         text: "Dụng cụ sẵn sanh, ai dùng cũng được. Phật Pháp nên có sẵn cho tất cả chúng sinh, bất kể chuyên môn kỹ thuật hay phương tiện tài chính. Chúng tôi xây dựng các công cụ trực quan với các mức giá phù hợp với các nhóm thiền nhỏ và mạng lưới tu viện lớn."
       }
     },
