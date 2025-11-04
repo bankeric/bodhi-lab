@@ -21,7 +21,7 @@ export const landingTranslations = {
     hero: {
       title: "Bodhi Technology Lab",
       subtitle: "Awaken Technology for the Dharma-Ending Age",
-      description: "A studio-first builder hub for Buddhist organisations. We partner with temples, monasteries, and meditation centres to create sacred technology that serves the Dharma, not the market.",
+      description: "A foundry where worldly coders and Dharma artisans unite, Forging digital temples, tending sacred cyberspace. Here, technology serves not profit, but the Light — Its sole purpose: to safeguard the Path of Liberation for all.",
       cta: {
         startSprint: "Start a Sprint",
         explorePlatform: "Explore Platform"
@@ -248,7 +248,7 @@ export const landingTranslations = {
     hero: {
       title: "Bodhi Technology Lab",
       subtitle: "Thức Tỉnh Công Nghệ Cho Thời Mạt Pháp",
-      description: "Một trung tâm xây dựng ưu tiên studio cho các tổ chức Phật giáo. Chúng tôi hợp tác với chùa chiền, tu viện và trung tâm thiền để tạo ra công nghệ thiêng liêng phục vụ Phật Pháp, không phải thị trường.",
+      description: "Nơi thợ đời kết đạo cùng thợ pháp, Đồng xây chùa số, giữ sạch không gian. Công nghệ nơi đây, không vì lợi danh, Chỉ một lòng thành, hộ trì Chánh Pháp.",
       cta: {
         startSprint: "Bắt Đầu Sprint",
         explorePlatform: "Khám Phá Nền Tảng"
