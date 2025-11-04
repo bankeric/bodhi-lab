@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { Search, Heart, MessageCircle, Repeat2, Home, User, Bell, Hash, Radio, Clock, X, Mic, Hand, Share2, ArrowRight } from "lucide-react";
+import { Search, Heart, MessageCircle, Repeat2, Home, User, Bell, Hash, Radio, Clock, X, Mic, Hand, Share2, ArrowRight, CreditCard, Landmark } from "lucide-react";
+import { SiCashapp, SiApplepay } from "react-icons/si";
 import { TracingBeam } from "@/components/TracingBeam";
 import { buddhistAgents } from "@shared/buddhistAgents";
 import { apiRequest } from "@/lib/queryClient";
@@ -1359,61 +1360,66 @@ export default function Platform() {
                   <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
                     <button
                       onClick={() => setPaymentMethod('card')}
-                      className={`p-3 rounded-xl border-2 transition-all duration-300 ${
+                      className={`p-3 rounded-xl border-2 transition-all duration-300 flex flex-col items-center gap-2 ${
                         paymentMethod === 'card'
                           ? 'border-[#991b1b] bg-[#991b1b]/5'
                           : 'border-[#8B4513]/20 bg-white/50 hover:border-[#991b1b]/50'
                       }`}
                       data-testid="button-payment-card"
                     >
+                      <CreditCard className="w-6 h-6 text-[#4285F4]" />
                       <div className="font-serif text-sm font-semibold text-[#2c2c2c]">Card</div>
                     </button>
 
                     <button
                       onClick={() => setPaymentMethod('cashapp')}
-                      className={`p-3 rounded-xl border-2 transition-all duration-300 ${
+                      className={`p-3 rounded-xl border-2 transition-all duration-300 flex flex-col items-center gap-2 ${
                         paymentMethod === 'cashapp'
                           ? 'border-[#991b1b] bg-[#991b1b]/5'
                           : 'border-[#8B4513]/20 bg-white/50 hover:border-[#991b1b]/50'
                       }`}
                       data-testid="button-payment-cashapp"
                     >
+                      <SiCashapp className="w-6 h-6 text-[#00D632]" />
                       <div className="font-serif text-sm font-semibold text-[#2c2c2c]">Cash App</div>
                     </button>
 
                     <button
                       onClick={() => setPaymentMethod('applepay')}
-                      className={`p-3 rounded-xl border-2 transition-all duration-300 ${
+                      className={`p-3 rounded-xl border-2 transition-all duration-300 flex flex-col items-center gap-2 ${
                         paymentMethod === 'applepay'
                           ? 'border-[#991b1b] bg-[#991b1b]/5'
                           : 'border-[#8B4513]/20 bg-white/50 hover:border-[#991b1b]/50'
                       }`}
                       data-testid="button-payment-applepay"
                     >
+                      <SiApplepay className="w-6 h-6 text-[#000000]" />
                       <div className="font-serif text-sm font-semibold text-[#2c2c2c]">Apple Pay</div>
                     </button>
 
                     <button
                       onClick={() => setPaymentMethod('venmo')}
-                      className={`p-3 rounded-xl border-2 transition-all duration-300 ${
+                      className={`p-3 rounded-xl border-2 transition-all duration-300 flex flex-col items-center gap-2 ${
                         paymentMethod === 'venmo'
                           ? 'border-[#991b1b] bg-[#991b1b]/5'
                           : 'border-[#8B4513]/20 bg-white/50 hover:border-[#991b1b]/50'
                       }`}
                       data-testid="button-payment-venmo"
                     >
+                      <div className="w-6 h-6 flex items-center justify-center font-bold text-[#008CFF] text-xl">V</div>
                       <div className="font-serif text-sm font-semibold text-[#2c2c2c]">Venmo</div>
                     </button>
 
                     <button
                       onClick={() => setPaymentMethod('bank')}
-                      className={`p-3 rounded-xl border-2 transition-all duration-300 ${
+                      className={`p-3 rounded-xl border-2 transition-all duration-300 flex flex-col items-center gap-2 ${
                         paymentMethod === 'bank'
                           ? 'border-[#991b1b] bg-[#991b1b]/5'
                           : 'border-[#8B4513]/20 bg-white/50 hover:border-[#991b1b]/50'
                       }`}
                       data-testid="button-payment-bank"
                     >
+                      <Landmark className="w-6 h-6 text-[#5C6AC4]" />
                       <div className="font-serif text-sm font-semibold text-[#2c2c2c]">US Bank</div>
                     </button>
                   </div>
