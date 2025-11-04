@@ -887,6 +887,7 @@ export default function Platform() {
   const [selectedRadio, setSelectedRadio] = useState<string | null>(null);
   const [donationAmount, setDonationAmount] = useState<number | null>(500000);
   const [customAmount, setCustomAmount] = useState<string>("");
+  const [paymentMethod, setPaymentMethod] = useState<'card' | 'cashapp' | 'applepay' | 'venmo' | 'bank'>('card');
   const [showCheckout, setShowCheckout] = useState(false);
   const [clientSecret, setClientSecret] = useState<string>("");
   const [isCreatingPayment, setIsCreatingPayment] = useState(false);
@@ -1352,9 +1353,76 @@ export default function Platform() {
                   />
                 </div>
 
+                {/* Payment Method Selector */}
+                <div className="mb-6">
+                  <h4 className="font-serif text-sm font-semibold text-[#2c2c2c] mb-3">Payment Method</h4>
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
+                    <button
+                      onClick={() => setPaymentMethod('card')}
+                      className={`p-3 rounded-xl border-2 transition-all duration-300 ${
+                        paymentMethod === 'card'
+                          ? 'border-[#991b1b] bg-[#991b1b]/5'
+                          : 'border-[#8B4513]/20 bg-white/50 hover:border-[#991b1b]/50'
+                      }`}
+                      data-testid="button-payment-card"
+                    >
+                      <div className="font-serif text-sm font-semibold text-[#2c2c2c]">Card</div>
+                    </button>
+
+                    <button
+                      onClick={() => setPaymentMethod('cashapp')}
+                      className={`p-3 rounded-xl border-2 transition-all duration-300 ${
+                        paymentMethod === 'cashapp'
+                          ? 'border-[#991b1b] bg-[#991b1b]/5'
+                          : 'border-[#8B4513]/20 bg-white/50 hover:border-[#991b1b]/50'
+                      }`}
+                      data-testid="button-payment-cashapp"
+                    >
+                      <div className="font-serif text-sm font-semibold text-[#2c2c2c]">Cash App</div>
+                    </button>
+
+                    <button
+                      onClick={() => setPaymentMethod('applepay')}
+                      className={`p-3 rounded-xl border-2 transition-all duration-300 ${
+                        paymentMethod === 'applepay'
+                          ? 'border-[#991b1b] bg-[#991b1b]/5'
+                          : 'border-[#8B4513]/20 bg-white/50 hover:border-[#991b1b]/50'
+                      }`}
+                      data-testid="button-payment-applepay"
+                    >
+                      <div className="font-serif text-sm font-semibold text-[#2c2c2c]">Apple Pay</div>
+                    </button>
+
+                    <button
+                      onClick={() => setPaymentMethod('venmo')}
+                      className={`p-3 rounded-xl border-2 transition-all duration-300 ${
+                        paymentMethod === 'venmo'
+                          ? 'border-[#991b1b] bg-[#991b1b]/5'
+                          : 'border-[#8B4513]/20 bg-white/50 hover:border-[#991b1b]/50'
+                      }`}
+                      data-testid="button-payment-venmo"
+                    >
+                      <div className="font-serif text-sm font-semibold text-[#2c2c2c]">Venmo</div>
+                    </button>
+
+                    <button
+                      onClick={() => setPaymentMethod('bank')}
+                      className={`p-3 rounded-xl border-2 transition-all duration-300 ${
+                        paymentMethod === 'bank'
+                          ? 'border-[#991b1b] bg-[#991b1b]/5'
+                          : 'border-[#8B4513]/20 bg-white/50 hover:border-[#991b1b]/50'
+                      }`}
+                      data-testid="button-payment-bank"
+                    >
+                      <div className="font-serif text-sm font-semibold text-[#2c2c2c]">US Bank</div>
+                    </button>
+                  </div>
+                </div>
+
                 {/* Card Information */}
-                <div className="mb-6 space-y-4">
-                  <h4 className="font-serif text-sm font-semibold text-[#2c2c2c]">Card Information</h4>
+                {paymentMethod === 'card' && (
+                  <div className="mb-6 space-y-4">
+                    <h4 className="font-serif text-sm font-semibold text-[#2c2c2c]">Card Information</h4>
                   
                   {/* Card Number */}
                   <div>
@@ -1414,20 +1482,21 @@ export default function Platform() {
                     </div>
                   </div>
                 </div>
+              )}
 
-                {/* Submit Button */}
-                <button 
-                  onClick={handleDonationSubmit}
-                  disabled={isCreatingPayment || !donationAmount}
-                  className="w-full px-6 py-3 bg-gradient-to-r from-[#991b1b] to-[#7a1515] text-white font-serif font-semibold rounded-xl hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed" 
-                  data-testid="button-submit-donation"
-                >
-                  {isCreatingPayment ? "Processing..." : "Complete Donation"}
-                </button>
+              {/* Submit Button */}
+              <button 
+                onClick={handleDonationSubmit}
+                disabled={isCreatingPayment || !donationAmount}
+                className="w-full px-6 py-3 bg-gradient-to-r from-[#991b1b] to-[#7a1515] text-white font-serif font-semibold rounded-xl hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed" 
+                data-testid="button-submit-donation"
+              >
+                {isCreatingPayment ? "Processing..." : "Complete Donation"}
+              </button>
 
-                <p className="font-serif text-xs text-center text-[#8B4513]/60 mt-4 italic">
-                  This is a demo. No actual payment will be processed.
-                </p>
+              <p className="font-serif text-xs text-center text-[#8B4513]/60 mt-4 italic">
+                This is a demo. No actual payment will be processed.
+              </p>
               </div>
             </div>
           </section>
