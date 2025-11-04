@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { ChevronDown, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { TracingBeam } from "@/components/TracingBeam";
 
 interface NavSection {
   id: string;
@@ -56,44 +57,48 @@ export function DocsNav({ navigation }: DocsNavProps) {
         </div>
       </div>
 
-      <nav className="flex-1 overflow-y-auto p-4 space-y-1">
-        {filteredNavigation.map((section) => (
-          <div key={section.id}>
-            <button
-              onClick={() => toggleSection(section.id)}
-              className="w-full flex items-center justify-between px-3 py-2 rounded-lg font-serif text-sm font-semibold text-foreground hover-elevate transition-all"
-              data-testid={`button-section-${section.id}`}
-            >
-              <div className="flex items-center gap-2">
-                <section.icon className="w-4 h-4" />
-                <span>{section.title}</span>
+      <nav className="flex-1 overflow-y-auto p-4 space-y-1 relative">
+        <TracingBeam>
+          <div className="space-y-1">
+            {filteredNavigation.map((section) => (
+              <div key={section.id}>
+                <button
+                  onClick={() => toggleSection(section.id)}
+                  className="w-full flex items-center justify-between px-3 py-2 rounded-lg font-serif text-sm font-semibold text-foreground hover-elevate transition-all"
+                  data-testid={`button-section-${section.id}`}
+                >
+                  <div className="flex items-center gap-2">
+                    <section.icon className="w-4 h-4" />
+                    <span>{section.title}</span>
+                  </div>
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform ${
+                      expandedSections.includes(section.id) ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                {expandedSections.includes(section.id) && (
+                  <div className="ml-6 mt-1 space-y-1 border-l-2 border-border pl-3">
+                    {section.children.map((child) => (
+                      <Link key={child.id} href={child.href}>
+                        <div
+                          className={`w-full text-left px-3 py-1.5 rounded-lg font-serif text-sm transition-all cursor-pointer ${
+                            location === child.href
+                              ? "bg-primary text-primary-foreground font-medium"
+                              : "text-foreground hover-elevate"
+                          }`}
+                          data-testid={`link-nav-${child.id}`}
+                        >
+                          {child.title}
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </div>
-              <ChevronDown
-                className={`w-4 h-4 transition-transform ${
-                  expandedSections.includes(section.id) ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-            {expandedSections.includes(section.id) && (
-              <div className="ml-6 mt-1 space-y-1 border-l-2 border-border pl-3">
-                {section.children.map((child) => (
-                  <Link key={child.id} href={child.href}>
-                    <div
-                      className={`w-full text-left px-3 py-1.5 rounded-lg font-serif text-sm transition-all cursor-pointer ${
-                        location === child.href
-                          ? "bg-primary text-primary-foreground font-medium"
-                          : "text-foreground hover-elevate"
-                      }`}
-                      data-testid={`link-nav-${child.id}`}
-                    >
-                      {child.title}
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            )}
+            ))}
           </div>
-        ))}
+        </TracingBeam>
       </nav>
 
       <div className="border-t p-4 space-y-3">
