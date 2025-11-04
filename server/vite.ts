@@ -1,10 +1,13 @@
 import express, { type Express } from "express";
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 import { createServer as createViteServer, createLogger } from "vite";
 import { type Server } from "http";
 import viteConfig from "../vite.config";
-import { nanoid } from "nanoid";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const viteLogger = createLogger();
 
@@ -46,7 +49,7 @@ export async function setupVite(app: Express, server: Server) {
 
     try {
       const clientTemplate = path.resolve(
-        import.meta.dirname,
+        __dirname,
         "..",
         "client",
         "index.html",
@@ -56,7 +59,7 @@ export async function setupVite(app: Express, server: Server) {
       let template = await fs.promises.readFile(clientTemplate, "utf-8");
       template = template.replace(
         `src="/src/main.tsx"`,
-        `src="/src/main.tsx?v=${nanoid()}"`,
+        `src="/src/main.tsx?v=${Date.now()}"`,
       );
       const page = await vite.transformIndexHtml(url, template);
       res.status(200).set({ "Content-Type": "text/html" }).end(page);
@@ -68,12 +71,17 @@ export async function setupVite(app: Express, server: Server) {
 }
 
 export function serveStatic(app: Express) {
-  const distPath = path.resolve(import.meta.dirname, "public");
+  const distPath = path.resolve(process.cwd(), "dist");
 
   if (!fs.existsSync(distPath)) {
-    throw new Error(
-      `Could not find the build directory: ${distPath}, make sure to build the client first`,
-    );
+    log(`Warning: Build directory not found at ${distPath}. Static files will not be served.`, "express");
+    // Return a basic handler instead of throwing
+    app.use("*", (_req, res) => {
+      res.status(503).json({
+        message: "Application is not properly built. Please run 'npm run build' first."
+      });
+    });
+    return;
   }
 
   app.use(express.static(distPath));
