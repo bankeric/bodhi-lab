@@ -71,14 +71,30 @@ export async function setupVite(app: Express, server: Server) {
 }
 
 export function serveStatic(app: Express) {
-  const distPath = path.resolve(process.cwd(), "dist");
+  // Try multiple possible dist locations
+  const possiblePaths = [
+    path.resolve(process.cwd(), "dist", "public"),
+    path.resolve(process.cwd(), "dist"),
+    path.resolve(__dirname, "..", "dist", "public"),
+    path.resolve(__dirname, "..", "dist"),
+  ];
 
-  if (!fs.existsSync(distPath)) {
-    log(`Warning: Build directory not found at ${distPath}. Static files will not be served.`, "express");
+  let distPath: string | null = null;
+  for (const tryPath of possiblePaths) {
+    if (fs.existsSync(tryPath)) {
+      distPath = tryPath;
+      log(`Found build directory at ${distPath}`, "express");
+      break;
+    }
+  }
+
+  if (!distPath) {
+    log(`Warning: Build directory not found. Tried: ${possiblePaths.join(", ")}`, "express");
     // Return a basic handler instead of throwing
     app.use("*", (_req, res) => {
       res.status(503).json({
-        message: "Application is not properly built. Please run 'npm run build' first."
+        message: "Application is not properly built. Build directory not found.",
+        triedPaths: possiblePaths
       });
     });
     return;
@@ -88,6 +104,6 @@ export function serveStatic(app: Express) {
 
   // fall through to index.html if the file doesn't exist
   app.use("*", (_req, res) => {
-    res.sendFile(path.resolve(distPath, "index.html"));
+    res.sendFile(path.resolve(distPath!, "index.html"));
   });
 }
