@@ -14,6 +14,7 @@ import agentArt3 from "@assets/4_1761844089892.png";
 import agentArt4 from "@assets/32_1761844089890.png";
 import agentArt5 from "@assets/19_1761844089892.png";
 import agentArt6 from "@assets/5_1761844089893.png";
+import ensoSymbol from "@assets/enso-featured_1762237969237.png";
 
 // Mapping of agent IDs to artwork images (first 6 featured agents)
 const agentArtwork: Record<string, string> = {
@@ -131,8 +132,19 @@ export default function Landing() {
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
             <div className="relative group">
               <Link href="/">
-                <a className="flex items-center" data-testid="link-brand">
-                  <span className="font-serif font-bold text-[#991b1b] text-lg">{t.header.brand}</span>
+                <a className="flex items-center gap-0.5" data-testid="link-brand">
+                  <span className="font-serif font-bold text-[#991b1b] text-lg flex items-center">
+                    <span>B</span>
+                    <img 
+                      src={ensoSymbol} 
+                      alt="o" 
+                      className="inline-block h-[0.8em] w-[0.8em] object-contain mx-0.5"
+                      style={{
+                        filter: 'invert(15%) sepia(93%) saturate(4177%) hue-rotate(358deg) brightness(85%) contrast(103%)'
+                      }}
+                    />
+                    <span>dhi Technology Lab</span>
+                  </span>
                 </a>
               </Link>
               
@@ -223,12 +235,21 @@ export default function Landing() {
               }`}
             >
               <h1
-                className={`font-serif text-5xl md:text-7xl font-bold mb-6 text-center text-[#991b1b] transition-all duration-500 ${
+                className={`font-serif text-5xl md:text-7xl font-bold mb-6 text-center text-[#991b1b] transition-all duration-500 flex items-center justify-center gap-1 ${
                   searchFocused ? "opacity-0 -translate-y-10" : "opacity-100 translate-y-0"
                 }`}
                 data-testid="text-hero-title"
               >
-                {t.hero.title}
+                <span>B</span>
+                <img 
+                  src={ensoSymbol} 
+                  alt="o" 
+                  className="inline-block h-[0.8em] w-[0.8em] object-contain"
+                  style={{
+                    filter: 'invert(15%) sepia(93%) saturate(4177%) hue-rotate(358deg) brightness(85%) contrast(103%)'
+                  }}
+                />
+                <span>dhi Technology Lab</span>
               </h1>
               <p
                 className={`font-serif text-xl text-[#8B4513]/70 text-center mb-12 max-w-2xl mx-auto transition-all duration-500 ${
