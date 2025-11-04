@@ -81,26 +81,49 @@ export default function Discovery() {
               shadow-md hover:shadow-lg transition-all cursor-pointer h-full"
             data-testid={`card-discovery-center-${center.id}`}
           >
-        <div
-          className="relative h-40 overflow-hidden"
-          style={{
-            background: `linear-gradient(135deg, ${center.accentColor}40 0%, ${center.accentColor}60 100%)`,
-          }}
-        >
+        <div className="relative h-48 overflow-hidden">
+          {center.image && (
+            <>
+              <img
+                src={center.image}
+                alt={center.name}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60"></div>
+            </>
+          )}
+          {!center.image && (
+            <div
+              className="w-full h-full"
+              style={{
+                background: `linear-gradient(135deg, ${center.accentColor}40 0%, ${center.accentColor}60 100%)`,
+              }}
+            />
+          )}
           <div className="absolute top-3 left-3">
-            <div className="bg-[#991b1b] text-white px-3 py-1 rounded-full text-xs font-bold">
+            <div className="bg-[#991b1b] text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
               #{center.rank}
             </div>
           </div>
           <div className="absolute top-3 right-3">
             {getStatusBadge()}
           </div>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div
-              className="w-24 h-24 rounded-full flex items-center justify-center text-5xl border-4 border-white shadow-lg"
-              style={{ backgroundColor: center.accentColor }}
-            >
-              {categoryIcon}
+          <div className="absolute bottom-3 left-3 right-3">
+            <div className="flex items-center gap-2">
+              <div
+                className="w-10 h-10 rounded-full flex items-center justify-center text-xl border-2 border-white shadow-lg flex-shrink-0"
+                style={{ backgroundColor: center.accentColor }}
+              >
+                {categoryIcon}
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-white font-serif font-bold text-sm truncate drop-shadow-lg">
+                  {center.name}
+                </div>
+                <div className="text-white/90 font-serif text-xs truncate drop-shadow-lg">
+                  {center.location}
+                </div>
+              </div>
             </div>
           </div>
         </div>

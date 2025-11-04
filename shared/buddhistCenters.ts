@@ -1,3 +1,24 @@
+import img1 from "@assets/stock_images/vietnamese_buddhist__7ac90348.jpg";
+import img2 from "@assets/stock_images/buddhist_meditation__7405792d.jpg";
+import img3 from "@assets/stock_images/vietnamese_buddhist__de85f2b1.jpg";
+import img4 from "@assets/stock_images/vietnamese_buddhist__faf500b9.jpg";
+import img5 from "@assets/stock_images/buddhist_meditation__cf7ae198.jpg";
+import img6 from "@assets/stock_images/vietnamese_buddhist__9ceb6f2c.jpg";
+import img7 from "@assets/stock_images/vietnamese_buddhist__ab8f0638.jpg";
+import img8 from "@assets/stock_images/buddhist_meditation__6bac2a5c.jpg";
+import img9 from "@assets/stock_images/vietnamese_buddhist__17b345da.jpg";
+import img10 from "@assets/stock_images/vietnamese_buddhist__5a54978c.jpg";
+import img11 from "@assets/stock_images/vietnamese_buddhist__27f29f57.jpg";
+import img12 from "@assets/stock_images/vietnamese_buddhist__509b3e92.jpg";
+import img13 from "@assets/stock_images/buddhist_meditation__2cb1000a.jpg";
+import img14 from "@assets/stock_images/vietnamese_buddhist__aa2de530.jpg";
+import img15 from "@assets/stock_images/buddhist_meditation__ae58db11.jpg";
+import img16 from "@assets/stock_images/vietnamese_buddhist__faf500b9.jpg";
+import img17 from "@assets/stock_images/buddhist_meditation__c95bde3d.jpg";
+import img18 from "@assets/stock_images/vietnamese_buddhist__de85f2b1.jpg";
+import img19 from "@assets/stock_images/vietnamese_buddhist__9ceb6f2c.jpg";
+import img20 from "@assets/stock_images/buddhist_meditation__69b277e9.jpg";
+
 export interface BuddhistCenter {
   id: string;
   rank: number;
@@ -27,7 +48,7 @@ export const buddhistCenters: BuddhistCenter[] = [
     type: "temple",
     location: "Atlanta, GA",
     country: "United States",
-    image: "@assets/stock_images/vietnamese_buddhist__7ac90348.jpg",
+    image: img1,
     members: 850,
     rating: 4.8,
     status: "open",
@@ -44,7 +65,7 @@ export const buddhistCenters: BuddhistCenter[] = [
     type: "monastery",
     location: "Lucerne Valley, CA",
     country: "United States",
-    image: "@assets/stock_images/buddhist_meditation__7405792d.jpg",
+    image: img2,
     members: 420,
     rating: 4.9,
     status: "retreat",
@@ -61,7 +82,7 @@ export const buddhistCenters: BuddhistCenter[] = [
     type: "temple",
     location: "Port Arthur, TX",
     country: "United States",
-    image: "@assets/stock_images/vietnamese_buddhist__de85f2b1.jpg",
+    image: img3,
     members: 520,
     rating: 4.7,
     status: "open",
@@ -78,7 +99,7 @@ export const buddhistCenters: BuddhistCenter[] = [
     type: "temple",
     location: "Tulsa, OK",
     country: "United States",
-    image: "@assets/stock_images/vietnamese_buddhist__faf500b9.jpg",
+    image: img4,
     members: 380,
     rating: 4.6,
     status: "open",
@@ -95,7 +116,7 @@ export const buddhistCenters: BuddhistCenter[] = [
     type: "meditation-center",
     location: "Baton Rouge, LA",
     country: "United States",
-    image: "@assets/stock_images/buddhist_meditation__cf7ae198.jpg",
+    image: img5,
     members: 290,
     rating: 4.8,
     status: "open",
@@ -112,7 +133,7 @@ export const buddhistCenters: BuddhistCenter[] = [
     type: "temple",
     location: "Austin, TX",
     country: "United States",
-    image: "@assets/stock_images/vietnamese_buddhist__9ceb6f2c.jpg",
+    image: img6,
     members: 680,
     rating: 4.7,
     status: "open",
@@ -129,7 +150,7 @@ export const buddhistCenters: BuddhistCenter[] = [
     type: "buddhist-center",
     location: "Buffalo, NY",
     country: "United States",
-    image: "@assets/stock_images/vietnamese_buddhist__ab8f0638.jpg",
+    image: img7,
     members: 340,
     rating: 4.5,
     status: "open",
@@ -146,7 +167,7 @@ export const buddhistCenters: BuddhistCenter[] = [
     type: "meditation-center",
     location: "Braintree, MA",
     country: "United States",
-    image: "@assets/stock_images/buddhist_meditation__6bac2a5c.jpg",
+    image: img8,
     members: 450,
     rating: 4.8,
     status: "open",
@@ -163,7 +184,7 @@ export const buddhistCenters: BuddhistCenter[] = [
     type: "temple",
     location: "Lowell, MA",
     country: "United States",
-    image: "@assets/stock_images/vietnamese_buddhist__17b345da.jpg",
+    image: img9,
     members: 520,
     rating: 4.6,
     status: "open",
@@ -180,7 +201,7 @@ export const buddhistCenters: BuddhistCenter[] = [
     type: "temple",
     location: "Sacramento, CA",
     country: "United States",
-    image: "@assets/stock_images/vietnamese_buddhist__5a54978c.jpg",
+    image: img10,
     members: 740,
     rating: 4.7,
     status: "open",
@@ -197,7 +218,7 @@ export const buddhistCenters: BuddhistCenter[] = [
     type: "temple",
     location: "Washington, DC",
     country: "United States",
-    image: "@assets/stock_images/vietnamese_buddhist__27f29f57.jpg",
+    image: img11,
     members: 620,
     rating: 4.8,
     status: "open",
@@ -214,7 +235,7 @@ export const buddhistCenters: BuddhistCenter[] = [
     type: "temple",
     location: "Fort Worth, TX",
     country: "United States",
-    image: "@assets/stock_images/vietnamese_buddhist__509b3e92.jpg",
+    image: img12,
     members: 470,
     rating: 4.6,
     status: "open",
@@ -231,7 +252,7 @@ export const buddhistCenters: BuddhistCenter[] = [
     type: "monastery",
     location: "Mims, FL",
     country: "United States",
-    image: "@assets/stock_images/buddhist_meditation__2cb1000a.jpg",
+    image: img13,
     members: 180,
     rating: 4.9,
     status: "retreat",
@@ -248,7 +269,7 @@ export const buddhistCenters: BuddhistCenter[] = [
     type: "temple",
     location: "Worcester, MA",
     country: "United States",
-    image: "@assets/stock_images/vietnamese_buddhist__aa2de530.jpg",
+    image: img14,
     members: 390,
     rating: 4.7,
     status: "open",
@@ -265,7 +286,7 @@ export const buddhistCenters: BuddhistCenter[] = [
     type: "monastery",
     location: "Port Orange, FL",
     country: "United States",
-    image: "@assets/stock_images/buddhist_meditation__ae58db11.jpg",
+    image: img15,
     members: 150,
     rating: 4.8,
     status: "by-appointment",
@@ -282,7 +303,7 @@ export const buddhistCenters: BuddhistCenter[] = [
     type: "temple",
     location: "Lynnwood, WA",
     country: "United States",
-    image: "@assets/stock_images/vietnamese_buddhist__faf500b9.jpg",
+    image: img16,
     members: 560,
     rating: 4.7,
     status: "open",
@@ -299,7 +320,7 @@ export const buddhistCenters: BuddhistCenter[] = [
     type: "monastery",
     location: "Leesburg, FL",
     country: "United States",
-    image: "@assets/stock_images/buddhist_meditation__c95bde3d.jpg",
+    image: img17,
     members: 220,
     rating: 4.9,
     status: "retreat",
@@ -316,7 +337,7 @@ export const buddhistCenters: BuddhistCenter[] = [
     type: "temple",
     location: "Stockton, CA",
     country: "United States",
-    image: "@assets/stock_images/vietnamese_buddhist__de85f2b1.jpg",
+    image: img18,
     members: 640,
     rating: 4.6,
     status: "open",
@@ -333,7 +354,7 @@ export const buddhistCenters: BuddhistCenter[] = [
     type: "temple",
     location: "Santa Ana, CA",
     country: "United States",
-    image: "@assets/stock_images/vietnamese_buddhist__9ceb6f2c.jpg",
+    image: img19,
     members: 890,
     rating: 4.8,
     status: "open",
@@ -350,7 +371,7 @@ export const buddhistCenters: BuddhistCenter[] = [
     type: "monastery",
     location: "Watsonville, CA",
     country: "United States",
-    image: "@assets/stock_images/buddhist_meditation__69b277e9.jpg",
+    image: img20,
     members: 1200,
     rating: 4.9,
     status: "open",
