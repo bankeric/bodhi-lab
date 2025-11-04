@@ -36,9 +36,7 @@ import sutraIcon from "@assets/Wordless Sutra Icon - Sumi-e Style_1762155698128.
 export default function CenterDetail() {
   const params = useParams();
   const centerId = params.id as string;
-  const [activeTab, setActiveTab] = useState<"about" | "dharma-talk" | "calendar" | "library" | "agents" | "donation">(
-    "about"
-  );
+  const [activeTab, setActiveTab] = useState<"library" | "donation">("library");
   const [donationAmount, setDonationAmount] = useState(500000);
   const [customAmount, setCustomAmount] = useState("");
   const [paymentMethod, setPaymentMethod] = useState<"card" | "cashapp" | "applepay" | "venmo" | "bank">("card");
@@ -80,11 +78,7 @@ export default function CenterDetail() {
   }
 
   const tabs = [
-    { id: "about", label: "Giới thiệu", icon: BookOpen },
-    { id: "dharma-talk", label: "Pháp Thoại", icon: Video },
-    { id: "calendar", label: "Lịch", icon: CalendarIcon },
     { id: "library", label: "Thư viện", icon: FileText },
-    { id: "agents", label: "AI Agents", icon: Bot },
     { id: "donation", label: "Cúng dường", icon: Heart },
   ];
 
@@ -340,71 +334,11 @@ export default function CenterDetail() {
                 </div>
 
                 <div className="p-8">
-                  {activeTab === "about" && (
-                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
-                      <div>
-                        <h2 className="text-2xl font-serif font-bold text-[#2c2c2c] mb-4">Về {center.name}</h2>
-                        <p className="text-base font-serif text-[#8B4513]/80 leading-relaxed">
-                          {center.description}
-                        </p>
-                      </div>
-
-                      <div className="bg-white/70 border border-[#8B4513]/20 rounded-2xl p-6">
-                        <h3 className="text-lg font-serif font-bold text-[#2c2c2c] mb-4">Thông tin chi tiết</h3>
-                        <div className="grid md:grid-cols-2 gap-4">
-                          <div className="flex justify-between">
-                            <span className="text-[#8B4513]/60 font-serif">Xếp hạng:</span>
-                            <span className="font-serif font-semibold">#{center.rank}</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-[#8B4513]/60 font-serif">Loại hình:</span>
-                            <span className="font-serif font-semibold">{center.type}</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-[#8B4513]/60 font-serif">Thành viên:</span>
-                            <span className="font-serif font-semibold">{center.members.toLocaleString()}</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-[#8B4513]/60 font-serif">Đánh giá:</span>
-                            <span className="font-serif font-semibold">{center.rating} / 5.0</span>
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-
-                  {activeTab === "dharma-talk" && (
-                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-                      <h2 className="text-2xl font-serif font-bold text-[#2c2c2c] mb-4">Pháp Thoại</h2>
-                      <p className="text-base font-serif text-[#8B4513]/70">
-                        Nội dung pháp thoại sẽ được cập nhật sớm...
-                      </p>
-                    </motion.div>
-                  )}
-
-                  {activeTab === "calendar" && (
-                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-                      <h2 className="text-2xl font-serif font-bold text-[#2c2c2c] mb-4">Lịch Tu Tập</h2>
-                      <p className="text-base font-serif text-[#8B4513]/70">
-                        Lịch các khóa tu và sự kiện sẽ được cập nhật sớm...
-                      </p>
-                    </motion.div>
-                  )}
-
                   {activeTab === "library" && (
                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
                       <h2 className="text-2xl font-serif font-bold text-[#2c2c2c] mb-4">Thư Viện</h2>
                       <p className="text-base font-serif text-[#8B4513]/70">
                         Tài liệu và kinh sách sẽ được cập nhật sớm...
-                      </p>
-                    </motion.div>
-                  )}
-
-                  {activeTab === "agents" && (
-                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-                      <h2 className="text-2xl font-serif font-bold text-[#2c2c2c] mb-4">AI Agents</h2>
-                      <p className="text-base font-serif text-[#8B4513]/70">
-                        Các AI Agent của cộng đồng sẽ được cập nhật sớm...
                       </p>
                     </motion.div>
                   )}
