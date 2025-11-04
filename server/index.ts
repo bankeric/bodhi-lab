@@ -77,11 +77,7 @@ async function initializeApp() {
       await setupVite(app, server);
 
       const port = parseInt(process.env.PORT || '5000', 10);
-      server.listen({
-        port,
-        host: "0.0.0.0",
-        reusePort: true,
-      }, () => {
+      server.listen(port, "0.0.0.0", () => {
         log(`serving on port ${port}`);
       });
     } else {
@@ -89,11 +85,7 @@ async function initializeApp() {
       serveStatic(app);
       const server = createAppServer(app);
       const port = parseInt(process.env.PORT || '5000', 10);
-      server.listen({
-        port,
-        host: "0.0.0.0",
-        reusePort: true,
-      }, () => {
+      server.listen(port, "0.0.0.0", () => {
         log(`serving on port ${port}`);
       });
     }
