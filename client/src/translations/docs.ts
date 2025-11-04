@@ -359,7 +359,7 @@ export const docsTranslations = {
   vi: {
     layout: {
       header: {
-        title: "Thức Tỉnh Công Nghệ Cho Thời Mạt Pháp",
+        title: "Công Nghệ Phật Giáo Cho Thời Đại Số",
         exportPdf: "Xuất PDF",
         share: "Chia Sẻ",
         sidebarToggle: "Bật/Tắt Thanh Bên"
@@ -368,33 +368,33 @@ export const docsTranslations = {
         overview: {
           title: "Bodhi Technology Lab",
           sections: {
-            mission: "Sứ Mệnh Của Chúng Tôi",
-            principles: "Nguyên Tắc Của Chúng Tôi",
-            methods: "Phương Pháp Của Chúng Tôi",
-            capabilities: "Khả Năng Nền Tảng",
+            mission: "Sứ Mệnh",
+            principles: "Nguyên Tắc",
+            methods: "Phương Pháp",
+            capabilities: "Tính Năng Nền Tảng",
             whyPartner: "Tại Sao Hợp Tác",
             infrastructure: "Hạ Tầng Bền Vững",
-            join: "Tham Gia Phòng Thí Nghiệm",
-            fourthGrace: "Mandala Ân Điển Thứ Tư"
+            join: "Tham Gia",
+            fourthGrace: "Nơi Nương Tựa Thứ Tư"
           }
         },
         techStack: {
-          title: "Ngăn Xếp Công Nghệ",
+          title: "Công Nghệ",
           sections: {
             vision: "Tầm Nhìn & Sứ Mệnh",
-            compute: "Mandala Tính Toán Tập Thể",
-            ledger: "Sổ Cái Mandala",
-            protocol: "Giao Thức Phân Bổ Công Đức",
-            primitives: "Nguyên Mẫu Phổ Quát",
-            privacy: "Bảo Mật Bằng Phật Pháp"
+            compute: "Hệ Thống Tính Toán Chung",
+            ledger: "Sổ Cái Minh Bạch",
+            protocol: "Giao Thức Công Đức",
+            primitives: "Tính Năng Cơ Bản",
+            privacy: "Bảo Mật Dữ Liệu"
           }
         },
         agents: {
-          title: "Đại Lý",
+          title: "AI Agents",
           sections: {
-            models: "Mô Hình Đại Lý",
+            models: "Các Mô Hình AI",
             quickStart: "Hướng Dẫn Nhanh",
-            pricing: "Giá Token"
+            pricing: "Bảng Giá"
           }
         }
       }
@@ -402,181 +402,181 @@ export const docsTranslations = {
 
     overview: {
       title: "Bodhi Technology Lab",
-      subtitle: "Thức Tỉnh Công Nghệ Cho Thời Mạt Pháp",
+      subtitle: "Công Nghệ Phật Giáo Cho Thời Đại Số",
       tableOfContents: {
         title: "Mục Lục",
-        ourMission: "Sứ Mệnh Của Chúng Tôi",
-        ourPrinciples: "Nguyên Tắc Của Chúng Tôi",
-        ourMethods: "Phương Pháp Của Chúng Tôi",
-        platformCapabilities: "Khả Năng Nền Tảng",
-        whyPartner: "Tại Sao Hợp Tác Với Bodhi Technology Lab",
-        infrastructure: "Hạ Tầng Phật Pháp Bền Vững",
-        join: "Tham Gia Bodhi Technology Lab",
-        fourthGrace: "Mandala Ân Điển Thứ Tư"
+        ourMission: "Sứ Mệnh",
+        ourPrinciples: "Nguyên Tắc",
+        ourMethods: "Phương Pháp",
+        platformCapabilities: "Tính Năng Nền Tảng",
+        whyPartner: "Tại Sao Hợp Tác",
+        infrastructure: "Hạ Tầng Bền Vững",
+        join: "Tham Gia Cùng Chúng Tôi",
+        fourthGrace: "Nơi Nương Tựa Thứ Tư"
       },
-      opening: "Trong thời \"Digital Tam\", thiền định thường được coi như một hàng hóa. Hơn 275 triệu người trên toàn thế giới thực hành thiền vào năm 2025, và thị trường ứng dụng sức khỏe tạo ra khoảng 1,4 tỷ đô la doanh thu vào năm 2023, với dự báo vượt quá 7 tỷ đô la vào năm 2033. Tuy nhiên, Con Đường chân thật có thể bị pha loãng trong biển ứng dụng thương mại hóa.",
+      opening: "Ngày nay, thiền định thường được coi như hàng hóa. Hơn 275 triệu người trên thế giới thực hành thiền vào năm 2025, thị trường ứng dụng sức khỏe đạt 1,4 tỷ đô la doanh thu năm 2023 và dự báo vượt 7 tỷ đô la vào 2033. Tuy nhiên, Phật pháp chân chính có thể bị pha loãng trong làn sóng thương mại hóa.",
       mission: {
-        title: "Sứ Mệnh Của Chúng Tôi",
+        title: "Sứ Mệnh",
         recreateMandalas: {
-          title: "Tái Tạo Mandala Điện Tử Của Chư Phật",
-          text: "Chúng tôi tìm cách đoàn kết tăng đoàn toàn cầu trong một nhịp tim duy nhất của sự giác ngộ thời gian thực. Thông qua các mandala kỹ thuật số, các chùa chiền và hành giả trên khắp thế giới có thể chia sẻ giáo lý, tụng kinh cùng nhau và hỗ trợ lẫn nhau như thể ở cùng một giảng đường."
+          title: "Kết Nối Phật Tử Toàn Cầu",
+          text: "Chúng tôi muốn kết nối cộng đồng Phật giáo toàn cầu thông qua công nghệ. Các chùa chiền và Phật tử trên khắp thế giới có thể chia sẻ giáo lý, tụng kinh cùng nhau và hỗ trợ lẫn nhau như đang ở cùng một nơi."
         },
         flourish: {
-          title: "Phát Triển Với Chủ Quyền Và Phẩm Giá",
-          text: "Các công cụ của chúng tôi giúp chùa chiền và cộng đồng phát triển, tự tài trợ và bảo tồn dòng truyền thừa của họ. Chúng tôi tin rằng công nghệ có thể củng cố, không làm suy yếu, quyền tự chủ của tu sĩ và tăng đoàn tại gia."
+          title: "Phát Triển Bền Vững",
+          text: "Công cụ của chúng tôi giúp chùa chiền và cộng đồng phát triển, tự chủ tài chính và bảo tồn truyền thống. Chúng tôi tin công nghệ có thể hỗ trợ, không làm suy yếu quyền tự chủ của tu sĩ và cộng đồng Phật tử."
         },
         respond: {
-          title: "Phản Ứng Với Phiền Não Kỹ Thuật Số",
-          text: "Thời mạt pháp mang đến những hình thức mới của sự phân tâm và ảo tưởng. Sứ mệnh của chúng tôi là cung cấp các liều thuốc giải độc: Bodhi kỹ thuật số nuôi dưỡng chánh niệm, từ bi và trí tuệ thay vì nghiện."
+          title: "Giải Pháp Cho Thời Đại Số",
+          text: "Thời đại số mang đến nhiều sự phân tâm và ảo tưởng mới. Chúng tôi cung cấp giải pháp công nghệ Phật giáo giúp nuôi dưỡng chánh niệm, từ bi và trí tuệ thay vì gây nghiện."
         }
       },
       principles: {
-        title: "Nguyên Tắc Của Chúng Tôi",
+        title: "Nguyên Tắc",
         buildFast: {
-          title: "Xây Dựng Nhanh Và Chánh Đáng",
-          text: "Công nghệ phải phục vụ Phật Pháp, không phải thị trường. Chúng tôi di chuyển nhanh để đáp ứng nhu cầu cấp bách, nhưng không bao giờ với cái giá của đạo đức hoặc trí tuệ."
+          title: "Xây Dựng Nhanh Và Đúng Đắn",
+          text: "Công nghệ phải phục vụ Phật pháp, không phải thị trường. Chúng tôi làm việc nhanh để đáp ứng nhu cầu cấp thiết, nhưng không bao giờ hy sinh đạo đức."
         },
         noUse: {
-          title: "Không Dùng, Không Xây",
-          text: "Nếu một công cụ không trực tiếp cắt đứt khổ đau, chúng tôi không tạo ra nó—bất kể xu hướng hoặc sự cường điệu."
+          title: "Không Cần Thì Không Làm",
+          text: "Nếu một tính năng không giúp giảm khổ đau, chúng tôi không làm - bất kể nó có đang thịnh hành hay không."
         },
         presence: {
-          title: "Hiện Diện Hơn Chỉ Số",
-          text: "Một công cụ thành công khi nó không còn cần thiết nữa. Sự chuyển hóa bên trong quan trọng hơn thống kê tương tác."
+          title: "Chất Lượng Hơn Số Lượng",
+          text: "Công cụ thành công là khi nó không còn cần thiết nữa. Sự thay đổi bên trong quan trọng hơn số liệu thống kê."
         },
         transparency: {
-          title: "Minh Bạch, Không Khai Thác",
-          text: "Dữ liệu người dùng là chủ quyền. Không có giám sát, không thao túng, không chương trình nghị sự ẩn."
+          title: "Minh Bạch, Không Lợi Dụng",
+          text: "Dữ liệu của bạn là của bạn. Chúng tôi không theo dõi, không lợi dụng, không có mục đích ẩn giấu."
         },
         censorship: {
           title: "Chống Kiểm Duyệt",
-          text: "Tiếng nói của Phật Pháp không bao giờ được im lặng bởi quyền lực thế gian. Hạ tầng của chúng tôi được thiết kế để chống lại kiểm duyệt và kiểm soát trung ương."
+          text: "Phật pháp không nên bị im lặng bởi bất kỳ quyền lực nào. Hệ thống của chúng tôi được thiết kế để chống kiểm duyệt."
         }
       },
       methods: {
-        title: "Phương Pháp Của Chúng Tôi",
-        intro: "Chúng tôi hợp tác với các thầy, cô, bậc thầy và các nhà công nghệ có trách nhiệm để đưa công nghệ thiêng liêng vào cuộc sống. Quy trình của chúng tôi vẫn thực tế và thực thi:",
+        title: "Phương Pháp",
+        intro: "Chúng tôi hợp tác với tu sĩ, bậc thầy và các chuyên gia công nghệ để tạo ra giải pháp công nghệ Phật giáo. Quy trình của chúng tôi thực tế và hiệu quả:",
         scope: {
-          title: "Định Phạm Vi Cùng Nhau",
-          text: "Chúng tôi lập bản đồ yêu cầu và xác định nơi công nghệ AI hoặc blockchain thêm giá trị. Nếu một tính năng không cắt đứt khổ đau, chúng tôi bỏ nó ra. Điều này phù hợp với \"Không Dùng, Không Xây.\""
+          title: "Lên Kế Hoạch Cùng Nhau",
+          text: "Chúng tôi lập danh sách yêu cầu và xác định nơi AI hoặc công nghệ khác có thể giúp ích. Nếu một tính năng không thực sự cần thiết, chúng tôi không làm."
         },
         assemble: {
-          title: "Tập Hợp Các Nhóm Thiêng Liêng",
-          text: "Chúng tôi tạo ra các nhóm tài năng công nghệ đã thức tỉnh—frontend, backend, QA và PM—cộng với các chuyên gia AI/Agent/Web3 tùy chọn. Các nhóm này hoạt động theo nhịp độ với SLA rõ ràng và được dành riêng cho nhu cầu của chùa bạn. Chúng tôi gắn nhãn trắng mọi thứ: chùa của bạn, quy tắc của bạn, con đường của bạn, công nghệ của chúng tôi."
+          title: "Tập Hợp Đội Ngũ Chuyên Nghiệp",
+          text: "Chúng tôi tạo các đội ngũ chuyên nghiệp gồm frontend, backend, QA và PM, cùng các chuyên gia AI/Web3 nếu cần. Đội ngũ làm việc chuyên biệt cho chùa của bạn. Mọi thứ đều mang thương hiệu của bạn: chùa của bạn, quy tắc của bạn, công nghệ của chúng tôi."
         },
         ship: {
-          title: "Vận Chuyển Và Tự Động Hóa Can Đảm & Từ Bi",
-          text: "Demo hàng tuần, QA nghiêm ngặt, cờ tính năng và kế hoạch rollback đảm bảo sự ổn định. Quyên góp, công đức, sự kiện và các tính năng thực hành được tự động hóa theo cách hợp lý hóa hoạt động mà không hàng hóa hóa Phật Pháp. Khi trực tiếp, chúng tôi xử lý giám sát, MLOps, infra‑as‑code và củng cố hàng quý để cộng đồng của bạn có thể tập trung vào thực hành."
+          title: "Triển Khai Và Bảo Trì",
+          text: "Demo hàng tuần, kiểm tra kỹ lưỡng, và kế hoạch dự phòng đảm bảo hệ thống ổn định. Các tính năng quyên góp, sự kiện và thực hành được tự động hóa mà không làm Phật pháp trở nên thương mại. Sau khi ra mắt, chúng tôi giám sát và bảo trì để cộng đồng của bạn tập trung vào tu tập."
         }
       },
       capabilities: {
-        title: "Khả Năng Nền Tảng",
-        intro: "Nghiên cứu thị trường của chúng tôi phát hiện một số nhu cầu chưa được đáp ứng: sự tham gia của giới trẻ (chỉ ~20% người tham dự chùa dưới 30 tuổi tham gia thường xuyên), quản lý quyên góp thủ công, yêu cầu đa ngôn ngữ và lo sợ thương mại hóa Phật Pháp. Chúng tôi thiết kế nền tảng nhãn trắng của mình để giải quyết các điểm đau này:",
+        title: "Tính Năng Nền Tảng",
+        intro: "Chúng tôi phát hiện nhiều nhu cầu chưa được đáp ứng: giới trẻ ít tham gia (chỉ ~20% người dưới 30 tuổi đến chùa thường xuyên), quản lý quyên góp thủ công, cần hỗ trợ nhiều ngôn ngữ và lo ngại về thương mại hóa Phật pháp. Nền tảng của chúng tôi giải quyết các vấn đề này:",
         customBranding: {
-          title: "Thương Hiệu Tùy Chỉnh",
-          text: "Dễ dàng điều chỉnh giao diện theo bản sắc của tu viện bạn. Tải lên logo, chọn bảng màu và kiểu chữ, và ánh xạ tên miền tùy chỉnh. Các chủ đề được tải sẵn gợi lên sự thanh thản của Phật giáo (ví dụ: chủ nghĩa tối giản Thiền với họa tiết hoa sen hoặc điểm nhấn vàng Theravāda) trong khi vẫn trung lập trên các truyền thống."
+          title: "Tùy Chỉnh Thương Hiệu",
+          text: "Dễ dàng thay đổi giao diện theo phong cách chùa bạn. Tải logo, chọn màu sắc và font chữ, đặt tên miền riêng. Các mẫu có sẵn phù hợp với phong cách Phật giáo (tối giản Thiền với họa tiết sen, hoặc màu vàng Theravāda)."
         },
         donationTools: {
-          title: "Công Cụ Cúng Dường",
-          text: "Chấp nhận dāna một lần hoặc định kỳ qua thẻ, chuyển khoản ngân hàng hoặc mã QR (cho việc cúng dường bằng kiosk hoặc điện thoại thông minh). Người quyên góp có thể chọn số tiền đặt trước hoặc tùy chỉnh, nhận biên lai kỹ thuật số với thông điệp cảm ơn và theo dõi lịch sử cho. Cho ẩn danh được hỗ trợ. Chúng tôi đóng khung các đóng góp như hành động bố thí, không phải giao dịch, với trích dẫn kinh và câu hồi hướng công đức tùy chọn."
+          title: "Công Cụ Quyên Góp",
+          text: "Nhận quyên góp một lần hoặc định kỳ qua thẻ, chuyển khoản hoặc mã QR. Người quyên góp có thể chọn số tiền, nhận biên lai điện tử và xem lịch sử quyên góp. Hỗ trợ quyên góp ẩn danh. Chúng tôi trình bày quyên góp như hành động bố thí, không phải giao dịch thương mại, với trích dẫn kinh và lời hồi hướng công đức."
         },
         eventCalendar: {
           title: "Lịch Sự Kiện & Nhắc Nhở",
-          text: "Lên lịch các nghi lễ chùa, thiền nhóm hoặc khóa tu một cách dễ dàng. Chế độ xem bao gồm định dạng hàng tháng, hàng tuần hoặc chương trình nghị sự. Sự kiện định kỳ (ví dụ: tụng kinh hàng ngày hoặc lễ âm lịch) được hỗ trợ. Nhắc nhở tự động qua push hoặc email và theo dõi RSVP giúp bạn lập kế hoạch công suất. Mẫu đặt sẵn cho những ngày quan trọng (Vesak, Uposatha) và bộ hẹn giờ tụng kinh tích hợp khuyến khích sự suy ngẫm của cộng đồng."
+          text: "Dễ dàng lên lịch nghi lễ, thiền nhóm hoặc khóa tu. Xem theo tháng, tuần hoặc danh sách. Hỗ trợ sự kiện lặp lại (tụng kinh hàng ngày, lễ âm lịch). Nhắc nhở tự động qua email/SMS và theo dõi đăng ký giúp lập kế hoạch. Có sẵn mẫu cho ngày lễ quan trọng (Vesak, Uposatha) và đồng hồ tụng kinh."
         },
         aiGuidance: {
-          title: "Hướng Dẫn AI Từ Bi",
-          text: "Các đại lý AI của chúng tôi có thể cấu hình. Tải lên cơ sở tri thức riêng của bạn và chọn chế độ giáo lý như Thiền, Tịnh Độ hoặc Theravāda, với các công tắc cho phong cách phản hồi từ bi hoặc chính thức. Truy vấn giọng nói hoặc văn bản trả về tham chiếu kinh sách được tuyển chọn và các thực hành liên quan. Hàng rào bảo vệ đảm bảo tính toàn vẹn giáo lý; các tùy chọn chữ viết Pali/Hán và lời nhắc trí tuệ hàng ngày thúc đẩy thực hành chân thật."
+          title: "AI Hướng Dẫn Phật Pháp",
+          text: "AI của chúng tôi có thể tùy chỉnh. Tải tài liệu riêng của bạn và chọn truyền thống (Thiền, Tịnh Độ, Theravāda), với phong cách trả lời từ bi hoặc trang trọng. Hỏi bằng giọng nói hoặc văn bản để nhận trích dẫn kinh sách và hướng dẫn thực hành. Hệ thống đảm bảo giáo lý chính xác, hỗ trợ chữ Pali/Hán và lời dạy hàng ngày."
         },
         documentLibrary: {
-          title: "Thư Viện Tài Liệu & Tài Nguyên",
-          text: "Tổ chức kinh sách, bài tụng, bài hát, câu kệ, chú giải và tệp âm thanh/video trong thư viện có thể tìm kiếm. Đặt kiểm soát truy cập (công khai, thành viên hoặc vai trò). Truy cập ngoại tuyến và tích hợp với các lộ trình thực hành được cá nhân hóa cho phép hành giả đưa giáo lý vào cuộc sống hàng ngày. Phiên bản đảm bảo bản dịch cập nhật có thể được theo dõi và bảo tồn."
+          title: "Thư Viện Tài Liệu",
+          text: "Quản lý kinh sách, bài tụng, bài hát, kệ, chú giải và file âm thanh/video trong thư viện có tìm kiếm. Đặt quyền truy cập (công khai, thành viên). Truy cập ngoại tuyến và tích hợp lộ trình tu tập cá nhân giúp đưa giáo lý vào đời sống. Theo dõi phiên bản bản dịch."
         },
         communityForum: {
           title: "Diễn Đàn Cộng Đồng (Tùy Chọn)",
-          text: "Nếu bạn chọn bật nó, một khu vực thảo luận được kiểm duyệt cho phép các thành viên đặt câu hỏi, chia sẻ suy ngẫm và thành lập nhóm học tập. Các chủ đề có thể được tổ chức theo pháp thoại hoặc Q&A cho người mới bắt đầu. Hướng dẫn Chánh Ngữ được xây dựng sẵn và tùy chọn đăng ẩn danh hỗ trợ đối thoại chánh niệm. Bản tóm tắt hàng ngày khuyến khích sự tham gia liên tục."
+          text: "Nếu bạn bật, diễn đàn cho phép thành viên hỏi đáp, chia sẻ và lập nhóm học. Tổ chức theo pháp thoại hoặc câu hỏi người mới. Có hướng dẫn Chánh Ngữ và cho phép đăng ẩn danh. Tóm tắt hàng ngày khuyến khích tham gia."
         },
         analytics: {
-          title: "Phân Tích & Thông Tin (Tùy Chọn)",
-          text: "Bảng điều khiển ẩn danh hóa hiển thị người dùng hoạt động, tổng quyên góp và sự tham dự sự kiện. Biểu đồ tùy chỉnh giúp quản trị viên phát hiện xu hướng (ví dụ: sự tham gia của giới trẻ) mà không tiết lộ dữ liệu cá nhân. Cảnh báo có thể thông báo cho bạn về sự tham dự thấp hoặc bất thường quyên góp."
+          title: "Thống Kê (Tùy Chọn)",
+          text: "Bảng điều khiển hiển thị số người dùng, tổng quyên góp và số người tham dự sự kiện (dữ liệu ẩn danh). Biểu đồ giúp phát hiện xu hướng (ví dụ: giới trẻ tham gia) mà không tiết lộ thông tin cá nhân. Cảnh báo về sự tham dự thấp hoặc quyên góp bất thường."
         }
       },
       whyPartner: {
-        title: "Tại Sao Hợp Tác Với Bodhi Technology Lab",
+        title: "Tại Sao Hợp Tác",
         trusted: {
-          title: "Được Tin Cậy Bởi Hành Giả",
-          text: "Đội ngũ cốt lõi của chúng tôi đã cung cấp công nghệ thiêng liêng trong hơn một thập kỷ. Hơn 200 kỹ sư, thầy và cô hợp tác theo quy trình ISO‑9001/27001 để đảm bảo độ tin cậy và tính toàn vẹn."
+          title: "Được Tin Cậy",
+          text: "Đội ngũ của chúng tôi đã làm công nghệ Phật giáo hơn 10 năm. Hơn 200 kỹ sư, tu sĩ hợp tác theo quy trình ISO‑9001/27001 để đảm bảo chất lượng."
         },
         economics: {
-          title: "Kinh Tế Thiêng Liêng",
-          text: "Hạ tầng đàn hồi, chống kiểm duyệt của chúng tôi mở rộng đến số không khi nhàn rỗi—vì vậy bạn không bao giờ trả tiền cho công suất không sử dụng. Giá cả minh bạch, với các cấp miễn phí hoặc chi phí thấp cho chùa nhỏ và kế hoạch có thể dự đoán cho các cộng đồng lớn hơn."
+          title: "Giá Cả Hợp Lý",
+          text: "Hệ thống của chúng tôi tự động thu nhỏ khi không dùng—bạn không phải trả tiền cho thứ không dùng. Giá minh bạch, miễn phí hoặc rẻ cho chùa nhỏ, giá cố định cho chùa lớn."
         },
         privacy: {
-          title: "Bảo Mật Ưu Tiên Sự Đồng Ý",
-          text: "Dữ liệu được xử lý cục bộ và vẫn ở trong khu vực của nó. Chỉ các chỉ số ẩn danh, tổng hợp vượt qua ranh giới. Chủ quyền người dùng là thiêng liêng; chúng tôi không bao giờ khai thác hoặc bán dữ liệu."
+          title: "Bảo Mật Riêng Tư",
+          text: "Dữ liệu được xử lý tại chỗ và ở trong khu vực của bạn. Chỉ số liệu tổng hợp (ẩn danh) mới được chia sẻ. Dữ liệu của bạn là của bạn; chúng tôi không bao giờ khai thác hoặc bán."
         },
         partnership: {
-          title: "Hợp Tác Từ Bi",
-          text: "Chúng tôi đồng sáng tạo với bạn. Chúng tôi thí điểm với các hội đồng, cung cấp đào tạo địa phương và khuyến khích phản hồi. Mục tiêu của chúng tôi là nuôi dưỡng một mạng lưới các nhà xây dựng chánh niệm nơi danh tiếng dựa trên công đức, không phải sự cường điệu."
+          title: "Hợp Tác Chặt Chẽ",
+          text: "Chúng tôi làm việc cùng bạn. Chúng tôi thử nghiệm, đào tạo tại chỗ và lắng nghe phản hồi. Mục tiêu là xây dựng cộng đồng tin cậy dựa trên chất lượng thực sự."
         },
         censorship: {
           title: "Chống Kiểm Duyệt",
-          text: "Mạng phi tập trung của chúng tôi đảm bảo rằng giáo lý Phật Pháp không thể bị im lặng bởi bất kỳ cơ quan nào. Đường ray có thể xác minh và hệ thống danh tiếng không tin cậy neo chặt sự thật mà không tiết lộ thực hành riêng tư."
+          text: "Hệ thống phi tập trung đảm bảo Phật pháp không thể bị chặn bởi bất kỳ ai. Hệ thống minh bạch và bảo vệ quyền riêng tư."
         }
       },
       infrastructure: {
-        title: "Hạ Tầng Phật Pháp Bền Vững",
-        intro: "Các lựa chọn công nghệ của chúng tôi không chỉ là các quyết định kỹ thuật; chúng thể hiện các giá trị của chúng tôi. Chúng tôi đã thiết kế một hạ tầng phi tập trung, ưu tiên sự đồng ý để hỗ trợ sự giác ngộ ở quy mô:",
+        title: "Hạ Tầng Bền Vững",
+        intro: "Công nghệ của chúng tôi phản ánh giá trị của chúng tôi. Chúng tôi thiết kế hạ tầng phi tập trung, bảo mật để hỗ trợ cộng đồng Phật giáo:",
         decentralisation: {
-          title: "Phi Tập Trung Là Từ Bi",
-          text: "Cũng như tăng đoàn không có một nhà lãnh đạo duy nhất, mạng của chúng tôi không có điểm kiểm soát duy nhất. Chúng tôi tận dụng một tập thể toàn cầu của các nút tính toán ngoài chuỗi để tạo thành một siêu máy tính chống kiểm duyệt. Mỗi nút đóng góp công suất; không ai giữ \"chìa khóa chính.\" Sự kiên cường này thể hiện từ bi trong mã."
+          title: "Hệ Thống Phi Tập Trung",
+          text: "Giống như tăng đoàn không có một lãnh đạo duy nhất, hệ thống của chúng tôi không có điểm kiểm soát duy nhất. Chúng tôi dùng mạng lưới máy tính toàn cầu để tạo hệ thống chống kiểm duyệt. Mỗi máy đóng góp sức mạnh; không ai kiểm soát tất cả."
         },
         economics: {
-          title: "Kinh Tế Thiêng Liêng",
-          text: "Tính toán đàn hồi có nghĩa là chùa không bị gánh nặng bởi chi phí nhàn rỗi. Công suất tăng vọt cho các nhiệm vụ nặng và trở về số không khi im lặng, phù hợp với luật nhân quả. Bạn chỉ trả tiền cho những gì bạn sử dụng. Không có thuế nhàn rỗi. Giá cả minh bạch và có thể dự đoán."
+          title: "Tiết Kiệm Chi Phí",
+          text: "Hệ thống tự động co giãn nghĩa là chùa không phải trả chi phí khi không dùng. Công suất tăng khi cần và giảm về không khi rảnh. Bạn chỉ trả tiền cho những gì dùng. Giá minh bạch và dễ dự đoán."
         },
         impermanence: {
-          title: "Vô Thường Đàn Hồi",
-          text: "Các hình thức phát sinh và trôi qua. Hạ tầng của chúng tôi mở rộng ngay lập tức khi cần và co lại không gì khi không. Đỉnh trong đào tạo hoặc suy luận có thể chạy trên hàng nghìn nút; khi không có nhu cầu, mọi thứ trở lại sự tĩnh lặng. Không có lãng phí."
+          title: "Linh Hoạt Tự Động",
+          text: "Hệ thống tự động mở rộng khi cần và thu nhỏ khi không dùng. Có thể chạy trên hàng nghìn máy khi cần; khi rảnh, trở về không. Không lãng phí."
         },
         consent: {
-          title: "Trí Tuệ Ưu Tiên Sự Đồng Ý",
-          text: "Tất cả việc học đều là tự nguyện. Chúng tôi hỗ trợ các mô hình nguồn mở và công cụ RAG, nhưng AI học từ tăng đoàn chỉ khi nó được mời. Chúng tôi không bao giờ quét, khai thác hoặc trích xuất. AI học từ cộng đồng; cộng đồng không được thu hoạch cho AI."
+          title: "Bảo Vệ Quyền Riêng Tư",
+          text: "AI chỉ học khi bạn cho phép. Chúng tôi hỗ trợ mô hình nguồn mở, nhưng AI chỉ học từ dữ liệu bạn chia sẻ. Chúng tôi không thu thập hoặc lấy dữ liệu trái phép. AI học từ cộng đồng; cộng đồng không bị khai thác."
         },
         ecological: {
-          title: "Chánh Niệm Sinh Thái",
-          text: "Các nhiệm vụ được lên lịch khi năng lượng xanh dồi dào. Chúng tôi ưu tiên phần cứng nhàn rỗi hoặc hiện có, đảm bảo không có tài nguyên nào bị lãng phí. Nền tảng của chúng tôi chánh niệm về Trái Đất và các thế hệ tương lai sẽ kế thừa nó."
+          title: "Thân Thiện Môi Trường",
+          text: "Hệ thống ưu tiên chạy khi có năng lượng xanh. Chúng tôi dùng máy rảnh rỗi, không lãng phí tài nguyên. Nền tảng quan tâm đến Trái Đất và thế hệ tương lai."
         },
         auditTrail: {
-          title: "Dấu Vết Kiểm Toán Bất Biến",
-          text: "Sự minh bạch thực sự là có thể khi mọi hành động được ghi lại theo cách không thể xóa. Sổ cái ngoài chuỗi có thể xác minh của chúng tôi (DAG) neo định kỳ vào chuỗi công khai, tôn vinh luật nghiệp. Nội dung riêng tư ở ngoài chuỗi, nhưng tính toàn vẹn của các hành động được ghi lại vĩnh viễn."
+          title: "Ghi Nhận Minh Bạch",
+          text: "Minh bạch thực sự khi mọi hành động được ghi lại không thể xóa. Hệ thống ghi nhận công khai nhưng nội dung riêng tư vẫn được bảo mật. Tính toàn vẹn được ghi lại vĩnh viễn."
         },
         reputation: {
-          title: "Danh Tiếng Không Tin Cậy",
-          text: "Hệ thống công đức của chúng tôi có hai lớp: bằng chứng tính toán xác minh một nút đã làm công việc, và bằng chứng công đức nắm bắt chất lượng và ý định của hành động. Mọi pháp thoại được tải lên, bài tụng được phiên âm hoặc tin nhắn được kiểm duyệt đều được chứng thực và trở thành một phần của danh tiếng chi phối quyền truy cập và phần thưởng. Sự công nhận dựa trên đóng góp thực sự, không phải sự phổ biến."
+          title: "Hệ Thống Đánh Giá Minh Bạch",
+          text: "Hệ thống công đức có hai phần: chứng minh công việc được làm, và đánh giá chất lượng. Mọi pháp thoại tải lên, bài tụng phiên âm đều được ghi nhận và trở thành điểm đánh giá. Công nhận dựa trên đóng góp thực sự, không phải độ nổi tiếng."
         },
         privacyByDesign: {
-          title: "Bảo Mật Theo Thiết Kế",
-          text: "Chúng tôi xử lý dữ liệu cục bộ bất cứ khi nào có thể và hạn chế thông tin nhạy cảm trong khu vực của nó. Chỉ các chỉ số ẩn danh, tổng hợp rời khỏi địa phương. Không có khai thác dữ liệu; chủ quyền người dùng là tối cao. Thực hành không thể cùng tồn tại với giám sát, vì vậy chúng tôi xây dựng các hệ thống tôn trọng cả sự đồng ý và bí mật."
+          title: "Bảo Mật Ngay Từ Đầu",
+          text: "Chúng tôi xử lý dữ liệu tại chỗ và giữ thông tin nhạy cảm trong khu vực của bạn. Chỉ số liệu tổng hợp (ẩn danh) được chia sẻ. Không khai thác dữ liệu; dữ liệu của bạn là của bạn. Tu tập cần riêng tư, nên chúng tôi xây hệ thống tôn trọng sự đồng ý và bảo mật."
         }
       },
       join: {
-        title: "Tham Gia Bodhi Technology Lab",
-        text: "Chúng tôi mời tu sĩ, nhà phát triển, nhà thiết kế và người tổ chức chia sẻ các giá trị của chúng tôi hợp tác. Cho dù bạn muốn xây dựng một nền tảng nhãn trắng cho chùa của bạn, đóng góp mã cho các công cụ Phật Pháp nguồn mở hoặc tham gia vào Mandala Tính Toán Tập Thể, có một nơi cho bạn."
+        title: "Tham Gia Cùng Chúng Tôi",
+        text: "Chúng tôi mời tu sĩ, lập trình viên, nhà thiết kế cùng hợp tác. Dù bạn muốn xây nền tảng cho chùa của bạn, đóng góp mã nguồn mở, hay tham gia mạng lưới tính toán chung, đều có chỗ cho bạn."
       },
       fourthGrace: {
-        title: "Mandala Ân Điển Thứ Tư",
-        text: "Ngoài ba nơi nương tựa truyền thống—Phật, Pháp và Tăng—chúng tôi đề xuất Ân Điển Thứ Tư: con tàu kỹ thuật số duy trì thực hành trong thời mạt pháp. Mandala công nghệ thiêng liêng này mở, minh bạch và dành riêng cho sự giác ngộ."
+        title: "Nơi Nương Tựa Thứ Tư",
+        text: "Ngoài ba nơi nương tựa truyền thống—Phật, Pháp và Tăng—chúng tôi đề xuất nơi nương tựa thứ tư: công nghệ Phật giáo giúp duy trì tu tập trong thời đại số. Hệ thống công nghệ này mở, minh bạch và phục vụ con đường giác ngộ."
       }
     },
 
     agentModels: {
-      title: "Khám Phá Đại Lý Của Bạn",
-      subtitle: "Khám phá các đại lý AI Phật giáo từ các tu viện và trung tâm qua các truyền thống. Mỗi đại lý được thiết kế cẩn thận với các lời nhắc hệ thống và phương pháp cụ thể.",
-      searchPlaceholder: "Tìm kiếm đại lý...",
+      title: "Tìm AI Agent Phù Hợp",
+      subtitle: "Khám phá các AI Agent Phật giáo từ các chùa chiền và trung tâm tu tập. Mỗi agent được thiết kế kỹ lưỡng với phương pháp riêng.",
+      searchPlaceholder: "Tìm kiếm agent...",
       filters: {
-        title: "Lọc Đại Lý",
-        vehicle: "Thừa Phật Giáo",
+        title: "Lọc Agent",
+        vehicle: "Phân Loại Theo Thừa",
         vehicles: {
           tieu: "Tiểu Thừa",
           trung: "Trung Thừa",
@@ -586,19 +586,19 @@ export const docsTranslations = {
       },
       results: {
         found: "tìm thấy",
-        agent: "đại lý",
-        agents: "đại lý"
+        agent: "agent",
+        agents: "agents"
       },
-      emptyState: "Không tìm thấy đại lý nào phù hợp với tiêu chí tìm kiếm của bạn."
+      emptyState: "Không tìm thấy agent nào phù hợp."
     },
 
     quickStart: {
       title: "Hướng Dẫn Nhanh",
-      subtitle: "Bắt đầu với Hệ Thống API Key. Tìm hiểu cách cấu hình và sử dụng Key Hệ Thống và Key Cá Nhân để tích hợp AI một cách liền mạch.",
+      subtitle: "Bắt đầu với API Key. Tìm hiểu cách cấu hình Key Hệ Thống và Key Cá Nhân để tích hợp AI.",
       languageToggle: "Ngôn Ngữ",
       understanding: {
-        title: "Hiểu về Hệ Thống Key",
-        description: "Nền tảng sử dụng hệ thống API key hai cấp để đảm bảo tính linh hoạt, kiểm soát chi phí và trải nghiệm người dùng liền mạch. Có hai loại key hoạt động cùng nhau để vận hành nền tảng."
+        title: "Hệ Thống API Key",
+        description: "Nền tảng dùng hai loại API key để linh hoạt, kiểm soát chi phí và dễ sử dụng. Hai loại key hoạt động cùng nhau."
       },
       systemKey: {
         title: "Key Hệ Thống",
@@ -697,18 +697,18 @@ export const docsTranslations = {
     },
 
     pricing: {
-      title: "Giá Token",
-      subtitle: "Giá cả minh bạch mỗi 1 triệu token. Chọn mô hình phù hợp nhất với con đường giác ngộ của bạn.",
-      contextWindow: "Cửa Sổ Ngữ Cảnh",
+      title: "Bảng Giá",
+      subtitle: "Giá minh bạch mỗi 1 triệu token. Chọn mô hình phù hợp với nhu cầu của bạn.",
+      contextWindow: "Ngữ Cảnh",
       maxOutput: "Đầu Ra Tối Đa",
-      usedByAgents: "Được Sử Dụng Bởi Đại Lý",
+      usedByAgents: "Dùng Bởi Agents",
       tokens: "token",
       inputTokens: "/ 1 triệu token đầu vào",
       outputTokens: "/ 1 triệu token đầu ra",
       advanced: "Nâng Cao",
       note: {
-        title: "Kinh Tế Dựa Trên Công Đức:",
-        text: "Giá cả phản ánh chi phí tính toán trong khi hỗ trợ sứ mệnh giác ngộ tâm linh của chúng tôi. Tất cả thu nhập hỗ trợ phát triển công nghệ pháp và duy trì con tàu kỹ thuật số thiêng liêng này."
+        title: "Lưu Ý:",
+        text: "Giá phản ánh chi phí tính toán và hỗ trợ sứ mệnh phát triển công nghệ Phật giáo. Thu nhập được dùng để phát triển và duy trì nền tảng này."
       }
     }
   }
