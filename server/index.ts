@@ -97,11 +97,16 @@ async function initializeApp() {
   return initializationPromise;
 }
 
-// For Vercel serverless, wrap the app to ensure initialization
-const handler = async (req: Request, res: Response, next: NextFunction) => {
+// For Vercel serverless, create a proper handler that wraps the Express app
+async function handler(req: any, res: any) {
   await initializeApp();
-  return app(req, res, next);
-};
+  return new Promise((resolve, reject) => {
+    app(req, res, (err: any) => {
+      if (err) reject(err);
+      else resolve(undefined);
+    });
+  });
+}
 
 // Start initialization in development
 if (!process.env.VERCEL) {
