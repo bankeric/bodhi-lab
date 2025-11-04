@@ -1262,6 +1262,113 @@ export default function Platform() {
                 </div>
               </div>
 
+              {/* Hồi Hướng Công Đức - Merit Dedication Section */}
+              <div className="bg-gradient-to-br from-[#EFE0BD] to-[#EFE0BD]/80 rounded-2xl border-2 border-[#8B4513]/30 p-8 mb-12">
+                <div className="text-center mb-8">
+                  <div className="flex items-center justify-center gap-3 mb-3">
+                    <img src={lotusIcon} alt="Lotus" className="w-10 h-10 object-contain" />
+                    <h3 className="font-serif text-3xl font-bold text-[#991b1b]">Hồi Hướng Công Đức</h3>
+                  </div>
+                  <p className="font-serif text-lg text-[#8B4513] italic">The Act of Returning: Dedicating Merit to All Beings</p>
+                </div>
+
+                {/* An Offering of Merit */}
+                <div className="mb-8">
+                  <h4 className="font-serif text-xl font-bold text-[#2c2c2c] mb-4 flex items-center gap-2">
+                    <img src={lotusIcon} alt="Lotus" className="w-6 h-6 object-contain" />
+                    An Offering of Merit (Công Đức)
+                  </h4>
+                  <p className="font-serif text-base text-[#2c2c2c]/80 mb-6 italic">
+                    This is more than a donation. It is a practice of selfless offering.
+                  </p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div className="bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-[#8B4513]/20">
+                      <div className="flex items-start gap-3 mb-3">
+                        <img src={lotusIcon} alt="Lotus" className="w-5 h-5 object-contain flex-shrink-0 mt-1" />
+                        <h5 className="font-serif text-sm font-bold text-[#991b1b]">Your Action</h5>
+                      </div>
+                      <p className="font-serif text-sm text-[#2c2c2c]/70 leading-relaxed">
+                        By giving without expectation of personal reward, you are performing the act of <span className="font-semibold text-[#991b1b]">Hồi Hướng Công Đức</span>—the selfless dedication of intrinsic merit.
+                      </p>
+                    </div>
+
+                    <div className="bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-[#8B4513]/20">
+                      <div className="flex items-start gap-3 mb-3">
+                        <img src={lotusIcon} alt="Lotus" className="w-5 h-5 object-contain flex-shrink-0 mt-1" />
+                        <h5 className="font-serif text-sm font-bold text-[#991b1b]">The Intention</h5>
+                      </div>
+                      <p className="font-serif text-sm text-[#2c2c2c]/70 leading-relaxed">
+                        This merit is not for one, but for all. It is dedicated to the liberation and awakening of all beings.
+                      </p>
+                    </div>
+
+                    <div className="bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-[#8B4513]/20">
+                      <div className="flex items-start gap-3 mb-3">
+                        <img src={lotusIcon} alt="Lotus" className="w-5 h-5 object-contain flex-shrink-0 mt-1" />
+                        <h5 className="font-serif text-sm font-bold text-[#991b1b]">The Result</h5>
+                      </div>
+                      <p className="font-serif text-sm text-[#2c2c2c]/70 leading-relaxed">
+                        You are planting a seed of awakening, free from the bonds of cause and effect that govern worldly blessings.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Supporting the Work of Awakening */}
+                <div>
+                  <h4 className="font-serif text-xl font-bold text-[#2c2c2c] mb-4 flex items-center gap-2">
+                    <img src={buddhaIcon} alt="Buddha" className="w-6 h-6 object-contain" />
+                    Supporting the Work of Awakening (Phật Sự)
+                  </h4>
+                  <p className="font-serif text-base text-[#2c2c2c]/80 mb-6">
+                    100% of your offering directly supports the continuation of the Dharma in this world. Your contribution is used exclusively for:
+                  </p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="flex items-start gap-4 bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-[#8B4513]/20">
+                      <img src={lotusIcon} alt="Lotus" className="w-8 h-8 object-contain flex-shrink-0" />
+                      <div>
+                        <h5 className="font-serif text-sm font-bold text-[#991b1b] mb-2">Sustaining the Sangha</h5>
+                        <p className="font-serif text-xs text-[#2c2c2c]/70 leading-relaxed">
+                          Providing for masters and practitioners who dedicate their lives to holding and transmitting the teachings.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-4 bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-[#8B4513]/20">
+                      <img src={sutraIcon} alt="Sutra" className="w-8 h-8 object-contain flex-shrink-0" />
+                      <div>
+                        <h5 className="font-serif text-sm font-bold text-[#991b1b] mb-2">Spreading the Dharma</h5>
+                        <p className="font-serif text-xs text-[#2c2c2c]/70 leading-relaxed">
+                          Funding the creation and sharing of teachings, texts, and digital resources to reach all who are searching.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-4 bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-[#8B4513]/20">
+                      <img src={buddhaIcon} alt="Buddha" className="w-8 h-8 object-contain flex-shrink-0" />
+                      <div>
+                        <h5 className="font-serif text-sm font-bold text-[#991b1b] mb-2">Maintaining Sacred Space</h5>
+                        <p className="font-serif text-xs text-[#2c2c2c]/70 leading-relaxed">
+                          Ensuring our physical and digital sanctuaries remain pure, accessible, and conducive to practice.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-4 bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-[#8B4513]/20">
+                      <Heart className="w-8 h-8 text-[#991b1b] flex-shrink-0" />
+                      <div>
+                        <h5 className="font-serif text-sm font-bold text-[#991b1b] mb-2">Acts of True Compassion</h5>
+                        <p className="font-serif text-xs text-[#2c2c2c]/70 leading-relaxed">
+                          Enabling projects that alleviate suffering and guide others toward the path of liberation.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               {/* Interactive Donation Interface Demo */}
               <div className="bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 p-8" data-testid="card-donation-interface">
                 <div className="flex items-center gap-3 mb-6">
