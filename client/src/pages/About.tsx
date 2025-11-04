@@ -113,6 +113,23 @@ export default function About() {
             </div>
           </div>
 
+          {/* Philosophy Section */}
+          <div className="bg-gradient-to-br from-[#991b1b]/10 to-[#8B4513]/10 rounded-3xl border-2 border-[#991b1b]/30 p-8 md:p-12 mb-12" data-testid="section-philosophy">
+            <div className="flex items-center gap-3 mb-6">
+              <img src={lotusIcon} alt="Lotus" className="w-12 h-12 object-contain" />
+              <h2 className="font-serif text-3xl font-bold text-[#991b1b]">{t.philosophy.title}</h2>
+            </div>
+            <p className="font-serif text-lg text-[#2c2c2c] leading-relaxed mb-6">
+              {t.philosophy.para1}
+            </p>
+            <p className="font-serif text-lg text-[#2c2c2c] leading-relaxed mb-6">
+              {t.philosophy.para2}
+            </p>
+            <p className="font-serif text-lg text-[#2c2c2c] leading-relaxed">
+              {t.philosophy.para3}
+            </p>
+          </div>
+
           {/* What We Do Section */}
           <div className="bg-white/50 backdrop-blur-md rounded-3xl border-2 border-[#8B4513]/20 p-8 md:p-12 mb-12" data-testid="section-what-we-do">
             <div className="flex items-center gap-3 mb-8">
