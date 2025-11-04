@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { ChevronDown, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -18,9 +18,40 @@ interface DocsNavProps {
 export function DocsNav({ navigation }: DocsNavProps) {
   const [location] = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeSection, setActiveSection] = useState<string>("");
   const [expandedSections, setExpandedSections] = useState<string[]>(
     navigation.map(section => section.id)
   );
+
+  // Track which section is currently in view
+  useEffect(() => {
+    const handleScroll = () => {
+      // Get all sections with IDs
+      const sections = document.querySelectorAll('section[id]');
+      let currentSection = "";
+
+      sections.forEach((section) => {
+        const sectionTop = section.getBoundingClientRect().top;
+        const sectionHeight = (section as HTMLElement).offsetHeight;
+        
+        // Check if section is in viewport (with some offset for better UX)
+        if (sectionTop <= 150 && sectionTop + sectionHeight > 150) {
+          currentSection = section.getAttribute('id') || "";
+        }
+      });
+
+      if (currentSection) {
+        setActiveSection(currentSection);
+      }
+    };
+
+    // Initial check
+    handleScroll();
+
+    // Listen to scroll events
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [location]);
 
   const toggleSection = (id: string) => {
     setExpandedSections(prev =>
@@ -79,20 +110,33 @@ export function DocsNav({ navigation }: DocsNavProps) {
                 </button>
                 {expandedSections.includes(section.id) && (
                   <div className="ml-6 mt-1 space-y-1 border-l-2 border-border pl-3">
-                    {section.children.map((child) => (
-                      <Link key={child.id} href={child.href}>
-                        <div
-                          className={`w-full text-left px-3 py-1.5 rounded-lg font-serif text-sm transition-all cursor-pointer ${
-                            location === child.href
-                              ? "bg-[#991b1b] text-white font-medium"
-                              : "text-foreground hover:bg-[#991b1b]/10 hover:text-[#991b1b] active:bg-[#991b1b]/20"
-                          }`}
-                          data-testid={`link-nav-${child.id}`}
-                        >
-                          {child.title}
-                        </div>
-                      </Link>
-                    ))}
+                    {section.children.map((child) => {
+                      // Extract section ID from href (e.g., /docs/overview#mission -> mission)
+                      const sectionId = child.href.split('#')[1] || "";
+                      const isActive = activeSection === sectionId || location === child.href;
+                      
+                      return (
+                        <Link key={child.id} href={child.href}>
+                          <div
+                            onClick={() => {
+                              // Smooth scroll to section
+                              const element = document.getElementById(sectionId);
+                              if (element) {
+                                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                              }
+                            }}
+                            className={`w-full text-left px-3 py-1.5 rounded-lg font-serif text-sm transition-all cursor-pointer ${
+                              isActive
+                                ? "bg-[#991b1b] text-white font-medium"
+                                : "text-foreground hover:bg-[#991b1b]/10 hover:text-[#991b1b] active:bg-[#991b1b]/20"
+                            }`}
+                            data-testid={`link-nav-${child.id}`}
+                          >
+                            {child.title}
+                          </div>
+                        </Link>
+                      );
+                    })}
                   </div>
                 )}
               </div>
