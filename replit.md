@@ -113,7 +113,9 @@ Preferred communication style: Simple, everyday language.
 ### Platform Capabilities (B2B Showcase)
 
 **Recent Changes**:
-- **November 17, 2025**: Added comprehensive Pricing section with three subscription tiers (Start $79/mo, Scale $199/mo, Enterprise $499+/mo) featuring detailed feature breakdowns for donation fees, AI agents, user limits, admin seats, mobile apps, branding, API access, support levels, and backup/logs.
+- **November 17, 2025**: 
+  - Added comprehensive Pricing section with three subscription tiers (Start $79/mo, Scale $199/mo, Enterprise $499+/mo) featuring detailed feature breakdowns for donation fees, AI agents, user limits, admin seats, mobile apps, branding, API access, support levels, and backup/logs.
+  - Added Premium Package section showcasing hands-on product training (5 video sessions), personalized setup support (60 days 1-on-1), effortless data migration, and proven launch resources with Dharma-aligned onboarding guides.
 - **November 3, 2025**: Transformed the Platform page from a basic social network demo into a comprehensive B2B showcase with six in-depth capability sections targeting Buddhist organizations (temples, monasteries, meditation centers).
 
 **Platform Page Structure**: Located at `/platform`, the page showcases white-label technology solutions with detailed feature cards designed to convert B2B customers. Each section follows a consistent pattern: Icon + Title + Description + Feature Cards (3-column responsive grid) + Interactive Demo/Examples.

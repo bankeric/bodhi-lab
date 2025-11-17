@@ -256,6 +256,28 @@ export const platformTranslations = {
       note: {
         title: "Note:",
         text: "all plans include one shared website & library template. other features scale by tier. contact us to discuss your specific needs."
+      },
+      premium: {
+        badge: "Premium Package",
+        title: "Premium Package",
+        subtitle: "accelerate your launch with comprehensive onboarding, training, and migration support",
+        training: {
+          title: "Hands-On Product Training",
+          description: "Five dedicated video sessions tailored for your organization."
+        },
+        support: {
+          title: "Personalized Setup Support",
+          description: "60 days of 1-on-1 onboarding with our team."
+        },
+        migration: {
+          title: "Effortless Data Transfer",
+          description: "We will migrate your existing library, donation records, or user data."
+        },
+        resources: {
+          title: "Proven Launch Resources",
+          description: "Templates, outreach materials, and Dharma-aligned onboarding guides."
+        },
+        cta: "Contact Us About Premium Package"
       }
     },
     
@@ -526,6 +548,28 @@ export const platformTranslations = {
       note: {
         title: "Lưu ý:",
         text: "tất cả các gói đều bao gồm một mẫu website & library được chia sẻ. các tính năng khác được mở rộng theo từng tier. liên hệ chúng tôi để thảo luận về nhu cầu cụ thể của bạn."
+      },
+      premium: {
+        badge: "Gói Premium",
+        title: "Gói Premium",
+        subtitle: "tăng tốc khởi động của bạn với hỗ trợ onboarding, đào tạo và di chuyển dữ liệu toàn diện",
+        training: {
+          title: "Đào Tạo Sản Phẩm Thực Hành",
+          description: "Năm buổi video chuyên dụng được tùy chỉnh cho tổ chức của bạn."
+        },
+        support: {
+          title: "Hỗ Trợ Thiết Lập Cá Nhân Hóa",
+          description: "60 ngày onboarding 1-on-1 với đội ngũ của chúng tôi."
+        },
+        migration: {
+          title: "Chuyển Đổi Dữ Liệu Dễ Dàng",
+          description: "Chúng tôi sẽ di chuyển thư viện hiện có, hồ sơ quyên góp hoặc dữ liệu người dùng của bạn."
+        },
+        resources: {
+          title: "Tài Nguyên Khởi Động Đã Được Chứng Minh",
+          description: "Mẫu, tài liệu tiếp cận và hướng dẫn onboarding phù hợp với Phật Pháp."
+        },
+        cta: "Liên Hệ Về Gói Premium"
       }
     },
     

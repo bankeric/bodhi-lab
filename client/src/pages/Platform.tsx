@@ -2445,6 +2445,98 @@ export default function Platform() {
                   </p>
                 </div>
               </div>
+
+              {/* Premium Package */}
+              <div className="mt-16 max-w-6xl mx-auto">
+                <div className="bg-gradient-to-br from-[#991b1b]/10 to-[#8B4513]/10 backdrop-blur-md rounded-2xl border-2 border-[#991b1b] p-8 md:p-10" data-testid="card-premium-package">
+                  <div className="text-center mb-8">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#991b1b] text-white rounded-full text-xs font-bold uppercase tracking-wide mb-4">
+                      <img src={lotusIcon} alt="Lotus" className="w-4 h-4 object-contain" />
+                      {t.pricing.premium.badge}
+                    </div>
+                    <h3 className="font-serif text-3xl font-bold text-[#2c2c2c] mb-3">
+                      {t.pricing.premium.title}
+                    </h3>
+                    <p className="font-serif text-lg text-[#8B4513]/70 max-w-2xl mx-auto">
+                      {t.pricing.premium.subtitle}
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Training */}
+                    <div className="bg-white/60 backdrop-blur-sm rounded-xl border border-[#8B4513]/20 p-6" data-testid="card-premium-training">
+                      <div className="flex items-start gap-3 mb-3">
+                        <img src={sutraIcon} alt="Sutra" className="w-8 h-8 object-contain flex-shrink-0" />
+                        <div>
+                          <h4 className="font-serif text-lg font-bold text-[#2c2c2c] mb-2">
+                            {t.pricing.premium.training.title}
+                          </h4>
+                          <p className="font-serif text-sm text-[#8B4513]/70">
+                            {t.pricing.premium.training.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Setup Support */}
+                    <div className="bg-white/60 backdrop-blur-sm rounded-xl border border-[#8B4513]/20 p-6" data-testid="card-premium-support">
+                      <div className="flex items-start gap-3 mb-3">
+                        <img src={bellIcon} alt="Bell" className="w-8 h-8 object-contain flex-shrink-0" />
+                        <div>
+                          <h4 className="font-serif text-lg font-bold text-[#2c2c2c] mb-2">
+                            {t.pricing.premium.support.title}
+                          </h4>
+                          <p className="font-serif text-sm text-[#8B4513]/70">
+                            {t.pricing.premium.support.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Data Transfer */}
+                    <div className="bg-white/60 backdrop-blur-sm rounded-xl border border-[#8B4513]/20 p-6" data-testid="card-premium-migration">
+                      <div className="flex items-start gap-3 mb-3">
+                        <img src={buddhaIcon} alt="Buddha" className="w-8 h-8 object-contain flex-shrink-0" />
+                        <div>
+                          <h4 className="font-serif text-lg font-bold text-[#2c2c2c] mb-2">
+                            {t.pricing.premium.migration.title}
+                          </h4>
+                          <p className="font-serif text-sm text-[#8B4513]/70">
+                            {t.pricing.premium.migration.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Launch Resources */}
+                    <div className="bg-white/60 backdrop-blur-sm rounded-xl border border-[#8B4513]/20 p-6" data-testid="card-premium-resources">
+                      <div className="flex items-start gap-3 mb-3">
+                        <img src={lotusIcon} alt="Lotus" className="w-8 h-8 object-contain flex-shrink-0" />
+                        <div>
+                          <h4 className="font-serif text-lg font-bold text-[#2c2c2c] mb-2">
+                            {t.pricing.premium.resources.title}
+                          </h4>
+                          <p className="font-serif text-sm text-[#8B4513]/70">
+                            {t.pricing.premium.resources.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-8 text-center">
+                    <Link href="/">
+                      <a
+                        className="inline-flex items-center gap-2 px-8 py-4 bg-[#991b1b] text-white rounded-xl hover:bg-[#7a1515] transition-colors font-serif font-semibold text-lg shadow-lg"
+                        data-testid="button-premium-contact"
+                      >
+                        {t.pricing.premium.cta}
+                        <ArrowRight className="w-5 h-5" />
+                      </a>
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
         </TracingBeam>
