@@ -2309,6 +2309,144 @@ export default function Platform() {
               </div>
             </div>
           )}
+
+          {/* Pricing Section */}
+          <section className="py-24" id="pricing">
+            <div className="container mx-auto px-4 max-w-7xl">
+              <div className="text-center space-y-4 mb-16">
+                <h2 className="font-serif text-4xl sm:text-5xl font-bold text-[#2c2c2c]">
+                  {t.pricing.title}
+                </h2>
+                <p className="font-serif text-lg text-[#8B4513]/70 max-w-3xl mx-auto">
+                  {t.pricing.subtitle}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                {/* Start Tier */}
+                <div className="bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 p-8 flex flex-col" data-testid="card-pricing-start">
+                  <div className="mb-6">
+                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">
+                      {t.pricing.start.name}
+                    </h3>
+                    <div className="flex items-baseline gap-2 mb-4">
+                      <span className="font-mono text-4xl font-bold text-[#991b1b]">
+                        ${t.pricing.start.price}
+                      </span>
+                      <span className="font-serif text-[#8B4513]/70">{t.pricing.perMonth}</span>
+                    </div>
+                    <p className="font-serif text-sm text-[#8B4513]/70">
+                      {t.pricing.start.description}
+                    </p>
+                  </div>
+
+                  <div className="flex-1 space-y-4 mb-8">
+                    {t.pricing.start.features.map((feature, idx) => (
+                      <div key={idx} className="flex items-start gap-2">
+                        <img src={lotusIcon} alt="Lotus" className="w-4 h-4 object-contain flex-shrink-0 mt-0.5" />
+                        <span className="font-serif text-sm text-[#2c2c2c]">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <Link href="/">
+                    <a
+                      className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-white border-2 border-[#991b1b] text-[#991b1b] rounded-xl hover:bg-[#991b1b] hover:text-white transition-all font-serif font-semibold"
+                      data-testid="button-start-tier"
+                    >
+                      {t.pricing.getStarted}
+                    </a>
+                  </Link>
+                </div>
+
+                {/* Scale Tier (Featured) */}
+                <div className="bg-[#991b1b]/5 backdrop-blur-md rounded-2xl border-2 border-[#991b1b] p-8 flex flex-col relative" data-testid="card-pricing-scale">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#991b1b] text-white rounded-full text-xs font-bold uppercase tracking-wide">
+                    {t.pricing.popular}
+                  </div>
+
+                  <div className="mb-6">
+                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">
+                      {t.pricing.scale.name}
+                    </h3>
+                    <div className="flex items-baseline gap-2 mb-4">
+                      <span className="font-mono text-4xl font-bold text-[#991b1b]">
+                        ${t.pricing.scale.price}
+                      </span>
+                      <span className="font-serif text-[#8B4513]/70">{t.pricing.perMonth}</span>
+                    </div>
+                    <p className="font-serif text-sm text-[#8B4513]/70">
+                      {t.pricing.scale.description}
+                    </p>
+                  </div>
+
+                  <div className="flex-1 space-y-4 mb-8">
+                    {t.pricing.scale.features.map((feature, idx) => (
+                      <div key={idx} className="flex items-start gap-2">
+                        <img src={lotusIcon} alt="Lotus" className="w-4 h-4 object-contain flex-shrink-0 mt-0.5" />
+                        <span className="font-serif text-sm text-[#2c2c2c]">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <Link href="/">
+                    <a
+                      className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-[#991b1b] text-white rounded-xl hover:bg-[#7a1515] transition-colors font-serif font-semibold shadow-lg"
+                      data-testid="button-scale-tier"
+                    >
+                      {t.pricing.getStarted}
+                    </a>
+                  </Link>
+                </div>
+
+                {/* Enterprise Tier */}
+                <div className="bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 p-8 flex flex-col" data-testid="card-pricing-enterprise">
+                  <div className="mb-6">
+                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">
+                      {t.pricing.enterprise.name}
+                    </h3>
+                    <div className="flex items-baseline gap-2 mb-4">
+                      <span className="font-mono text-4xl font-bold text-[#991b1b]">
+                        ${t.pricing.enterprise.price}
+                      </span>
+                      <span className="font-serif text-[#8B4513]/70">{t.pricing.perMonth}</span>
+                    </div>
+                    <p className="font-serif text-sm text-[#8B4513]/70">
+                      {t.pricing.enterprise.description}
+                    </p>
+                  </div>
+
+                  <div className="flex-1 space-y-4 mb-8">
+                    {t.pricing.enterprise.features.map((feature, idx) => (
+                      <div key={idx} className="flex items-start gap-2">
+                        <img src={lotusIcon} alt="Lotus" className="w-4 h-4 object-contain flex-shrink-0 mt-0.5" />
+                        <span className="font-serif text-sm text-[#2c2c2c]">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <Link href="/">
+                    <a
+                      className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-white border-2 border-[#991b1b] text-[#991b1b] rounded-xl hover:bg-[#991b1b] hover:text-white transition-all font-serif font-semibold"
+                      data-testid="button-enterprise-tier"
+                    >
+                      {t.pricing.contactSales}
+                    </a>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Feature Comparison Note */}
+              <div className="mt-12 max-w-4xl mx-auto">
+                <div className="bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 p-6" data-testid="card-pricing-note">
+                  <p className="font-serif text-sm text-[#2c2c2c] text-center">
+                    <strong className="text-[#991b1b]">{t.pricing.note.title}</strong>{" "}
+                    {t.pricing.note.text}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
         </TracingBeam>
 
         <footer className="border-t border-[#8B4513]/20 py-8 bg-[#EFE0BD]/50 backdrop-blur-sm">

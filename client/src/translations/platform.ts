@@ -195,6 +195,70 @@ export const platformTranslations = {
       }
     },
     
+    pricing: {
+      title: "Pricing & Plans",
+      subtitle: "choose the plan that fits your organization's needs—from small temples to large monastery networks",
+      perMonth: "/mo",
+      popular: "Most Popular",
+      getStarted: "Get Started",
+      contactSales: "Contact Sales",
+      start: {
+        name: "Start",
+        price: "79",
+        description: "perfect for small temples or meditation centers getting started with digital transformation",
+        features: [
+          "Website Builder & Library: One shared template",
+          "Donation Fees: 2.5% + $0.20 per card (0.8% + $0.20 for bank transfer)",
+          "AI Dharma Agent: No",
+          "User Limit: 1,000 users",
+          "Admin Seats: 2",
+          "Mobile App: No",
+          "Domain/Branding: Shared domain",
+          "API Access: No",
+          "Support: Email",
+          "Backup & Logs: Basic"
+        ]
+      },
+      scale: {
+        name: "Scale",
+        price: "199",
+        description: "for growing communities needing AI agents and mobile app",
+        features: [
+          "Website Builder & Library: One shared template",
+          "Donation Fees: 1.5% + $0.20 per card (0.8% + $0.20 for bank transfer)",
+          "AI Dharma Agent: Yes (standard usage)",
+          "User Limit: 5,000 users",
+          "Admin Seats: 5",
+          "Mobile App: Included",
+          "Domain/Branding: Custom domain",
+          "API Access: Limited",
+          "Support: Email + product updates",
+          "Backup & Logs: Daily backup, 7-day logs"
+        ]
+      },
+      enterprise: {
+        name: "Enterprise",
+        price: "499+",
+        description: "comprehensive solution for large monastery networks with custom needs",
+        features: [
+          "Website Builder & Library: One shared template",
+          "Donation Fees: Free (we don't charge fees)",
+          "AI Dharma Agent: Yes (fine-tuned, multi-instance)",
+          "User Limit: 10,000+ users",
+          "Admin Seats: 10+",
+          "Mobile App: White-label native app",
+          "Domain/Branding: Full brand suite (BYO domain, logo, style)",
+          "API Access: Full API & developer dashboard",
+          "Support: Dedicated success manager + 24/7 response",
+          "Backup & Logs: Custom SLAs, security onboarding"
+        ]
+      },
+      note: {
+        title: "Note:",
+        text: "all plans include one shared website & library template. other features scale by tier. contact us to discuss your specific needs."
+      }
+    },
+    
     footer: {
       copyright: "© 2025 Bodhi Technology Lab. Building technology for awakening.",
       company: "Company",
@@ -398,6 +462,70 @@ export const platformTranslations = {
           "Chuyển hướng câu hỏi nhạy cảm cho tu sĩ",
           "Trích dẫn nguồn từ các văn bản bạn đã tải lên"
         ]
+      }
+    },
+    
+    pricing: {
+      title: "Giá Cả & Gói Dịch Vụ",
+      subtitle: "chọn gói phù hợp với nhu cầu tổ chức của bạn—từ chùa nhỏ đến mạng lưới tu viện lớn",
+      perMonth: "/tháng",
+      popular: "Phổ biến nhất",
+      getStarted: "Bắt Đầu",
+      contactSales: "Liên Hệ Tư Vấn",
+      start: {
+        name: "Start",
+        price: "79",
+        description: "hoàn hảo cho các ngôi chùa nhỏ hoặc trung tâm thiền mới bắt đầu số hóa",
+        features: [
+          "Website Builder & Library: Một mẫu chia sẻ",
+          "Phí Quyên Góp: 2.5% + $0.20 mỗi thẻ (0.8% + $0.20 cho chuyển khoản)",
+          "AI Dharma Agent: Không có",
+          "Giới hạn thành viên: 1,000 người dùng",
+          "Quản trị: 2 tài khoản admin",
+          "Ứng dụng di động: Không có",
+          "Domain/Branding: Domain chia sẻ",
+          "API Access: Không có",
+          "Hỗ trợ: Email",
+          "Backup & Logs: Cơ bản"
+        ]
+      },
+      scale: {
+        name: "Scale",
+        price: "199",
+        description: "cho cộng đồng đang phát triển cần AI agents và mobile app",
+        features: [
+          "Website Builder & Library: Một mẫu chia sẻ",
+          "Phí Quyên Góp: 1.5% + $0.20 mỗi thẻ (0.8% + $0.20 cho chuyển khoản)",
+          "AI Dharma Agent: Có (sử dụng tiêu chuẩn)",
+          "Giới hạn thành viên: 5,000 người dùng",
+          "Quản trị: 5 tài khoản admin",
+          "Ứng dụng di động: Bao gồm",
+          "Domain/Branding: Custom domain",
+          "API Access: Giới hạn",
+          "Hỗ trợ: Email + cập nhật sản phẩm",
+          "Backup & Logs: Sao lưu hàng ngày, logs 7 ngày"
+        ]
+      },
+      enterprise: {
+        name: "Enterprise",
+        price: "499+",
+        description: "giải pháp toàn diện cho mạng lưới tu viện lớn với nhu cầu tùy chỉnh",
+        features: [
+          "Website Builder & Library: Một mẫu chia sẻ",
+          "Phí Quyên Góp: Miễn phí (chúng tôi không lấy phí)",
+          "AI Dharma Agent: Có (fine-tuned, multi-instance)",
+          "Giới hạn thành viên: 10,000+ người dùng",
+          "Quản trị: 10+ tài khoản admin",
+          "Ứng dụng di động: White-label native app",
+          "Domain/Branding: Bộ nhận diện thương hiệu đầy đủ",
+          "API Access: API đầy đủ & developer dashboard",
+          "Hỗ trợ: Quản lý thành công chuyên dụng + phản hồi 24/7",
+          "Backup & Logs: SLA tùy chỉnh, onboarding bảo mật"
+        ]
+      },
+      note: {
+        title: "Lưu ý:",
+        text: "tất cả các gói đều bao gồm một mẫu website & library được chia sẻ. các tính năng khác được mở rộng theo từng tier. liên hệ chúng tôi để thảo luận về nhu cầu cụ thể của bạn."
       }
     },
     
