@@ -321,7 +321,7 @@ export default function Career() {
                 <div>
                   <h3 className="font-serif text-xl font-bold text-[#2c2c2c] mb-2">{t.process.step1.title}</h3>
                   <p className="font-serif text-[#8B4513]/70">
-                    {t.process.step1.text} <a href="mailto:talent@boddhilab.io" className="text-[#991b1b] underline font-semibold" data-testid="link-email-talent">talent@boddhilab.io</a> {t.process.step1.textContinued}
+                    {t.process.step1.text} <a href="mailto:talent@boddhilab.io" className="text-[#991b1b] underline font-semibold" data-testid="link-email-talent">talent@boddhilab.io</a>
                   </p>
                 </div>
               </div>

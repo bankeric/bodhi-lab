@@ -20,17 +20,17 @@ export const landingTranslations = {
 
     hero: {
       title: "Bodhi Technology Lab",
-      subtitle: "Awaken Technology for the Dharma-Ending Age",
-      description: "A foundry where worldly coders and Dharma artisans unite, Forging digital temples, tending sacred cyberspace. Here, technology serves not profit, but the Light — Its sole purpose: to safeguard the Path of Liberation for all.",
+      subtitle: "Buddhist Technology Solutions for Modern Organizations",
+      description: "We build white-label platforms for temples, monasteries, and dharma centers worldwide. Our mission: empower Buddhist communities with donation tools, AI guidance, resource libraries, and custom branding—technology that serves the Dharma, not profit.",
       cta: {
-        startSprint: "Start a Sprint",
-        explorePlatform: "Explore Platform"
+        startSprint: "Schedule a Consultation",
+        explorePlatform: "See Our Solutions"
       },
       features: [
-        "Custom Branding",
-        "AI-Powered Tools",
-        "Decentralized Infrastructure",
-        "Censorship Resistant"
+        "White-Label Platform",
+        "Donation & Event Tools",
+        "Buddhist AI Guidance",
+        "Full Data Sovereignty"
       ],
       stats: {
         engineers: {
@@ -247,17 +247,17 @@ export const landingTranslations = {
 
     hero: {
       title: "Bodhi Technology Lab",
-      subtitle: "Thức Tỉnh Công Nghệ Cho Thời Mạt Pháp",
-      description: "Nơi thợ đời kết đạo cùng thợ pháp, đồng xây chùa số, giữ sạch không gian. Công nghệ nơi đây, không vì lợi danh - Chỉ một lòng thành, hộ trì Chánh Pháp.",
+      subtitle: "Giải pháp công nghệ Phật giáo cho các tổ chức hiện đại",
+      description: "Chúng tôi xây dựng nền tảng nhãn trắng cho chùa, tu viện và trung tâm pháp trên toàn cầu. Sứ mệnh: trao quyền cho cộng đồng Phật giáo với công cụ cúng dường, hướng dẫn AI, thư viện tài nguyên và thương hiệu tùy chỉnh. Công nghệ nơi đây, không vì lợi danh - chỉ một lòng thành, hộ trì Chánh Pháp.",
       cta: {
-        startSprint: "Bắt Đầu Sprint",
-        explorePlatform: "Khám Phá Nền Tảng"
+        startSprint: "Đặt lịch tư vấn",
+        explorePlatform: "Xem giải pháp"
       },
       features: [
-        "Thương Hiệu Tùy Chỉnh",
-        "Công Cụ AI",
-        "Hạ Tầng Phi Tập Trung",
-        "Chống Kiểm Duyệt"
+        "Nền tảng nhãn trắng",
+        "Công cụ cúng dường & sự kiện",
+        "Hướng dẫn AI Phật giáo",
+        "Chủ quyền dữ liệu đầy đủ"
       ],
       stats: {
         engineers: {

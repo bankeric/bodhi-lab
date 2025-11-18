@@ -165,12 +165,14 @@ export const privacyTranslations = {
     contact: {
       title: "Questions About Privacy?",
       subtitle: "We're committed to transparency and protecting your rights. If you have questions, concerns, or requests regarding your privacy, please reach out.",
+      emailLabel: "Email:",
       email: "privacy@boddhilab.io",
       company: "Bodhi Technology Lab",
       tagline: "Building technology for awakening, with respect for your sovereignty"
     },
     
     footer: {
+      home: "Home",
       copyright: "© 2025 Bodhi Technology Lab. Building technology for awakening.",
       career: "Career",
       privacy: "Privacy",
@@ -344,12 +346,14 @@ export const privacyTranslations = {
     contact: {
       title: "Câu Hỏi Về Bảo Mật?",
       subtitle: "Chúng tôi cam kết minh bạch và bảo vệ quyền của bạn. Nếu bạn có thắc mắc, lo ngại hoặc yêu cầu liên quan đến quyền riêng tư của mình, vui lòng liên hệ.",
+      emailLabel: "Email:",
       email: "privacy@boddhilab.io",
       company: "Bodhi Technology Lab",
       tagline: "Xây dựng công nghệ cho sự giác ngộ, với sự tôn trọng chủ quyền của bạn"
     },
     
     footer: {
+      home: "Trang Chủ",
       copyright: "© 2025 Bodhi Technology Lab. Xây dựng công nghệ cho sự giác ngộ.",
       career: "Nghề Nghiệp",
       privacy: "Bảo Mật",

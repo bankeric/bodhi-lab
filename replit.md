@@ -1,10 +1,18 @@
-# Buddhist Agents Documentation Platform
+# Bodhi Technology Lab - Buddhist B2B Platform
 
 ## Overview
-This full-stack web application documents and showcases Buddhist AI agents, integrating spiritual wisdom with modern AI. The platform features agent models, pricing, quick start guides, and an overview of the Buddhist AI system. It organizes specialized Buddhist agents by traditional vehicle levels (Tiểu Thừa, Trung Thừa, Đại Thừa, Phật Thừa) and aims to provide B2B solutions for Buddhist organizations, including white-label technology, donation tools, and AI guidance trained on spiritual texts. The project's ambition is to preserve and propagate Buddha-Dharma in the digital age by offering accessible and ethically aligned technology.
+Bodhi Technology Lab is a B2B development studio serving Buddhist organizations with white-label technology solutions. The platform provides temples, monasteries, and dharma centers worldwide with donation tools, AI guidance, resource libraries, and custom branding. Core philosophy: "Công nghệ nơi đây, không vì lợi danh - chỉ một lòng thành, hộ trì Chánh Pháp" (Technology here serves not profit, but sincerely upholds the True Dharma).
+
+## Recent Changes (November 2025)
+- Updated hero section to be more practical "About Us" style while keeping philosophical Vietnamese phrase
+- Improved CTA buttons targeting Buddhist organizations: "Schedule a Consultation" and "See Our Solutions"
+- Enhanced logo visibility with larger size (48px headers, 44px footers) and brightness/contrast filters
+- Replaced background animation with rotating red enso circle image
+- All pages now use official Bodhi Technology Lab logo image
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
+Hero section style: Practical business-focused content with preserved philosophical essence.
 
 ## System Architecture
 
