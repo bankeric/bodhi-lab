@@ -28,7 +28,7 @@ export default function About() {
         <header className="sticky top-0 backdrop-blur-md bg-[#EFE0BD]/80 border-b border-[#8B4513]/20">
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
             <Link href="/" className="flex items-center" data-testid="link-brand">
-              <img src={bodhiLogo} alt="Bodhi Technology Lab" className="h-10" />
+              <img src={bodhiLogo} alt="Bodhi Technology Lab" className="h-12 brightness-110 contrast-125" />
             </Link>
             <div className="flex items-center gap-4">
               <Link href="/platform">
@@ -219,7 +219,7 @@ export default function About() {
         <footer className="border-t border-[#8B4513]/20 py-8 bg-[#EFE0BD]/50 backdrop-blur-sm mt-16">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <img src={bodhiLogo} alt="Bodhi Technology Lab" className="h-9" />
+              <img src={bodhiLogo} alt="Bodhi Technology Lab" className="h-11 brightness-110 contrast-125" />
               <div className="flex gap-6">
                 <Link href="/about">
                   <a className="font-serif text-[#991b1b] underline transition-colors" data-testid="link-footer-about">
