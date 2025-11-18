@@ -11,6 +11,7 @@ import lotusIcon from "@assets/44_1762155616660.png";
 import bellIcon from "@assets/Bell_no_bg (1)_1762155616660.png";
 import buddhaIcon from "@assets/2_1762155709385.png";
 import sutraIcon from "@assets/Wordless Sutra Icon - Sumi-e Style_1762155698128.png";
+import bodhiLogo from "@assets/Bodhi Logo_1763503529516.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { platformTranslations } from "@/translations/platform";
@@ -968,10 +969,8 @@ export default function Platform() {
         <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#EFE0BD]/80 border-b border-[#8B4513]/20">
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
             <div className="relative group">
-              <Link href="/">
-                <a className="flex items-center" data-testid="link-brand">
-                  <span className="font-serif font-bold text-[#991b1b] text-lg">Bodhi Technology Lab</span>
-                </a>
+              <Link href="/" className="flex items-center" data-testid="link-brand">
+                <img src={bodhiLogo} alt="Bodhi Technology Lab" className="h-8" />
               </Link>
               
               {/* Dropdown Menu */}
@@ -2539,7 +2538,7 @@ export default function Platform() {
         <footer className="border-t border-[#8B4513]/20 py-8 bg-[#EFE0BD]/50 backdrop-blur-sm">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <span className="font-serif font-bold text-[#991b1b]">Bodhi Technology Lab</span>
+              <img src={bodhiLogo} alt="Bodhi Technology Lab" className="h-7" />
               <div className="flex gap-6">
                 <Link href="/platform">
                   <a className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">

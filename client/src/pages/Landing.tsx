@@ -15,6 +15,7 @@ import agentArt4 from "@assets/32_1761844089890.png";
 import agentArt5 from "@assets/19_1761844089892.png";
 import agentArt6 from "@assets/5_1761844089893.png";
 import heroBackgroundImage from "@assets/ChatGPT Image Nov 18, 2025, 04_57_10 PM_1763503305579.png";
+import bodhiLogo from "@assets/Bodhi Logo_1763503529516.png";
 
 // Mapping of agent IDs to artwork images (first 6 featured agents)
 const agentArtwork: Record<string, string> = {
@@ -105,10 +106,8 @@ export default function Landing() {
         <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#EFE0BD]/80 border-b border-[#8B4513]/20">
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
             <div className="relative group">
-              <Link href="/">
-                <a className="flex items-center" data-testid="link-brand">
-                  <span className="font-serif font-bold text-[#991b1b] text-lg">{t.header.brand}</span>
-                </a>
+              <Link href="/" className="flex items-center" data-testid="link-brand">
+                <img src={bodhiLogo} alt="Bodhi Technology Lab" className="h-8" />
               </Link>
               
               {/* Dropdown Menu */}
@@ -759,7 +758,7 @@ export default function Landing() {
         <footer className="border-t border-[#8B4513]/20 py-8 bg-[#EFE0BD]/50 backdrop-blur-sm">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <span className="font-serif font-bold text-[#991b1b]">{t.footer.brand}</span>
+              <img src={bodhiLogo} alt="Bodhi Technology Lab" className="h-7" />
               <div className="flex gap-6">
                 <a 
                   href="#capabilities" 

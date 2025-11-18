@@ -1,238 +1,45 @@
 # Buddhist Agents Documentation Platform
 
 ## Overview
-
-This is a full-stack web application for documenting and showcasing Buddhist AI agents. The platform provides comprehensive documentation pages including agent models, pricing information, quick start guides, and an overview of the Buddhist AI system. It combines spiritual wisdom with modern AI technology, presenting specialized Buddhist agents organized by traditional vehicle levels (Tiểu Thừa, Trung Thừa, Đại Thừa, Phật Thừa).
+This full-stack web application documents and showcases Buddhist AI agents, integrating spiritual wisdom with modern AI. The platform features agent models, pricing, quick start guides, and an overview of the Buddhist AI system. It organizes specialized Buddhist agents by traditional vehicle levels (Tiểu Thừa, Trung Thừa, Đại Thừa, Phật Thừa) and aims to provide B2B solutions for Buddhist organizations, including white-label technology, donation tools, and AI guidance trained on spiritual texts. The project's ambition is to preserve and propagate Buddha-Dharma in the digital age by offering accessible and ethically aligned technology.
 
 ## User Preferences
-
 Preferred communication style: Simple, everyday language.
 
 ## System Architecture
 
 ### Frontend Architecture
-
-**Framework**: React with TypeScript, using Vite as the build tool and development server.
-
-**Routing**: Implemented using Wouter, a lightweight routing library. The application has a single-page architecture with client-side routing between documentation pages (`/docs/overview`, `/docs/models`, `/docs/quick-start`, `/docs/pricing`).
-
-**UI Component Library**: Shadcn/ui with Radix UI primitives. The application follows the "new-york" style variant with extensive customization through CSS variables. Components are located in `client/src/components/ui/`.
-
-**State Management**: React Query (TanStack Query) for server state management, with local state handled via React hooks.
-
-**Styling System**: 
-- Tailwind CSS with custom configuration
-- HSL-based color system with CSS custom properties for theming
-- Custom design tokens for spacing (2, 4, 8, 12, 16 units)
-- Serif fonts for spiritual content, monospace for technical details, sans-serif for UI elements
-- Hybrid design approach combining technical documentation clarity with Buddhist spiritual aesthetics
-
-**Key Design Patterns**:
-- Component composition with shared props interfaces
-- Custom utility classes for elevation effects (`hover-elevate`, `active-elevate-2`)
-- Responsive grid layouts (2-column for cards, 3-4 columns for technical specs)
-- Accent color system per Buddhist agent with HSL alpha transparency
+The frontend uses React with TypeScript and Vite. Routing is handled by Wouter, creating a single-page application. UI components are built with Shadcn/ui and Radix UI, following a "new-york" style with extensive customization via CSS variables. State management leverages React Query for server state and React hooks for local state. Styling is managed with Tailwind CSS, an HSL-based color system, custom design tokens, and a combination of serif, monospace, and sans-serif fonts to blend technical clarity with spiritual aesthetics. Key design patterns include component composition, custom utility classes for elevation, and responsive grid layouts.
 
 ### Backend Architecture
-
-**Server Framework**: Express.js running on Node.js with TypeScript.
-
-**API Structure**: RESTful API design with routes prefixed under `/api`. The routes are registered through a modular system in `server/routes.ts`.
-
-**Session Management**: Uses `connect-pg-simple` for PostgreSQL-backed session storage.
-
-**Development Setup**: Custom Vite integration for HMR (Hot Module Replacement) in development mode, with middleware mode enabled for seamless frontend/backend integration.
-
-**Build Process**: 
-- Frontend: Vite builds React application to `dist/public`
-- Backend: esbuild bundles server code to `dist/index.js`
-- Production server serves static files from the Vite build output
+The backend is built with Express.js on Node.js with TypeScript, featuring a RESTful API under the `/api` prefix. Session management is planned with `connect-pg-simple` for PostgreSQL-backed storage. Development uses Vite for HMR in middleware mode, and production builds involve Vite for the frontend (`dist/public`) and esbuild for the backend (`dist/index.js`).
 
 ### Data Storage Solutions
-
-**Database**: PostgreSQL configured through Drizzle ORM.
-
-**ORM Configuration**: 
-- Schema definition in `shared/schema.ts`
-- Migrations directory: `./migrations`
-- Database connection via `DATABASE_URL` environment variable
-- Neon serverless PostgreSQL driver for edge deployment compatibility
-
-**Schema Design**: Currently includes a basic users table with UUID primary keys, username/password authentication fields.
-
-**Storage Interface**: Abstracted through `IStorage` interface in `server/storage.ts`, currently implemented with in-memory storage (`MemStorage`) for development, with PostgreSQL implementation planned.
+PostgreSQL is used as the database, configured via Drizzle ORM. The schema is defined in `shared/schema.ts`, and migrations are managed separately. A basic users table is currently implemented. The storage interface is abstracted, with an in-memory implementation for development and a PostgreSQL implementation planned.
 
 ### Authentication and Authorization
-
-**Current State**: Basic user schema exists with username/password fields. No active authentication middleware is implemented yet.
-
-**Planned Approach**: Session-based authentication using PostgreSQL session store via `connect-pg-simple`.
-
-### External Dependencies
-
-**Neon Serverless PostgreSQL**: Cloud-native PostgreSQL database with serverless driver (`@neondatabase/serverless`).
-
-**OpenAI API Integration**: The Buddhist agents are designed to work with OpenAI's language models (GPT-4o and GPT-5), though the actual API integration is not yet implemented in the codebase. System prompts and model configurations are defined in `shared/buddhistAgents.ts`.
-
-**UI Component Libraries**:
-- Radix UI primitives for accessible, unstyled component foundation
-- Embla Carousel for carousel functionality
-- Lucide React for iconography
-- React Hook Form with Zod for form validation
-
-**Development Tools**:
-- Replit-specific plugins for runtime error overlay, cartographer, and dev banner
-- TypeScript with strict mode enabled
-- Date-fns for date manipulation
-
-**Build Dependencies**:
-- Vite for frontend bundling and development server
-- esbuild for backend bundling
-- PostCSS with Tailwind CSS and Autoprefixer
+A basic user schema exists, but active authentication middleware is not yet implemented. Session-based authentication using a PostgreSQL session store is the planned approach.
 
 ### Agent System Design
-
-**Agent Data Model**: Each Buddhist agent is defined with:
-- Unique identifier and display name
-- Tagline for quick purpose identification
-- OpenAI model selection (gpt-4o or gpt-5)
-- Accent color for visual identity
-- Purpose description and capability list
-- Complete system prompt for AI behavior
-- Vehicle level classification (Tiểu Thừa through Phật Thừa)
-- Optional monastery affiliation
-
-**Pricing Model**: Token-based pricing structure aligned with OpenAI's pricing tiers, configured in `shared/buddhistAgents.ts` with separate input/output token costs per model.
-
-**Documentation Structure**: 
-- Overview page introducing the concept and system
-- Agent Models page with filtering by vehicle level and search functionality
-- Quick Start guide with code examples for API integration
-- Token Pricing page displaying transparent cost breakdown
+Each Buddhist agent includes a unique ID, display name, tagline, OpenAI model selection (gpt-4o or gpt-5), accent color, purpose, capability list, complete system prompt, and vehicle level classification. Pricing is token-based, aligned with OpenAI's tiers. Documentation covers an overview, agent models (with filtering), quick start guides, and transparent token pricing.
 
 ### Platform Capabilities (B2B Showcase)
+The `/platform` page showcases white-label technology solutions for Buddhist organizations with six sections: Document & Resource Library, Donation Tools, Custom Branding, Engage Your Sangha (community forum), Events & Reminder Calendar, and Compassionate AI Guidance. These sections feature detailed cards, emphasizing sovereignty, white-labeling, and spiritual aspects. Four professional company pages (About, Career, Privacy, Terms) are also included, maintaining a consistent Buddhist spiritual aesthetic and professional B2B content.
 
-**Recent Changes**:
-- **November 17, 2025**: 
-  - Added comprehensive Pricing section with three subscription tiers (Start $79/mo, Scale $199/mo, Enterprise $499+/mo) featuring detailed feature breakdowns for donation fees, AI agents, user limits, admin seats, mobile apps, branding, API access, support levels, and backup/logs.
-  - Added Premium Package section showcasing hands-on product training (5 video sessions), personalized setup support (60 days 1-on-1), effortless data migration, and proven launch resources with Dharma-aligned onboarding guides.
-  - Removed Discovery section and all links to /discovery to prevent misunderstanding about Buddhist centers being clients/partners.
-  - Fixed language consistency issues - all text now properly uses translation system (no more hardcoded English/Vietnamese).
-  - Fixed Vercel deployment configuration to properly handle SPA routing with rewrites to index.html.
-- **November 3, 2025**: Transformed the Platform page from a basic social network demo into a comprehensive B2B showcase with six in-depth capability sections targeting Buddhist organizations (temples, monasteries, meditation centers).
+## External Dependencies
 
-**Platform Page Structure**: Located at `/platform`, the page showcases white-label technology solutions with detailed feature cards designed to convert B2B customers. Each section follows a consistent pattern: Icon + Title + Description + Feature Cards (3-column responsive grid) + Interactive Demo/Examples.
-
-**Six Platform Capability Sections** (in order):
-
-1. **Document & Resource Library** (`#library`)
-   - Searchable library with full-text search across PDFs
-   - Access control with role-based permissions
-   - Offline download capabilities and version history
-   - Data-testid: card-library-search, card-library-access, card-library-offline
-
-2. **Donation Tools** (`#donation-tools`)
-   - Recurring donations with multiple payment cycles
-   - Multiple payment methods (QR codes, cards, bank transfers)
-   - Merit dedication and anonymous giving options
-   - Data-testid: card-recurring-dana, card-payment-methods, card-merit-dedication
-
-3. **Custom Branding** (`#custom-branding`)
-   - Logo & visual identity upload with theme builder
-   - Domain & white-labeling with SSL certificates
-   - Sovereignty messaging emphasizing temple control over data and branding
-   - Data-testid: card-branding-logo, card-branding-domain, card-branding-sovereignty
-
-4. **Engage Your Sangha** (`#awaken-feed`)
-   - Community Forum section with enhanced B2B messaging
-   - Feature cards: Right Speech Moderation (AI-assisted flagging), Study Groups & Circles (sutra study), Anonymous Posting (sensitive questions)
-   - Includes interactive social feed demo with Vietnamese sample content
-   - Data-testid: card-forum-moderation, card-forum-study-groups, card-forum-anonymous
-
-5. **Events & Reminder Calendar** (`#dharma-radio`)
-   - Smart scheduling with recurring event templates (Vesak, Uposatha)
-   - RSVP tracking with capacity limits and attendance analytics
-   - Automated reminders via email, SMS, and push notifications
-   - Includes interactive "Dharma Radio" live audio rooms demo
-   - Data-testid: card-events-scheduling, card-events-rsvp, card-events-reminders
-
-6. **Compassionate AI Guidance** (Community Agents section)
-   - Custom knowledge training from monastery resources (PDFs, audio, video)
-   - Multi-tradition modes (Zen, Pure Land, Theravāda, Tibetan)
-   - Voice & text queries in 50+ languages with text-to-speech responses
-   - Community Agent Marketplace showcasing pre-trained agents from temples worldwide
-   - Data-testid: card-ai-training, card-ai-traditions, card-ai-voice
-
-**Design Consistency**:
-- All sections use Buddhist color palette (#991b1b for primary red, #8B4513 for browns, #EFE0BD for beige backgrounds)
-- Feature cards use HSL alpha transparency for layered glass-morphism effects
-- CheckCircle2 icons from lucide-react for feature bullet points
-- Icons consistently placed in rounded containers with #991b1b/10 backgrounds
-- Responsive grids: 1 column mobile, 2-3 columns tablet/desktop
-
-**B2B Messaging Strategy**:
-- Emphasizes sovereignty, white-labeling, and temple control over technology
-- Highlights spiritual aspects (merit dedication, Right Speech, Dharma preservation)
-- Focuses on practical temple needs (donations, events, moderation, AI customization)
-- Uses professional B2B language while maintaining Buddhist authenticity
-
-**Testing Compliance**:
-- All feature cards include unique data-testid attributes following pattern: card-{section}-{feature}
-- Interactive elements and key content blocks marked for testing
-- No duplicate testids across entire Platform page
-
-### Company Pages (About, Career, Privacy, Terms)
-
-**Recent Changes (November 3, 2025)**: Added four professional company pages accessible via dropdown menu under the company logo in both Landing and Platform pages.
-
-**Page Structure**: All company pages follow consistent Buddhist spiritual aesthetic with warm color palette (#991b1b, #8B4513, #EFE0BD), serif typography, and professional B2B-appropriate content.
-
-**Four Company Pages**:
-
-1. **About Page** (`/about`)
-   - Company mission, values, and story of Bodhi Technology Lab
-   - Mission section: Preserving and propagating Buddha-Dharma in the digital age
-   - Values section: Respect for Tradition, Temple Sovereignty, Transparency & Ethics, Accessible Technology
-   - What We Build: Community Platforms, AI Buddhist Agents, Donation Infrastructure, Digital Libraries
-   - Team section: Distributed team of engineers, designers, and Buddhist practitioners
-   - Global Reach section: Serving Buddhist communities worldwide with local customization
-   - CTA section with links to Platform and Career pages
-   - Data-testid attributes for all sections and interactive elements
-
-2. **Career Page** (`/career`)
-   - Job opportunities at Bodhi Technology Lab
-   - Contact email: talent@boddhilab.io
-   - Four open positions: Senior Full-Stack Engineer, AI/ML Engineer, Product Designer, DevOps Engineer
-   - Culture section highlighting intentional work, distributed team, contemplative tech practices
-   - Benefits section with competitive compensation, retreat support, flexible hours, learning budget
-   - Application process with 5 steps from submission to onboarding
-   - Data-testid attributes for all interactive elements and content sections
-
-3. **Privacy Policy Page** (`/privacy`)
-   - Contact email: privacy@boddhilab.io
-   - Comprehensive privacy policy covering data collection, usage, sharing, security
-   - Sections: Our Commitment, Information Collection, Data Usage, Data Sharing, Security, User Rights, Cookies, Children's Privacy, International Transfers, Changes to Policy
-   - Emphasizes no tracking, no data sales, Buddhist ethics-aligned privacy practices
-   - Data-testid attributes for all major sections
-
-4. **Terms of Service Page** (`/terms`)
-   - Contact email: privacy@boddhilab.io (legal inquiries)
-   - Comprehensive terms covering service usage, acceptable use, AI agent guidelines, IP, payments, termination
-   - 13 major sections including Acceptance, Eligibility, Account Responsibilities, Acceptable Use, AI Guidelines, IP, Payment Terms, Termination, Disclaimers, Indemnification, Dispute Resolution, Changes to Terms, Miscellaneous
-   - Professional legal language balanced with Buddhist spiritual tone
-   - Data-testid attributes for all sections
-
-**Navigation Integration**:
-- All four pages accessible via dropdown menu under "Company" in header
-- Dropdown appears on hover over "Bodhi Technology Lab" brand name in both Landing.tsx and Platform.tsx
-- Consistent footer with cross-links to all company pages (About link appears first and underlined in footer)
-- Routes registered in App.tsx at `/about`, `/career`, `/privacy`, `/terms`
-
-**Design Consistency**:
-- All pages use warm parchment background (#EFE0BD) with gradient overlays
-- Sticky header with backdrop blur matching main site
-- Hero sections with Lucide React icons (Briefcase, Shield, FileText)
-- Content sections with white/50 backdrop-blur cards
-- Consistent font hierarchy: serif for headings and body, sans-serif for UI elements
-- All email links styled with underline and #991b1b color
-- Buddhist spiritual messaging balanced with professional B2B legal content
+-   **Neon Serverless PostgreSQL**: Cloud-native PostgreSQL database.
+-   **OpenAI API Integration**: Planned for Buddhist agents using GPT-4o and GPT-5 models.
+-   **UI Component Libraries**:
+    -   Radix UI: Accessible, unstyled component primitives.
+    -   Shadcn/ui: React UI components.
+    -   Embla Carousel: Carousel functionality.
+    -   Lucide React: Iconography.
+    -   React Hook Form with Zod: Form validation.
+-   **Development Tools**:
+    -   Vite: Frontend bundling and development server.
+    -   esbuild: Backend bundling.
+    -   PostCSS with Tailwind CSS and Autoprefixer.
+    -   TypeScript.
+    -   Date-fns: Date manipulation.
+    -   Replit-specific plugins (runtime error overlay, cartographer, dev banner).

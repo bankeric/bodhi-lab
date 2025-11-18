@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import sutraIcon from "@assets/Wordless Sutra Icon - Sumi-e Style_1762155698128.png";
 import bellIcon from "@assets/Bell_no_bg (1)_1762155616660.png";
+import bodhiLogo from "@assets/Bodhi Logo_1763503529516.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { termsTranslations } from "@/translations/terms";
@@ -25,10 +26,8 @@ export default function Terms() {
         {/* Header */}
         <header className="sticky top-0 backdrop-blur-md bg-[#EFE0BD]/80 border-b border-[#8B4513]/20">
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-            <Link href="/">
-              <a className="flex items-center" data-testid="link-brand">
-                <span className="font-serif font-bold text-[#991b1b] text-lg">Bodhi Technology Lab</span>
-              </a>
+            <Link href="/" className="flex items-center" data-testid="link-brand">
+              <img src={bodhiLogo} alt="Bodhi Technology Lab" className="h-8" />
             </Link>
             <div className="flex items-center gap-4">
               <Link href="/">
