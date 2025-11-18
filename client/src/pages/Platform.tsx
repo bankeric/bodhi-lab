@@ -970,7 +970,7 @@ export default function Platform() {
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
             <div className="relative group">
               <Link href="/" className="flex items-center" data-testid="link-brand">
-                <img src={bodhiLogo} alt="Bodhi Technology Lab" className="h-8" />
+                <img src={bodhiLogo} alt="Bodhi Technology Lab" className="h-10" />
               </Link>
               
               {/* Dropdown Menu */}
@@ -2538,7 +2538,7 @@ export default function Platform() {
         <footer className="border-t border-[#8B4513]/20 py-8 bg-[#EFE0BD]/50 backdrop-blur-sm">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <img src={bodhiLogo} alt="Bodhi Technology Lab" className="h-7" />
+              <img src={bodhiLogo} alt="Bodhi Technology Lab" className="h-9" />
               <div className="flex gap-6">
                 <Link href="/platform">
                   <a className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">

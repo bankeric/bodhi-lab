@@ -27,7 +27,7 @@ export default function Privacy() {
         <header className="sticky top-0 backdrop-blur-md bg-[#EFE0BD]/80 border-b border-[#8B4513]/20">
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
             <Link href="/" className="flex items-center" data-testid="link-brand">
-              <img src={bodhiLogo} alt="Bodhi Technology Lab" className="h-8" />
+              <img src={bodhiLogo} alt="Bodhi Technology Lab" className="h-10" />
             </Link>
             <div className="flex items-center gap-4">
               <Link href="/">
