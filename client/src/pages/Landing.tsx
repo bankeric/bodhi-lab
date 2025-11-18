@@ -14,6 +14,7 @@ import agentArt3 from "@assets/4_1761844089892.png";
 import agentArt4 from "@assets/32_1761844089890.png";
 import agentArt5 from "@assets/19_1761844089892.png";
 import agentArt6 from "@assets/5_1761844089893.png";
+import heroBackgroundImage from "@assets/ChatGPT Image Nov 18, 2025, 04_57_10 PM_1763503305579.png";
 
 // Mapping of agent IDs to artwork images (first 6 featured agents)
 const agentArtwork: Record<string, string> = {
@@ -66,32 +67,6 @@ function AnimatedPlaceholder({ texts }: { texts: string[] }) {
   );
 }
 
-function SphereAnimation() {
-  return (
-    <div className="absolute inset-0 flex items-center justify-center opacity-30">
-      <svg width="400" height="400" viewBox="0 0 400 400" className="animate-[spin_20s_linear_infinite]">
-        <defs>
-          <radialGradient id="sphereGradient">
-            <stop offset="0%" stopColor="#991b1b" stopOpacity="0.8" />
-            <stop offset="50%" stopColor="#8B4513" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="#2c2c2c" stopOpacity="0.1" />
-          </radialGradient>
-        </defs>
-        <circle
-          cx="200"
-          cy="200"
-          r="150"
-          fill="url(#sphereGradient)"
-          stroke="#991b1b"
-          strokeWidth="2"
-          className="animate-pulse"
-        />
-        <circle cx="200" cy="200" r="120" fill="none" stroke="#8B4513" strokeWidth="1" opacity="0.5" />
-        <circle cx="200" cy="200" r="90" fill="none" stroke="#991b1b" strokeWidth="1" opacity="0.3" />
-      </svg>
-    </div>
-  );
-}
 
 export default function Landing() {
   const { language } = useLanguage();
@@ -209,8 +184,12 @@ export default function Landing() {
 
         <TracingBeam className="pt-24">
           <section className="min-h-[90vh] flex flex-col items-center justify-center px-4 relative pb-16">
-            <div className="absolute inset-0 -z-10">
-              <SphereAnimation />
+            <div className="absolute inset-0 -z-10 flex items-center justify-center">
+              <img 
+                src={heroBackgroundImage} 
+                alt="" 
+                className="w-[600px] h-[600px] object-contain opacity-20 animate-[spin_30s_linear_infinite]"
+              />
             </div>
             <div
               className={`max-w-4xl w-full transition-all duration-500 ease-out ${
