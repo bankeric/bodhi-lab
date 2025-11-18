@@ -21,7 +21,7 @@ export const landingTranslations = {
     hero: {
       title: "Bodhi Technology Lab",
       subtitle: "Buddhist Technology Solutions for Modern Organizations",
-      description: "We build white-label platforms for temples, monasteries, and dharma centers worldwide. Our mission: empower Buddhist communities with donation tools, AI guidance, resource libraries, and custom branding—technology that serves the Dharma, not profit.",
+      description: "White-label platforms for temples, monasteries, and dharma centers—empowering Buddhist communities with donation tools, AI guidance, and resource libraries.",
       cta: {
         startSprint: "Schedule a Consultation",
         explorePlatform: "See Our Solutions"
@@ -248,7 +248,7 @@ export const landingTranslations = {
     hero: {
       title: "Bodhi Technology Lab",
       subtitle: "Giải pháp công nghệ Phật giáo cho các tổ chức hiện đại",
-      description: "Chúng tôi xây dựng nền tảng nhãn trắng cho chùa, tu viện và trung tâm pháp trên toàn cầu. Sứ mệnh: trao quyền cho cộng đồng Phật giáo với công cụ cúng dường, hướng dẫn AI, thư viện tài nguyên và thương hiệu tùy chỉnh. Công nghệ nơi đây, không vì lợi danh - chỉ một lòng thành, hộ trì Chánh Pháp.",
+      description: "Nền tảng nhãn trắng cho chùa, tu viện và trung tâm pháp—trao quyền cộng đồng Phật giáo với công cụ cúng dường, hướng dẫn AI và thư viện tài nguyên. Công nghệ nơi đây, không vì lợi danh - chỉ một lòng thành, hộ trì Chánh Pháp.",
       cta: {
         startSprint: "Đặt lịch tư vấn",
         explorePlatform: "Xem giải pháp"
