@@ -5,10 +5,8 @@ import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { X } from "lucide-react";
 
-if (!import.meta.env.VITE_STRIPE_PUBLIC_KEY) {
-  throw new Error('Missing required Stripe key: VITE_STRIPE_PUBLIC_KEY');
-}
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
+const stripePromise = stripePublicKey ? loadStripe(stripePublicKey) : null;
 
 interface CheckoutFormProps {
   amount: number;
@@ -107,6 +105,51 @@ interface DonationCheckoutProps {
 
 export default function DonationCheckout({ isOpen, amount, clientSecret, onClose, onSuccess }: DonationCheckoutProps) {
   if (!isOpen || !clientSecret) return null;
+
+  if (!stripePromise) {
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4" data-testid="modal-donation-checkout">
+        <div 
+          className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+          onClick={onClose}
+        ></div>
+        
+        <div className="relative bg-gradient-to-br from-[#EFE0BD] to-[#E5D5B7] rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border-2 border-[#8B4513]/30">
+          <div className="sticky top-0 bg-gradient-to-br from-[#EFE0BD] to-[#E5D5B7] border-b-2 border-[#8B4513]/20 px-8 py-6 flex items-center justify-between backdrop-blur-sm">
+            <div>
+              <h2 className="font-serif text-2xl font-bold text-[#991b1b]">
+                Hồi Hướng Công Đức
+              </h2>
+              <p className="font-serif text-sm text-[#8B4513]/70 italic mt-1">
+                Payment system not configured
+              </p>
+            </div>
+            <button
+              onClick={onClose}
+              className="w-10 h-10 rounded-full bg-white/50 hover:bg-white/80 flex items-center justify-center transition-all duration-300"
+              data-testid="button-close-checkout"
+            >
+              <X className="w-5 h-5 text-[#8B4513]" />
+            </button>
+          </div>
+
+          <div className="px-8 py-6">
+            <div className="bg-gradient-to-br from-[#EFE0BD]/30 to-[#E5D5B7]/20 rounded-2xl p-6 border border-[#8B4513]/20 text-center">
+              <p className="font-serif text-lg text-[#8B4513]">
+                Payment features are currently disabled. Please contact the administrator to configure Stripe.
+              </p>
+            </div>
+            <button
+              onClick={onClose}
+              className="mt-6 w-full px-6 py-3 bg-white/70 text-[#8B4513] font-serif font-semibold rounded-full border-2 border-[#8B4513]/20 hover:bg-[#8B4513]/10 transition-all duration-300"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" data-testid="modal-donation-checkout">
