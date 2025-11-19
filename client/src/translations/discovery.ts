@@ -19,8 +19,9 @@ export const discoveryTranslations = {
 
     hero: {
       title: "Discover Community",
-      subtitle: "Connect with Buddhist temples, meditation centers, and practice centers around the world",
-      searchPlaceholder: "Search for communities, temples, meditation centers..."
+      subtitle: "Explore real-world examples of how Buddhist organizations leverage our platform. These are sample implementations showcasing our technology capabilities—each center can be customized to your specific needs.",
+      searchPlaceholder: "Search for communities, temples, meditation centers...",
+      badge: "Example Implementation"
     },
 
     categories: {
@@ -85,8 +86,9 @@ export const discoveryTranslations = {
 
     hero: {
       title: "Khám Phá Cộng Đồng",
-      subtitle: "Kết nối với các chùa chiền, thiền viện, và trung tâm tu tập Phật giáo khắp nơi trên thế giới",
-      searchPlaceholder: "Tìm kiếm cộng đồng, chùa chiền, thiền viện..."
+      subtitle: "Khám phá các ví dụ thực tế về cách các tổ chức Phật giáo tận dụng nền tảng của chúng tôi. Đây là những triển khai mẫu thể hiện khả năng công nghệ—mỗi trung tâm có thể được tùy chỉnh theo nhu cầu cụ thể của bạn.",
+      searchPlaceholder: "Tìm kiếm cộng đồng, chùa chiền, thiền viện...",
+      badge: "Triển Khai Mẫu"
     },
 
     categories: {

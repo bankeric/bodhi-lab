@@ -420,20 +420,21 @@ export default function Landing() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {/* Seeker (Free) */}
-              <div className="bg-white/50 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#8B4513]/20 hover:shadow-xl transition-all duration-300" data-testid="card-pricing-seeker">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              {/* Start */}
+              <div className="bg-white/50 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#8B4513]/20 hover:shadow-xl transition-all duration-300" data-testid="card-pricing-start">
                 <div className="p-6">
                   <div className="text-center mb-6">
-                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">{t.pricing.seeker.title}</h3>
+                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">{t.pricing.start.title}</h3>
                     <div className="flex items-baseline justify-center gap-1 mb-2">
-                      <span className="font-serif text-4xl font-bold text-[#991b1b]">{t.pricing.seeker.price}</span>
+                      <span className="font-serif text-4xl font-bold text-[#991b1b]">{t.pricing.start.price}</span>
+                      <span className="font-serif text-[#8B4513]/70">{t.pricing.start.priceUnit}</span>
                     </div>
-                    <p className="font-serif text-sm text-[#8B4513]/70 mb-4">{t.pricing.seeker.description}</p>
+                    <p className="font-serif text-sm text-[#8B4513]/70 mb-4">{t.pricing.start.description}</p>
                   </div>
 
                   <ul className="space-y-3 mb-6">
-                    {t.pricing.seeker.features.map((feature, index) => (
+                    {t.pricing.start.features.map((feature, index) => (
                       <li key={index} className="flex items-start gap-2">
                         <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
                         <span className="font-serif text-xs text-[#2c2c2c]">{feature}</span>
@@ -443,30 +444,30 @@ export default function Landing() {
 
                   <button
                     className="w-full px-4 py-2.5 bg-white border-2 border-[#991b1b] rounded-xl text-[#991b1b] font-serif font-semibold hover:bg-[#991b1b] hover:text-white transition-all duration-300 text-sm"
-                    data-testid="button-subscribe-seeker"
+                    data-testid="button-subscribe-start"
                   >
-                    {t.pricing.seeker.cta}
+                    {t.pricing.start.cta}
                   </button>
                 </div>
               </div>
 
-              {/* Practitioner Pod - Featured */}
-              <div className="bg-white/50 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#991b1b] hover:shadow-2xl transition-all duration-300 relative" data-testid="card-pricing-practitioner">
+              {/* Scale - Featured */}
+              <div className="bg-white/50 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#991b1b] hover:shadow-2xl transition-all duration-300 relative" data-testid="card-pricing-scale">
                 <div className="absolute top-0 left-0 right-0 bg-[#991b1b] text-white text-center py-2 font-serif text-xs font-semibold">
-                  {t.pricing.practitioner.badge}
+                  {t.pricing.scale.badge}
                 </div>
                 <div className="p-6 pt-10">
                   <div className="text-center mb-6">
-                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">{t.pricing.practitioner.title}</h3>
+                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">{t.pricing.scale.title}</h3>
                     <div className="flex items-baseline justify-center gap-1 mb-2">
-                      <span className="font-serif text-4xl font-bold text-[#991b1b]">{t.pricing.practitioner.price}</span>
-                      <span className="font-serif text-[#8B4513]/70">{t.pricing.practitioner.priceUnit}</span>
+                      <span className="font-serif text-4xl font-bold text-[#991b1b]">{t.pricing.scale.price}</span>
+                      <span className="font-serif text-[#8B4513]/70">{t.pricing.scale.priceUnit}</span>
                     </div>
-                    <p className="font-serif text-sm text-[#8B4513]/70 mb-4">{t.pricing.practitioner.description}</p>
+                    <p className="font-serif text-sm text-[#8B4513]/70 mb-4">{t.pricing.scale.description}</p>
                   </div>
 
                   <ul className="space-y-3 mb-6">
-                    {t.pricing.practitioner.features.map((feature, index) => (
+                    {t.pricing.scale.features.map((feature, index) => (
                       <li key={index} className="flex items-start gap-2">
                         <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
                         <span className="font-serif text-xs text-[#2c2c2c]">{feature}</span>
@@ -476,27 +477,27 @@ export default function Landing() {
 
                   <button
                     className="w-full px-4 py-2.5 bg-[#991b1b] rounded-xl text-white font-serif font-semibold hover:bg-[#7a1515] transition-all duration-300 shadow-md text-sm"
-                    data-testid="button-subscribe-practitioner"
+                    data-testid="button-subscribe-scale"
                   >
-                    {t.pricing.practitioner.cta}
+                    {t.pricing.scale.cta}
                   </button>
                 </div>
               </div>
 
-              {/* Sangha Community */}
-              <div className="bg-white/50 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#8B4513]/20 hover:shadow-xl transition-all duration-300" data-testid="card-pricing-sangha">
+              {/* Enterprise */}
+              <div className="bg-white/50 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#8B4513]/20 hover:shadow-xl transition-all duration-300" data-testid="card-pricing-enterprise">
                 <div className="p-6">
                   <div className="text-center mb-6">
-                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">{t.pricing.sangha.title}</h3>
+                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">{t.pricing.enterprise.title}</h3>
                     <div className="flex items-baseline justify-center gap-1 mb-2">
-                      <span className="font-serif text-4xl font-bold text-[#991b1b]">{t.pricing.sangha.price}</span>
-                      <span className="font-serif text-[#8B4513]/70">{t.pricing.sangha.priceUnit}</span>
+                      <span className="font-serif text-3xl font-bold text-[#991b1b]">{t.pricing.enterprise.price}</span>
+                      <span className="font-serif text-[#8B4513]/70">{t.pricing.enterprise.priceUnit}</span>
                     </div>
-                    <p className="font-serif text-sm text-[#8B4513]/70 mb-4">{t.pricing.sangha.description}</p>
+                    <p className="font-serif text-sm text-[#8B4513]/70 mb-4">{t.pricing.enterprise.description}</p>
                   </div>
 
                   <ul className="space-y-3 mb-6">
-                    {t.pricing.sangha.features.map((feature, index) => (
+                    {t.pricing.enterprise.features.map((feature, index) => (
                       <li key={index} className="flex items-start gap-2">
                         <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
                         <span className="font-serif text-xs text-[#2c2c2c]">{feature}</span>
@@ -506,39 +507,38 @@ export default function Landing() {
 
                   <button
                     className="w-full px-4 py-2.5 bg-white border-2 border-[#991b1b] rounded-xl text-[#991b1b] font-serif font-semibold hover:bg-[#991b1b] hover:text-white transition-all duration-300 text-sm"
-                    data-testid="button-subscribe-sangha"
+                    data-testid="button-contact-enterprise"
                   >
-                    {t.pricing.sangha.cta}
+                    {t.pricing.enterprise.cta}
                   </button>
                 </div>
               </div>
+            </div>
 
-              {/* Mandala Network */}
-              <div className="bg-white/50 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#8B4513]/20 hover:shadow-xl transition-all duration-300" data-testid="card-pricing-mandala">
-                <div className="p-6">
-                  <div className="text-center mb-6">
-                    <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">{t.pricing.mandala.title}</h3>
-                    <div className="flex items-baseline justify-center gap-1 mb-2">
-                      <span className="font-serif text-2xl font-bold text-[#991b1b]">{t.pricing.mandala.price}</span>
+            {/* Premium Package Section */}
+            <div className="max-w-4xl mx-auto">
+              <div className="bg-gradient-to-br from-[#991b1b]/5 to-[#8B4513]/5 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#991b1b]/30 shadow-xl p-8">
+                <div className="text-center mb-6">
+                  <h3 className="font-serif text-3xl font-bold text-[#991b1b] mb-2">{t.pricing.premium.title}</h3>
+                  <p className="font-serif text-lg text-[#8B4513] mb-4">{t.pricing.premium.subtitle}</p>
+                  <p className="font-serif text-sm text-[#8B4513]/70 max-w-2xl mx-auto">{t.pricing.premium.description}</p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                  {t.pricing.premium.features.map((feature, index) => (
+                    <div key={index} className="flex items-start gap-3 bg-white/50 backdrop-blur-sm rounded-xl p-4">
+                      <Check className="w-5 h-5 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                      <span className="font-serif text-sm text-[#2c2c2c]">{feature}</span>
                     </div>
-                    <p className="font-serif text-xs text-[#8B4513]/60 mb-2">{t.pricing.mandala.priceNote}</p>
-                    <p className="font-serif text-sm text-[#8B4513]/70 mb-4">{t.pricing.mandala.description}</p>
-                  </div>
+                  ))}
+                </div>
 
-                  <ul className="space-y-3 mb-6">
-                    {t.pricing.mandala.features.map((feature, index) => (
-                      <li key={index} className="flex items-start gap-2">
-                        <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                        <span className="font-serif text-xs text-[#2c2c2c]">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-
+                <div className="text-center">
                   <button
-                    className="w-full px-4 py-2.5 bg-white border-2 border-[#991b1b] rounded-xl text-[#991b1b] font-serif font-semibold hover:bg-[#991b1b] hover:text-white transition-all duration-300 text-sm"
-                    data-testid="button-contact-mandala"
+                    className="px-8 py-3 bg-[#991b1b] rounded-xl text-white font-serif font-semibold hover:bg-[#7a1515] transition-all duration-300 shadow-lg"
+                    data-testid="button-add-premium"
                   >
-                    {t.pricing.mandala.cta}
+                    {t.pricing.premium.cta}
                   </button>
                 </div>
               </div>

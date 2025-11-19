@@ -100,9 +100,12 @@ export default function Discovery() {
               }}
             />
           )}
-          <div className="absolute top-3 left-3">
+          <div className="absolute top-3 left-3 flex flex-col gap-2">
             <div className="bg-[#991b1b] text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
               #{center.rank}
+            </div>
+            <div className="bg-[#8B4513]/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
+              {t.hero.badge}
             </div>
           </div>
           <div className="absolute top-3 right-3">

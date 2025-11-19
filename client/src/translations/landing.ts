@@ -94,62 +94,73 @@ export const landingTranslations = {
 
     pricing: {
       title: "Pricing",
-      subtitle: "Choose the plan that best serves your sangha—from exploration to enterprise-scale deployment",
-      seeker: {
-        title: "Seeker",
-        price: "US$0",
-        description: "Small sanghas and independent practitioners exploring digital tools",
+      subtitle: "Professional-grade platforms designed for Buddhist organizations of all sizes",
+      start: {
+        title: "Start",
+        price: "$79",
+        priceUnit: "/month",
+        description: "Perfect for small to medium temples getting started with digital transformation",
         features: [
-          "Access to a single project with basic templates",
-          "Up to 100 messages/month through AI guides",
-          "Basic library of open Dharma resources",
-          "1 admin user",
-          "5% donation processing fee"
+          "Shared website template & resource library",
+          "2.5% + $0.20 per card donation (0.8% + $0.20 bank transfer)",
+          "1,000 user limit",
+          "2 admin seats",
+          "Shared domain",
+          "Email support",
+          "Basic backup & logs"
         ],
         cta: "Get Started"
       },
-      practitioner: {
-        title: "Practitioner Pod",
-        price: "US$49",
+      scale: {
+        title: "Scale",
+        price: "$199",
         priceUnit: "/month",
         badge: "Most Popular",
-        description: "Temples and centres ready to digitise day‑to‑day operations",
+        description: "Ideal for growing communities ready to expand their digital presence",
         features: [
-          "Unlimited messages and full access to all agents",
-          "White‑label modules for donations, events & library",
-          "Priority support and bug fixes",
-          "Up to 5 admin users and 500 active devotees",
-          "Reduced donation fee (2%)"
+          "Shared website template & resource library",
+          "1.5% + $0.20 per card donation (0.8% + $0.20 bank transfer)",
+          "AI Dharma Agent (standard usage)",
+          "5,000 user limit",
+          "5 admin seats",
+          "Included mobile app",
+          "Custom domain",
+          "Limited API access",
+          "Email + product updates",
+          "Daily backup, 7-day logs"
         ],
         cta: "Subscribe Now"
       },
-      sangha: {
-        title: "Sangha Community",
-        price: "US$149",
+      enterprise: {
+        title: "Enterprise",
+        price: "$499+",
         priceUnit: "/month",
-        description: "Large monasteries or regional organisations needing multi‑member coordination",
+        description: "Comprehensive solution for large monasteries and temple networks",
         features: [
-          "All Practitioner Pod features",
-          "Multiple pods/sites under one account",
-          "Custom domain and branding",
-          "Advanced analytics dashboards",
-          "Custom AI agent training"
-        ],
-        cta: "Subscribe Now"
-      },
-      mandala: {
-        title: "Mandala Network",
-        price: "Custom",
-        priceNote: "(starting at US$299/month)",
-        description: "National or transnational sangha networks and federations",
-        features: [
-          "Everything in Sangha Community",
-          "Bespoke development & unlimited projects",
-          "Dedicated success manager & 24×7 support",
-          "Private on‑premises deployment options",
-          "Governance tools for multiple councils"
+          "Shared website template & resource library",
+          "Free donation processing",
+          "AI Dharma Agent (fine-tuned, multi-instance)",
+          "10,000+ user limit",
+          "10+ admin seats",
+          "White-label native mobile app",
+          "Full brand suite (custom domain, logo, styling)",
+          "Full API & developer dashboard",
+          "Dedicated success manager + 24/7 support",
+          "Custom SLAs, security onboarding"
         ],
         cta: "Contact Us"
+      },
+      premium: {
+        title: "Premium Package",
+        subtitle: "Add hands-on support to accelerate your digital transformation",
+        description: "Get expert guidance from setup to launch with our comprehensive onboarding program",
+        features: [
+          "Five dedicated video training sessions tailored for your organization",
+          "60 days of 1-on-1 personalized setup support",
+          "Effortless data migration—we transfer your library, donation records, and user data",
+          "Proven launch resources including templates, outreach materials, and Dharma-aligned guides"
+        ],
+        cta: "Add Premium Package"
       }
     },
 
@@ -321,62 +332,73 @@ export const landingTranslations = {
 
     pricing: {
       title: "Bảng Giá",
-      subtitle: "Chọn gói phù hợp nhất với tăng đoàn của bạn—từ khám phá đến triển khai quy mô doanh nghiệp",
-      seeker: {
-        title: "Người Tìm Đạo",
-        price: "US$0",
-        description: "Tăng đoàn nhỏ và hành giả độc lập khám phá công cụ kỹ thuật số",
+      subtitle: "Nền tảng chuyên nghiệp được thiết kế cho các tổ chức Phật giáo với mọi quy mô",
+      start: {
+        title: "Khởi Đầu",
+        price: "$79",
+        priceUnit: "/tháng",
+        description: "Hoàn hảo cho các chùa nhỏ và vừa bắt đầu chuyển đổi số",
         features: [
-          "Truy cập một dự án với các mẫu cơ bản",
-          "Tối đa 100 tin nhắn/tháng qua hướng dẫn AI",
-          "Thư viện cơ bản về tài nguyên Phật Pháp mở",
-          "1 người dùng quản trị",
-          "Phí xử lý quyên góp 5%"
+          "Mẫu trang web & thư viện tài nguyên chung",
+          "2.5% + $0.20 mỗi cúng dường qua thẻ (0.8% + $0.20 chuyển khoản)",
+          "Giới hạn 1.000 người dùng",
+          "2 ghế quản trị",
+          "Tên miền chung",
+          "Hỗ trợ qua email",
+          "Sao lưu & nhật ký cơ bản"
         ],
         cta: "Bắt Đầu"
       },
-      practitioner: {
-        title: "Nhóm Hành Giả",
-        price: "US$49",
+      scale: {
+        title: "Mở Rộng",
+        price: "$199",
         priceUnit: "/tháng",
         badge: "Phổ Biến Nhất",
-        description: "Chùa chiền và trung tâm sẵn sàng số hóa hoạt động hàng ngày",
+        description: "Lý tưởng cho cộng đồng đang phát triển sẵn sàng mở rộng hiện diện số",
         features: [
-          "Tin nhắn không giới hạn và truy cập đầy đủ vào tất cả các đại lý",
-          "Mô-đun nhãn trắng cho quyên góp, sự kiện & thư viện",
-          "Hỗ trợ ưu tiên và sửa lỗi",
-          "Tối đa 5 người dùng quản trị và 500 phật tử tích cực",
-          "Phí quyên góp giảm (2%)"
+          "Mẫu trang web & thư viện tài nguyên chung",
+          "1.5% + $0.20 mỗi cúng dường qua thẻ (0.8% + $0.20 chuyển khoản)",
+          "Đại lý AI Phật Pháp (sử dụng tiêu chuẩn)",
+          "Giới hạn 5.000 người dùng",
+          "5 ghế quản trị",
+          "Ứng dụng di động đi kèm",
+          "Tên miền tùy chỉnh",
+          "Truy cập API giới hạn",
+          "Email + cập nhật sản phẩm",
+          "Sao lưu hàng ngày, nhật ký 7 ngày"
         ],
         cta: "Đăng Ký Ngay"
       },
-      sangha: {
-        title: "Cộng Đồng Tăng",
-        price: "US$149",
+      enterprise: {
+        title: "Doanh Nghiệp",
+        price: "$499+",
         priceUnit: "/tháng",
-        description: "Tu viện lớn hoặc tổ chức khu vực cần phối hợp nhiều thành viên",
+        description: "Giải pháp toàn diện cho tu viện lớn và mạng lưới chùa chiền",
         features: [
-          "Tất cả tính năng Nhóm Hành Giả",
-          "Nhiều nhóm/trang web dưới một tài khoản",
-          "Tên miền và thương hiệu tùy chỉnh",
-          "Bảng điều khiển phân tích nâng cao",
-          "Huấn luyện đại lý AI tùy chỉnh"
-        ],
-        cta: "Đăng Ký Ngay"
-      },
-      mandala: {
-        title: "Mạng Lưới Mandala",
-        price: "Tùy Chỉnh",
-        priceNote: "(bắt đầu từ US$299/tháng)",
-        description: "Mạng lưới tăng đoàn quốc gia hoặc xuyên quốc gia và liên đoàn",
-        features: [
-          "Mọi thứ trong Cộng Đồng Tăng",
-          "Phát triển theo yêu cầu & dự án không giới hạn",
-          "Người quản lý thành công chuyên dụng & hỗ trợ 24×7",
-          "Tùy chọn triển khai tại chỗ riêng tư",
-          "Công cụ quản trị cho nhiều hội đồng"
+          "Mẫu trang web & thư viện tài nguyên chung",
+          "Xử lý cúng dường miễn phí",
+          "Đại lý AI Phật Pháp (tinh chỉnh, đa thực thể)",
+          "Giới hạn 10.000+ người dùng",
+          "10+ ghế quản trị",
+          "Ứng dụng di động nhãn trắng",
+          "Bộ thương hiệu đầy đủ (tên miền, logo, phong cách tùy chỉnh)",
+          "API đầy đủ & bảng điều khiển nhà phát triển",
+          "Người quản lý chuyên dụng + hỗ trợ 24/7",
+          "SLA tùy chỉnh, đào tạo bảo mật"
         ],
         cta: "Liên Hệ Chúng Tôi"
+      },
+      premium: {
+        title: "Gói Cao Cấp",
+        subtitle: "Thêm hỗ trợ thực hành để tăng tốc chuyển đổi số của bạn",
+        description: "Nhận hướng dẫn chuyên gia từ thiết lập đến ra mắt với chương trình đào tạo toàn diện của chúng tôi",
+        features: [
+          "Năm buổi đào tạo video chuyên dụng được điều chỉnh cho tổ chức của bạn",
+          "60 ngày hỗ trợ thiết lập 1-1 cá nhân hóa",
+          "Di chuyển dữ liệu dễ dàng—chúng tôi chuyển thư viện, hồ sơ cúng dường và dữ liệu người dùng của bạn",
+          "Tài nguyên ra mắt đã được chứng minh bao gồm mẫu, tài liệu tiếp cận và hướng dẫn phù hợp Phật Pháp"
+        ],
+        cta: "Thêm Gói Cao Cấp"
       }
     },
 
