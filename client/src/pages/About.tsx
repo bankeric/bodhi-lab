@@ -25,7 +25,7 @@ export default function About() {
       </div>
 
       <div className="relative z-10">
-        <header className="sticky top-0 backdrop-blur-md bg-[#EFE0BD]/80 border-b border-[#8B4513]/20">
+        <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#EFE0BD]/80 border-b border-[#8B4513]/20">
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
             <Link href="/" className="flex items-center" data-testid="link-brand">
               <img src={bodhiLogo} alt="Bodhi Technology Lab" className="h-12 brightness-110 contrast-125" />
@@ -46,7 +46,7 @@ export default function About() {
           </div>
         </header>
 
-        <main className="container mx-auto px-4 py-16 max-w-4xl">
+        <main className="container mx-auto px-4 pt-32 py-16 max-w-4xl">
           {/* Hero Section */}
           <div className="text-center mb-16">
             <div className="flex items-center justify-center gap-3 mb-6">
