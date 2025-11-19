@@ -14,7 +14,7 @@ if (process.env.STRIPE_SECRET_KEY) {
   console.warn('Warning: STRIPE_SECRET_KEY not configured. Payment features will be disabled.');
 }
 
-export async function registerRoutes(app: Express): Promise<Server> {
+export function registerRoutes(app: Express): void {
   // Stripe payment route for one-time donations (VND currency)
   app.post("/api/create-payment-intent", async (req, res) => {
     try {
@@ -42,8 +42,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ message: "Error creating payment intent: " + error.message });
     }
   });
+}
 
-  const httpServer = createServer(app);
-
-  return httpServer;
+// Create server only when needed (for local development)
+export function createAppServer(app: Express): Server {
+  return createServer(app);
 }
