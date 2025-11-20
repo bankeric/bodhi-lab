@@ -704,19 +704,143 @@ export default function Landing() {
                   {t.contact.form.subtitle}
                 </p>
 
-                {/* Tally Inline Embed */}
-                <iframe
-                  data-tally-src="https://tally.so/embed/aQQvOv?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-                  loading="lazy"
-                  width="100%"
-                  height="0"
-                  frameBorder="0"
-                  marginHeight={0}
-                  marginWidth={0}
-                  title="Contact our team"
-                  className="w-full rounded-lg"
-                />
-                <script dangerouslySetInnerHTML={{__html: `var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}`}} />
+                <form className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block font-serif text-sm font-medium text-[#2c2c2c] mb-1.5">
+                        {t.contact.form.firstName}
+                      </label>
+                      <input
+                        type="text"
+                        placeholder={t.contact.form.firstNamePlaceholder}
+                        className="w-full px-4 py-2.5 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#2c2c2c] placeholder:text-[#8B4513]/40 focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50 focus:border-[#991b1b] transition-all"
+                        data-testid="input-first-name"
+                      />
+                    </div>
+                    <div>
+                      <label className="block font-serif text-sm font-medium text-[#2c2c2c] mb-1.5">
+                        {t.contact.form.lastName}
+                      </label>
+                      <input
+                        type="text"
+                        placeholder={t.contact.form.lastNamePlaceholder}
+                        className="w-full px-4 py-2.5 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#2c2c2c] placeholder:text-[#8B4513]/40 focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50 focus:border-[#991b1b] transition-all"
+                        data-testid="input-last-name"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block font-serif text-sm font-medium text-[#2c2c2c] mb-1.5">
+                      {t.contact.form.email}
+                    </label>
+                    <input
+                      type="email"
+                      placeholder={t.contact.form.emailPlaceholder}
+                      className="w-full px-4 py-2.5 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#2c2c2c] placeholder:text-[#8B4513]/40 focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50 focus:border-[#991b1b] transition-all"
+                      data-testid="input-email"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block font-serif text-sm font-medium text-[#2c2c2c] mb-1.5">
+                      {t.contact.form.organizationName}
+                    </label>
+                    <input
+                      type="text"
+                      placeholder={t.contact.form.organizationPlaceholder}
+                      className="w-full px-4 py-2.5 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#2c2c2c] placeholder:text-[#8B4513]/40 focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50 focus:border-[#991b1b] transition-all"
+                      data-testid="input-organization"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block font-serif text-sm font-medium text-[#2c2c2c] mb-1.5">
+                      {t.contact.form.role}
+                    </label>
+                    <input
+                      type="text"
+                      placeholder={t.contact.form.rolePlaceholder}
+                      className="w-full px-4 py-2.5 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#2c2c2c] placeholder:text-[#8B4513]/40 focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50 focus:border-[#991b1b] transition-all"
+                      data-testid="input-role"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block font-serif text-sm font-medium text-[#2c2c2c] mb-1.5">
+                      {t.contact.form.organizationType}
+                    </label>
+                    <select
+                      className="w-full px-4 py-2.5 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#2c2c2c] focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50 focus:border-[#991b1b] transition-all appearance-none cursor-pointer"
+                      data-testid="select-organization-type"
+                      style={{
+                        backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%238B4513' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                        backgroundPosition: 'right 0.5rem center',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: '1.5em 1.5em',
+                        paddingRight: '2.5rem'
+                      }}
+                    >
+                      <option value="">{t.contact.form.organizationTypeOptions.placeholder}</option>
+                      <option value="temple">{t.contact.form.organizationTypeOptions.temple}</option>
+                      <option value="monastery">{t.contact.form.organizationTypeOptions.monastery}</option>
+                      <option value="meditation-center">{t.contact.form.organizationTypeOptions.meditationCenter}</option>
+                      <option value="dharma-center">{t.contact.form.organizationTypeOptions.dharmaCenter}</option>
+                      <option value="retreat-center">{t.contact.form.organizationTypeOptions.retreatCenter}</option>
+                      <option value="sangha-community">{t.contact.form.organizationTypeOptions.sanghaCommunity}</option>
+                      <option value="federation">{t.contact.form.organizationTypeOptions.federation}</option>
+                      <option value="other">{t.contact.form.organizationTypeOptions.other}</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block font-serif text-sm font-medium text-[#2c2c2c] mb-1.5">
+                      {t.contact.form.communitySize}
+                    </label>
+                    <select
+                      className="w-full px-4 py-2.5 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#2c2c2c] focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50 focus:border-[#991b1b] transition-all appearance-none cursor-pointer"
+                      data-testid="select-organization-size"
+                      style={{
+                        backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%238B4513' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                        backgroundPosition: 'right 0.5rem center',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: '1.5em 1.5em',
+                        paddingRight: '2.5rem'
+                      }}
+                    >
+                      <option value="">{t.contact.form.communitySizeOptions.placeholder}</option>
+                      <option value="1-50">{t.contact.form.communitySizeOptions.small}</option>
+                      <option value="51-200">{t.contact.form.communitySizeOptions.medium}</option>
+                      <option value="201-500">{t.contact.form.communitySizeOptions.large}</option>
+                      <option value="501-1000">{t.contact.form.communitySizeOptions.larger}</option>
+                      <option value="1000+">{t.contact.form.communitySizeOptions.largest}</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block font-serif text-sm font-medium text-[#2c2c2c] mb-1.5">
+                      {t.contact.form.message}
+                    </label>
+                    <textarea
+                      placeholder={t.contact.form.messagePlaceholder}
+                      rows={4}
+                      className="w-full px-4 py-2.5 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#2c2c2c] placeholder:text-[#8B4513]/40 focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50 focus:border-[#991b1b] transition-all resize-none"
+                      data-testid="textarea-message"
+                    ></textarea>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full px-6 py-3 bg-[#991b1b] text-white rounded-xl font-serif font-semibold hover:bg-[#7a1515] transition-all duration-300 shadow-md text-sm"
+                    data-testid="button-submit-contact"
+                  >
+                    {t.contact.form.submit}
+                  </button>
+
+                  <p className="font-serif text-xs text-[#8B4513]/60 text-center">
+                    {t.contact.form.disclaimer}
+                  </p>
+                </form>
               </div>
             </div>
           </div>
