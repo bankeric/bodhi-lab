@@ -39,6 +39,10 @@ localPort = 40863
 externalPort = 5000
 
 [[ports]]
+localPort = 43597
+externalPort = 6800
+
+[[ports]]
 localPort = 45043
 externalPort = 4200
 
@@ -76,3 +80,4 @@ waitForPort = 5000
 
 [agent]
 integrations = ["javascript_stripe:1.0.0"]
+expertMode = true

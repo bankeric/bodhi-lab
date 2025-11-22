@@ -104,14 +104,14 @@ export default function Landing() {
 
       <div className="relative z-10">
         <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#EFE0BD]/80 border-b border-[#8B4513]/20">
-          <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <div className="container mx-auto px-4 py-3 flex justify-between items-center">
             <div className="relative group">
               <Link href="/" className="flex items-center" data-testid="link-brand">
-                <img src={bodhiLogo} alt="Bodhi Technology Lab" className="h-12 brightness-110 contrast-125" />
+                <img src={bodhiLogo} alt="Bodhi Technology Lab" className="h-10 md:h-12 brightness-110 contrast-125" />
               </Link>
               
-              {/* Dropdown Menu */}
-              <div className="absolute top-full left-0 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out transform group-hover:translate-y-0 -translate-y-2">
+              {/* Dropdown Menu - Desktop Only */}
+              <div className="hidden md:block absolute top-full left-0 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out transform group-hover:translate-y-0 -translate-y-2">
                 <div className="bg-gradient-to-br from-[#EFE0BD] to-[#E5D5B7] backdrop-blur-xl border border-[#8B4513]/30 rounded-3xl shadow-2xl overflow-hidden w-[250px]"
                   style={{ boxShadow: 'inset 0 1px 2px rgba(139, 69, 19, 0.1), 0 20px 60px rgba(139, 69, 19, 0.15)' }}>
                   <div className="p-6">
@@ -122,36 +122,30 @@ export default function Landing() {
                       {t.header.company.title}
                     </h3>
                     <div className="space-y-3">
-                      <Link href="/about">
-                        <a className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-about">
-                          <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
-                          {t.header.company.about}
-                        </a>
+                      <Link href="/about" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-about">
+                        <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
+                        {t.header.company.about}
                       </Link>
-                      <Link href="/career">
-                        <a className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-career">
-                          <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
-                          {t.header.company.career}
-                        </a>
+                      <Link href="/career" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-career">
+                        <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
+                        {t.header.company.career}
                       </Link>
-                      <Link href="/terms">
-                        <a className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-terms">
-                          <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
-                          {t.header.company.terms}
-                        </a>
+                      <Link href="/terms" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-terms">
+                        <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
+                        {t.header.company.terms}
                       </Link>
-                      <Link href="/privacy">
-                        <a className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-privacy">
-                          <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
-                          {t.header.company.privacy}
-                        </a>
+                      <Link href="/privacy" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-privacy">
+                        <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
+                        {t.header.company.privacy}
                       </Link>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-4">
+            
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-4">
               <a 
                 href="#capabilities" 
                 className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" 
@@ -166,16 +160,17 @@ export default function Landing() {
               >
                 {t.header.nav.pricing}
               </a>
-              <Link href="/platform">
-                <a className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-platform">
-                  {t.header.nav.platform}
-                </a>
+              <Link href="/platform" className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-platform">
+                {t.header.nav.platform}
               </Link>
-              <Link href="/docs/overview">
-                <a className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-docs">
-                  {t.header.nav.docs}
-                </a>
+              <Link href="/docs/overview" className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-docs">
+                {t.header.nav.docs}
               </Link>
+              <LanguageSwitcher />
+            </div>
+
+            {/* Mobile Navigation - Language Switcher only */}
+            <div className="flex md:hidden items-center">
               <LanguageSwitcher />
             </div>
           </div>
@@ -253,21 +248,23 @@ export default function Landing() {
             </div>
 
             <div
-              className={`absolute bottom-8 left-0 right-0 flex justify-center gap-16 transition-all duration-500 ${
+              className={`absolute bottom-8 left-0 right-0 px-4 transition-all duration-500 ${
                 searchFocused ? "opacity-0 translate-y-10" : "opacity-100 translate-y-0"
               }`}
             >
-              <div className="text-center">
-                <div className="font-serif text-3xl font-bold text-[#991b1b]">{t.hero.stats.engineers.value}</div>
-                <div className="font-serif text-[#8B4513]/50 text-sm">{t.hero.stats.engineers.label}</div>
-              </div>
-              <div className="text-center">
-                <div className="font-serif text-3xl font-bold text-[#991b1b]">{t.hero.stats.certification.value}</div>
-                <div className="font-serif text-[#8B4513]/50 text-sm">{t.hero.stats.certification.label}</div>
-              </div>
-              <div className="text-center">
-                <div className="font-serif text-3xl font-bold text-[#991b1b]">{t.hero.stats.network.value}</div>
-                <div className="font-serif text-[#8B4513]/50 text-sm">{t.hero.stats.network.label}</div>
+              <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8 md:gap-16 max-w-4xl mx-auto">
+                <div className="text-center">
+                  <div className="font-serif text-2xl sm:text-3xl font-bold text-[#991b1b]">{t.hero.stats.engineers.value}</div>
+                  <div className="font-serif text-[#8B4513]/50 text-xs sm:text-sm">{t.hero.stats.engineers.label}</div>
+                </div>
+                <div className="text-center">
+                  <div className="font-serif text-2xl sm:text-3xl font-bold text-[#991b1b]">{t.hero.stats.certification.value}</div>
+                  <div className="font-serif text-[#8B4513]/50 text-xs sm:text-sm">{t.hero.stats.certification.label}</div>
+                </div>
+                <div className="text-center">
+                  <div className="font-serif text-2xl sm:text-3xl font-bold text-[#991b1b]">{t.hero.stats.network.value}</div>
+                  <div className="font-serif text-[#8B4513]/50 text-xs sm:text-sm">{t.hero.stats.network.label}</div>
+                </div>
               </div>
             </div>
           </section>
