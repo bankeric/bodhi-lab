@@ -121,7 +121,7 @@ export const landingTranslations = {
       title: "Pricing",
       subtitle: "Professional-grade platforms designed for Buddhist organizations of all sizes",
       start: {
-        title: "Hành Giả",
+        title: "Practitioner",
         price: "$79",
         priceUnit: "/month",
         description: "Perfect for small to medium temples getting started with digital transformation",
@@ -137,7 +137,7 @@ export const landingTranslations = {
         cta: "Get Started"
       },
       scale: {
-        title: "Cư Sĩ",
+        title: "Layperson",
         price: "$199",
         priceUnit: "/month",
         badge: "Most Popular",
@@ -157,7 +157,7 @@ export const landingTranslations = {
         cta: "Subscribe Now"
       },
       enterprise: {
-        title: "Tăng Đoàn",
+        title: "Sangha",
         price: "$499+",
         priceUnit: "/month",
         description: "Comprehensive solution for large monasteries and temple networks",
