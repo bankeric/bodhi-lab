@@ -216,7 +216,7 @@ export const platformTranslations = {
       getStarted: "Get Started",
       contactSales: "Contact Sales",
       start: {
-        name: "Start",
+        name: "Practitioner",
         price: "79",
         description: "perfect for small temples or meditation centers getting started with digital transformation",
         features: [
@@ -233,7 +233,7 @@ export const platformTranslations = {
         ]
       },
       scale: {
-        name: "Scale",
+        name: "Layperson",
         price: "199",
         description: "for growing communities needing AI agents and mobile app",
         features: [
@@ -250,7 +250,7 @@ export const platformTranslations = {
         ]
       },
       enterprise: {
-        name: "Enterprise",
+        name: "Sangha",
         price: "499+",
         description: "comprehensive solution for large monastery networks with custom needs",
         features: [
@@ -523,7 +523,7 @@ export const platformTranslations = {
       getStarted: "Bắt Đầu",
       contactSales: "Liên Hệ Tư Vấn",
       start: {
-        name: "Start",
+        name: "Hành Giả",
         price: "79",
         description: "hoàn hảo cho các ngôi chùa nhỏ hoặc trung tâm thiền mới bắt đầu số hóa",
         features: [
@@ -540,7 +540,7 @@ export const platformTranslations = {
         ]
       },
       scale: {
-        name: "Scale",
+        name: "Cư Sĩ",
         price: "199",
         description: "cho cộng đồng đang phát triển cần AI agents và mobile app",
         features: [
@@ -557,7 +557,7 @@ export const platformTranslations = {
         ]
       },
       enterprise: {
-        name: "Enterprise",
+        name: "Tăng Đoàn",
         price: "499+",
         description: "giải pháp toàn diện cho mạng lưới tu viện lớn với nhu cầu tùy chỉnh",
         features: [
