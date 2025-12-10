@@ -121,7 +121,7 @@ export const landingTranslations = {
       title: "Pricing",
       subtitle: "Professional-grade platforms designed for Buddhist organizations of all sizes",
       start: {
-        title: "Start",
+        title: "Hành Giả",
         price: "$79",
         priceUnit: "/month",
         description: "Perfect for small to medium temples getting started with digital transformation",
@@ -137,7 +137,7 @@ export const landingTranslations = {
         cta: "Get Started"
       },
       scale: {
-        title: "Scale",
+        title: "Cư Sĩ",
         price: "$199",
         priceUnit: "/month",
         badge: "Most Popular",
@@ -157,7 +157,7 @@ export const landingTranslations = {
         cta: "Subscribe Now"
       },
       enterprise: {
-        title: "Enterprise",
+        title: "Tăng Đoàn",
         price: "$499+",
         priceUnit: "/month",
         description: "Comprehensive solution for large monasteries and temple networks",
@@ -384,7 +384,7 @@ export const landingTranslations = {
       title: "Bảng Giá",
       subtitle: "Nền tảng chuyên nghiệp được thiết kế cho các tổ chức Phật giáo với mọi quy mô",
       start: {
-        title: "Khởi Đầu",
+        title: "Hành Giả",
         price: "$79",
         priceUnit: "/tháng",
         description: "Hoàn hảo cho các chùa nhỏ và vừa bắt đầu chuyển đổi số",
@@ -400,7 +400,7 @@ export const landingTranslations = {
         cta: "Bắt Đầu"
       },
       scale: {
-        title: "Mở Rộng",
+        title: "Cư Sĩ",
         price: "$199",
         priceUnit: "/tháng",
         badge: "Phổ Biến Nhất",
@@ -420,7 +420,7 @@ export const landingTranslations = {
         cta: "Đăng Ký Ngay"
       },
       enterprise: {
-        title: "Doanh Nghiệp",
+        title: "Tăng Đoàn",
         price: "$499+",
         priceUnit: "/tháng",
         description: "Giải pháp toàn diện cho tu viện lớn và mạng lưới chùa chiền",

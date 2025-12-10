@@ -482,16 +482,13 @@ export default function Landing() {
             </div>
 
             <div className="text-center">
-              <Link href="/platform">
-                <a>
-                  <button
-                    className="inline-flex items-center gap-2 px-8 py-4 bg-white/50 backdrop-blur-md border-2 border-[#991b1b] rounded-full text-[#991b1b] font-serif font-semibold text-lg hover:bg-[#991b1b] hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl"
-                    data-testid="button-view-services"
-                  >
-                    {t.capabilities.cta}
-                    <ArrowRight className="w-5 h-5" />
-                  </button>
-                </a>
+              <Link 
+                href="/platform"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white/50 backdrop-blur-md border-2 border-[#991b1b] rounded-full text-[#991b1b] font-serif font-semibold text-lg hover:bg-[#991b1b] hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl"
+                data-testid="button-view-services"
+              >
+                {t.capabilities.cta}
+                <ArrowRight className="w-5 h-5" />
               </Link>
             </div>
           </div>
@@ -861,10 +858,8 @@ export default function Landing() {
                 >
                   {t.footer.services}
                 </a>
-                <Link href="/docs/overview">
-                  <a className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
-                    {t.footer.docs}
-                  </a>
+                <Link href="/docs/overview" className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
+                  {t.footer.docs}
                 </Link>
               </div>
               <div className="font-serif text-[#8B4513]/50">{t.footer.copyright.replace('{year}', new Date().getFullYear().toString())}</div>
