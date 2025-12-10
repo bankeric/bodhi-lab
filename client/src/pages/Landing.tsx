@@ -140,6 +140,19 @@ export default function Landing() {
                         {t.header.company.privacy}
                       </Link>
                     </div>
+                    
+                    {/* Social Media */}
+                    <div className="mt-5 pt-4 border-t border-[#8B4513]/20 flex justify-center">
+                      <a 
+                        href="https://www.facebook.com/profile.php?id=61584769384755" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="w-9 h-9 rounded-full bg-[#8B4513]/10 flex items-center justify-center text-[#8B4513]/70 hover:bg-[#991b1b]/20 hover:text-[#991b1b] transition-all"
+                        data-testid="link-facebook"
+                      >
+                        <SiFacebook className="w-4 h-4" />
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -845,18 +858,7 @@ export default function Landing() {
         <footer className="border-t border-[#8B4513]/20 py-8 bg-[#EFE0BD]/50 backdrop-blur-sm">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <div className="flex flex-col items-center gap-3">
-                <img src={bodhiLogo} alt="Bodhi Technology Lab" className="h-11 brightness-110 contrast-125" />
-                <a 
-                  href="https://www.facebook.com/profile.php?id=61584769384755" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-[#8B4513]/10 flex items-center justify-center text-[#8B4513]/70 hover:bg-[#991b1b]/20 hover:text-[#991b1b] transition-all"
-                  data-testid="link-facebook"
-                >
-                  <SiFacebook className="w-4 h-4" />
-                </a>
-              </div>
+              <img src={bodhiLogo} alt="Bodhi Technology Lab" className="h-11 brightness-110 contrast-125" />
               <div className="flex gap-6">
                 <a 
                   href="#capabilities" 
