@@ -3,7 +3,16 @@
 ## Overview
 Bodhi Technology Lab is a B2B development studio serving Buddhist organizations with white-label technology solutions. The platform provides temples, monasteries, and dharma centers worldwide with donation tools, AI guidance, resource libraries, and custom branding. Core philosophy: "Công nghệ nơi đây, không vì lợi danh - chỉ một lòng thành, hộ trì Chánh Pháp" (Technology here serves not profit, but sincerely upholds the True Dharma).
 
-## Recent Changes (November 2025)
+## Recent Changes (December 2025)
+- Added subscription pop-up modal for lead collection when users click pricing package buttons
+- Created password-protected Admin CRM page (/admin) for managing leads
+- Lead collection includes: name, phone, email, specific needs/interests, package selected
+- Leads stored in PostgreSQL with status tracking (new, contacted, qualified, converted, lost)
+- Email notifications sent to om@bodhilab.io when new leads are submitted
+- Footer updated with email icon and om@bodhilab.io contact
+- Admin password default: "bodhi2024" (can be set via ADMIN_PASSWORD env var)
+
+## Previous Changes (November 2025)
 - Updated hero section to be more practical "About Us" style while keeping philosophical Vietnamese phrase
 - Improved CTA buttons targeting Buddhist organizations: "Schedule a Consultation" and "See Our Solutions"
 - Enhanced logo visibility with larger size (48px headers, 44px footers) and brightness/contrast filters
@@ -23,7 +32,11 @@ The frontend uses React with TypeScript and Vite. Routing is handled by Wouter, 
 The backend is built with Express.js on Node.js with TypeScript, featuring a RESTful API under the `/api` prefix. Session management is planned with `connect-pg-simple` for PostgreSQL-backed storage. Development uses Vite for HMR in middleware mode, and production builds involve Vite for the frontend (`dist/public`) and esbuild for the backend (`dist/index.js`).
 
 ### Data Storage Solutions
-PostgreSQL is used as the database, configured via Drizzle ORM. The schema is defined in `shared/schema.ts`, and migrations are managed separately. A basic users table is currently implemented. The storage interface is abstracted, with an in-memory implementation for development and a PostgreSQL implementation planned.
+PostgreSQL is used as the database, configured via Drizzle ORM. The schema is defined in `shared/schema.ts`, and migrations are managed with `drizzle-kit push`. Tables include:
+- `users`: Basic user accounts
+- `leads`: CRM lead management (name, phone, email, interests, package, status, createdAt)
+
+The storage interface is abstracted in `server/storage.ts` using DatabaseStorage class for PostgreSQL operations.
 
 ### Authentication and Authorization
 A basic user schema exists, but active authentication middleware is not yet implemented. Session-based authentication using a PostgreSQL session store is the planned approach.
