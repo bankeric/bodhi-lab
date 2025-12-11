@@ -3,9 +3,13 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import Stripe from "stripe";
 import nodemailer from "nodemailer";
+import { insertLeadSchema } from "@shared/schema";
 
 // Initialize Stripe only if the key is available
 let stripe: Stripe | null = null;
+
+// Admin password for CRM access
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "bodhi2024";
 
 // Email transporter configuration
 const createEmailTransporter = () => {
@@ -81,6 +85,109 @@ This email was sent from the Bodhi Technology Lab contact form.
     } catch (error: any) {
       console.error("Error sending contact email:", error);
       res.status(500).json({ message: "Error sending message: " + error.message });
+    }
+  });
+
+  // Lead submission route (subscription pop-up)
+  app.post("/api/leads", async (req, res) => {
+    try {
+      const result = insertLeadSchema.safeParse(req.body);
+      
+      if (!result.success) {
+        return res.status(400).json({ message: "Invalid lead data", errors: result.error.errors });
+      }
+
+      const lead = await storage.createLead(result.data);
+
+      // Send notification email
+      const transporter = createEmailTransporter();
+      if (transporter) {
+        const emailContent = `
+New Subscription Interest from Bodhi Technology Lab Website
+
+Lead Information:
+- Name: ${lead.name}
+- Phone: ${lead.phone}
+- Email: ${lead.email}
+- Package: ${lead.package}
+- Interests/Needs: ${lead.interests || 'Not specified'}
+
+---
+This lead was submitted via the subscription form.
+        `.trim();
+
+        try {
+          await transporter.sendMail({
+            from: '"Bodhi Technology Lab" <om@bodhilab.io>',
+            to: "om@bodhilab.io",
+            replyTo: lead.email,
+            subject: `New Lead: ${lead.name} - ${lead.package}`,
+            text: emailContent,
+          });
+        } catch (emailError) {
+          console.error("Error sending lead notification email:", emailError);
+        }
+      }
+
+      res.json({ success: true, message: "Your request has been received", lead });
+    } catch (error: any) {
+      console.error("Error creating lead:", error);
+      res.status(500).json({ message: "Error submitting request: " + error.message });
+    }
+  });
+
+  // Get all leads (admin only)
+  app.get("/api/leads", async (req, res) => {
+    try {
+      const password = req.headers["x-admin-password"];
+      
+      if (password !== ADMIN_PASSWORD) {
+        return res.status(401).json({ message: "Unauthorized" });
+      }
+
+      const leads = await storage.getLeads();
+      res.json(leads);
+    } catch (error: any) {
+      console.error("Error getting leads:", error);
+      res.status(500).json({ message: "Error fetching leads: " + error.message });
+    }
+  });
+
+  // Update lead status (admin only)
+  app.patch("/api/leads/:id", async (req, res) => {
+    try {
+      const password = req.headers["x-admin-password"];
+      
+      if (password !== ADMIN_PASSWORD) {
+        return res.status(401).json({ message: "Unauthorized" });
+      }
+
+      const { status } = req.body;
+      const lead = await storage.updateLeadStatus(req.params.id, status);
+      
+      if (!lead) {
+        return res.status(404).json({ message: "Lead not found" });
+      }
+
+      res.json(lead);
+    } catch (error: any) {
+      console.error("Error updating lead:", error);
+      res.status(500).json({ message: "Error updating lead: " + error.message });
+    }
+  });
+
+  // Admin authentication check
+  app.post("/api/admin/auth", async (req, res) => {
+    try {
+      const { password } = req.body;
+      
+      if (password === ADMIN_PASSWORD) {
+        res.json({ success: true });
+      } else {
+        res.status(401).json({ message: "Invalid password" });
+      }
+    } catch (error: any) {
+      res.status(500).json({ message: "Authentication error" });
     }
   });
 
