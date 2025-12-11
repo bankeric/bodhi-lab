@@ -1,4 +1,6 @@
-import { type User, type InsertUser, type Lead, type InsertLead } from "@shared/schema";
+import { type User, type InsertUser, type Lead, type InsertLead, users, leads } from "@shared/schema";
+import { db } from "./db";
+import { eq, desc } from "drizzle-orm";
 import { randomUUID } from "crypto";
 
 export interface IStorage {
@@ -10,60 +12,41 @@ export interface IStorage {
   updateLeadStatus(id: string, status: string): Promise<Lead | undefined>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-  private leads: Map<string, Lead>;
-
-  constructor() {
-    this.users = new Map();
-    this.leads = new Map();
-  }
-
+export class DatabaseStorage implements IStorage {
   async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+    const result = await db.select().from(users).where(eq(users.id, id));
+    return result[0];
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    const result = await db.select().from(users).where(eq(users.username, username));
+    return result[0];
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+    const result = await db.insert(users).values(insertUser).returning();
+    return result[0];
   }
 
   async createLead(insertLead: InsertLead): Promise<Lead> {
-    const id = randomUUID();
-    const lead: Lead = { 
-      ...insertLead, 
-      id, 
-      createdAt: new Date(),
-      interests: insertLead.interests || null,
+    const result = await db.insert(leads).values({
+      ...insertLead,
       status: insertLead.status || "new"
-    };
-    this.leads.set(id, lead);
-    return lead;
+    }).returning();
+    return result[0];
   }
 
   async getLeads(): Promise<Lead[]> {
-    return Array.from(this.leads.values()).sort(
-      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-    );
+    return await db.select().from(leads).orderBy(desc(leads.createdAt));
   }
 
   async updateLeadStatus(id: string, status: string): Promise<Lead | undefined> {
-    const lead = this.leads.get(id);
-    if (lead) {
-      lead.status = status;
-      this.leads.set(id, lead);
-      return lead;
-    }
-    return undefined;
+    const result = await db.update(leads)
+      .set({ status })
+      .where(eq(leads.id, id))
+      .returning();
+    return result[0];
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();

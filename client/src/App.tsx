@@ -22,6 +22,7 @@ import About from "@/pages/About";
 import Career from "@/pages/Career";
 import Privacy from "@/pages/Privacy";
 import Terms from "@/pages/Terms";
+import Admin from "@/pages/Admin";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -35,6 +36,7 @@ function Router() {
       <Route path="/career" component={Career} />
       <Route path="/privacy" component={Privacy} />
       <Route path="/terms" component={Terms} />
+      <Route path="/admin" component={Admin} />
       <Route path="/docs/manifesto">
         <DocsLayout>
           <Manifesto />
