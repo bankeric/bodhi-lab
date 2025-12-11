@@ -29,10 +29,21 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createLead(insertLead: InsertLead): Promise<Lead> {
-    const result = await db.insert(leads).values({
-      ...insertLead,
-      status: insertLead.status || "new"
-    }).returning();
+    const id = randomUUID();
+    const now = new Date();
+    await db.insert(leads).values({
+      id,
+      name: insertLead.name,
+      phone: insertLead.phone,
+      email: insertLead.email,
+      interests: insertLead.interests || null,
+      package: insertLead.package,
+      status: insertLead.status || "new",
+      createdAt: now
+    });
+    
+    // Fetch the created lead since returning() may not work with neon-http
+    const result = await db.select().from(leads).where(eq(leads.id, id));
     return result[0];
   }
 
