@@ -934,15 +934,14 @@ export default function Landing() {
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <img src={bodhiLogo} alt="Bodhi Technology Lab" className="h-11 brightness-110 contrast-125" />
-              <div className="flex items-center gap-6">
-                <a 
-                  href="mailto:om@bodhilab.io"
-                  className="text-[#8B4513]/50 hover:text-[#991b1b] transition-colors"
-                  data-testid="link-email-footer"
-                >
-                  <Mail className="w-5 h-5" />
-                </a>
-              </div>
+              <a 
+                href="mailto:om@bodhilab.io"
+                className="flex items-center gap-2 text-[#8B4513]/50 hover:text-[#991b1b] transition-colors"
+                data-testid="link-email-footer"
+              >
+                <Mail className="w-5 h-5" />
+                <span className="font-serif">om@bodhilab.io</span>
+              </a>
               <div className="font-serif text-[#8B4513]/50">{t.footer.copyright.replace('{year}', new Date().getFullYear().toString())}</div>
             </div>
           </div>
