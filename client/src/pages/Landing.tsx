@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Search, ArrowRight, Sparkles, Users, Heart, Briefcase, FileText, Shield, BookOpen, MessageCircle, Calendar, HandHeart, Check, Workflow, Bot, Target, Award, Database } from "lucide-react";
+import { Search, ArrowRight, Sparkles, Users, Heart, Briefcase, FileText, Shield, BookOpen, MessageCircle, Calendar, HandHeart, Check, Workflow, Bot, Target, Award, Database, Mail } from "lucide-react";
 import { SiFacebook } from "react-icons/si";
 import { Link } from "wouter";
 import { buddhistAgents } from "@shared/buddhistAgents";
@@ -934,22 +934,14 @@ export default function Landing() {
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <img src={bodhiLogo} alt="Bodhi Technology Lab" className="h-11 brightness-110 contrast-125" />
-              <div className="flex gap-6">
+              <div className="flex items-center gap-6">
                 <a 
-                  href="#capabilities" 
-                  className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors"
+                  href="mailto:om@bodhilab.io"
+                  className="text-[#8B4513]/50 hover:text-[#991b1b] transition-colors"
+                  data-testid="link-email-footer"
                 >
-                  {t.footer.platform}
+                  <Mail className="w-5 h-5" />
                 </a>
-                <a 
-                  href="#services" 
-                  className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors"
-                >
-                  {t.footer.services}
-                </a>
-                <Link href="/docs/overview" className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
-                  {t.footer.docs}
-                </Link>
               </div>
               <div className="font-serif text-[#8B4513]/50">{t.footer.copyright.replace('{year}', new Date().getFullYear().toString())}</div>
             </div>
