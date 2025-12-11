@@ -74,6 +74,56 @@ export default function Landing() {
   const { language } = useLanguage();
   const t = landingTranslations[language];
   
+  // Contact form state
+  const [contactForm, setContactForm] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    organizationName: "",
+    role: "",
+    organizationType: "",
+    communitySize: "",
+    message: ""
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{ success: boolean; message: string } | null>(null);
+
+  const handleContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(contactForm),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus({ success: true, message: language === 'vi' ? "Tin nhắn của bạn đã được gửi thành công!" : "Your message has been sent successfully!" });
+        setContactForm({
+          firstName: "",
+          lastName: "",
+          email: "",
+          organizationName: "",
+          role: "",
+          organizationType: "",
+          communitySize: "",
+          message: ""
+        });
+      } else {
+        setSubmitStatus({ success: false, message: data.message || (language === 'vi' ? "Không thể gửi tin nhắn. Vui lòng thử lại." : "Failed to send message. Please try again.") });
+      }
+    } catch (error) {
+      setSubmitStatus({ success: false, message: language === 'vi' ? "Lỗi mạng. Vui lòng thử lại." : "Network error. Please try again." });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+  
   const [searchQuery, setSearchQuery] = useState("");
   const [searchFocused, setSearchFocused] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -712,7 +762,12 @@ export default function Landing() {
                   {t.contact.form.subtitle}
                 </p>
 
-                <form className="space-y-4">
+                <form className="space-y-4" onSubmit={handleContactSubmit}>
+                  {submitStatus && (
+                    <div className={`p-3 rounded-lg font-serif text-sm ${submitStatus.success ? 'bg-green-100 text-green-800 border border-green-200' : 'bg-red-100 text-red-800 border border-red-200'}`} data-testid="status-contact-form">
+                      {submitStatus.message}
+                    </div>
+                  )}
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className="block font-serif text-sm font-medium text-[#2c2c2c] mb-1.5">
@@ -720,9 +775,12 @@ export default function Landing() {
                       </label>
                       <input
                         type="text"
+                        value={contactForm.firstName}
+                        onChange={(e) => setContactForm({ ...contactForm, firstName: e.target.value })}
                         placeholder={t.contact.form.firstNamePlaceholder}
                         className="w-full px-4 py-2.5 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#2c2c2c] placeholder:text-[#8B4513]/40 focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50 focus:border-[#991b1b] transition-all"
                         data-testid="input-first-name"
+                        required
                       />
                     </div>
                     <div>
@@ -731,9 +789,12 @@ export default function Landing() {
                       </label>
                       <input
                         type="text"
+                        value={contactForm.lastName}
+                        onChange={(e) => setContactForm({ ...contactForm, lastName: e.target.value })}
                         placeholder={t.contact.form.lastNamePlaceholder}
                         className="w-full px-4 py-2.5 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#2c2c2c] placeholder:text-[#8B4513]/40 focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50 focus:border-[#991b1b] transition-all"
                         data-testid="input-last-name"
+                        required
                       />
                     </div>
                   </div>
@@ -744,9 +805,12 @@ export default function Landing() {
                     </label>
                     <input
                       type="email"
+                      value={contactForm.email}
+                      onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
                       placeholder={t.contact.form.emailPlaceholder}
                       className="w-full px-4 py-2.5 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#2c2c2c] placeholder:text-[#8B4513]/40 focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50 focus:border-[#991b1b] transition-all"
                       data-testid="input-email"
+                      required
                     />
                   </div>
 
@@ -756,6 +820,8 @@ export default function Landing() {
                     </label>
                     <input
                       type="text"
+                      value={contactForm.organizationName}
+                      onChange={(e) => setContactForm({ ...contactForm, organizationName: e.target.value })}
                       placeholder={t.contact.form.organizationPlaceholder}
                       className="w-full px-4 py-2.5 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#2c2c2c] placeholder:text-[#8B4513]/40 focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50 focus:border-[#991b1b] transition-all"
                       data-testid="input-organization"
@@ -768,6 +834,8 @@ export default function Landing() {
                     </label>
                     <input
                       type="text"
+                      value={contactForm.role}
+                      onChange={(e) => setContactForm({ ...contactForm, role: e.target.value })}
                       placeholder={t.contact.form.rolePlaceholder}
                       className="w-full px-4 py-2.5 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#2c2c2c] placeholder:text-[#8B4513]/40 focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50 focus:border-[#991b1b] transition-all"
                       data-testid="input-role"
@@ -779,6 +847,8 @@ export default function Landing() {
                       {t.contact.form.organizationType}
                     </label>
                     <select
+                      value={contactForm.organizationType}
+                      onChange={(e) => setContactForm({ ...contactForm, organizationType: e.target.value })}
                       className="w-full px-4 py-2.5 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#2c2c2c] focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50 focus:border-[#991b1b] transition-all appearance-none cursor-pointer"
                       data-testid="select-organization-type"
                       style={{
@@ -806,6 +876,8 @@ export default function Landing() {
                       {t.contact.form.communitySize}
                     </label>
                     <select
+                      value={contactForm.communitySize}
+                      onChange={(e) => setContactForm({ ...contactForm, communitySize: e.target.value })}
                       className="w-full px-4 py-2.5 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#2c2c2c] focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50 focus:border-[#991b1b] transition-all appearance-none cursor-pointer"
                       data-testid="select-organization-size"
                       style={{
@@ -830,6 +902,8 @@ export default function Landing() {
                       {t.contact.form.message}
                     </label>
                     <textarea
+                      value={contactForm.message}
+                      onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
                       placeholder={t.contact.form.messagePlaceholder}
                       rows={4}
                       className="w-full px-4 py-2.5 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#2c2c2c] placeholder:text-[#8B4513]/40 focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50 focus:border-[#991b1b] transition-all resize-none"
@@ -839,10 +913,11 @@ export default function Landing() {
 
                   <button
                     type="submit"
-                    className="w-full px-6 py-3 bg-[#991b1b] text-white rounded-xl font-serif font-semibold hover:bg-[#7a1515] transition-all duration-300 shadow-md text-sm"
+                    disabled={isSubmitting}
+                    className="w-full px-6 py-3 bg-[#991b1b] text-white rounded-xl font-serif font-semibold hover:bg-[#7a1515] transition-all duration-300 shadow-md text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                     data-testid="button-submit-contact"
                   >
-                    {t.contact.form.submit}
+                    {isSubmitting ? (language === 'vi' ? 'Đang gửi...' : 'Sending...') : t.contact.form.submit}
                   </button>
 
                   <p className="font-serif text-xs text-[#8B4513]/60 text-center">
