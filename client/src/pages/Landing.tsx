@@ -712,6 +712,43 @@ export default function Landing() {
                 </div>
               </div>
             </div>
+
+            {/* Onboarding Package Section */}
+            <div className="max-w-4xl mx-auto mt-12">
+              <div className="bg-gradient-to-br from-[#8B4513]/5 to-[#991b1b]/5 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#8B4513]/30 shadow-xl p-8">
+                <div className="text-center mb-6">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#8B4513] text-white rounded-full text-xs font-bold uppercase tracking-wide mb-4">
+                    {t.pricing.onboarding.badge}
+                  </div>
+                  <h3 className="font-serif text-3xl font-bold text-[#991b1b] mb-2">{t.pricing.onboarding.title}</h3>
+                  <div className="flex items-baseline justify-center gap-2 mb-4">
+                    <span className="font-mono text-4xl font-bold text-[#991b1b]">{t.pricing.onboarding.price}</span>
+                    <span className="font-serif text-[#8B4513]/70">{t.pricing.onboarding.priceUnit}</span>
+                  </div>
+                  <p className="font-serif text-lg text-[#8B4513] mb-2">{t.pricing.onboarding.subtitle}</p>
+                  <p className="font-serif text-sm text-[#8B4513]/70 max-w-2xl mx-auto">{t.pricing.onboarding.description}</p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                  {t.pricing.onboarding.features.map((feature, index) => (
+                    <div key={index} className="flex items-start gap-3 bg-white/50 backdrop-blur-sm rounded-xl p-4">
+                      <Check className="w-5 h-5 text-[#8B4513] flex-shrink-0 mt-0.5" />
+                      <span className="font-serif text-sm text-[#2c2c2c]">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="text-center">
+                  <a
+                    href="/onboarding"
+                    className="inline-flex items-center gap-2 px-8 py-3 bg-[#8B4513] rounded-xl text-white font-serif font-semibold hover:bg-[#6d3610] transition-all duration-300 shadow-lg"
+                    data-testid="button-start-onboarding"
+                  >
+                    {t.pricing.onboarding.cta}
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 

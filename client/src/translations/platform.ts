@@ -291,9 +291,33 @@ export const platformTranslations = {
           description: "Templates, outreach materials, and Dharma-aligned onboarding guides."
         },
         cta: "Contact Us About Premium Package"
+      },
+      onboarding: {
+        badge: "Onboarding Package",
+        title: "Onboarding Package",
+        price: "899",
+        priceUnit: "one-time",
+        subtitle: "everything you need to launch your temple's digital presence—done for you",
+        website: {
+          title: "Custom Website Build",
+          description: "A fully designed website tailored to your temple's identity and community needs."
+        },
+        setup: {
+          title: "Full Platform Onboarding",
+          description: "Complete configuration of your platform—donations, members, and content ready to go."
+        },
+        digitization: {
+          title: "Document Classification & Digitization",
+          description: "We convert your paper records into organized, searchable digital files."
+        },
+        migration: {
+          title: "Data Migration & Training",
+          description: "Seamless transfer of existing data plus an initial training session for your team."
+        },
+        cta: "Start Onboarding"
       }
     },
-    
+
     footer: {
       copyright: "© 2025 Bodhi Technology Lab. Building technology for awakening.",
       company: "Company",
@@ -598,9 +622,33 @@ export const platformTranslations = {
           description: "Mẫu, tài liệu tiếp cận và hướng dẫn onboarding phù hợp với Phật Pháp."
         },
         cta: "Liên Hệ Về Gói Premium"
+      },
+      onboarding: {
+        badge: "Gói Khởi Động",
+        title: "Gói Khởi Động",
+        price: "899",
+        priceUnit: "một lần",
+        subtitle: "tất cả những gì bạn cần để ra mắt hiện diện số của chùa—chúng tôi làm cho bạn",
+        website: {
+          title: "Xây Dựng Website Tùy Chỉnh",
+          description: "Trang web được thiết kế hoàn chỉnh theo bản sắc và nhu cầu cộng đồng của ngôi chùa."
+        },
+        setup: {
+          title: "Thiết Lập Nền Tảng Hoàn Chỉnh",
+          description: "Cấu hình đầy đủ nền tảng—cúng dường, thành viên và nội dung sẵn sàng hoạt động."
+        },
+        digitization: {
+          title: "Phân Loại & Số Hóa Tài Liệu",
+          description: "Chúng tôi chuyển đổi hồ sơ giấy của bạn thành tệp số có tổ chức, dễ tìm kiếm."
+        },
+        migration: {
+          title: "Di Chuyển Dữ Liệu & Đào Tạo",
+          description: "Chuyển dữ liệu hiện có liền mạch cùng buổi đào tạo ban đầu cho đội ngũ của bạn."
+        },
+        cta: "Bắt Đầu Khởi Động"
       }
     },
-    
+
     footer: {
       copyright: "© 2025 Bodhi Technology Lab. Xây dựng công nghệ cho sự giác ngộ.",
       company: "Công Ty",

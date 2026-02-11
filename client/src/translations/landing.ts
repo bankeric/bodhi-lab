@@ -186,6 +186,22 @@ export const landingTranslations = {
           "Proven launch resources including templates, outreach materials, and Dharma-aligned guides"
         ],
         cta: "Add Premium Package"
+      },
+      onboarding: {
+        badge: "Onboarding Package",
+        title: "Onboarding Package",
+        price: "$899",
+        priceUnit: "one-time",
+        subtitle: "Everything you need to launch your temple's digital presence",
+        description: "A complete, done-for-you setup so your community can go live with confidence",
+        features: [
+          "Custom website design & build tailored to your temple's identity",
+          "Full platform onboarding & configuration",
+          "Document classification & digitization—convert paper records to organized digital files",
+          "Data migration—library, donation records, and member data transferred seamlessly",
+          "Initial training session to get your team up and running"
+        ],
+        cta: "Start Onboarding"
       }
     },
 
@@ -449,6 +465,22 @@ export const landingTranslations = {
           "Tài nguyên ra mắt đã được chứng minh bao gồm mẫu, tài liệu tiếp cận và hướng dẫn phù hợp Phật Pháp"
         ],
         cta: "Thêm Gói Cao Cấp"
+      },
+      onboarding: {
+        badge: "Gói Khởi Động",
+        title: "Gói Khởi Động",
+        price: "$899",
+        priceUnit: "một lần",
+        subtitle: "Tất cả những gì bạn cần để ra mắt hiện diện số của chùa",
+        description: "Thiết lập trọn gói để cộng đồng của bạn có thể hoạt động ngay với sự tự tin",
+        features: [
+          "Thiết kế & xây dựng trang web tùy chỉnh theo bản sắc ngôi chùa",
+          "Thiết lập & cấu hình nền tảng hoàn chỉnh",
+          "Phân loại & số hóa tài liệu—chuyển đổi hồ sơ giấy thành tệp số có tổ chức",
+          "Di chuyển dữ liệu—thư viện, hồ sơ cúng dường và dữ liệu thành viên được chuyển liền mạch",
+          "Buổi đào tạo ban đầu để đội ngũ của bạn bắt đầu hoạt động"
+        ],
+        cta: "Bắt Đầu Khởi Động"
       }
     },
 

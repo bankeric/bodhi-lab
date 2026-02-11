@@ -2531,6 +2531,98 @@ export default function Platform() {
                   </div>
                 </div>
               </div>
+
+              {/* Onboarding Package */}
+              <div className="mt-16 max-w-6xl mx-auto">
+                <div className="bg-gradient-to-br from-[#8B4513]/10 to-[#991b1b]/5 backdrop-blur-md rounded-2xl border-2 border-[#8B4513] p-8 md:p-10" data-testid="card-onboarding-package">
+                  <div className="text-center mb-8">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#8B4513] text-white rounded-full text-xs font-bold uppercase tracking-wide mb-4">
+                      <img src={lotusIcon} alt="Lotus" className="w-4 h-4 object-contain" />
+                      {t.pricing.onboarding.badge}
+                    </div>
+                    <h3 className="font-serif text-3xl font-bold text-[#2c2c2c] mb-3">
+                      {t.pricing.onboarding.title}
+                    </h3>
+                    <div className="flex items-baseline justify-center gap-2 mb-4">
+                      <span className="font-mono text-4xl font-bold text-[#8B4513]">${t.pricing.onboarding.price}</span>
+                      <span className="font-serif text-[#8B4513]/70">{t.pricing.onboarding.priceUnit}</span>
+                    </div>
+                    <p className="font-serif text-lg text-[#8B4513]/70 max-w-2xl mx-auto">
+                      {t.pricing.onboarding.subtitle}
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="bg-white/60 backdrop-blur-sm rounded-xl border border-[#8B4513]/20 p-6" data-testid="card-onboarding-website">
+                      <div className="flex items-start gap-3 mb-3">
+                        <img src={sutraIcon} alt="Website" className="w-8 h-8 object-contain flex-shrink-0" />
+                        <div>
+                          <h4 className="font-serif text-lg font-bold text-[#2c2c2c] mb-2">
+                            {t.pricing.onboarding.website.title}
+                          </h4>
+                          <p className="font-serif text-sm text-[#8B4513]/70">
+                            {t.pricing.onboarding.website.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-white/60 backdrop-blur-sm rounded-xl border border-[#8B4513]/20 p-6" data-testid="card-onboarding-setup">
+                      <div className="flex items-start gap-3 mb-3">
+                        <img src={bellIcon} alt="Setup" className="w-8 h-8 object-contain flex-shrink-0" />
+                        <div>
+                          <h4 className="font-serif text-lg font-bold text-[#2c2c2c] mb-2">
+                            {t.pricing.onboarding.setup.title}
+                          </h4>
+                          <p className="font-serif text-sm text-[#8B4513]/70">
+                            {t.pricing.onboarding.setup.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-white/60 backdrop-blur-sm rounded-xl border border-[#8B4513]/20 p-6" data-testid="card-onboarding-digitization">
+                      <div className="flex items-start gap-3 mb-3">
+                        <img src={buddhaIcon} alt="Digitization" className="w-8 h-8 object-contain flex-shrink-0" />
+                        <div>
+                          <h4 className="font-serif text-lg font-bold text-[#2c2c2c] mb-2">
+                            {t.pricing.onboarding.digitization.title}
+                          </h4>
+                          <p className="font-serif text-sm text-[#8B4513]/70">
+                            {t.pricing.onboarding.digitization.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-white/60 backdrop-blur-sm rounded-xl border border-[#8B4513]/20 p-6" data-testid="card-onboarding-migration">
+                      <div className="flex items-start gap-3 mb-3">
+                        <img src={lotusIcon} alt="Migration" className="w-8 h-8 object-contain flex-shrink-0" />
+                        <div>
+                          <h4 className="font-serif text-lg font-bold text-[#2c2c2c] mb-2">
+                            {t.pricing.onboarding.migration.title}
+                          </h4>
+                          <p className="font-serif text-sm text-[#8B4513]/70">
+                            {t.pricing.onboarding.migration.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-8 text-center">
+                    <Link href="/onboarding">
+                      <a
+                        className="inline-flex items-center gap-2 px-8 py-4 bg-[#8B4513] text-white rounded-xl hover:bg-[#6d3610] transition-colors font-serif font-semibold text-lg shadow-lg"
+                        data-testid="button-onboarding-start"
+                      >
+                        {t.pricing.onboarding.cta}
+                        <ArrowRight className="w-5 h-5" />
+                      </a>
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
         </TracingBeam>

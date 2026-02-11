@@ -8,6 +8,7 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import Landing from "@/pages/Landing";
 import Platform from "@/pages/Platform";
 import Discovery from "@/pages/Discovery";
+import Onboarding from "@/pages/Onboarding";
 import CenterDetail from "@/pages/CenterDetail";
 import Manifesto from "@/pages/Manifesto";
 import MandalaMerit from "@/pages/MandalaMerit";
@@ -31,6 +32,7 @@ function Router() {
       <Route path="/" component={Landing} />
       <Route path="/platform" component={Platform} />
       <Route path="/discovery" component={Discovery} />
+      <Route path="/onboarding" component={Onboarding} />
       <Route path="/center/:id" component={CenterDetail} />
       <Route path="/about" component={About} />
       <Route path="/career" component={Career} />
