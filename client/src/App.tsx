@@ -9,6 +9,7 @@ import Landing from "@/pages/Landing";
 import Platform from "@/pages/Platform";
 import Discovery from "@/pages/Discovery";
 import Onboarding from "@/pages/Onboarding";
+import Process from "@/pages/Process";
 import CenterDetail from "@/pages/CenterDetail";
 import Manifesto from "@/pages/Manifesto";
 import MandalaMerit from "@/pages/MandalaMerit";
@@ -33,6 +34,7 @@ function Router() {
       <Route path="/platform" component={Platform} />
       <Route path="/discovery" component={Discovery} />
       <Route path="/onboarding" component={Onboarding} />
+      <Route path="/process" component={Process} />
       <Route path="/center/:id" component={CenterDetail} />
       <Route path="/about" component={About} />
       <Route path="/career" component={Career} />
