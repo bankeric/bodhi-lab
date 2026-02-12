@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { Briefcase, Building2, User, Mail, Phone, MapPin, Users, Globe, Wrench, FileText, ClipboardList, PhoneCall, Settings, Rocket, Check, ArrowRight, ArrowLeft, Video, MessageSquare, Monitor, HeadphonesIcon } from "lucide-react";
+import { Briefcase, Building2, User, Mail, Phone, MapPin, Users, Globe, Wrench, FileText, ClipboardList, PhoneCall, Settings, Rocket, Check, ArrowRight, ArrowLeft, Video, MessageSquare, Monitor, HeadphonesIcon, XCircle, AlertTriangle } from "lucide-react";
 import { TracingBeam } from "@/components/TracingBeam";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
@@ -42,6 +42,7 @@ export default function Process() {
 
   const steps = [t.steps.step1, t.steps.step2, t.steps.step3, t.steps.step4] as Array<{
     label: string; title: string; timeline: string; description: string; deliverables: string[]; price?: string;
+    weHandle: string[]; youProvide: string[]; notIncluded?: string[];
   }>;
 
   const inputClass = "w-full px-4 py-2.5 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#2c2c2c] placeholder:text-[#8B4513]/40 focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50 focus:border-[#991b1b] transition-all";
@@ -161,8 +162,8 @@ export default function Process() {
                       </p>
 
                       {/* Deliverables */}
-                      <div className="bg-[#EFE0BD]/50 rounded-xl p-5">
-                        <h4 className="font-serif text-xs font-bold uppercase tracking-wider text-[#8B4513] mb-3">Deliverables</h4>
+                      <div className="bg-[#EFE0BD]/50 rounded-xl p-5 mb-4">
+                        <h4 className="font-serif text-xs font-bold uppercase tracking-wider text-[#8B4513] mb-3">{language === 'en' ? 'Deliverables' : 'Sản Phẩm Bàn Giao'}</h4>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                           {step.deliverables.map((item, i) => (
                             <div key={i} className="flex items-start gap-2">
@@ -172,6 +173,59 @@ export default function Process() {
                           ))}
                         </div>
                       </div>
+
+                      {/* Per-step responsibilities */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        {/* We Handle */}
+                        <div className="bg-[#991b1b]/5 rounded-xl p-5 border border-[#991b1b]/10">
+                          <h4 className="font-serif text-xs font-bold uppercase tracking-wider text-[#991b1b] mb-3 flex items-center gap-1.5">
+                            <Rocket className="w-3.5 h-3.5" />
+                            {language === 'en' ? 'We Handle' : 'Chúng Tôi Lo Liệu'}
+                          </h4>
+                          <div className="space-y-2">
+                            {step.weHandle.map((item, i) => (
+                              <div key={i} className="flex items-start gap-2">
+                                <Check className="w-3.5 h-3.5 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                                <span className="font-serif text-xs text-[#2c2c2c]">{item}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* You Provide */}
+                        <div className="bg-[#8B4513]/5 rounded-xl p-5 border border-[#8B4513]/10">
+                          <h4 className="font-serif text-xs font-bold uppercase tracking-wider text-[#8B4513] mb-3 flex items-center gap-1.5">
+                            <Users className="w-3.5 h-3.5" />
+                            {language === 'en' ? 'You Provide' : 'Bạn Cung Cấp'}
+                          </h4>
+                          <div className="space-y-2">
+                            {step.youProvide.map((item, i) => (
+                              <div key={i} className="flex items-start gap-2">
+                                <Check className="w-3.5 h-3.5 text-[#8B4513] flex-shrink-0 mt-0.5" />
+                                <span className="font-serif text-xs text-[#2c2c2c]">{item}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Not Included (only for steps that have it) */}
+                      {step.notIncluded && step.notIncluded.length > 0 && (
+                        <div className="bg-[#f5f0e8] rounded-xl p-5 border border-dashed border-[#8B4513]/20">
+                          <h4 className="font-serif text-xs font-bold uppercase tracking-wider text-[#8B4513]/60 mb-3 flex items-center gap-1.5">
+                            <AlertTriangle className="w-3.5 h-3.5" />
+                            {language === 'en' ? 'Not Included (Available as Add-Ons)' : 'Không Bao Gồm (Có Thể Thêm)'}
+                          </h4>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            {step.notIncluded.map((item, i) => (
+                              <div key={i} className="flex items-start gap-2">
+                                <XCircle className="w-3.5 h-3.5 text-[#8B4513]/40 flex-shrink-0 mt-0.5" />
+                                <span className="font-serif text-xs text-[#8B4513]/60">{item}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 );
@@ -179,20 +233,21 @@ export default function Process() {
             </div>
           </section>
 
-          {/* Responsibility Matrix */}
+          {/* Responsibility Matrix — Full Scope Summary */}
           <section className="px-4 py-12">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="font-serif text-3xl font-bold text-[#2c2c2c] text-center mb-10">{t.responsibilities.title}</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="max-w-5xl mx-auto">
+              <h2 className="font-serif text-3xl font-bold text-[#2c2c2c] text-center mb-2">{t.responsibilities.title}</h2>
+              <p className="font-serif text-base text-[#8B4513]/60 text-center mb-10">{(t.responsibilities as any).subtitle}</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* We Handle */}
-                <div className="bg-gradient-to-br from-[#991b1b]/10 to-[#8B4513]/5 backdrop-blur-md rounded-2xl border-2 border-[#991b1b]/30 p-6 md:p-8" data-testid="card-we-handle">
-                  <h3 className="font-serif text-xl font-bold text-[#991b1b] mb-6 flex items-center gap-2">
+                <div className="bg-gradient-to-br from-[#991b1b]/10 to-[#8B4513]/5 backdrop-blur-md rounded-2xl border-2 border-[#991b1b]/30 p-6" data-testid="card-we-handle">
+                  <h3 className="font-serif text-lg font-bold text-[#991b1b] mb-5 flex items-center gap-2">
                     <Rocket className="w-5 h-5" />
                     {t.responsibilities.weHandle.title}
                   </h3>
-                  <div className="space-y-3">
+                  <div className="space-y-2.5">
                     {t.responsibilities.weHandle.items.map((item, i) => (
-                      <div key={i} className="flex items-start gap-3">
+                      <div key={i} className="flex items-start gap-2">
                         <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
                         <span className="font-serif text-sm text-[#2c2c2c]">{item}</span>
                       </div>
@@ -201,16 +256,32 @@ export default function Process() {
                 </div>
 
                 {/* You Provide */}
-                <div className="bg-white/50 backdrop-blur-md rounded-2xl border border-[#8B4513]/20 p-6 md:p-8" data-testid="card-you-provide">
-                  <h3 className="font-serif text-xl font-bold text-[#8B4513] mb-6 flex items-center gap-2">
+                <div className="bg-white/50 backdrop-blur-md rounded-2xl border border-[#8B4513]/20 p-6" data-testid="card-you-provide">
+                  <h3 className="font-serif text-lg font-bold text-[#8B4513] mb-5 flex items-center gap-2">
                     <Users className="w-5 h-5" />
                     {t.responsibilities.youProvide.title}
                   </h3>
-                  <div className="space-y-3">
+                  <div className="space-y-2.5">
                     {t.responsibilities.youProvide.items.map((item, i) => (
-                      <div key={i} className="flex items-start gap-3">
+                      <div key={i} className="flex items-start gap-2">
                         <Check className="w-4 h-4 text-[#8B4513] flex-shrink-0 mt-0.5" />
                         <span className="font-serif text-sm text-[#2c2c2c]">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Not Included */}
+                <div className="bg-[#f5f0e8]/80 backdrop-blur-md rounded-2xl border border-dashed border-[#8B4513]/20 p-6" data-testid="card-not-included">
+                  <h3 className="font-serif text-lg font-bold text-[#8B4513]/60 mb-5 flex items-center gap-2">
+                    <AlertTriangle className="w-5 h-5" />
+                    {(t.responsibilities as any).notIncluded.title}
+                  </h3>
+                  <div className="space-y-2.5">
+                    {((t.responsibilities as any).notIncluded.items as string[]).map((item, i) => (
+                      <div key={i} className="flex items-start gap-2">
+                        <XCircle className="w-4 h-4 text-[#8B4513]/40 flex-shrink-0 mt-0.5" />
+                        <span className="font-serif text-sm text-[#8B4513]/60">{item}</span>
                       </div>
                     ))}
                   </div>
