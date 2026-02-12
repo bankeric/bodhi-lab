@@ -242,6 +242,9 @@ export default function Landing() {
               <Link href="/platform" className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-platform">
                 {t.header.nav.platform}
               </Link>
+              <Link href="/process" className="font-serif text-[#991b1b] px-4 py-2 rounded-full bg-[#991b1b]/10 hover:bg-[#991b1b]/20 transition-colors" data-testid="link-process">
+                {t.hero.cta.howItWorks}
+              </Link>
               <Link href="/docs/overview" className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-docs">
                 {t.header.nav.docs}
               </Link>
@@ -310,6 +313,14 @@ export default function Landing() {
                 >
                   {t.hero.cta.explorePlatform}
                 </a>
+                <Link
+                  href="/process"
+                  className="font-serif px-8 py-4 rounded-xl bg-white/50 backdrop-blur-md hover:bg-white/70 text-[#8B4513] font-semibold border-2 border-[#8B4513]/20 transition-all duration-300 hover:scale-105 flex items-center gap-2"
+                  data-testid="button-how-it-works"
+                >
+                  {t.hero.cta.howItWorks}
+                  <ArrowRight className="h-5 w-5" />
+                </Link>
               </div>
 
               <div
@@ -560,13 +571,21 @@ export default function Landing() {
               </div>
             </div>
 
-            <div className="text-center">
-              <Link 
+            <div className="text-center flex flex-wrap justify-center gap-4">
+              <Link
                 href="/platform"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-white/50 backdrop-blur-md border-2 border-[#991b1b] rounded-full text-[#991b1b] font-serif font-semibold text-lg hover:bg-[#991b1b] hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl"
                 data-testid="button-view-services"
               >
                 {t.capabilities.cta}
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+              <Link
+                href="/process"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-[#8B4513] rounded-full text-white font-serif font-semibold text-lg hover:bg-[#6d3610] transition-all duration-300 shadow-lg hover:shadow-xl"
+                data-testid="button-how-it-works-capabilities"
+              >
+                {t.hero.cta.howItWorks}
                 <ArrowRight className="w-5 h-5" />
               </Link>
             </div>

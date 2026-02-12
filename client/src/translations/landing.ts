@@ -24,7 +24,8 @@ export const landingTranslations = {
       description: "White-label platforms for temples, monasteries, and dharma centers—empowering Buddhist communities with donation tools, AI guidance, and resource libraries.",
       cta: {
         startSprint: "Schedule a Consultation",
-        explorePlatform: "See Our Solutions"
+        explorePlatform: "See Our Solutions",
+        howItWorks: "How It Works"
       },
       features: [
         "White-Label Platform",
@@ -303,7 +304,8 @@ export const landingTranslations = {
       description: "Nền tảng nhãn trắng cho chùa, tu viện và trung tâm pháp—trao quyền cộng đồng Phật giáo với công cụ cúng dường, hướng dẫn AI và thư viện tài nguyên. Công nghệ nơi đây, không vì lợi danh - chỉ một lòng thành, hộ trì Chánh Pháp.",
       cta: {
         startSprint: "Đặt lịch tư vấn",
-        explorePlatform: "Xem giải pháp"
+        explorePlatform: "Xem giải pháp",
+        howItWorks: "Quy Trình"
       },
       features: [
         "Nền tảng nhãn trắng",
