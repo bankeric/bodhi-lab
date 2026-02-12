@@ -49,7 +49,7 @@ The `/platform` page showcases white-label technology solutions for Buddhist org
 
 ## External Dependencies
 
--   **Neon Serverless PostgreSQL**: Cloud-native PostgreSQL database.
+-   **PostgreSQL**: Database via Replit's built-in PostgreSQL (node-postgres driver).
 -   **OpenAI API Integration**: Planned for Buddhist agents using GPT-4o and GPT-5 models.
 -   **UI Component Libraries**:
     -   Radix UI: Accessible, unstyled component primitives.
