@@ -18,40 +18,129 @@ export const processTranslations = {
     },
 
     hero: {
-      title: "How It Works",
-      subtitle: "From your first inquiry to going live — here's our simple 4-step process to bring your temple online.",
+      title: "Four Steps. Two Weeks. One Launch.",
+      subtitle: "From your first form submission to a fully live digital platform — we handle everything so you can focus on your community.",
+    },
+
+    timeline: {
+      title: "Your Journey at a Glance",
+      nodes: [
+        { label: "Submit Form", time: "Day 1" },
+        { label: "Consultation", time: "Day 3–5" },
+        { label: "Build & Setup", time: "Week 1–2" },
+        { label: "Go Live", time: "Week 2" },
+      ],
     },
 
     steps: {
       step1: {
-        number: "01",
         label: "Step 1",
-        title: "Tell Us About Your Temple",
-        description: "Fill out the discovery form below with basic information about your organization, community size, and the services you need. This helps us understand your goals and prepare a tailored plan.",
+        title: "Submit Your Discovery Form",
+        timeline: "Day 1",
+        description: "Fill out the discovery form below with basic details about your temple. Our team reviews every submission within 24 hours.",
+        deliverables: [
+          "Confirmation email within 24 hours",
+          "Initial review of your needs and community profile",
+          "Consultation call scheduled within 2–3 business days",
+        ],
       },
       step2: {
-        number: "02",
         label: "Step 2",
-        title: "Consultation & Planning",
-        description: "Our team reviews your submission and schedules a free consultation call. We'll discuss your vision, walk you through the platform, answer questions, and recommend the right plan and services for your community.",
+        title: "Free Consultation & Planning",
+        timeline: "Day 3–5",
+        price: "Free",
+        description: "We schedule a 30-minute call to understand your vision. We walk you through the platform, answer questions, and recommend a plan tailored to your community size and needs.",
+        deliverables: [
+          "Platform demo & feature walkthrough",
+          "Recommended plan and service package",
+          "Custom project scope and timeline",
+          "Clear pricing breakdown — no hidden fees",
+        ],
       },
       step3: {
-        number: "03",
         label: "Step 3",
-        title: "Onboarding & Setup",
-        description: "We build your custom website, configure the platform, migrate your data, and digitize your documents. You'll receive a training session so your team is confident and ready before launch.",
+        title: "Onboarding & Build",
+        timeline: "Week 1–2",
+        price: "$899 one-time",
+        description: "Our team builds your website, configures the platform, migrates your data, and digitizes your documents. You receive a hands-on training session before launch.",
+        deliverables: [
+          "Custom website designed to your temple's identity",
+          "Full platform configuration (donations, members, content)",
+          "Document classification & digitization (paper to digital)",
+          "Data migration — library, donation records, member data",
+          "Training session for your team",
+        ],
       },
       step4: {
-        number: "04",
         label: "Step 4",
-        title: "Go Live",
-        description: "Your temple's digital platform goes live. Your community can access the website, make donations, and engage with AI Dharma agents. We stay available for ongoing support as you grow.",
+        title: "Go Live + Ongoing Support",
+        timeline: "Week 2+",
+        price: "From $79/mo",
+        description: "Your temple's digital platform goes live. Your community can access the website, make donations, and engage with AI Dharma agents. We provide 30 days of post-launch support and stay available as you grow.",
+        deliverables: [
+          "Platform goes live with your custom domain",
+          "30-day post-launch support included",
+          "Monthly subscription begins (choose your plan)",
+          "Ongoing updates, backups, and technical support",
+        ],
       },
     },
 
+    responsibilities: {
+      title: "What We Handle vs. What You Provide",
+      weHandle: {
+        title: "We Handle",
+        items: [
+          "Website design & development",
+          "Platform setup & configuration",
+          "Data migration & document digitization",
+          "Training & onboarding sessions",
+          "Domain setup & SSL certificates",
+          "Ongoing technical support & maintenance",
+        ],
+      },
+      youProvide: {
+        title: "You Provide",
+        items: [
+          "Temple branding (logo, photos, colors)",
+          "Content for your library (sutras, teachings, schedules)",
+          "Existing records for migration (if any)",
+          "Feedback during the build process",
+          "A point of contact for communication",
+        ],
+      },
+    },
+
+    communication: {
+      title: "How We Stay Connected",
+      channels: [
+        {
+          title: "Weekly Check-ins",
+          description: "Scheduled video or phone calls during the build phase to review progress.",
+        },
+        {
+          title: "Email & Chat Support",
+          description: "Respond within 24 hours during onboarding. Ongoing support via email.",
+        },
+        {
+          title: "Live Demo Before Launch",
+          description: "A full walkthrough of your platform before going live — so you can request any changes.",
+        },
+        {
+          title: "30-Day Post-Launch Support",
+          description: "Dedicated support after launch to resolve issues and answer questions.",
+        },
+      ],
+    },
+
     formSection: {
-      title: "Start Here",
-      subtitle: "Fill out the form to begin your onboarding journey.",
+      title: "Start Here — Submit Your Discovery Form",
+      subtitle: "Takes less than 3 minutes. We'll reach out within 24 hours.",
+      stepLabels: ["Temple Info", "Contact Details", "Your Needs", "Review & Submit"],
+      next: "Next",
+      previous: "Previous",
+      step: "Step",
+      of: "of",
     },
 
     form: {
@@ -123,40 +212,129 @@ export const processTranslations = {
     },
 
     hero: {
-      title: "Quy Trình Hoạt Động",
-      subtitle: "Từ yêu cầu đầu tiên đến khi ra mắt — đây là quy trình 4 bước đơn giản để đưa ngôi chùa của bạn lên nền tảng số.",
+      title: "Bốn Bước. Hai Tuần. Một Lần Ra Mắt.",
+      subtitle: "Từ lần gửi biểu mẫu đầu tiên đến nền tảng số hoàn chỉnh — chúng tôi lo liệu mọi thứ để bạn tập trung vào cộng đồng.",
+    },
+
+    timeline: {
+      title: "Hành Trình Của Bạn",
+      nodes: [
+        { label: "Gửi Biểu Mẫu", time: "Ngày 1" },
+        { label: "Tư Vấn", time: "Ngày 3–5" },
+        { label: "Xây Dựng", time: "Tuần 1–2" },
+        { label: "Ra Mắt", time: "Tuần 2" },
+      ],
     },
 
     steps: {
       step1: {
-        number: "01",
         label: "Bước 1",
-        title: "Cho Chúng Tôi Biết Về Ngôi Chùa",
-        description: "Điền vào biểu mẫu khám phá bên dưới với thông tin cơ bản về tổ chức, quy mô cộng đồng và dịch vụ bạn cần. Điều này giúp chúng tôi hiểu mục tiêu và chuẩn bị kế hoạch phù hợp.",
+        title: "Gửi Biểu Mẫu Khám Phá",
+        timeline: "Ngày 1",
+        description: "Điền biểu mẫu bên dưới với thông tin cơ bản về ngôi chùa. Đội ngũ xem xét mọi yêu cầu trong vòng 24 giờ.",
+        deliverables: [
+          "Email xác nhận trong vòng 24 giờ",
+          "Đánh giá ban đầu nhu cầu và hồ sơ cộng đồng",
+          "Lên lịch tư vấn trong 2–3 ngày làm việc",
+        ],
       },
       step2: {
-        number: "02",
         label: "Bước 2",
-        title: "Tư Vấn & Lập Kế Hoạch",
-        description: "Đội ngũ của chúng tôi xem xét thông tin và sắp xếp cuộc gọi tư vấn miễn phí. Chúng tôi sẽ thảo luận về tầm nhìn của bạn, giới thiệu nền tảng, trả lời câu hỏi và đề xuất gói dịch vụ phù hợp cho cộng đồng.",
+        title: "Tư Vấn & Lập Kế Hoạch Miễn Phí",
+        timeline: "Ngày 3–5",
+        price: "Miễn phí",
+        description: "Chúng tôi lên lịch cuộc gọi 30 phút để hiểu tầm nhìn của bạn. Giới thiệu nền tảng, trả lời câu hỏi và đề xuất gói phù hợp với quy mô cộng đồng.",
+        deliverables: [
+          "Demo nền tảng & giới thiệu tính năng",
+          "Đề xuất gói dịch vụ phù hợp",
+          "Phạm vi dự án và lịch trình tùy chỉnh",
+          "Bảng giá rõ ràng — không phí ẩn",
+        ],
       },
       step3: {
-        number: "03",
         label: "Bước 3",
-        title: "Khởi Động & Thiết Lập",
-        description: "Chúng tôi xây dựng website tùy chỉnh, cấu hình nền tảng, di chuyển dữ liệu và số hóa tài liệu. Bạn sẽ nhận được buổi đào tạo để đội ngũ tự tin và sẵn sàng trước khi ra mắt.",
+        title: "Khởi Động & Xây Dựng",
+        timeline: "Tuần 1–2",
+        price: "$899 một lần",
+        description: "Đội ngũ xây dựng website, cấu hình nền tảng, di chuyển dữ liệu và số hóa tài liệu. Bạn nhận buổi đào tạo thực hành trước khi ra mắt.",
+        deliverables: [
+          "Website tùy chỉnh theo bản sắc ngôi chùa",
+          "Cấu hình nền tảng đầy đủ (cúng dường, thành viên, nội dung)",
+          "Phân loại & số hóa tài liệu (giấy sang số)",
+          "Di chuyển dữ liệu — thư viện, hồ sơ cúng dường, thành viên",
+          "Buổi đào tạo cho đội ngũ",
+        ],
       },
       step4: {
-        number: "04",
         label: "Bước 4",
-        title: "Ra Mắt",
-        description: "Nền tảng số của ngôi chùa chính thức hoạt động. Cộng đồng có thể truy cập trang web, cúng dường và tương tác với AI Phật Pháp. Chúng tôi luôn sẵn sàng hỗ trợ khi bạn phát triển.",
+        title: "Ra Mắt + Hỗ Trợ Liên Tục",
+        timeline: "Tuần 2+",
+        price: "Từ $79/tháng",
+        description: "Nền tảng số chính thức hoạt động. Cộng đồng truy cập website, cúng dường và tương tác AI Phật Pháp. 30 ngày hỗ trợ sau ra mắt và hỗ trợ liên tục khi phát triển.",
+        deliverables: [
+          "Nền tảng hoạt động với tên miền tùy chỉnh",
+          "30 ngày hỗ trợ sau ra mắt",
+          "Bắt đầu thuê bao hàng tháng (chọn gói)",
+          "Cập nhật, sao lưu và hỗ trợ kỹ thuật liên tục",
+        ],
       },
     },
 
+    responsibilities: {
+      title: "Chúng Tôi Lo Liệu vs. Bạn Cung Cấp",
+      weHandle: {
+        title: "Chúng Tôi Lo Liệu",
+        items: [
+          "Thiết kế & phát triển website",
+          "Thiết lập & cấu hình nền tảng",
+          "Di chuyển dữ liệu & số hóa tài liệu",
+          "Đào tạo & hướng dẫn sử dụng",
+          "Thiết lập tên miền & chứng chỉ SSL",
+          "Hỗ trợ kỹ thuật & bảo trì liên tục",
+        ],
+      },
+      youProvide: {
+        title: "Bạn Cung Cấp",
+        items: [
+          "Nhận diện thương hiệu (logo, hình ảnh, màu sắc)",
+          "Nội dung cho thư viện (kinh, bài giảng, lịch trình)",
+          "Hồ sơ hiện có để di chuyển (nếu có)",
+          "Phản hồi trong quá trình xây dựng",
+          "Người liên hệ cho giao tiếp",
+        ],
+      },
+    },
+
+    communication: {
+      title: "Cách Chúng Tôi Liên Lạc",
+      channels: [
+        {
+          title: "Họp Hàng Tuần",
+          description: "Cuộc gọi video hoặc điện thoại theo lịch trong giai đoạn xây dựng.",
+        },
+        {
+          title: "Hỗ Trợ Email & Chat",
+          description: "Phản hồi trong 24 giờ trong quá trình khởi động. Hỗ trợ liên tục qua email.",
+        },
+        {
+          title: "Demo Trước Khi Ra Mắt",
+          description: "Giới thiệu đầy đủ nền tảng trước khi hoạt động — để bạn yêu cầu thay đổi.",
+        },
+        {
+          title: "30 Ngày Hỗ Trợ Sau Ra Mắt",
+          description: "Hỗ trợ chuyên dụng sau ra mắt để giải quyết vấn đề và trả lời câu hỏi.",
+        },
+      ],
+    },
+
     formSection: {
-      title: "Bắt Đầu Tại Đây",
-      subtitle: "Điền biểu mẫu để bắt đầu hành trình khởi động.",
+      title: "Bắt Đầu — Gửi Biểu Mẫu Khám Phá",
+      subtitle: "Chỉ mất chưa đến 3 phút. Chúng tôi liên hệ trong vòng 24 giờ.",
+      stepLabels: ["Thông Tin Chùa", "Liên Hệ", "Nhu Cầu", "Xem Lại & Gửi"],
+      next: "Tiếp",
+      previous: "Quay Lại",
+      step: "Bước",
+      of: "/",
     },
 
     form: {
