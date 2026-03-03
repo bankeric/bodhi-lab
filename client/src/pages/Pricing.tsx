@@ -10,14 +10,14 @@ import {
   CreditCard,
   Loader2,
   Star,
-  Zap,
 } from "lucide-react";
 
 interface PlanConfig {
   id: "basic" | "standard" | "premium";
   name: string;
-  price: number;
+  price: string;
   period: string;
+  description: string;
   features: string[];
   highlighted: boolean;
 }
@@ -25,60 +25,62 @@ interface PlanConfig {
 const PLANS: PlanConfig[] = [
   {
     id: "basic",
-    name: "Basic",
-    price: 99,
+    name: "Lay Practitioner",
+    price: "$79",
     period: "/month",
+    description: "Perfect for small to medium temples getting started with digital transformation",
     features: [
-      "Temple website & landing page",
-      "Event calendar management",
-      "Basic community features",
+      "Shared website template & resource library",
+      "2.5% + $0.20 per card donation (0.8% + $0.20 bank transfer)",
+      "1,000 user limit",
+      "2 admin seats",
+      "Shared domain",
       "Email support",
+      "Basic backup & logs",
     ],
     highlighted: false,
   },
   {
     id: "standard",
-    name: "Standard",
-    price: 199,
+    name: "Devoted Practitioner",
+    price: "$199",
     period: "/month",
+    description: "Ideal for growing communities ready to expand their digital presence",
     features: [
-      "Everything in Basic",
-      "Donation management system",
-      "Member directory",
-      "Push notifications",
-      "Priority support",
+      "Shared website template & resource library",
+      "1.5% + $0.20 per card donation (0.8% + $0.20 bank transfer)",
+      "AI Dharma Agent (standard usage)",
+      "5,000 user limit",
+      "5 admin seats",
+      "Included mobile app",
+      "Custom domain",
+      "Limited API access",
+      "Email + product updates",
+      "Daily backup, 7-day logs",
     ],
     highlighted: true,
   },
   {
     id: "premium",
-    name: "Premium",
-    price: 299,
+    name: "Sangha Community",
+    price: "$499+",
     period: "/month",
+    description: "Comprehensive solution for large monasteries and temple networks",
     features: [
-      "Everything in Standard",
-      "AI-powered content tools",
-      "Advanced analytics dashboard",
-      "Multi-language support",
-      "Custom integrations",
-      "Dedicated account manager",
+      "Shared website template & resource library",
+      "Free donation processing",
+      "AI Dharma Agent (fine-tuned, multi-instance)",
+      "10,000+ user limit",
+      "10+ admin seats",
+      "White-label native mobile app",
+      "Full brand suite (custom domain, logo, styling)",
+      "Full API & developer dashboard",
+      "Dedicated success manager + 24/7 support",
+      "Custom SLAs, security onboarding",
     ],
     highlighted: false,
   },
 ];
-
-const ONBOARDING = {
-  id: "onboarding" as const,
-  name: "Onboarding Service",
-  price: 500,
-  description: "One-time setup and migration assistance",
-  features: [
-    "Data migration from existing systems",
-    "Custom branding & theme setup",
-    "Staff training sessions",
-    "30-day post-launch support",
-  ],
-};
 
 export default function Pricing() {
   useDocumentTitle("Pricing Plans", "Affordable subscription plans for Buddhist temples and organizations. Basic, Standard, and Premium tiers starting at $99/month.");
@@ -174,9 +176,12 @@ export default function Pricing() {
                 <h3 className="font-serif text-lg font-semibold text-[#2c2c2c]">
                   {plan.name}
                 </h3>
+                <p className="font-serif text-xs text-[#8B4513]/60 mt-1 mb-2">
+                  {plan.description}
+                </p>
                 <div className="mt-2">
                   <span className="font-serif text-3xl font-bold text-[#2c2c2c]">
-                    ${plan.price}
+                    {plan.price}
                   </span>
                   <span className="font-serif text-sm text-[#8B4513]/60">
                     {plan.period}
@@ -210,49 +215,6 @@ export default function Pricing() {
           ))}
         </div>
 
-        {/* Onboarding Add-on */}
-        <div className="max-w-3xl mx-auto">
-          <div className="bg-white/80 backdrop-blur-md rounded-2xl border border-[#8B4513]/20 p-8">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-2">
-                  <Zap className="w-5 h-5 text-[#991b1b]" />
-                  <h3 className="font-serif text-lg font-semibold text-[#2c2c2c]">
-                    {ONBOARDING.name}
-                  </h3>
-                </div>
-                <p className="font-serif text-sm text-[#8B4513]/70 mb-4">
-                  {ONBOARDING.description}
-                </p>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {ONBOARDING.features.map((f, i) => (
-                    <li key={i} className="flex items-center gap-2 font-serif text-sm text-[#8B4513]/80">
-                      <Check className="w-3.5 h-3.5 text-green-600 flex-shrink-0" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="text-center md:text-right">
-                <div className="font-serif text-3xl font-bold text-[#2c2c2c] mb-1">
-                  ${ONBOARDING.price}
-                </div>
-                <p className="font-serif text-xs text-[#8B4513]/60 mb-4">one-time</p>
-                <button
-                  onClick={() => handleSubscribe(ONBOARDING.id)}
-                  disabled={loadingPlan === ONBOARDING.id}
-                  className="px-6 py-3 bg-white border-2 border-[#991b1b] text-[#991b1b] rounded-xl font-serif font-semibold hover:bg-[#991b1b] hover:text-white transition-all disabled:opacity-50 flex items-center gap-2 mx-auto md:mx-0"
-                >
-                  {loadingPlan === ONBOARDING.id ? (
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                  ) : (
-                    "Add Onboarding"
-                  )}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
       </main>
     </div>
   );

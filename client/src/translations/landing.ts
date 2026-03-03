@@ -174,7 +174,7 @@ export const landingTranslations = {
           "Dedicated success manager + 24/7 support",
           "Custom SLAs, security onboarding"
         ],
-        cta: "Contact Us"
+        cta: "Subscribe Now"
       },
       premium: {
         title: "Premium Package",
@@ -454,7 +454,7 @@ export const landingTranslations = {
           "Người quản lý chuyên dụng + hỗ trợ 24/7",
           "SLA tùy chỉnh, đào tạo bảo mật"
         ],
-        cta: "Liên Hệ Chúng Tôi"
+        cta: "Đăng Ký Ngay"
       },
       premium: {
         title: "Gói Cao Cấp",
