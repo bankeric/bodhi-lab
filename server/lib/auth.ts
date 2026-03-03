@@ -13,6 +13,15 @@ if (!process.env.BETTER_AUTH_SECRET) {
 export const auth = betterAuth({
   database: drizzleAdapter(poolDb, { provider: "pg", schema }),
   secret: process.env.BETTER_AUTH_SECRET,
+  baseURL: process.env.BETTER_AUTH_URL,
+  trustedOrigins: [
+    "http://localhost:3000",
+    "http://localhost:5000",
+    "http://localhost:5173",
+    "https://bodhi-labs.vercel.app",
+    "https://bodhi-labs.com",
+    "https://www.bodhi-labs.com",
+  ],
   emailAndPassword: { enabled: true },
   user: {
     additionalFields: {
