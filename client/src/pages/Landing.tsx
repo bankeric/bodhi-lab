@@ -8,8 +8,9 @@ import { TracingBeam } from "@/components/TracingBeam";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { landingTranslations } from "@/translations/landing";
-import { SubscriptionModal } from "@/components/SubscriptionModal";
 import { useDocumentTitle } from "@/hooks/use-document-title";
+import { useCustomer } from "autumn-js/react";
+import { useToast } from "@/hooks/use-toast";
 
 // Buddhist artwork for agent cards
 import agentArt1 from "@assets/agent-tam-an-artwork.png";
@@ -134,18 +135,28 @@ export default function Landing() {
   const [searchFocused, setSearchFocused] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  // Subscription modal state
-  const [subscriptionModal, setSubscriptionModal] = useState<{ isOpen: boolean; packageName: string }>({
-    isOpen: false,
-    packageName: ""
-  });
+  // Subscription checkout state
+  const { attach } = useCustomer();
+  const { toast } = useToast();
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
 
-  const openSubscriptionModal = (packageName: string) => {
-    setSubscriptionModal({ isOpen: true, packageName });
-  };
-
-  const closeSubscriptionModal = () => {
-    setSubscriptionModal({ isOpen: false, packageName: "" });
+  const handleSubscribe = async (productId: string) => {
+    if (!session) {
+      window.location.href = "/login";
+      return;
+    }
+    setLoadingPlan(productId);
+    try {
+      await attach({ productId, successUrl: `${window.location.origin}/dashboard` });
+    } catch (err: any) {
+      toast({
+        title: "Checkout Error",
+        description: err?.message || "Could not start checkout. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoadingPlan(null);
+    }
   };
 
   const handleSearch = (e?: React.FormEvent) => {
@@ -707,11 +718,12 @@ export default function Landing() {
                   </ul>
 
                   <button
-                    onClick={() => openSubscriptionModal(t.pricing.start.title)}
-                    className="w-full px-4 py-2.5 bg-white border-2 border-[#991b1b] rounded-xl text-[#991b1b] font-serif font-semibold hover:bg-[#991b1b] hover:text-white transition-all duration-300 text-sm"
+                    onClick={() => handleSubscribe("basic")}
+                    disabled={loadingPlan === "basic"}
+                    className="w-full px-4 py-2.5 bg-white border-2 border-[#991b1b] rounded-xl text-[#991b1b] font-serif font-semibold hover:bg-[#991b1b] hover:text-white transition-all duration-300 text-sm disabled:opacity-50"
                     data-testid="button-subscribe-start"
                   >
-                    {t.pricing.start.cta}
+                    {loadingPlan === "basic" ? "..." : t.pricing.start.cta}
                   </button>
                 </div>
               </div>
@@ -741,11 +753,12 @@ export default function Landing() {
                   </ul>
 
                   <button
-                    onClick={() => openSubscriptionModal(t.pricing.scale.title)}
-                    className="w-full px-4 py-2.5 bg-[#991b1b] rounded-xl text-white font-serif font-semibold hover:bg-[#7a1515] transition-all duration-300 shadow-md text-sm"
+                    onClick={() => handleSubscribe("standard")}
+                    disabled={loadingPlan === "standard"}
+                    className="w-full px-4 py-2.5 bg-[#991b1b] rounded-xl text-white font-serif font-semibold hover:bg-[#7a1515] transition-all duration-300 shadow-md text-sm disabled:opacity-50"
                     data-testid="button-subscribe-scale"
                   >
-                    {t.pricing.scale.cta}
+                    {loadingPlan === "standard" ? "..." : t.pricing.scale.cta}
                   </button>
                 </div>
               </div>
@@ -772,11 +785,12 @@ export default function Landing() {
                   </ul>
 
                   <button
-                    onClick={() => openSubscriptionModal(t.pricing.enterprise.title)}
-                    className="w-full px-4 py-2.5 bg-white border-2 border-[#991b1b] rounded-xl text-[#991b1b] font-serif font-semibold hover:bg-[#991b1b] hover:text-white transition-all duration-300 text-sm"
+                    onClick={() => handleSubscribe("premium")}
+                    disabled={loadingPlan === "premium"}
+                    className="w-full px-4 py-2.5 bg-white border-2 border-[#991b1b] rounded-xl text-[#991b1b] font-serif font-semibold hover:bg-[#991b1b] hover:text-white transition-all duration-300 text-sm disabled:opacity-50"
                     data-testid="button-contact-enterprise"
                   >
-                    {t.pricing.enterprise.cta}
+                    {loadingPlan === "premium" ? "..." : t.pricing.enterprise.cta}
                   </button>
                 </div>
               </div>
@@ -802,11 +816,12 @@ export default function Landing() {
 
                 <div className="text-center">
                   <button
-                    onClick={() => openSubscriptionModal(t.pricing.premium.title)}
-                    className="px-8 py-3 bg-[#991b1b] rounded-xl text-white font-serif font-semibold hover:bg-[#7a1515] transition-all duration-300 shadow-lg"
+                    onClick={() => handleSubscribe("premium")}
+                    disabled={loadingPlan === "premium"}
+                    className="px-8 py-3 bg-[#991b1b] rounded-xl text-white font-serif font-semibold hover:bg-[#7a1515] transition-all duration-300 shadow-lg disabled:opacity-50"
                     data-testid="button-add-premium"
                   >
-                    {t.pricing.premium.cta}
+                    {loadingPlan === "premium" ? "..." : t.pricing.premium.cta}
                   </button>
                 </div>
               </div>
@@ -1103,12 +1118,6 @@ export default function Landing() {
         </footer>
       </div>
 
-      <SubscriptionModal
-        isOpen={subscriptionModal.isOpen}
-        onClose={closeSubscriptionModal}
-        packageName={subscriptionModal.packageName}
-        language={language}
-      />
     </div>
   );
 }
