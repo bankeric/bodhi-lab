@@ -204,6 +204,10 @@ export default function Landing() {
                         <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
                         {t.header.company.privacy}
                       </Link>
+                      <Link href="/contact" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-contact">
+                        <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
+                        Contact
+                      </Link>
                     </div>
                     
                     {/* Social Media */}
@@ -232,13 +236,13 @@ export default function Landing() {
               >
                 {t.header.nav.services}
               </a>
-              <a 
-                href="#services" 
+              <Link 
+                href="/pricing"
                 className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" 
                 data-testid="link-pricing"
               >
                 {t.header.nav.pricing}
-              </a>
+              </Link>
               <Link href="/platform" className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-platform">
                 {t.header.nav.platform}
               </Link>

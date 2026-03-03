@@ -25,6 +25,11 @@ import Career from "@/pages/Career";
 import Privacy from "@/pages/Privacy";
 import Terms from "@/pages/Terms";
 import Admin from "@/pages/Admin";
+import Dashboard from "@/pages/Dashboard";
+import Login from "@/pages/Login";
+import Pricing from "@/pages/Pricing";
+import Contact from "@/pages/Contact";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -40,7 +45,19 @@ function Router() {
       <Route path="/career" component={Career} />
       <Route path="/privacy" component={Privacy} />
       <Route path="/terms" component={Terms} />
-      <Route path="/admin" component={Admin} />
+      <Route path="/admin">
+        <ProtectedRoute requiredRole="bodhi_admin">
+          <Admin />
+        </ProtectedRoute>
+      </Route>
+      <Route path="/dashboard">
+        <ProtectedRoute requiredRole="temple_admin">
+          <Dashboard />
+        </ProtectedRoute>
+      </Route>
+      <Route path="/login" component={Login} />
+      <Route path="/pricing" component={Pricing} />
+      <Route path="/contact" component={Contact} />
       <Route path="/docs/manifesto">
         <DocsLayout>
           <Manifesto />

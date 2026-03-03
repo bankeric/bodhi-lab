@@ -1,10 +1,7 @@
-import { useState } from 'react';
 import { DocsNav } from '../DocsNav';
-import { Sparkles, DollarSign, BookOpen, Zap } from 'lucide-react';
+import { Sparkles, DollarSign } from 'lucide-react';
 
 export default function DocsNavExample() {
-  const [activeSection, setActiveSection] = useState('overview');
-
   const navigation = [
     {
       id: 'agents',
@@ -28,11 +25,7 @@ export default function DocsNavExample() {
 
   return (
     <div className="h-screen w-80 bg-sidebar border-r">
-      <DocsNav
-        navigation={navigation}
-        activeSection={activeSection}
-        onSectionClick={setActiveSection}
-      />
+      <DocsNav navigation={navigation} />
     </div>
   );
 }

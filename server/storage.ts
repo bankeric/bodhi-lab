@@ -1,33 +1,16 @@
-import { type User, type InsertUser, type Lead, type InsertLead, users, leads } from "@shared/schema";
+import { type Lead, type InsertLead, leads } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc } from "drizzle-orm";
 import { randomUUID } from "crypto";
 
 export interface IStorage {
-  getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
   createLead(lead: InsertLead): Promise<Lead>;
   getLeads(): Promise<Lead[]>;
   updateLeadStatus(id: string, status: string): Promise<Lead | undefined>;
+  updateLead(id: string, data: Partial<Lead>): Promise<Lead | undefined>;
 }
 
 export class DatabaseStorage implements IStorage {
-  async getUser(id: string): Promise<User | undefined> {
-    const result = await db.select().from(users).where(eq(users.id, id));
-    return result[0];
-  }
-
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    const result = await db.select().from(users).where(eq(users.username, username));
-    return result[0];
-  }
-
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const result = await db.insert(users).values(insertUser).returning();
-    return result[0];
-  }
-
   async createLead(insertLead: InsertLead): Promise<Lead> {
     const id = randomUUID();
     const now = new Date();
@@ -39,9 +22,9 @@ export class DatabaseStorage implements IStorage {
       interests: insertLead.interests || null,
       package: insertLead.package,
       status: insertLead.status || "new",
-      createdAt: now
+      createdAt: now,
     });
-    
+
     // Fetch the created lead since returning() may not work with neon-http
     const result = await db.select().from(leads).where(eq(leads.id, id));
     return result[0];
@@ -51,9 +34,25 @@ export class DatabaseStorage implements IStorage {
     return await db.select().from(leads).orderBy(desc(leads.createdAt));
   }
 
-  async updateLeadStatus(id: string, status: string): Promise<Lead | undefined> {
-    const result = await db.update(leads)
+  async updateLeadStatus(
+    id: string,
+    status: string
+  ): Promise<Lead | undefined> {
+    const result = await db
+      .update(leads)
       .set({ status })
+      .where(eq(leads.id, id))
+      .returning();
+    return result[0];
+  }
+
+  async updateLead(
+    id: string,
+    data: Partial<Lead>
+  ): Promise<Lead | undefined> {
+    const result = await db
+      .update(leads)
+      .set(data)
       .where(eq(leads.id, id))
       .returning();
     return result[0];

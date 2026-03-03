@@ -4,9 +4,7 @@ import { Search, Heart, MessageCircle, Repeat2, Home, User, Bell, Hash, Radio, C
 import { SiCashapp, SiApplepay } from "react-icons/si";
 import { TracingBeam } from "@/components/TracingBeam";
 import { buddhistAgents } from "@shared/buddhistAgents";
-import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
-import DonationCheckout from "@/components/DonationCheckout";
 import lotusIcon from "@assets/44_1762155616660.png";
 import bellIcon from "@assets/Bell_no_bg (1)_1762155616660.png";
 import buddhaIcon from "@assets/2_1762155709385.png";
@@ -890,61 +888,13 @@ export default function Platform() {
   const [donationAmount, setDonationAmount] = useState<number | null>(500000);
   const [customAmount, setCustomAmount] = useState<string>("");
   const [paymentMethod, setPaymentMethod] = useState<'card' | 'cashapp' | 'applepay' | 'venmo' | 'bank'>('card');
-  const [showCheckout, setShowCheckout] = useState(false);
-  const [clientSecret, setClientSecret] = useState<string>("");
-  const [isCreatingPayment, setIsCreatingPayment] = useState(false);
   const { toast } = useToast();
 
   const handleDonationSubmit = async () => {
-    if (!donationAmount || donationAmount < 1000) {
-      toast({
-        title: "Số tiền không hợp lệ",
-        description: "Vui lòng nhập số tiền tối thiểu 1.000 đ",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setIsCreatingPayment(true);
-    
-    try {
-      const response = await apiRequest("POST", "/api/create-payment-intent", { 
-        amount: donationAmount 
-      });
-      const data = await response.json();
-      
-      if (data.clientSecret) {
-        setClientSecret(data.clientSecret);
-        setShowCheckout(true);
-      } else {
-        throw new Error("No client secret received");
-      }
-    } catch (error: any) {
-      toast({
-        title: "Lỗi kết nối",
-        description: error.message || "Không thể kết nối đến dịch vụ thanh toán. Vui lòng thử lại.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsCreatingPayment(false);
-    }
-  };
-
-  const handleDonationSuccess = () => {
-    setShowCheckout(false);
-    setClientSecret("");
-    setDonationAmount(500000);
-    setCustomAmount("");
-    
     toast({
-      title: "Cúng dường thành công! 🙏",
-      description: "Cảm ơn lòng từ bi của bạn. Công đức được hồi hướng cho tất cả chúng sinh.",
+      title: "Coming Soon 🙏",
+      description: "Donation feature is being prepared. Thank you for your generosity.",
     });
-  };
-
-  const handleCloseCheckout = () => {
-    setShowCheckout(false);
-    setClientSecret("");
   };
 
   return (
@@ -1594,15 +1544,15 @@ export default function Platform() {
               {/* Submit Button */}
               <button 
                 onClick={handleDonationSubmit}
-                disabled={isCreatingPayment || !donationAmount}
+                disabled={!donationAmount}
                 className="w-full px-6 py-3 bg-gradient-to-r from-[#991b1b] to-[#7a1515] text-white font-serif font-semibold rounded-xl hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed" 
                 data-testid="button-submit-donation"
               >
-                {isCreatingPayment ? "Processing..." : "Complete Donation"}
+                Complete Donation
               </button>
 
               <p className="font-serif text-xs text-center text-[#8B4513]/60 mt-4 italic">
-                This is a demo. No actual payment will be processed.
+                Donation feature coming soon.
               </p>
               </div>
             </div>
@@ -2654,13 +2604,6 @@ export default function Platform() {
         </footer>
       </div>
 
-      <DonationCheckout
-        isOpen={showCheckout}
-        amount={donationAmount || 0}
-        clientSecret={clientSecret}
-        onClose={handleCloseCheckout}
-        onSuccess={handleDonationSuccess}
-      />
     </div>
   );
 }

@@ -1,4 +1,11 @@
 import express, { type Request, Response, NextFunction } from "express";
+import helmet from "helmet";
+import cors from "cors";
+import rateLimit from "express-rate-limit";
+import { toNodeHandler } from "better-auth/node";
+import { fromNodeHeaders } from "better-auth/node";
+import { autumnHandler } from "autumn-js/express";
+import { auth } from "./lib/auth";
 import { registerRoutes, createAppServer } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
@@ -9,12 +16,83 @@ declare module 'http' {
     rawBody: unknown
   }
 }
+
+// ─── Security Middleware ───
+
+// Helmet — security headers (CSP, X-Frame-Options, etc.)
+app.use(helmet({
+  contentSecurityPolicy: false, // Vite dev server needs inline scripts
+}));
+
+// CORS — restrict origins in production
+const allowedOrigins = [
+  "https://bodhi-labs.vercel.app",
+  "https://bodhi-labs.com",
+  "https://www.bodhi-labs.com",
+  process.env.NODE_ENV === "development" ? "http://localhost:5173" : "",
+  process.env.NODE_ENV === "development" ? "http://localhost:5000" : "",
+].filter(Boolean);
+
+app.use(cors({
+  origin: (origin, callback) => {
+    // Allow requests with no origin (same-origin, server-to-server, mobile apps)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+}));
+
+// Stricter limiter for form submissions
+const formLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10, // 10 form submissions per 15 min per IP
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: "Too many submissions, please try again later." },
+});
+
+// Apply rate limiters to public endpoints
+app.use("/api/contact", formLimiter);
+// POST /api/leads is handled in registerRoutes but we apply limiter here
+app.post("/api/leads", formLimiter);
+
+// Mount Better Auth handler BEFORE express.json() to avoid body parsing conflicts
+app.all("/api/auth/*", toNodeHandler(auth));
+
 app.use(express.json({
+  limit: "100kb", // Prevent oversized payloads
   verify: (req, _res, buf) => {
     req.rawBody = buf;
   }
 }));
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false, limit: "100kb" }));
+
+// Mount Autumn billing handler (needs parsed body + Better Auth session)
+app.use(
+  "/api/autumn",
+  autumnHandler({
+    identify: async (req: any) => {
+      const session = await auth.api.getSession({
+        headers: fromNodeHeaders(req.headers),
+      });
+
+      if (!session) {
+        return { customerId: undefined };
+      }
+
+      return {
+        customerId: session.user.id,
+        customerData: {
+          name: session.user.name,
+          email: session.user.email,
+        },
+      };
+    },
+  })
+);
 
 app.use((req, res, next) => {
   const start = Date.now();
@@ -62,8 +140,13 @@ async function initializeApp() {
       const status = err.status || err.statusCode || 500;
       const message = err.message || "Internal Server Error";
 
-      res.status(status).json({ message });
-      throw err;
+      // Log full error internally
+      console.error("Unhandled error:", err);
+
+      // Return generic message to client (don't leak internals)
+      if (!res.headersSent) {
+        res.status(status).json({ message: status >= 500 ? "Internal Server Error" : message });
+      }
     });
 
     // Setup based on environment

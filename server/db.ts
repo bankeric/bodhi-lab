@@ -1,13 +1,19 @@
-import { drizzle } from "drizzle-orm/node-postgres";
-import pg from "pg";
+import { neon } from "@neondatabase/serverless";
+import { drizzle as drizzleHttp } from "drizzle-orm/neon-http";
+import { Pool } from "@neondatabase/serverless";
+import { drizzle as drizzlePool } from "drizzle-orm/neon-serverless";
 import * as schema from "@shared/schema";
 
 if (!process.env.DATABASE_URL) {
-  throw new Error("DATABASE_URL is not set");
+  throw new Error(
+    "DATABASE_URL is not set. Provide a Neon PostgreSQL connection string."
+  );
 }
 
-const pool = new pg.Pool({
-  connectionString: process.env.DATABASE_URL,
-});
+// HTTP driver — lowest latency for single queries (used by app routes)
+const sql = neon(process.env.DATABASE_URL);
+export const db = drizzleHttp(sql, { schema });
 
-export const db = drizzle(pool, { schema });
+// Pool driver — transaction support (used by Better Auth internally)
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+export const poolDb = drizzlePool(pool, { schema });

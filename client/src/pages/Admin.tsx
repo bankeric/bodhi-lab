@@ -1,8 +1,46 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { Lock, Users, Phone, Mail, Calendar, Tag, MessageSquare, RefreshCw, ArrowLeft } from "lucide-react";
+import {
+  Users,
+  Phone,
+  Mail,
+  Calendar,
+  Tag,
+  MessageSquare,
+  RefreshCw,
+  ArrowLeft,
+  LogOut,
+  DollarSign,
+  TrendingUp,
+  UserPlus,
+  Search,
+  StickyNote,
+  Check,
+  X,
+} from "lucide-react";
 import { Link } from "wouter";
-import { queryClient, apiRequest } from "@/lib/queryClient";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+  Legend,
+} from "recharts";
+import { queryClient } from "@/lib/queryClient";
+import { useSession, signOut } from "@/lib/auth-client";
+import {
+  computeStats,
+  computeFunnelData,
+  computeSubscriptionDistribution,
+  filterLeads,
+  paymentStatusColors,
+  planTierLabels,
+} from "@/lib/admin-utils";
 import type { Lead } from "@shared/schema";
 
 const statusColors: Record<string, string> = {
@@ -10,7 +48,7 @@ const statusColors: Record<string, string> = {
   contacted: "bg-yellow-100 text-yellow-800 border-yellow-200",
   qualified: "bg-purple-100 text-purple-800 border-purple-200",
   converted: "bg-green-100 text-green-800 border-green-200",
-  lost: "bg-gray-100 text-gray-800 border-gray-200"
+  lost: "bg-gray-100 text-gray-800 border-gray-200",
 };
 
 const statusLabels: Record<string, string> = {
@@ -18,129 +56,78 @@ const statusLabels: Record<string, string> = {
   contacted: "Contacted",
   qualified: "Qualified",
   converted: "Converted",
-  lost: "Lost"
+  lost: "Lost",
 };
 
 export default function Admin() {
-  const [password, setPassword] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [authError, setAuthError] = useState("");
-  const [storedPassword, setStoredPassword] = useState("");
+  const { data: session } = useSession();
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("");
+  const [paymentFilter, setPaymentFilter] = useState("");
+  const [editingNotes, setEditingNotes] = useState<string | null>(null);
+  const [notesValue, setNotesValue] = useState("");
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setAuthError("");
-    
-    try {
-      const response = await fetch("/api/admin/auth", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password })
-      });
-
-      if (response.ok) {
-        setStoredPassword(password);
-        setIsAuthenticated(true);
-      } else {
-        setAuthError("Invalid password");
-      }
-    } catch {
-      setAuthError("Authentication failed");
-    }
+  const handleSignOut = async () => {
+    await signOut();
+    window.location.href = "/login";
   };
 
-  if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen bg-[#EFE0BD] flex items-center justify-center p-4">
-        <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-xl p-8 max-w-md w-full border border-[#8B4513]/20">
-          <div className="text-center mb-6">
-            <div className="w-16 h-16 mx-auto mb-4 bg-[#991b1b]/10 rounded-full flex items-center justify-center">
-              <Lock className="w-8 h-8 text-[#991b1b]" />
-            </div>
-            <h1 className="font-serif text-2xl font-bold text-[#2c2c2c]">Admin CRM</h1>
-            <p className="font-serif text-sm text-[#8B4513]/70 mt-2">Enter password to access lead management</p>
-          </div>
-
-          <form onSubmit={handleLogin} className="space-y-4">
-            {authError && (
-              <div className="p-3 bg-red-100 text-red-800 rounded-lg font-serif text-sm border border-red-200">
-                {authError}
-              </div>
-            )}
-            
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter admin password"
-              className="w-full px-4 py-3 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-[#2c2c2c] placeholder:text-[#8B4513]/40 focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50 focus:border-[#991b1b] transition-all"
-              data-testid="input-admin-password"
-              required
-            />
-
-            <button
-              type="submit"
-              className="w-full px-6 py-3 bg-[#991b1b] text-white rounded-xl font-serif font-semibold hover:bg-[#7a1515] transition-all duration-300 shadow-md"
-              data-testid="button-admin-login"
-            >
-              Access CRM
-            </button>
-          </form>
-
-          <Link href="/" className="flex items-center justify-center gap-2 mt-6 text-[#8B4513]/60 hover:text-[#991b1b] transition-colors font-serif text-sm">
-            <ArrowLeft className="w-4 h-4" />
-            Back to Home
-          </Link>
-        </div>
-      </div>
-    );
-  }
-
-  return <LeadsDashboard password={storedPassword} />;
-}
-
-function LeadsDashboard({ password }: { password: string }) {
-  const { data: leads = [], isLoading, refetch } = useQuery<Lead[]>({
-    queryKey: ['/api/leads'],
+  const {
+    data: leads = [],
+    isLoading,
+    refetch,
+  } = useQuery<Lead[]>({
+    queryKey: ["/api/leads"],
     queryFn: async () => {
-      const response = await fetch("/api/leads", {
-        headers: { "X-Admin-Password": password }
-      });
+      const response = await fetch("/api/leads", { credentials: "include" });
       if (!response.ok) throw new Error("Failed to fetch leads");
       return response.json();
-    }
+    },
   });
 
-  const updateStatusMutation = useMutation({
-    mutationFn: async ({ id, status }: { id: string; status: string }) => {
+  const updateLeadMutation = useMutation({
+    mutationFn: async ({ id, ...data }: { id: string; [key: string]: any }) => {
       const response = await fetch(`/api/leads/${id}`, {
         method: "PATCH",
-        headers: { 
-          "Content-Type": "application/json",
-          "X-Admin-Password": password 
-        },
-        body: JSON.stringify({ status })
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(data),
       });
-      if (!response.ok) throw new Error("Failed to update status");
+      if (!response.ok) throw new Error("Failed to update lead");
       return response.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/leads'] });
-    }
+      queryClient.invalidateQueries({ queryKey: ["/api/leads"] });
+    },
   });
 
-  const formatDate = (date: string | Date) => {
-    return new Date(date).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
+  const stats = computeStats(leads);
+  const funnelData = computeFunnelData(leads);
+  const subscriptionData = computeSubscriptionDistribution(leads);
+  const filteredLeads = filterLeads(leads, search, statusFilter, paymentFilter);
+
+  const formatDate = (date: string | Date) =>
+    new Date(date).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
     });
+
+  const startEditNotes = (lead: Lead) => {
+    setEditingNotes(lead.id);
+    setNotesValue(lead.notes || "");
+  };
+
+  const saveNotes = (id: string) => {
+    updateLeadMutation.mutate({ id, notes: notesValue });
+    setEditingNotes(null);
   };
 
   return (
     <div className="min-h-screen bg-[#EFE0BD]">
+      {/* Header */}
       <header className="bg-white/80 backdrop-blur-md border-b border-[#8B4513]/20 sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between gap-4 flex-wrap">
           <div className="flex items-center gap-3">
@@ -149,114 +136,287 @@ function LeadsDashboard({ password }: { password: string }) {
             </div>
             <div>
               <h1 className="font-serif text-xl font-bold text-[#2c2c2c]">Lead Management</h1>
-              <p className="font-serif text-xs text-[#8B4513]/70">{leads.length} total leads</p>
+              <p className="font-serif text-xs text-[#8B4513]/70">
+                {leads.length} total leads
+                {session?.user?.name && ` · ${session.user.name}`}
+              </p>
             </div>
           </div>
-          
           <div className="flex items-center gap-3">
-            <button
-              onClick={() => refetch()}
-              className="flex items-center gap-2 px-4 py-2 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#8B4513] hover:bg-[#8B4513]/5 transition-all"
-              data-testid="button-refresh-leads"
-            >
-              <RefreshCw className="w-4 h-4" />
-              Refresh
+            <button onClick={() => refetch()} className="flex items-center gap-2 px-4 py-2 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#8B4513] hover:bg-[#8B4513]/5 transition-all">
+              <RefreshCw className="w-4 h-4" /> Refresh
             </button>
-            <Link 
-              href="/" 
-              className="flex items-center gap-2 px-4 py-2 bg-[#991b1b] text-white rounded-lg font-serif text-sm hover:bg-[#7a1515] transition-all"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back
+            <button onClick={handleSignOut} className="flex items-center gap-2 px-4 py-2 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#8B4513] hover:bg-red-50 hover:border-red-200 hover:text-red-700 transition-all">
+              <LogOut className="w-4 h-4" /> Sign Out
+            </button>
+            <Link href="/" className="flex items-center gap-2 px-4 py-2 bg-[#991b1b] text-white rounded-lg font-serif text-sm hover:bg-[#7a1515] transition-all">
+              <ArrowLeft className="w-4 h-4" /> Back
             </Link>
           </div>
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-6">
+      <main className="container mx-auto px-4 py-6 space-y-6">
         {isLoading ? (
           <div className="flex items-center justify-center py-12">
             <div className="animate-spin w-8 h-8 border-4 border-[#991b1b] border-t-transparent rounded-full" />
           </div>
-        ) : leads.length === 0 ? (
-          <div className="text-center py-12 bg-white/50 backdrop-blur-md rounded-2xl border border-[#8B4513]/20">
-            <Users className="w-12 h-12 mx-auto mb-4 text-[#8B4513]/30" />
-            <h2 className="font-serif text-xl font-semibold text-[#8B4513]/60">No leads yet</h2>
-            <p className="font-serif text-sm text-[#8B4513]/40 mt-2">New subscription requests will appear here</p>
-          </div>
         ) : (
-          <div className="grid gap-4">
-            {leads.map((lead) => (
-              <div 
-                key={lead.id} 
-                className="bg-white/80 backdrop-blur-md rounded-xl border border-[#8B4513]/20 p-6 hover:shadow-lg transition-all"
-                data-testid={`card-lead-${lead.id}`}
-              >
-                <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
-                  <div className="flex-1 space-y-3">
-                    <div className="flex items-start justify-between gap-4 flex-wrap">
-                      <div>
-                        <h3 className="font-serif text-lg font-semibold text-[#2c2c2c]" data-testid={`text-lead-name-${lead.id}`}>
-                          {lead.name}
-                        </h3>
-                        <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium border mt-2 ${statusColors[lead.status] || statusColors.new}`}>
-                          {statusLabels[lead.status] || lead.status}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2 px-3 py-1 bg-[#991b1b]/10 rounded-full">
-                        <Tag className="w-3 h-3 text-[#991b1b]" />
-                        <span className="font-serif text-xs font-medium text-[#991b1b]">{lead.package}</span>
-                      </div>
-                    </div>
-                    
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-sm">
-                      <div className="flex items-center gap-2 text-[#8B4513]/70">
-                        <Phone className="w-4 h-4 text-[#991b1b]" />
-                        <a href={`tel:${lead.phone}`} className="font-serif hover:text-[#991b1b] transition-colors">
-                          {lead.phone}
-                        </a>
-                      </div>
-                      <div className="flex items-center gap-2 text-[#8B4513]/70">
-                        <Mail className="w-4 h-4 text-[#991b1b]" />
-                        <a href={`mailto:${lead.email}`} className="font-serif hover:text-[#991b1b] transition-colors truncate">
-                          {lead.email}
-                        </a>
-                      </div>
-                      <div className="flex items-center gap-2 text-[#8B4513]/70">
-                        <Calendar className="w-4 h-4 text-[#991b1b]" />
-                        <span className="font-serif">{formatDate(lead.createdAt)}</span>
-                      </div>
-                    </div>
-
-                    {lead.interests && (
-                      <div className="flex items-start gap-2 mt-3 p-3 bg-[#8B4513]/5 rounded-lg">
-                        <MessageSquare className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                        <p className="font-serif text-sm text-[#8B4513]/80">{lead.interests}</p>
-                      </div>
-                    )}
+          <>
+            {/* MRR Stats */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="bg-white/80 backdrop-blur-md rounded-xl border border-[#8B4513]/20 p-5">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                    <DollarSign className="w-5 h-5 text-green-600" />
                   </div>
-
-                  <div className="flex flex-wrap gap-2 lg:flex-col">
-                    {Object.keys(statusLabels).map((status) => (
-                      <button
-                        key={status}
-                        onClick={() => updateStatusMutation.mutate({ id: lead.id, status })}
-                        disabled={lead.status === status || updateStatusMutation.isPending}
-                        className={`px-3 py-1.5 rounded-lg font-serif text-xs transition-all ${
-                          lead.status === status
-                            ? 'bg-[#991b1b] text-white cursor-default'
-                            : 'bg-white border border-[#8B4513]/20 text-[#8B4513]/70 hover:border-[#991b1b] hover:text-[#991b1b]'
-                        } disabled:opacity-50`}
-                        data-testid={`button-status-${status}-${lead.id}`}
-                      >
-                        {statusLabels[status]}
-                      </button>
-                    ))}
+                  <div>
+                    <p className="font-serif text-xs text-[#8B4513]/60">Total MRR</p>
+                    <p className="font-serif text-2xl font-bold text-[#2c2c2c]">${stats.totalMRR.toLocaleString()}</p>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
+              <div className="bg-white/80 backdrop-blur-md rounded-xl border border-[#8B4513]/20 p-5">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                    <TrendingUp className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="font-serif text-xs text-[#8B4513]/60">Active Subscriptions</p>
+                    <p className="font-serif text-2xl font-bold text-[#2c2c2c]">{stats.activeCount}</p>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-white/80 backdrop-blur-md rounded-xl border border-[#8B4513]/20 p-5">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                    <UserPlus className="w-5 h-5 text-purple-600" />
+                  </div>
+                  <div>
+                    <p className="font-serif text-xs text-[#8B4513]/60">New This Month</p>
+                    <p className="font-serif text-2xl font-bold text-[#2c2c2c]">{stats.newThisMonth}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Charts */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              {/* Pipeline Funnel */}
+              <div className="bg-white/80 backdrop-blur-md rounded-xl border border-[#8B4513]/20 p-5">
+                <h2 className="font-serif text-sm font-semibold text-[#2c2c2c] mb-4">Pipeline Funnel</h2>
+                <ResponsiveContainer width="100%" height={220}>
+                  <BarChart data={funnelData} layout="vertical">
+                    <XAxis type="number" allowDecimals={false} fontSize={12} />
+                    <YAxis type="category" dataKey="label" width={80} fontSize={12} />
+                    <Tooltip />
+                    <Bar dataKey="count" radius={[0, 4, 4, 0]}>
+                      {funnelData.map((entry, i) => (
+                        <Cell key={i} fill={entry.color} />
+                      ))}
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+
+              {/* Subscription Status */}
+              <div className="bg-white/80 backdrop-blur-md rounded-xl border border-[#8B4513]/20 p-5">
+                <h2 className="font-serif text-sm font-semibold text-[#2c2c2c] mb-4">Subscription Status</h2>
+                {subscriptionData.every((d) => d.status === "unpaid" || d.count === 0) &&
+                subscriptionData.find((d) => d.status === "unpaid")?.count === leads.length ? (
+                  <div className="flex items-center justify-center h-[220px] text-[#8B4513]/40 font-serif text-sm">
+                    No subscription data yet
+                  </div>
+                ) : (
+                  <ResponsiveContainer width="100%" height={220}>
+                    <PieChart>
+                      <Pie
+                        data={subscriptionData.filter((d) => d.count > 0)}
+                        dataKey="count"
+                        nameKey="label"
+                        cx="50%"
+                        cy="50%"
+                        outerRadius={80}
+                        label={({ label, count }) => `${label}: ${count}`}
+                      >
+                        {subscriptionData
+                          .filter((d) => d.count > 0)
+                          .map((entry, i) => (
+                            <Cell key={i} fill={entry.color} />
+                          ))}
+                      </Pie>
+                      <Legend />
+                      <Tooltip />
+                    </PieChart>
+                  </ResponsiveContainer>
+                )}
+              </div>
+            </div>
+
+            {/* Search & Filters */}
+            <div className="flex flex-wrap gap-3 items-center">
+              <div className="relative flex-1 min-w-[200px]">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8B4513]/40" />
+                <input
+                  type="text"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search by name, email, phone..."
+                  className="w-full pl-10 pr-4 py-2 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#2c2c2c] placeholder:text-[#8B4513]/40 focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50"
+                />
+              </div>
+              <select
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="px-3 py-2 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#2c2c2c] focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50"
+              >
+                <option value="">All Statuses</option>
+                {Object.entries(statusLabels).map(([k, v]) => (
+                  <option key={k} value={k}>{v}</option>
+                ))}
+              </select>
+              <select
+                value={paymentFilter}
+                onChange={(e) => setPaymentFilter(e.target.value)}
+                className="px-3 py-2 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#2c2c2c] focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50"
+              >
+                <option value="">All Payments</option>
+                <option value="unpaid">Unpaid</option>
+                <option value="active">Active</option>
+                <option value="overdue">Overdue</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+              <span className="font-serif text-xs text-[#8B4513]/50">
+                {filteredLeads.length} of {leads.length} leads
+              </span>
+            </div>
+
+            {/* Lead List */}
+            {filteredLeads.length === 0 ? (
+              <div className="text-center py-12 bg-white/50 backdrop-blur-md rounded-2xl border border-[#8B4513]/20">
+                <Users className="w-12 h-12 mx-auto mb-4 text-[#8B4513]/30" />
+                <h2 className="font-serif text-xl font-semibold text-[#8B4513]/60">No leads found</h2>
+                <p className="font-serif text-sm text-[#8B4513]/40 mt-2">
+                  {leads.length === 0 ? "New subscription requests will appear here" : "Try adjusting your filters"}
+                </p>
+              </div>
+            ) : (
+              <div className="grid gap-4">
+                {filteredLeads.map((lead) => (
+                  <div key={lead.id} className="bg-white/80 backdrop-blur-md rounded-xl border border-[#8B4513]/20 p-6 hover:shadow-lg transition-all">
+                    <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
+                      <div className="flex-1 space-y-3">
+                        {/* Name + Badges */}
+                        <div className="flex items-start justify-between gap-4 flex-wrap">
+                          <div>
+                            <h3 className="font-serif text-lg font-semibold text-[#2c2c2c]">{lead.name}</h3>
+                            <div className="flex flex-wrap gap-2 mt-2">
+                              <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium border ${statusColors[lead.status] || statusColors.new}`}>
+                                {statusLabels[lead.status] || lead.status}
+                              </span>
+                              <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium border ${paymentStatusColors[lead.paymentStatus || "unpaid"]}`}>
+                                {(lead.paymentStatus || "unpaid").charAt(0).toUpperCase() + (lead.paymentStatus || "unpaid").slice(1)}
+                              </span>
+                              {lead.planTier && (
+                                <span className="inline-block px-3 py-1 rounded-full text-xs font-medium border bg-indigo-100 text-indigo-800 border-indigo-200">
+                                  {planTierLabels[lead.planTier] || lead.planTier}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2 px-3 py-1 bg-[#991b1b]/10 rounded-full">
+                            <Tag className="w-3 h-3 text-[#991b1b]" />
+                            <span className="font-serif text-xs font-medium text-[#991b1b]">{lead.package}</span>
+                          </div>
+                        </div>
+
+                        {/* Contact Info */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-sm">
+                          <div className="flex items-center gap-2 text-[#8B4513]/70">
+                            <Phone className="w-4 h-4 text-[#991b1b]" />
+                            <a href={`tel:${lead.phone}`} className="font-serif hover:text-[#991b1b] transition-colors">{lead.phone}</a>
+                          </div>
+                          <div className="flex items-center gap-2 text-[#8B4513]/70">
+                            <Mail className="w-4 h-4 text-[#991b1b]" />
+                            <a href={`mailto:${lead.email}`} className="font-serif hover:text-[#991b1b] transition-colors truncate">{lead.email}</a>
+                          </div>
+                          <div className="flex items-center gap-2 text-[#8B4513]/70">
+                            <Calendar className="w-4 h-4 text-[#991b1b]" />
+                            <span className="font-serif">{formatDate(lead.createdAt)}</span>
+                          </div>
+                        </div>
+
+                        {/* Interests */}
+                        {lead.interests && (
+                          <div className="flex items-start gap-2 p-3 bg-[#8B4513]/5 rounded-lg">
+                            <MessageSquare className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                            <p className="font-serif text-sm text-[#8B4513]/80">{lead.interests}</p>
+                          </div>
+                        )}
+
+                        {/* Notes */}
+                        <div className="flex items-start gap-2">
+                          <StickyNote className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-1" />
+                          {editingNotes === lead.id ? (
+                            <div className="flex-1 space-y-2">
+                              <textarea
+                                value={notesValue}
+                                onChange={(e) => setNotesValue(e.target.value)}
+                                rows={3}
+                                className="w-full px-3 py-2 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#2c2c2c] focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50 resize-none"
+                                placeholder="Add notes..."
+                                autoFocus
+                              />
+                              <div className="flex gap-2">
+                                <button
+                                  onClick={() => saveNotes(lead.id)}
+                                  disabled={updateLeadMutation.isPending}
+                                  className="flex items-center gap-1 px-3 py-1 bg-[#991b1b] text-white rounded-lg font-serif text-xs hover:bg-[#7a1515] disabled:opacity-50"
+                                >
+                                  <Check className="w-3 h-3" /> Save
+                                </button>
+                                <button
+                                  onClick={() => setEditingNotes(null)}
+                                  className="flex items-center gap-1 px-3 py-1 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-xs text-[#8B4513] hover:bg-[#8B4513]/5"
+                                >
+                                  <X className="w-3 h-3" /> Cancel
+                                </button>
+                              </div>
+                            </div>
+                          ) : (
+                            <button
+                              onClick={() => startEditNotes(lead)}
+                              className="font-serif text-sm text-[#8B4513]/60 hover:text-[#991b1b] transition-colors text-left"
+                            >
+                              {lead.notes || "Click to add notes..."}
+                            </button>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Status Buttons */}
+                      <div className="flex flex-wrap gap-2 lg:flex-col">
+                        {Object.keys(statusLabels).map((status) => (
+                          <button
+                            key={status}
+                            onClick={() => updateLeadMutation.mutate({ id: lead.id, status })}
+                            disabled={lead.status === status || updateLeadMutation.isPending}
+                            className={`px-3 py-1.5 rounded-lg font-serif text-xs transition-all ${
+                              lead.status === status
+                                ? "bg-[#991b1b] text-white cursor-default"
+                                : "bg-white border border-[#8B4513]/20 text-[#8B4513]/70 hover:border-[#991b1b] hover:text-[#991b1b]"
+                            } disabled:opacity-50`}
+                          >
+                            {statusLabels[status]}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </>
         )}
       </main>
     </div>

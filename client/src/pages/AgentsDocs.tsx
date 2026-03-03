@@ -11,7 +11,6 @@ import { buddhistAgents, modelPricing, type BuddhistAgent } from "@shared/buddhi
 
 export default function AgentsDocs() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("overview");
   const [selectedAgent, setSelectedAgent] = useState<BuddhistAgent | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -35,21 +34,6 @@ export default function AgentsDocs() {
       ],
     },
   ];
-
-  const scrollToSection = (id: string) => {
-    setActiveSection(id);
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 100;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-    }
-    setSidebarOpen(false);
-  };
 
   const handleViewDetails = (agent: BuddhistAgent) => {
     setSelectedAgent(agent);
@@ -89,11 +73,7 @@ export default function AgentsDocs() {
       <div className="flex pt-[57px]">
         {(sidebarOpen || window.innerWidth >= 1024) && (
           <aside className="fixed top-[57px] left-0 h-[calc(100vh-57px)] w-80 bg-sidebar border-r overflow-y-auto z-30 lg:block">
-            <DocsNav
-              navigation={navigation}
-              activeSection={activeSection}
-              onSectionClick={scrollToSection}
-            />
+            <DocsNav navigation={navigation} />
           </aside>
         )}
 
