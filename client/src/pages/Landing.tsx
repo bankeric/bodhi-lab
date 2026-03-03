@@ -853,13 +853,14 @@ export default function Landing() {
                 </div>
 
                 <div className="text-center">
-                  <a
-                    href="/onboarding"
-                    className="inline-flex items-center gap-2 px-8 py-3 bg-[#8B4513] rounded-xl text-white font-serif font-semibold hover:bg-[#6d3610] transition-all duration-300 shadow-lg"
+                  <button
+                    onClick={() => handleSubscribe("onboarding")}
+                    disabled={loadingPlan === "onboarding"}
+                    className="inline-flex items-center gap-2 px-8 py-3 bg-[#8B4513] rounded-xl text-white font-serif font-semibold hover:bg-[#6d3610] transition-all duration-300 shadow-lg disabled:opacity-50"
                     data-testid="button-start-onboarding"
                   >
-                    {t.pricing.onboarding.cta}
-                  </a>
+                    {loadingPlan === "onboarding" ? "..." : t.pricing.onboarding.cta}
+                  </button>
                 </div>
               </div>
             </div>
