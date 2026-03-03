@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express, { type Request, Response, NextFunction } from "express";
 import helmet from "helmet";
 import cors from "cors";
@@ -30,7 +31,7 @@ const allowedOrigins = [
   "https://bodhi-labs.com",
   "https://www.bodhi-labs.com",
   process.env.NODE_ENV === "development" ? "http://localhost:5173" : "",
-  process.env.NODE_ENV === "development" ? "http://localhost:5000" : "",
+  process.env.NODE_ENV === "development" ? "http://localhost:3000" : "",
 ].filter(Boolean);
 
 app.use(cors({
