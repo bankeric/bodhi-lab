@@ -28,10 +28,10 @@ import { buddhistCenters } from "@shared/buddhistCenters";
 import { TracingBeam } from "@/components/TracingBeam";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
-import lotusIcon from "@assets/44_1762155616660.png";
-import bellIcon from "@assets/Bell_no_bg (1)_1762155616660.png";
-import buddhaIcon from "@assets/2_1762155709385.png";
-import sutraIcon from "@assets/Wordless Sutra Icon - Sumi-e Style_1762155698128.png";
+import lotusIcon from "@assets/lotus-icon.png";
+import bellIcon from "@assets/bell-icon.png";
+import buddhaIcon from "@assets/buddha-icon.png";
+import sutraIcon from "@assets/sutra-scroll-icon.png";
 
 export default function CenterDetail() {
   const params = useParams();

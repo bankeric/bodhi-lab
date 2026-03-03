@@ -1,14 +1,16 @@
 import { Link } from "wouter";
-import buddhaIcon from "@assets/2_1762155709385.png";
-import bellIcon from "@assets/Bell_no_bg (1)_1762155616660.png";
-import bodhiLogo from "@assets/Bodhi Logo_1763503529516.png";
+import buddhaIcon from "@assets/buddha-icon.png";
+import bellIcon from "@assets/bell-icon.png";
+import bodhiLogo from "@assets/bodhi-technology-lab-logo.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { privacyTranslations } from "@/translations/privacy";
+import { useDocumentTitle } from "@/hooks/use-document-title";
 
 export default function Privacy() {
   const { language } = useLanguage();
   const t = privacyTranslations[language];
+  useDocumentTitle("Privacy Policy", "Bodhi Technology Lab privacy policy. How we protect your temple and community data.");
   return (
     <div className="min-h-screen bg-[#EFE0BD] text-[#8B4513]">
       <div className="fixed inset-0 z-0">

@@ -4,10 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Key, User, Settings, Zap, Languages } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { docsTranslations } from "@/translations/docs";
+import { useDocumentTitle } from "@/hooks/use-document-title";
 
 export default function QuickStart() {
   const { language, setLanguage } = useLanguage();
   const t = docsTranslations[language].quickStart;
+  useDocumentTitle("Quick Start Guide", "Get started with Bodhi Technology Lab. Set up your temple's digital platform in minutes.");
 
   return (
     <div className="max-w-6xl mx-auto px-8 py-16 space-y-8">

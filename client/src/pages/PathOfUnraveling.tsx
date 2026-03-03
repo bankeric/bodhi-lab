@@ -1,4 +1,7 @@
+import { useDocumentTitle } from "@/hooks/use-document-title";
+
 export default function PathOfUnraveling() {
+  useDocumentTitle("Path of Unraveling", "The Path of Unraveling — beyond gamification. A dharma-aligned approach to community engagement.");
   return (
     <div className="max-w-4xl mx-auto px-6 py-12">
       <article className="space-y-12">

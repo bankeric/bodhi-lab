@@ -5,6 +5,7 @@ import { TracingBeam } from "@/components/TracingBeam";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { processTranslations } from "@/translations/process";
+import { useDocumentTitle } from "@/hooks/use-document-title";
 
 const stepIcons = [ClipboardList, PhoneCall, Settings, Rocket];
 const commIcons = [Video, MessageSquare, Monitor, HeadphonesIcon];
@@ -12,6 +13,7 @@ const commIcons = [Video, MessageSquare, Monitor, HeadphonesIcon];
 export default function Process() {
   const { language } = useLanguage();
   const t = processTranslations[language];
+  useDocumentTitle("How It Works", "Learn how Bodhi Technology Lab onboards your temple — from consultation to launch.");
 
   const [formStep, setFormStep] = useState(0);
   const totalFormSteps = 4;

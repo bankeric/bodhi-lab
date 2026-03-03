@@ -1,4 +1,7 @@
+import { useDocumentTitle } from "@/hooks/use-document-title";
+
 export default function TechStack() {
+  useDocumentTitle("Tech Stack", "The architecture of awakened technology — Bodhi Lab's tech stack for Buddhist community platforms.");
   return (
     <div className="max-w-4xl mx-auto px-6 py-12">
       <article className="space-y-12">

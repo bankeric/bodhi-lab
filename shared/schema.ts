@@ -175,3 +175,14 @@ export const updateLeadSchema = z.object({
   stripeSubscriptionId: z.string().optional(),
   notes: z.string().optional(),
 });
+
+export const contactSchema = z.object({
+  firstName: z.string().min(1, "First name is required").max(255),
+  lastName: z.string().min(1, "Last name is required").max(255),
+  email: z.email("Invalid email address").max(255),
+  role: z.string().max(255).optional().default(""),
+  organizationName: z.string().max(255).optional().default(""),
+  organizationType: z.string().max(100).optional().default(""),
+  communitySize: z.string().max(50).optional().default(""),
+  message: z.string().max(5000).optional().default(""),
+});

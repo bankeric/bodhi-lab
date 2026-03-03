@@ -1,16 +1,18 @@
 import { Link } from "wouter";
-import lotusIcon from "@assets/44_1762155616660.png";
-import bellIcon from "@assets/Bell_no_bg (1)_1762155616660.png";
-import buddhaIcon from "@assets/2_1762155709385.png";
-import sutraIcon from "@assets/Wordless Sutra Icon - Sumi-e Style_1762155698128.png";
-import bodhiLogo from "@assets/Bodhi Logo_1763503529516.png";
+import lotusIcon from "@assets/lotus-icon.png";
+import bellIcon from "@assets/bell-icon.png";
+import buddhaIcon from "@assets/buddha-icon.png";
+import sutraIcon from "@assets/sutra-scroll-icon.png";
+import bodhiLogo from "@assets/bodhi-technology-lab-logo.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { aboutTranslations } from "@/translations/about";
+import { useDocumentTitle } from "@/hooks/use-document-title";
 
 export default function About() {
   const { language } = useLanguage();
   const t = aboutTranslations[language];
+  useDocumentTitle("About Us", "Learn about Bodhi Technology Lab's mission to empower Buddhist temples, monasteries, and dharma centers with modern technology.");
   return (
     <div className="min-h-screen bg-[#EFE0BD] text-[#8B4513]">
       <div className="fixed inset-0 z-0">

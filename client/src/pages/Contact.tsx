@@ -13,6 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { useDocumentTitle } from "@/hooks/use-document-title";
 import {
   validateContactForm,
   INITIAL_FORM_DATA,
@@ -20,6 +21,7 @@ import {
 } from "@/lib/contact-utils";
 
 export default function Contact() {
+  useDocumentTitle("Contact Us", "Get in touch with Bodhi Technology Lab. Inquire about our platform for Buddhist temples, monasteries, and dharma centers.");
   const { toast } = useToast();
   const [form, setForm] = useState<ContactFormData>({ ...INITIAL_FORM_DATA });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -58,7 +60,7 @@ export default function Contact() {
         toast({ title: "Message Sent", description: data.message || "Your message has been sent successfully." });
         setForm({ ...INITIAL_FORM_DATA });
       } else {
-        toast({ title: "Error", description: data.message || "Failed to send message.", variant: "destructive" });
+        toast({ title: "Error", description: data.error || "Failed to send message.", variant: "destructive" });
       }
     } catch {
       toast({ title: "Network Error", description: "Lỗi mạng, vui lòng thử lại.", variant: "destructive" });
