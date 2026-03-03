@@ -2,10 +2,15 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist/public",
   "framework": null,
+  "functions": {
+    "api/index.mjs": {
+      "runtime": "nodejs20.x"
+    }
+  },
   "rewrites": [
-    { "source": "/api/auth/:path*", "destination": "/api" },
-    { "source": "/api/autumn/:path*", "destination": "/api" },
-    { "source": "/api/:path*", "destination": "/api" },
+    { "source": "/api/auth/:path*", "destination": "/api/index.mjs" },
+    { "source": "/api/autumn/:path*", "destination": "/api/index.mjs" },
+    { "source": "/api/:path*", "destination": "/api/index.mjs" },
     { "source": "/:path*", "destination": "/index.html" }
   ]
 }
