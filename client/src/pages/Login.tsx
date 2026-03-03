@@ -34,33 +34,36 @@ export default function Login() {
 
     try {
       if (mode === "signup") {
-        const result = await signUp.email({
+        await signUp.email({
           email,
           password,
           name: name || email.split("@")[0],
           callbackURL: "/dashboard",
-        });
-        if (result.error) {
-          setError(result.error.message || "Could not create account. Please try again.");
-        } else {
-          setLocation("/dashboard");
-        }
-      } else {
-        const result = await signIn.email({ email, password });
-
-        if (result.error) {
-          setError(result.error.message || "Invalid email or password. Please try again.");
-        } else {
-          const userRole = (result.data?.user as any)?.role;
-          if (userRole === "bodhi_admin") {
-            setLocation("/admin");
-          } else {
+        }, {
+          onSuccess: () => {
             setLocation("/dashboard");
-          }
-        }
+          },
+          onError: (ctx) => {
+            setError(ctx.error.message || JSON.stringify(ctx.error) || "Could not create account. Please try again.");
+          },
+        });
+      } else {
+        await signIn.email({ email, password }, {
+          onSuccess: (ctx) => {
+            const userRole = (ctx.data?.user as any)?.role;
+            if (userRole === "bodhi_admin") {
+              setLocation("/admin");
+            } else {
+              setLocation("/dashboard");
+            }
+          },
+          onError: (ctx) => {
+            setError(ctx.error.message || "Invalid email or password. Please try again.");
+          },
+        });
       }
-    } catch {
-      setError("Authentication failed. Please try again.");
+    } catch (err: any) {
+      setError(err?.message || "Authentication failed. Please try again.");
     } finally {
       setIsSubmitting(false);
     }

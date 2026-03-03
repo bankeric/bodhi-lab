@@ -60,7 +60,15 @@ app.use("/api/contact", formLimiter);
 app.post("/api/leads", formLimiter);
 
 // Mount Better Auth handler BEFORE express.json() to avoid body parsing conflicts
-app.all("/api/auth/*", toNodeHandler(auth));
+app.all("/api/auth/*", (req, res, next) => {
+  const handler = toNodeHandler(auth);
+  Promise.resolve(handler(req, res)).catch((err) => {
+    console.error("[Better Auth Error]", err);
+    if (!res.headersSent) {
+      res.status(500).json({ message: "Internal auth error" });
+    }
+  });
+});
 
 app.use(express.json({
   limit: "100kb", // Prevent oversized payloads
