@@ -5,37 +5,38 @@ import { SiCashapp, SiApplepay } from "react-icons/si";
 import { TracingBeam } from "@/components/TracingBeam";
 import { buddhistAgents } from "@shared/buddhistAgents";
 import { useToast } from "@/hooks/use-toast";
-import lotusIcon from "@assets/44_1762155616660.png";
-import bellIcon from "@assets/Bell_no_bg (1)_1762155616660.png";
-import buddhaIcon from "@assets/2_1762155709385.png";
-import sutraIcon from "@assets/Wordless Sutra Icon - Sumi-e Style_1762155698128.png";
-import bodhiLogo from "@assets/Bodhi Logo_1763503529516.png";
+import lotusIcon from "@assets/lotus-icon.png";
+import bellIcon from "@assets/bell-icon.png";
+import buddhaIcon from "@assets/buddha-icon.png";
+import sutraIcon from "@assets/sutra-scroll-icon.png";
+import bodhiLogo from "@assets/bodhi-technology-lab-logo.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { platformTranslations } from "@/translations/platform";
+import { useDocumentTitle } from "@/hooks/use-document-title";
 
 // Buddhist practitioner avatars
-import avatar1 from "@assets/download (4)_1761842289234.jpg";
-import avatar2 from "@assets/The Beginner's Guide to Meditation for Men_1761842289235.jpg";
-import avatar3 from "@assets/♥_1761842289235.jpg";
-import avatar4 from "@assets/Meditation_1761842289236.jpg";
-import avatar5 from "@assets/Forest Meditation Moment – Calm Mind Retreat Vibes_1761842289236.jpg";
-import avatar6 from "@assets/download (3)_1761842289236.jpg";
-import avatar7 from "@assets/download (2)_1761842289237.jpg";
-import avatar8 from "@assets/Buddhist nun_1761842289237.jpg";
-import avatar9 from "@assets/download (1)_1761842289238.jpg";
-import avatar10 from "@assets/download_1761842289238.jpg";
-import avatar11 from "@assets/Master Shi HengYi_1761842289239.jpg";
-import avatar12 from "@assets/3bacb184-32f1-4538-91c4-375a56b5ea47_1761842289239.jpg";
-import avatar13 from "@assets/6bed521b-69ca-4b5d-a603-9d2361bff5f7_1761842289240.jpg";
+import avatar1 from "@assets/practitioner-avatar-01.jpg";
+import avatar2 from "@assets/practitioner-meditation-guide.jpg";
+import avatar3 from "@assets/practitioner-mindfulness.jpg";
+import avatar4 from "@assets/practitioner-seated-meditation.jpg";
+import avatar5 from "@assets/practitioner-forest-retreat.jpg";
+import avatar6 from "@assets/practitioner-avatar-06.jpg";
+import avatar7 from "@assets/practitioner-avatar-07.jpg";
+import avatar8 from "@assets/practitioner-buddhist-nun.jpg";
+import avatar9 from "@assets/practitioner-avatar-09.jpg";
+import avatar10 from "@assets/practitioner-avatar-10.jpg";
+import avatar11 from "@assets/practitioner-master-shi-hengyi.jpg";
+import avatar12 from "@assets/practitioner-avatar-12.jpg";
+import avatar13 from "@assets/practitioner-avatar-13.jpg";
 
 // Agent artwork images
-import agentArt1 from "@assets/3_1761844028297.png";
-import agentArt2 from "@assets/15_1761844089890.png";
-import agentArt3 from "@assets/4_1761844089892.png";
-import agentArt4 from "@assets/32_1761844089890.png";
-import agentArt5 from "@assets/19_1761844089892.png";
-import agentArt6 from "@assets/5_1761844089893.png";
+import agentArt1 from "@assets/agent-tam-an-artwork.png";
+import agentArt2 from "@assets/agent-giac-ngo-artwork.png";
+import agentArt3 from "@assets/agent-don-ngo-artwork.png";
+import agentArt4 from "@assets/agent-tinh-thuc-artwork.png";
+import agentArt5 from "@assets/agent-ke-van-ngo-artwork.png";
+import agentArt6 from "@assets/agent-van-tinh-artwork.png";
 
 // Mapping of agent IDs to artwork images
 const agentArtwork: Record<string, string> = {
@@ -884,6 +885,7 @@ function SocialNetworkSection({ t }: { t: typeof platformTranslations.en }) {
 export default function Platform() {
   const { language } = useLanguage();
   const t = platformTranslations[language];
+  useDocumentTitle("Platform Features", "AI-powered Buddhist community platform with donation tools, event management, dharma content, and temple administration features.");
   const [selectedRadio, setSelectedRadio] = useState<string | null>(null);
   const [donationAmount, setDonationAmount] = useState<number | null>(500000);
   const [customAmount, setCustomAmount] = useState<string>("");

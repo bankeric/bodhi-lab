@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { Autumn } from "autumn-js";
-import { insertLeadSchema, updateLeadSchema } from "@shared/schema";
+import { insertLeadSchema, updateLeadSchema, contactSchema } from "@shared/schema";
 import { requireAuth, requireRole } from "./middleware/auth";
 import { notifyNewLead, notifyNewContact, isResendConfigured } from "./services/notifications";
 
@@ -12,39 +12,21 @@ export function registerRoutes(app: Express): void {
   // Contact form submission
   app.post("/api/contact", async (req, res) => {
     try {
-      const {
-        firstName,
-        lastName,
-        email,
-        organizationName,
-        role,
-        organizationType,
-        communitySize,
-        message,
-      } = req.body;
+      const result = contactSchema.safeParse(req.body);
 
-      if (!firstName || !lastName || !email) {
+      if (!result.success) {
         return res
           .status(400)
-          .json({ message: "First name, last name, and email are required" });
+          .json({ success: false, error: "Invalid contact data", details: result.error.issues });
       }
 
       if (!isResendConfigured()) {
         return res
           .status(503)
-          .json({ message: "Email service is not configured" });
+          .json({ success: false, error: "Email service is not configured" });
       }
 
-      await notifyNewContact({
-        firstName,
-        lastName,
-        email,
-        role,
-        organizationName,
-        organizationType,
-        communitySize,
-        message,
-      });
+      await notifyNewContact(result.data);
 
       res.json({
         success: true,
@@ -54,7 +36,7 @@ export function registerRoutes(app: Express): void {
       console.error("Error sending contact notification:", error);
       res
         .status(500)
-        .json({ message: "Failed to send message. Please try again later." });
+        .json({ success: false, error: "Failed to send message. Please try again later." });
     }
   });
 
@@ -66,7 +48,7 @@ export function registerRoutes(app: Express): void {
       if (!result.success) {
         return res
           .status(400)
-          .json({ message: "Invalid lead data", errors: result.error.issues });
+          .json({ success: false, error: "Invalid lead data", details: result.error.issues });
       }
 
       const lead = await storage.createLead(result.data);
@@ -84,7 +66,7 @@ export function registerRoutes(app: Express): void {
       console.error("Error creating lead:", error);
       res
         .status(500)
-        .json({ message: "Failed to submit request. Please try again later." });
+        .json({ success: false, error: "Failed to submit request. Please try again later." });
     }
   });
 
@@ -94,7 +76,7 @@ export function registerRoutes(app: Express): void {
   app.get("/api/leads", requireAuth, requireRole("bodhi_admin"), async (req, res) => {
     try {
       const leads = await storage.getLeads();
-      res.json(leads);
+      res.json({ success: true, data: leads });
     } catch (error: any) {
       console.error("Error getting leads:", error);
       res.status(500).json({ success: false, error: "Internal server error" });
@@ -108,8 +90,9 @@ export function registerRoutes(app: Express): void {
 
       if (!result.success) {
         return res.status(400).json({
-          message: "Invalid update data",
-          errors: result.error.issues,
+          success: false,
+          error: "Invalid update data",
+          details: result.error.issues,
         });
       }
 
@@ -128,10 +111,10 @@ export function registerRoutes(app: Express): void {
       const lead = await storage.updateLead(req.params.id, updateData);
 
       if (!lead) {
-        return res.status(404).json({ message: "Lead not found" });
+        return res.status(404).json({ success: false, error: "Lead not found" });
       }
 
-      res.json(lead);
+      res.json({ success: true, data: lead });
     } catch (error: any) {
       console.error("Error updating lead:", error);
       res.status(500).json({ success: false, error: "Internal server error" });
@@ -152,12 +135,15 @@ export function registerRoutes(app: Express): void {
       ) || null;
 
       res.json({
-        productId: activeProduct?.id || null,
-        productName: activeProduct?.name || null,
-        renewalDate: activeProduct?.current_period_end
-          ? new Date(activeProduct.current_period_end).toISOString()
-          : null,
-        status: activeProduct?.status || null,
+        success: true,
+        data: {
+          productId: activeProduct?.id || null,
+          productName: activeProduct?.name || null,
+          renewalDate: activeProduct?.current_period_end
+            ? new Date(activeProduct.current_period_end).toISOString()
+            : null,
+          status: activeProduct?.status || null,
+        },
       });
     } catch (error: any) {
       console.error("Error fetching subscription:", error);

@@ -7,10 +7,12 @@ import { TracingBeam } from "@/components/TracingBeam";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { discoveryTranslations } from "@/translations/discovery";
+import { useDocumentTitle } from "@/hooks/use-document-title";
 
 export default function Discovery() {
   const { language } = useLanguage();
   const t = discoveryTranslations[language];
+  useDocumentTitle("Discovery", "Explore Buddhist temples, monasteries, and meditation centers powered by Bodhi Technology Lab.");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
 

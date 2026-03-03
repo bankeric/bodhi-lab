@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Languages } from "lucide-react";
+import { useDocumentTitle } from "@/hooks/use-document-title";
 
 export default function Manifesto() {
   const [language, setLanguage] = useState<"vi" | "en">("vi");
+  useDocumentTitle("Manifesto", "The Bodhi Technology Lab manifesto — our vision for technology in service of Buddhist awakening.");
 
   return (
     <div className="max-w-4xl mx-auto px-8 py-16">

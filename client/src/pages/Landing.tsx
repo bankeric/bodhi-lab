@@ -9,16 +9,17 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { landingTranslations } from "@/translations/landing";
 import { SubscriptionModal } from "@/components/SubscriptionModal";
+import { useDocumentTitle } from "@/hooks/use-document-title";
 
 // Buddhist artwork for agent cards
-import agentArt1 from "@assets/3_1761844028297.png";
-import agentArt2 from "@assets/15_1761844089890.png";
-import agentArt3 from "@assets/4_1761844089892.png";
-import agentArt4 from "@assets/32_1761844089890.png";
-import agentArt5 from "@assets/19_1761844089892.png";
-import agentArt6 from "@assets/5_1761844089893.png";
-import heroBackgroundImage from "@assets/ChatGPT Image Nov 18, 2025, 04_57_10 PM_1763503305579.png";
-import bodhiLogo from "@assets/Bodhi Logo_1763503529516.png";
+import agentArt1 from "@assets/agent-tam-an-artwork.png";
+import agentArt2 from "@assets/agent-giac-ngo-artwork.png";
+import agentArt3 from "@assets/agent-don-ngo-artwork.png";
+import agentArt4 from "@assets/agent-tinh-thuc-artwork.png";
+import agentArt5 from "@assets/agent-ke-van-ngo-artwork.png";
+import agentArt6 from "@assets/agent-van-tinh-artwork.png";
+import heroBackgroundImage from "@assets/hero-buddhist-temple-background.png";
+import bodhiLogo from "@assets/bodhi-technology-lab-logo.png";
 
 // Mapping of agent IDs to artwork images (first 6 featured agents)
 const agentArtwork: Record<string, string> = {
@@ -77,6 +78,7 @@ export default function Landing() {
   const t = landingTranslations[language];
   const { data: session } = useSession();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  useDocumentTitle("", "Bodhi Technology Lab — AI-powered platform for Buddhist temples, monasteries, and dharma centers. Community management, donation tools, and dharma content.");
   
   // Contact form state
   const [contactForm, setContactForm] = useState({

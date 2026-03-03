@@ -2,10 +2,12 @@ import { Card } from "@/components/ui/card";
 import { Sparkles, Shield, Users, Heart, Zap, BookOpen, Calendar, HandHeart, MessageCircle, BarChart3, Globe, Lock, Leaf, FileCheck, Award, Database } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { docsTranslations } from "@/translations/docs";
+import { useDocumentTitle } from "@/hooks/use-document-title";
 
 export default function Overview() {
   const { language } = useLanguage();
   const t = docsTranslations[language].overview;
+  useDocumentTitle("Platform Overview", "Comprehensive overview of Bodhi Technology Lab's AI-powered platform for Buddhist communities.");
 
   return (
     <div className="max-w-6xl mx-auto px-8 py-16">

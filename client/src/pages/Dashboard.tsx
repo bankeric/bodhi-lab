@@ -36,7 +36,8 @@ export default function Dashboard() {
     queryFn: async () => {
       const res = await fetch("/api/temple/subscription", { credentials: "include" });
       if (!res.ok) throw new Error("Failed to fetch subscription");
-      return res.json();
+      const json = await res.json();
+      return json.data;
     },
   });
 

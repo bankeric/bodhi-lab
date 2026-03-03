@@ -1,17 +1,19 @@
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
-import lotusIcon from "@assets/44_1762155616660.png";
-import bellIcon from "@assets/Bell_no_bg (1)_1762155616660.png";
-import buddhaIcon from "@assets/2_1762155709385.png";
-import sutraIcon from "@assets/Wordless Sutra Icon - Sumi-e Style_1762155698128.png";
-import bodhiLogo from "@assets/Bodhi Logo_1763503529516.png";
+import lotusIcon from "@assets/lotus-icon.png";
+import bellIcon from "@assets/bell-icon.png";
+import buddhaIcon from "@assets/buddha-icon.png";
+import sutraIcon from "@assets/sutra-scroll-icon.png";
+import bodhiLogo from "@assets/bodhi-technology-lab-logo.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { careerTranslations } from "@/translations/career";
+import { useDocumentTitle } from "@/hooks/use-document-title";
 
 export default function Career() {
   const { language } = useLanguage();
   const t = careerTranslations[language];
+  useDocumentTitle("Careers", "Join Bodhi Technology Lab. Build technology that empowers Buddhist communities worldwide.");
   return (
     <div className="min-h-screen bg-[#EFE0BD] text-[#8B4513]">
       <div className="fixed inset-0 z-0">

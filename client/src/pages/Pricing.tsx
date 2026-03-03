@@ -3,6 +3,7 @@ import { useCustomer } from "autumn-js/react";
 import { useSession } from "@/lib/auth-client";
 import { useLocation, Link } from "wouter";
 import { useToast } from "@/hooks/use-toast";
+import { useDocumentTitle } from "@/hooks/use-document-title";
 import {
   ArrowLeft,
   Check,
@@ -80,6 +81,7 @@ const ONBOARDING = {
 };
 
 export default function Pricing() {
+  useDocumentTitle("Pricing Plans", "Affordable subscription plans for Buddhist temples and organizations. Basic, Standard, and Premium tiers starting at $99/month.");
   const { data: session } = useSession();
   const { attach, openBillingPortal } = useCustomer();
   const [, setLocation] = useLocation();

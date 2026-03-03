@@ -49,6 +49,7 @@ export default function Login() {
         }
       } else {
         const result = await signIn.email({ email, password });
+
         if (result.error) {
           setError("Invalid email or password. Please try again.");
         } else {
@@ -133,6 +134,7 @@ export default function Login() {
               autoComplete="email"
             />
           </div>
+
 
           <div>
             <label

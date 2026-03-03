@@ -1,4 +1,7 @@
+import { useDocumentTitle } from "@/hooks/use-document-title";
+
 export default function MeritTokenomics() {
+  useDocumentTitle("Merit Tokenomics", "Merit Tokenomics — the Dao Bùa and the path to emptiness. Token economics for Buddhist community governance.");
   return (
     <div className="max-w-4xl mx-auto px-6 py-12">
       <article className="space-y-12">

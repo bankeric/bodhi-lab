@@ -81,7 +81,8 @@ export default function Admin() {
     queryFn: async () => {
       const response = await fetch("/api/leads", { credentials: "include" });
       if (!response.ok) throw new Error("Failed to fetch leads");
-      return response.json();
+      const json = await response.json();
+      return json.data;
     },
   });
 

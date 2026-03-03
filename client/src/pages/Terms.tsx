@@ -1,14 +1,16 @@
 import { Link } from "wouter";
-import sutraIcon from "@assets/Wordless Sutra Icon - Sumi-e Style_1762155698128.png";
-import bellIcon from "@assets/Bell_no_bg (1)_1762155616660.png";
-import bodhiLogo from "@assets/Bodhi Logo_1763503529516.png";
+import sutraIcon from "@assets/sutra-scroll-icon.png";
+import bellIcon from "@assets/bell-icon.png";
+import bodhiLogo from "@assets/bodhi-technology-lab-logo.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { termsTranslations } from "@/translations/terms";
+import { useDocumentTitle } from "@/hooks/use-document-title";
 
 export default function Terms() {
   const { language } = useLanguage();
   const t = termsTranslations[language];
+  useDocumentTitle("Terms of Service", "Bodhi Technology Lab terms of service and conditions of use.");
   return (
     <div className="min-h-screen bg-[#EFE0BD] text-[#8B4513]">
       <div className="fixed inset-0 z-0">

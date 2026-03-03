@@ -7,10 +7,12 @@ import { Search, ChevronDown } from "lucide-react";
 import { buddhistAgents, vehicleInfo, type BuddhistAgent, type BuddhistVehicle } from "@shared/buddhistAgents";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { docsTranslations } from "@/translations/docs";
+import { useDocumentTitle } from "@/hooks/use-document-title";
 
 export default function AgentModels() {
   const { language } = useLanguage();
   const t = docsTranslations[language].agentModels;
+  useDocumentTitle("AI Agent Models", "Explore Buddhist AI agents — dharma guidance, meditation coaching, and community support powered by tradition-aligned language models.");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedVehicles, setSelectedVehicles] = useState<Set<BuddhistVehicle>>(new Set());
   const [selectedAgent, setSelectedAgent] = useState<BuddhistAgent | null>(null);

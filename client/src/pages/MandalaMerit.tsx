@@ -1,4 +1,7 @@
+import { useDocumentTitle } from "@/hooks/use-document-title";
+
 export default function MandalaMerit() {
+  useDocumentTitle("Mandala of Merit", "The Mandala of Merit — towards a DAO of Awakening. Bodhi Lab's vision for decentralized dharma governance.");
   return (
     <div className="max-w-4xl mx-auto px-6 py-12">
       <article className="space-y-12">
