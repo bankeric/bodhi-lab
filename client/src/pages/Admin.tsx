@@ -18,7 +18,7 @@ import {
   Check,
   X,
 } from "lucide-react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import {
   BarChart,
   Bar,
@@ -33,6 +33,7 @@ import {
 } from "recharts";
 import { queryClient } from "@/lib/queryClient";
 import { useSession, signOut } from "@/lib/auth-client";
+import { useToast } from "@/hooks/use-toast";
 import {
   computeStats,
   computeFunnelData,
@@ -61,6 +62,8 @@ const statusLabels: Record<string, string> = {
 
 export default function Admin() {
   const { data: session } = useSession();
+  const [, setLocation] = useLocation();
+  const { toast } = useToast();
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [paymentFilter, setPaymentFilter] = useState("");
@@ -68,8 +71,16 @@ export default function Admin() {
   const [notesValue, setNotesValue] = useState("");
 
   const handleSignOut = async () => {
-    await signOut();
-    window.location.href = "/login";
+    try {
+      await signOut();
+      setLocation("/login");
+    } catch {
+      toast({
+        title: "Error",
+        description: "Sign out failed. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   const {

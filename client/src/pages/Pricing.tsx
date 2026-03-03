@@ -121,6 +121,10 @@ export default function Pricing() {
     }
   };
 
+  // Determine correct back link based on user role
+  const userRole = (session?.user as any)?.role;
+  const backHref = !session ? "/" : userRole === "bodhi_admin" ? "/admin" : "/dashboard";
+
   return (
     <div className="min-h-screen bg-[#EFE0BD]">
       <header className="bg-white/80 backdrop-blur-md border-b border-[#8B4513]/20 sticky top-0 z-10">
@@ -136,7 +140,7 @@ export default function Pricing() {
               </button>
             )}
             <Link
-              href={session ? "/dashboard" : "/"}
+              href={backHref}
               className="flex items-center gap-2 px-4 py-2 bg-[#991b1b] text-white rounded-lg font-serif text-sm hover:bg-[#7a1515] transition-all"
             >
               <ArrowLeft className="w-4 h-4" /> Back

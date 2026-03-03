@@ -23,6 +23,9 @@ export function ProtectedRoute({ children, requiredRole }: ProtectedRouteProps) 
   }
 
   if (requiredRole && (session.user as any).role !== requiredRole) {
+    const userRole = (session.user as any).role;
+    const dashboardHref = userRole === "bodhi_admin" ? "/admin" : "/dashboard";
+    
     return (
       <div className="min-h-screen bg-[#EFE0BD] flex items-center justify-center p-4">
         <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-xl p-8 max-w-md w-full border border-[#8B4513]/20 text-center">
@@ -44,10 +47,10 @@ export function ProtectedRoute({ children, requiredRole }: ProtectedRouteProps) 
               Back to Home
             </Link>
             <Link
-              href="/dashboard"
+              href={dashboardHref}
               className="font-serif text-sm text-[#8B4513]/60 hover:text-[#991b1b] transition-colors"
             >
-              Go to Dashboard
+              Go to {userRole === "bodhi_admin" ? "Admin" : "Dashboard"}
             </Link>
           </div>
         </div>
