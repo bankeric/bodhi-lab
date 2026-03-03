@@ -151,14 +151,14 @@ export function DocsNav({ navigation }: DocsNavProps) {
           <p className="font-serif text-sm font-semibold text-primary">2025.1</p>
         </div>
         <div className="space-y-1">
-          <Link href="/community">
+          <Link href="/about">
             <span className="block font-serif text-sm text-foreground hover:text-primary transition-colors cursor-pointer">
-              Community
+              About
             </span>
           </Link>
-          <Link href="/library">
+          <Link href="/contact">
             <span className="block font-serif text-sm text-foreground hover:text-primary transition-colors cursor-pointer">
-              Library
+              Contact
             </span>
           </Link>
         </div>

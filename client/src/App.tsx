@@ -51,7 +51,7 @@ function Router() {
         </ProtectedRoute>
       </Route>
       <Route path="/dashboard">
-        <ProtectedRoute requiredRole="temple_admin">
+        <ProtectedRoute>
           <Dashboard />
         </ProtectedRoute>
       </Route>

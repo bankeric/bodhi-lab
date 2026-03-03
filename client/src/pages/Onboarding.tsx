@@ -9,6 +9,8 @@ import { onboardingTranslations } from "@/translations/onboarding";
 export default function Onboarding() {
   const { language } = useLanguage();
   const t = onboardingTranslations[language];
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{ success: boolean; message: string } | null>(null);
 
   const [formData, setFormData] = useState({
     templeName: "",
@@ -136,7 +138,40 @@ export default function Onboarding() {
               </div>
 
               <div className="bg-white/50 backdrop-blur-md rounded-2xl border-2 border-[#8B4513]/20 shadow-xl p-8 md:p-10">
-                <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
+                <form onSubmit={async (e) => {
+                  e.preventDefault();
+                  setIsSubmitting(true);
+                  setSubmitStatus(null);
+                  try {
+                    const response = await fetch("/api/contact", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({
+                        firstName: formData.contactName.split(" ")[0] || formData.contactName,
+                        lastName: formData.contactName.split(" ").slice(1).join(" ") || "",
+                        email: formData.email,
+                        organizationName: formData.templeName,
+                        communitySize: formData.communitySize,
+                        message: `[Onboarding Request]\nPhone: ${formData.phone}\nLocation: ${formData.location}\nDigital Presence: ${formData.digitalPresence.join(", ")}\nServices Needed: ${formData.servicesNeeded.join(", ")}\nNotes: ${formData.notes}`,
+                      }),
+                    });
+                    if (response.ok) {
+                      setSubmitStatus({ success: true, message: language === "vi" ? "Yêu cầu đã được gửi thành công!" : "Your request has been submitted successfully!" });
+                      setFormData({ templeName: "", contactName: "", email: "", phone: "", location: "", communitySize: "", digitalPresence: [], servicesNeeded: [], notes: "" });
+                    } else {
+                      setSubmitStatus({ success: false, message: language === "vi" ? "Không thể gửi. Vui lòng thử lại." : "Failed to submit. Please try again." });
+                    }
+                  } catch {
+                    setSubmitStatus({ success: false, message: language === "vi" ? "Lỗi mạng. Vui lòng thử lại." : "Network error. Please try again." });
+                  } finally {
+                    setIsSubmitting(false);
+                  }
+                }} className="space-y-6">
+                  {submitStatus && (
+                    <div className={`p-3 rounded-lg font-serif text-sm ${submitStatus.success ? 'bg-green-100 text-green-800 border border-green-200' : 'bg-red-100 text-red-800 border border-red-200'}`}>
+                      {submitStatus.message}
+                    </div>
+                  )}
                   {/* Temple Name */}
                   <div>
                     <label className="flex items-center gap-2 font-serif text-sm font-medium text-[#2c2c2c] mb-1.5">
@@ -337,10 +372,11 @@ export default function Onboarding() {
                   <div className="pt-2">
                     <button
                       type="submit"
-                      className="w-full px-6 py-3 bg-[#991b1b] text-white rounded-xl font-serif font-semibold hover:bg-[#7a1515] transition-all duration-300 shadow-md"
+                      disabled={isSubmitting}
+                      className="w-full px-6 py-3 bg-[#991b1b] text-white rounded-xl font-serif font-semibold hover:bg-[#7a1515] transition-all duration-300 shadow-md disabled:opacity-50"
                       data-testid="button-submit-onboarding"
                     >
-                      {t.form.submit}
+                      {isSubmitting ? (language === 'vi' ? 'Đang gửi...' : 'Submitting...') : t.form.submit}
                     </button>
                   </div>
                 </form>

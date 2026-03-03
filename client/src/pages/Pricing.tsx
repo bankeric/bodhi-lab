@@ -132,7 +132,7 @@ export default function Pricing() {
               </button>
             )}
             <Link
-              href="/"
+              href={session ? "/dashboard" : "/"}
               className="flex items-center gap-2 px-4 py-2 bg-[#991b1b] text-white rounded-lg font-serif text-sm hover:bg-[#7a1515] transition-all"
             >
               <ArrowLeft className="w-4 h-4" /> Back

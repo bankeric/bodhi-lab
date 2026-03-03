@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import { Search, ArrowRight, Sparkles, Users, Heart, Briefcase, FileText, Shield, BookOpen, MessageCircle, Calendar, HandHeart, Check, Workflow, Bot, Target, Award, Database, Mail } from "lucide-react";
+import { Search, ArrowRight, Sparkles, Users, Heart, Briefcase, FileText, Shield, BookOpen, MessageCircle, Calendar, HandHeart, Check, Workflow, Bot, Target, Award, Database, Mail, Menu, X, LogIn } from "lucide-react";
 import { SiFacebook } from "react-icons/si";
 import { Link } from "wouter";
+import { useSession } from "@/lib/auth-client";
 import { buddhistAgents } from "@shared/buddhistAgents";
 import { TracingBeam } from "@/components/TracingBeam";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -74,6 +75,8 @@ function AnimatedPlaceholder({ texts }: { texts: string[] }) {
 export default function Landing() {
   const { language } = useLanguage();
   const t = landingTranslations[language];
+  const { data: session } = useSession();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   // Contact form state
   const [contactForm, setContactForm] = useState({
@@ -253,13 +256,84 @@ export default function Landing() {
                 {t.header.nav.docs}
               </Link>
               <LanguageSwitcher />
+              {session ? (
+                <Link
+                  href={(session.user as any).role === "bodhi_admin" ? "/admin" : "/dashboard"}
+                  className="font-serif px-4 py-2 rounded-full bg-[#991b1b] text-white hover:bg-[#7a1515] transition-colors text-sm font-semibold"
+                  data-testid="link-dashboard"
+                >
+                  Dashboard
+                </Link>
+              ) : (
+                <Link
+                  href="/login"
+                  className="font-serif px-4 py-2 rounded-full bg-[#991b1b] text-white hover:bg-[#7a1515] transition-colors text-sm font-semibold flex items-center gap-1.5"
+                  data-testid="link-signin"
+                >
+                  <LogIn className="w-4 h-4" />
+                  Sign In
+                </Link>
+              )}
             </div>
 
-            {/* Mobile Navigation - Language Switcher only */}
-            <div className="flex md:hidden items-center">
+            {/* Mobile Navigation */}
+            <div className="flex md:hidden items-center gap-2">
               <LanguageSwitcher />
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2 rounded-lg hover:bg-[#8B4513]/10 transition-colors"
+                aria-label="Toggle menu"
+              >
+                {mobileMenuOpen ? <X className="w-6 h-6 text-[#8B4513]" /> : <Menu className="w-6 h-6 text-[#8B4513]" />}
+              </button>
             </div>
           </div>
+
+          {/* Mobile Menu Dropdown */}
+          {mobileMenuOpen && (
+            <div className="md:hidden border-t border-[#8B4513]/20 bg-[#EFE0BD]/95 backdrop-blur-md px-4 py-4 space-y-2">
+              <a href="#capabilities" onClick={() => setMobileMenuOpen(false)} className="block font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-lg hover:bg-[#8B4513]/5 transition-colors">
+                {t.header.nav.services}
+              </a>
+              <Link href="/pricing" onClick={() => setMobileMenuOpen(false)} className="block font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-lg hover:bg-[#8B4513]/5 transition-colors">
+                {t.header.nav.pricing}
+              </Link>
+              <Link href="/platform" onClick={() => setMobileMenuOpen(false)} className="block font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-lg hover:bg-[#8B4513]/5 transition-colors">
+                {t.header.nav.platform}
+              </Link>
+              <Link href="/process" onClick={() => setMobileMenuOpen(false)} className="block font-serif text-[#991b1b] px-4 py-2 rounded-lg bg-[#991b1b]/10 hover:bg-[#991b1b]/20 transition-colors">
+                {t.hero.cta.howItWorks}
+              </Link>
+              <Link href="/docs/overview" onClick={() => setMobileMenuOpen(false)} className="block font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-lg hover:bg-[#8B4513]/5 transition-colors">
+                {t.header.nav.docs}
+              </Link>
+              <Link href="/about" onClick={() => setMobileMenuOpen(false)} className="block font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-lg hover:bg-[#8B4513]/5 transition-colors">
+                About
+              </Link>
+              <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="block font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-lg hover:bg-[#8B4513]/5 transition-colors">
+                Contact
+              </Link>
+              <div className="pt-2 border-t border-[#8B4513]/20">
+                {session ? (
+                  <Link
+                    href={(session.user as any).role === "bodhi_admin" ? "/admin" : "/dashboard"}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block text-center font-serif px-4 py-3 rounded-xl bg-[#991b1b] text-white hover:bg-[#7a1515] transition-colors font-semibold"
+                  >
+                    Dashboard
+                  </Link>
+                ) : (
+                  <Link
+                    href="/login"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block text-center font-serif px-4 py-3 rounded-xl bg-[#991b1b] text-white hover:bg-[#7a1515] transition-colors font-semibold"
+                  >
+                    Sign In
+                  </Link>
+                )}
+              </div>
+            </div>
+          )}
         </header>
 
         <TracingBeam className="pt-24">

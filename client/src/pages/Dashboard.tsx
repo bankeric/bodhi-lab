@@ -17,7 +17,6 @@ import {
 import {
   getWelcomeMessage,
   getSubscriptionDisplayStatus,
-  formatRenewalDate,
   type SubscriptionInfo,
 } from "@/lib/dashboard-utils";
 
@@ -78,14 +77,24 @@ export default function Dashboard() {
           <h1 className="font-serif text-xl font-bold text-[#2c2c2c]">
             {getWelcomeMessage(session?.user?.name)}
           </h1>
-          <Button
-            variant="outline"
-            onClick={handleSignOut}
-            className="flex items-center gap-2 font-serif text-sm border-[#8B4513]/30 text-[#8B4513] hover:bg-[#8B4513]/5"
-          >
-            <LogOut className="w-4 h-4" />
-            Sign Out
-          </Button>
+          <div className="flex items-center gap-3">
+            <Link href="/">
+              <Button
+                variant="outline"
+                className="flex items-center gap-2 font-serif text-sm border-[#8B4513]/30 text-[#8B4513] hover:bg-[#8B4513]/5"
+              >
+                Home
+              </Button>
+            </Link>
+            <Button
+              variant="outline"
+              onClick={handleSignOut}
+              className="flex items-center gap-2 font-serif text-sm border-[#8B4513]/30 text-[#8B4513] hover:bg-[#8B4513]/5"
+            >
+              <LogOut className="w-4 h-4" />
+              Sign Out
+            </Button>
+          </div>
         </div>
       </header>
 
