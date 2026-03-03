@@ -3,9 +3,9 @@
   "outputDirectory": "dist/public",
   "framework": null,
   "rewrites": [
-    { "source": "/api/auth/(.*)", "destination": "/api" },
-    { "source": "/api/autumn/(.*)", "destination": "/api" },
-    { "source": "/api/(.*)", "destination": "/api" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/api/auth/:path*", "destination": "/api" },
+    { "source": "/api/autumn/:path*", "destination": "/api" },
+    { "source": "/api/:path*", "destination": "/api" },
+    { "source": "/:path*", "destination": "/index.html" }
   ]
 }
