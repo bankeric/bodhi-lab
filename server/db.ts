@@ -1,8 +1,11 @@
-import { neon } from "@neondatabase/serverless";
+import { neon, neonConfig, Pool } from "@neondatabase/serverless";
 import { drizzle as drizzleHttp } from "drizzle-orm/neon-http";
-import { Pool } from "@neondatabase/serverless";
 import { drizzle as drizzlePool } from "drizzle-orm/neon-serverless";
+import ws from "ws";
 import * as schema from "@shared/schema";
+
+// Configure WebSocket constructor for serverless environments (Vercel)
+neonConfig.webSocketConstructor = ws;
 
 if (!process.env.DATABASE_URL) {
   throw new Error(
