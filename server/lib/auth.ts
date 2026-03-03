@@ -18,9 +18,8 @@ export const auth = betterAuth({
     "http://localhost:3000",
     "http://localhost:5000",
     "http://localhost:5173",
-    "https://bodhi-labs.vercel.app",
-    "https://bodhi-labs.com",
-    "https://www.bodhi-labs.com",
+    "https://bodhilab.io",
+    "https://www.bodhilab.io",
   ],
   emailAndPassword: { enabled: true },
   user: {

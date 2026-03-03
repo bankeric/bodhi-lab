@@ -27,9 +27,8 @@ app.use(helmet({
 
 // CORS — restrict origins in production
 const allowedOrigins = [
-  "https://bodhi-labs.vercel.app",
-  "https://bodhi-labs.com",
-  "https://www.bodhi-labs.com",
+  "https://bodhilab.io",
+  "https://www.bodhilab.io",
   process.env.NODE_ENV === "development" ? "http://localhost:5173" : "",
   process.env.NODE_ENV === "development" ? "http://localhost:5000" : "",
   process.env.NODE_ENV === "development" ? "http://localhost:3000" : "",
