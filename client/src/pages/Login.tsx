@@ -38,12 +38,10 @@ export default function Login() {
           email,
           password,
           name: name || email.split("@")[0],
+          callbackURL: "/dashboard",
         });
         if (result.error) {
-          setError(
-            result.error.message ||
-              "Could not create account. Please try again."
-          );
+          setError(result.error.message || "Could not create account. Please try again.");
         } else {
           setLocation("/dashboard");
         }
@@ -51,7 +49,7 @@ export default function Login() {
         const result = await signIn.email({ email, password });
 
         if (result.error) {
-          setError("Invalid email or password. Please try again.");
+          setError(result.error.message || "Invalid email or password. Please try again.");
         } else {
           const userRole = (result.data?.user as any)?.role;
           if (userRole === "bodhi_admin") {

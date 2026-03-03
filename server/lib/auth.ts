@@ -2,6 +2,7 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { organization } from "better-auth/plugins";
 import { poolDb } from "../db";
+import * as schema from "@shared/schema";
 
 if (!process.env.BETTER_AUTH_SECRET) {
   throw new Error(
@@ -10,8 +11,17 @@ if (!process.env.BETTER_AUTH_SECRET) {
 }
 
 export const auth = betterAuth({
-  database: drizzleAdapter(poolDb, { provider: "pg" }),
+  database: drizzleAdapter(poolDb, { provider: "pg", schema }),
   secret: process.env.BETTER_AUTH_SECRET,
   emailAndPassword: { enabled: true },
+  user: {
+    additionalFields: {
+      role: {
+        type: "string",
+        defaultValue: "temple_admin",
+        input: false,
+      },
+    },
+  },
   plugins: [organization()],
 });
