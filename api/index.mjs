@@ -30,6 +30,7 @@ var schema_exports = {};
 __export(schema_exports, {
   account: () => account,
   contactSchema: () => contactSchema,
+  giacNgoSyncLog: () => giacNgoSyncLog,
   insertLeadSchema: () => insertLeadSchema,
   invitation: () => invitation,
   leads: () => leads,
@@ -210,6 +211,23 @@ var contactSchema = z.object({
   communitySize: z.string().max(50).optional().default(""),
   message: z.string().max(5e3).optional().default("")
 });
+var giacNgoSyncLog = pgTable(
+  "giac_ngo_sync_log",
+  {
+    id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+    userId: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+    eventType: text("event_type").notNull(),
+    payload: text("payload").notNull(),
+    responseOk: boolean("response_ok").notNull(),
+    responseStatus: integer("response_status"),
+    errorMessage: text("error_message"),
+    createdAt: timestamp("created_at").defaultNow().notNull()
+  },
+  (table) => [
+    index("giac_ngo_sync_log_userId_idx").on(table.userId),
+    index("giac_ngo_sync_log_createdAt_idx").on(table.createdAt)
+  ]
+);
 
 // server/db.ts
 neonConfig.webSocketConstructor = ws;
@@ -414,7 +432,7 @@ if (!process.env.BETTER_AUTH_SECRET) {
     "BETTER_AUTH_SECRET is not set. Generate one with: openssl rand -base64 32"
   );
 }
-var baseURL = process.env.NODE_ENV === "development" ? "http://localhost:3000" : process.env.BETTER_AUTH_URL || "https://www.bodhilab.io";
+var baseURL = process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://www.bodhilab.io";
 console.log("[Auth] Initializing Better Auth configuration...");
 console.log("[Auth] RESEND_API_KEY configured:", !!process.env.RESEND_API_KEY);
 console.log("[Auth] NODE_ENV:", process.env.NODE_ENV);
@@ -640,9 +658,106 @@ function requireRole(...allowedRoles) {
 }
 
 // server/routes.ts
-import { eq as eq2 } from "drizzle-orm";
+import { eq as eq3 } from "drizzle-orm";
 import crypto from "crypto";
 import { Webhook } from "svix";
+
+// server/services/giac-ngo-sync.ts
+import { eq as eq2 } from "drizzle-orm";
+var STATUS_MAP = {
+  new: "active",
+  renew: "active",
+  upgrade: "active",
+  downgrade: "active",
+  scheduled: "active",
+  cancel: "unsubscribe",
+  expired: "unsubscribe",
+  past_due: "past_due"
+};
+function mapScenarioToStatus(scenario) {
+  return STATUS_MAP[scenario] ?? "active";
+}
+function mapScenarioToPlan(_scenario, productId) {
+  return productId;
+}
+async function syncToGiacNgo(params) {
+  try {
+    const apiUrl = process.env.GIAC_NGO_API_URL;
+    const apiKey = process.env.GIAC_NGO_API_KEY;
+    if (!apiUrl || !apiKey) {
+      console.warn("Gi\xE1c Ng\u1ED9 sync skipped: missing configuration");
+      return;
+    }
+    const [foundUser] = await db.select({ email: user.email }).from(user).where(eq2(user.id, params.userId)).limit(1);
+    if (!foundUser) {
+      console.warn(`[Gi\xE1c Ng\u1ED9 Sync] User not found: ${params.userId}`);
+      return;
+    }
+    const payload = {
+      user_id: params.userId,
+      email: foundUser.email,
+      plan: mapScenarioToPlan(params.scenario, params.productId),
+      status: mapScenarioToStatus(params.scenario)
+    };
+    const payloadJson = JSON.stringify(payload);
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 1e4);
+    let responseOk = false;
+    let responseStatus = null;
+    let errorMessage = null;
+    try {
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`
+        },
+        body: payloadJson,
+        signal: controller.signal
+      });
+      responseOk = response.ok;
+      responseStatus = response.status;
+      if (!response.ok) {
+        const body = await response.text().catch(() => "");
+        errorMessage = `HTTP ${response.status}: ${body}`;
+        console.error(`[Gi\xE1c Ng\u1ED9 Sync] API error: ${errorMessage}`);
+      }
+    } catch (err) {
+      responseOk = false;
+      if (err instanceof Error && err.name === "AbortError") {
+        errorMessage = "Request timeout (10s)";
+        console.error("[Gi\xE1c Ng\u1ED9 Sync] Request timeout (10s)");
+      } else {
+        errorMessage = err instanceof Error ? err.message : String(err);
+        console.error(`[Gi\xE1c Ng\u1ED9 Sync] Network error: ${errorMessage}`);
+      }
+    } finally {
+      clearTimeout(timeoutId);
+    }
+    try {
+      await db.insert(giacNgoSyncLog).values({
+        userId: params.userId,
+        eventType: params.scenario,
+        payload: payloadJson,
+        responseOk,
+        responseStatus,
+        errorMessage
+      });
+    } catch (dbErr) {
+      console.error(
+        "[Gi\xE1c Ng\u1ED9 Sync] Failed to write sync log:",
+        dbErr instanceof Error ? dbErr.message : String(dbErr)
+      );
+    }
+  } catch (err) {
+    console.error(
+      "[Gi\xE1c Ng\u1ED9 Sync] Unexpected error:",
+      err instanceof Error ? err.message : String(err)
+    );
+  }
+}
+
+// server/routes.ts
 async function verifyTurnstileToken(token) {
   const secret = process.env.TURNSTILE_SECRET_KEY;
   if (!secret) {
@@ -924,6 +1039,7 @@ function registerRoutes(app2) {
           scheduledProductId,
           scheduledProductName
         });
+        syncToGiacNgo({ userId, scenario, productId: updated_product.id }).catch((err) => console.error("[Gi\xE1c Ng\u1ED9 Sync] Unexpected error:", err));
         console.log(`[Autumn Webhook] Updated subscription for user ${userId}: ${scenario}`);
       }
       res.status(200).json({ received: true });
@@ -1029,7 +1145,7 @@ function registerRoutes(app2) {
       }
       const normalizedEmail = email.toLowerCase().trim();
       const trimmedName = name.trim();
-      const existingUser = await db.select().from(user).where(eq2(user.email, normalizedEmail)).limit(1);
+      const existingUser = await db.select().from(user).where(eq3(user.email, normalizedEmail)).limit(1);
       if (existingUser.length > 0) {
         return res.status(409).json({
           success: false,
@@ -1051,7 +1167,7 @@ function registerRoutes(app2) {
         });
       }
       const newUserId = signUpResult.user.id;
-      await db.update(user).set({ role: "temple_admin" }).where(eq2(user.id, newUserId));
+      await db.update(user).set({ role: "temple_admin" }).where(eq3(user.id, newUserId));
       const resetToken = crypto.randomBytes(32).toString("hex");
       const expiresAt = new Date(Date.now() + 72 * 60 * 60 * 1e3);
       await db.insert(verification).values({

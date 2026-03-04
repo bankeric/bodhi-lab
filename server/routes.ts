@@ -12,6 +12,7 @@ import { user, verification } from "@shared/schema";
 import { eq } from "drizzle-orm";
 import crypto from "crypto";
 import { Webhook } from "svix";
+import { syncToGiacNgo } from "./services/giac-ngo-sync";
 
 // ─── Cloudflare Turnstile Verification ───
 
@@ -387,6 +388,10 @@ export function registerRoutes(app: Express): void {
           scheduledProductId,
           scheduledProductName,
         });
+
+        // Fire-and-forget sync to Giác Ngộ — không await để không block webhook response
+        syncToGiacNgo({ userId, scenario, productId: updated_product.id })
+          .catch(err => console.error("[Giác Ngộ Sync] Unexpected error:", err));
 
         console.log(`[Autumn Webhook] Updated subscription for user ${userId}: ${scenario}`);
       }

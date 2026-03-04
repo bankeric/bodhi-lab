@@ -219,3 +219,28 @@ export const contactSchema = z.object({
   communitySize: z.string().max(50).optional().default(""),
   message: z.string().max(5000).optional().default(""),
 });
+
+// ─── Giác Ngộ Sync Log Table ───
+
+export const giacNgoSyncLog = pgTable(
+  "giac_ngo_sync_log",
+  {
+    id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    eventType: text("event_type").notNull(),
+    payload: text("payload").notNull(),
+    responseOk: boolean("response_ok").notNull(),
+    responseStatus: integer("response_status"),
+    errorMessage: text("error_message"),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  },
+  (table) => [
+    index("giac_ngo_sync_log_userId_idx").on(table.userId),
+    index("giac_ngo_sync_log_createdAt_idx").on(table.createdAt),
+  ]
+);
+
+export type GiacNgoSyncLog = typeof giacNgoSyncLog.$inferSelect;
+export type InsertGiacNgoSyncLog = typeof giacNgoSyncLog.$inferInsert;
