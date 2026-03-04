@@ -5,12 +5,18 @@ export interface SubscriptionInfo {
   productName: string | null;
   renewalDate: string | null;
   status: string | null;
+  cancelAtPeriodEnd?: boolean;
+  scheduledProductId?: string | null;
+  scheduledProductName?: string | null;
 }
 
 export interface DisplayStatus {
   hasActivePlan: boolean;
   planLabel: string;
   renewalLabel: string;
+  isCancelling: boolean;
+  hasScheduledChange: boolean;
+  scheduledPlanLabel: string | null;
 }
 
 /**
@@ -52,19 +58,29 @@ export function formatRenewalDate(isoDate: string | null): string {
  * Determines display status from subscription info.
  */
 export function getSubscriptionDisplayStatus(sub: SubscriptionInfo): DisplayStatus {
-  if (!sub.productId || sub.status !== "active") {
-    return { hasActivePlan: false, planLabel: "No active plan", renewalLabel: "N/A" };
-  }
-
   const planNames: Record<string, string> = {
-    basic: "Basic",
-    standard: "Standard",
-    premium: "Premium",
+    basic: "Lay Practitioner",
+    standard: "Devoted Practitioner",
+    premium: "Sangha Community",
   };
+
+  if (!sub.productId || (sub.status !== "active" && sub.status !== "past_due")) {
+    return { 
+      hasActivePlan: false, 
+      planLabel: "No active plan", 
+      renewalLabel: "N/A",
+      isCancelling: false,
+      hasScheduledChange: false,
+      scheduledPlanLabel: null,
+    };
+  }
 
   return {
     hasActivePlan: true,
     planLabel: sub.productName || planNames[sub.productId] || sub.productId,
     renewalLabel: formatRenewalDate(sub.renewalDate),
+    isCancelling: sub.cancelAtPeriodEnd || false,
+    hasScheduledChange: !!sub.scheduledProductId,
+    scheduledPlanLabel: sub.scheduledProductName || (sub.scheduledProductId ? planNames[sub.scheduledProductId] : null),
   };
 }

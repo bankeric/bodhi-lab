@@ -149,6 +149,39 @@ export const leads = pgTable("leads", {
   notes: text("notes"),
 });
 
+// ─── Subscriptions Table (synced from Autumn webhooks) ───
+
+export const subscriptions = pgTable(
+  "subscriptions",
+  {
+    id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    productId: text("product_id").notNull(), // basic, standard, premium
+    productName: text("product_name"),
+    status: text("status").notNull().default("active"), // active, scheduled, cancelled, expired, past_due
+    scenario: text("scenario"), // new, upgrade, downgrade, renew, cancel, expired, past_due, scheduled
+    currentPeriodStart: timestamp("current_period_start"),
+    currentPeriodEnd: timestamp("current_period_end"),
+    cancelAtPeriodEnd: boolean("cancel_at_period_end").default(false),
+    scheduledProductId: text("scheduled_product_id"), // For scheduled downgrades
+    scheduledProductName: text("scheduled_product_name"),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at")
+      .defaultNow()
+      .$onUpdate(() => new Date())
+      .notNull(),
+  },
+  (table) => [
+    index("subscriptions_userId_idx").on(table.userId),
+    index("subscriptions_productId_idx").on(table.productId),
+  ]
+);
+
+export type Subscription = typeof subscriptions.$inferSelect;
+export type InsertSubscription = typeof subscriptions.$inferInsert;
+
 export const insertLeadSchema = createInsertSchema(leads).omit({
   id: true,
   createdAt: true,

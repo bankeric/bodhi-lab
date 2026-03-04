@@ -16,6 +16,8 @@ import {
   ArrowRight,
   Zap,
   Check,
+  Clock,
+  AlertTriangle,
 } from "lucide-react";
 import {
   getWelcomeMessage,
@@ -157,12 +159,45 @@ export default function Dashboard() {
                     </p>
                   </div>
                   <div className="text-left sm:text-right">
-                    <p className="font-serif text-sm text-[#8B4513]/60">Renewal Date</p>
+                    <p className="font-serif text-sm text-[#8B4513]/60">
+                      {displayStatus.isCancelling ? "Ends on" : "Renewal Date"}
+                    </p>
                     <p className="font-serif text-base font-medium text-[#2c2c2c]">
                       {displayStatus.renewalLabel}
                     </p>
                   </div>
                 </div>
+
+                {/* Cancellation Warning */}
+                {displayStatus.isCancelling && (
+                  <div className="flex items-center gap-3 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+                    <AlertTriangle className="w-5 h-5 text-amber-600 flex-shrink-0" />
+                    <div>
+                      <p className="font-serif text-sm font-medium text-amber-800">
+                        Subscription Ending
+                      </p>
+                      <p className="font-serif text-xs text-amber-700">
+                        Your subscription will end on {displayStatus.renewalLabel}. You can resubscribe anytime.
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Scheduled Change */}
+                {displayStatus.hasScheduledChange && (
+                  <div className="flex items-center gap-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                    <Clock className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                    <div>
+                      <p className="font-serif text-sm font-medium text-blue-800">
+                        Plan Change Scheduled
+                      </p>
+                      <p className="font-serif text-xs text-blue-700">
+                        Switching to {displayStatus.scheduledPlanLabel} on {displayStatus.renewalLabel}
+                      </p>
+                    </div>
+                  </div>
+                )}
+
                 <div className="flex flex-wrap gap-3 pt-2">
                   <Button
                     onClick={handleManageBilling}
@@ -171,13 +206,14 @@ export default function Dashboard() {
                     <CreditCard className="w-4 h-4 mr-2" />
                     Manage Billing
                   </Button>
-                  <Button
-                    variant="outline"
-                    onClick={handleManageBilling}
-                    className="font-serif border-[#8B4513]/30 text-[#8B4513] hover:bg-[#8B4513]/5"
-                  >
-                    Download Invoices
-                  </Button>
+                  <Link href="/pricing">
+                    <Button
+                      variant="outline"
+                      className="font-serif border-[#8B4513]/30 text-[#8B4513] hover:bg-[#8B4513]/5"
+                    >
+                      Change Plan
+                    </Button>
+                  </Link>
                 </div>
               </div>
             ) : (

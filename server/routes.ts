@@ -70,6 +70,88 @@ export function registerRoutes(app: Express): void {
     }
   });
 
+  // ─── Autumn Webhook (subscription events) ───
+  app.post("/api/webhooks/autumn", async (req, res) => {
+    try {
+      const event = req.body;
+      console.log("[Autumn Webhook]", event.type, event.data?.scenario);
+
+      if (event.type === "customer.products.updated") {
+        const { scenario, customer, updated_product } = event.data;
+        const userId = customer?.id;
+        
+        if (!userId || !updated_product) {
+          return res.status(200).json({ received: true });
+        }
+
+        // Map scenario to status
+        let status = "active";
+        let cancelAtPeriodEnd = false;
+        let scheduledProductId = null;
+        let scheduledProductName = null;
+
+        switch (scenario) {
+          case "new":
+          case "upgrade":
+          case "renew":
+            status = "active";
+            break;
+          case "downgrade":
+          case "scheduled":
+            // Downgrade is scheduled for end of period
+            status = "active"; // Still active until period ends
+            scheduledProductId = updated_product.id;
+            scheduledProductName = updated_product.name;
+            break;
+          case "cancel":
+            status = "cancelled";
+            cancelAtPeriodEnd = true;
+            break;
+          case "expired":
+            status = "expired";
+            break;
+          case "past_due":
+            status = "past_due";
+            break;
+        }
+
+        // Find active subscription from customer data
+        const activeSubscription = customer.subscriptions?.find(
+          (s: any) => s.status === "active" || s.status === "scheduled"
+        );
+
+        await storage.upsertSubscription({
+          userId,
+          productId: scenario === "scheduled" || scenario === "downgrade" 
+            ? (activeSubscription?.product_id || updated_product.id)
+            : updated_product.id,
+          productName: scenario === "scheduled" || scenario === "downgrade"
+            ? (activeSubscription?.product_name || updated_product.name)
+            : updated_product.name,
+          status,
+          scenario,
+          currentPeriodStart: activeSubscription?.current_period_start 
+            ? new Date(activeSubscription.current_period_start) 
+            : null,
+          currentPeriodEnd: activeSubscription?.current_period_end 
+            ? new Date(activeSubscription.current_period_end) 
+            : null,
+          cancelAtPeriodEnd,
+          scheduledProductId,
+          scheduledProductName,
+        });
+
+        console.log(`[Autumn Webhook] Updated subscription for user ${userId}: ${scenario}`);
+      }
+
+      res.status(200).json({ received: true });
+    } catch (error: any) {
+      console.error("[Autumn Webhook Error]", error);
+      // Always return 200 to prevent retries
+      res.status(200).json({ received: true, error: error.message });
+    }
+  });
+
   // ─── Protected Routes (Better Auth session required) ───
 
   // Get all leads — Bodhi Admin only
@@ -123,10 +205,31 @@ export function registerRoutes(app: Express): void {
 
   // ─── Temple Admin Routes ───
 
-  // Get subscription info for temple_admin
+  // Get subscription info for temple_admin (from local DB + Autumn fallback)
   app.get("/api/temple/subscription", requireAuth, requireRole("temple_admin"), async (req, res) => {
     try {
       const userId = (req as any).session.user.id;
+      
+      // First try local database
+      const localSub = await storage.getSubscriptionByUserId(userId);
+      
+      if (localSub && localSub.status !== "expired") {
+        return res.json({
+          success: true,
+          data: {
+            productId: localSub.productId,
+            productName: localSub.productName,
+            status: localSub.status,
+            scenario: localSub.scenario,
+            renewalDate: localSub.currentPeriodEnd?.toISOString() || null,
+            cancelAtPeriodEnd: localSub.cancelAtPeriodEnd,
+            scheduledProductId: localSub.scheduledProductId,
+            scheduledProductName: localSub.scheduledProductName,
+          },
+        });
+      }
+
+      // Fallback to Autumn API
       const autumn = new Autumn({ secretKey: process.env.AUTUMN_SECRET_KEY! });
       const { data: customer } = await autumn.customers.get(userId);
 
@@ -143,6 +246,9 @@ export function registerRoutes(app: Express): void {
             ? new Date(activeProduct.current_period_end).toISOString()
             : null,
           status: activeProduct?.status || null,
+          cancelAtPeriodEnd: false,
+          scheduledProductId: null,
+          scheduledProductName: null,
         },
       });
     } catch (error: any) {
