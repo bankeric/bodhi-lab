@@ -26,6 +26,8 @@ import {
   LogOut,
   AlertCircle,
 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { authTranslations } from "@/translations/auth";
 
 // Session type from Better Auth
 interface Session {
@@ -113,6 +115,8 @@ type TabValue = "profile" | "security" | "sessions";
 export default function Settings() {
   const { data: session } = useSession();
   const { toast } = useToast();
+  const { language } = useLanguage();
+  const t = authTranslations[language].settings;
   const [activeTab, setActiveTab] = useState<TabValue>("profile");
   
   // Profile state
@@ -437,16 +441,16 @@ export default function Settings() {
             </div>
             <div>
               <h1 className="font-serif text-xl font-bold text-[#2c2c2c]">
-                Account Settings
+                {t.title}
               </h1>
               <p className="font-serif text-xs text-[#8B4513]/70">
-                Manage your profile and security
+                {language === "vi" ? "Quản lý hồ sơ và bảo mật" : "Manage your profile and security"}
               </p>
             </div>
           </div>
           <Link href={getDashboardLink()}>
             <button className="flex items-center gap-2 px-4 py-2 bg-[#991b1b] text-white rounded-lg font-serif text-sm hover:bg-[#7a1515] transition-all">
-              <ArrowLeft className="w-4 h-4" /> Back to Dashboard
+              <ArrowLeft className="w-4 h-4" /> {t.backToDashboard}
             </button>
           </Link>
         </div>
@@ -466,21 +470,21 @@ export default function Settings() {
                   className="font-serif text-sm data-[state=active]:bg-white data-[state=active]:text-[#991b1b] data-[state=active]:shadow-sm text-[#8B4513]/70 hover:text-[#8B4513] transition-all px-4 py-2 rounded-md"
                 >
                   <User className="w-4 h-4 mr-2" />
-                  Profile
+                  {t.tabs.profile}
                 </TabsTrigger>
                 <TabsTrigger
                   value="security"
                   className="font-serif text-sm data-[state=active]:bg-white data-[state=active]:text-[#991b1b] data-[state=active]:shadow-sm text-[#8B4513]/70 hover:text-[#8B4513] transition-all px-4 py-2 rounded-md"
                 >
                   <Shield className="w-4 h-4 mr-2" />
-                  Security
+                  {t.tabs.security}
                 </TabsTrigger>
                 <TabsTrigger
                   value="sessions"
                   className="font-serif text-sm data-[state=active]:bg-white data-[state=active]:text-[#991b1b] data-[state=active]:shadow-sm text-[#8B4513]/70 hover:text-[#8B4513] transition-all px-4 py-2 rounded-md"
                 >
                   <Monitor className="w-4 h-4 mr-2" />
-                  Sessions
+                  {t.tabs.sessions}
                 </TabsTrigger>
               </TabsList>
             </div>
@@ -490,24 +494,24 @@ export default function Settings() {
                 <div className="space-y-6">
                   <div>
                     <h2 className="font-serif text-lg font-semibold text-[#2c2c2c] mb-4">
-                      Profile Information
+                      {t.profile.title}
                     </h2>
                     <p className="font-serif text-sm text-[#8B4513]/70">
-                      Update your account profile information.
+                      {language === "vi" ? "Cập nhật thông tin hồ sơ tài khoản." : "Update your account profile information."}
                     </p>
                   </div>
 
                   {/* Name Field - Editable */}
                   <div className="space-y-2">
                     <Label htmlFor="name" className="font-serif text-sm font-medium text-[#2c2c2c]">
-                      Name
+                      {t.profile.name}
                     </Label>
                     <Input
                       id="name"
                       type="text"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      placeholder="Enter your name"
+                      placeholder={t.profile.namePlaceholder}
                       className="font-serif border-[#8B4513]/20 focus:border-[#991b1b] focus:ring-[#991b1b]/20"
                     />
                   </div>
@@ -515,7 +519,7 @@ export default function Settings() {
                   {/* Email Field - Read Only */}
                   <div className="space-y-2">
                     <Label htmlFor="email" className="font-serif text-sm font-medium text-[#2c2c2c]">
-                      Email
+                      {t.profile.email}
                     </Label>
                     <Input
                       id="email"
@@ -532,16 +536,16 @@ export default function Settings() {
                     <div className="flex items-center gap-2">
                       <Mail className="w-4 h-4 text-[#991b1b]" />
                       <h3 className="font-serif text-sm font-semibold text-[#2c2c2c]">
-                        Change Email
+                        {t.profile.changeEmail}
                       </h3>
                     </div>
                     <p className="font-serif text-xs text-[#8B4513]/70">
-                      Enter a new email address. You'll need to verify it before the change takes effect.
+                      {language === "vi" ? "Nhập địa chỉ email mới. Bạn cần xác minh trước khi thay đổi có hiệu lực." : "Enter a new email address. You'll need to verify it before the change takes effect."}
                     </p>
                     
                     <div className="space-y-2">
                       <Label htmlFor="newEmail" className="font-serif text-sm font-medium text-[#2c2c2c]">
-                        New Email Address
+                        {t.profile.newEmail}
                       </Label>
                       <Input
                         id="newEmail"
@@ -553,7 +557,7 @@ export default function Settings() {
                           setEmailChangeSuccess(false);
                           setPendingEmail(null);
                         }}
-                        placeholder="Enter new email address"
+                        placeholder={t.profile.newEmailPlaceholder}
                         className="font-serif border-[#8B4513]/20 focus:border-[#991b1b] focus:ring-[#991b1b]/20"
                         disabled={isChangingEmail}
                       />
@@ -563,7 +567,7 @@ export default function Settings() {
                     {emailChangeSuccess && pendingEmail && (
                       <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
                         <p className="font-serif text-sm text-green-700">
-                          Verification email sent to {pendingEmail}. Please check your inbox to confirm the change.
+                          {t.profile.emailChangeRequested}
                         </p>
                       </div>
                     )}
@@ -583,12 +587,12 @@ export default function Settings() {
                       {isChangingEmail ? (
                         <>
                           <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                          Sending Verification...
+                          {t.profile.changingEmail}
                         </>
                       ) : (
                         <>
                           <Mail className="w-4 h-4 mr-2" />
-                          Change Email
+                          {t.profile.changeEmailButton}
                         </>
                       )}
                     </Button>
@@ -597,7 +601,7 @@ export default function Settings() {
                   {/* Role Field - Read Only */}
                   <div className="space-y-2">
                     <Label htmlFor="role" className="font-serif text-sm font-medium text-[#2c2c2c]">
-                      Role
+                      {t.profile.role}
                     </Label>
                     <Input
                       id="role"
@@ -626,12 +630,12 @@ export default function Settings() {
                       {isSaving ? (
                         <>
                           <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                          Saving...
+                          {t.profile.saving}
                         </>
                       ) : (
                         <>
                           <Save className="w-4 h-4 mr-2" />
-                          Save Changes
+                          {t.profile.saveChanges}
                         </>
                       )}
                     </Button>
@@ -643,10 +647,10 @@ export default function Settings() {
                 <div className="space-y-6">
                   <div>
                     <h2 className="font-serif text-lg font-semibold text-[#2c2c2c] mb-4">
-                      Security Settings
+                      {language === "vi" ? "Cài Đặt Bảo Mật" : "Security Settings"}
                     </h2>
                     <p className="font-serif text-sm text-[#8B4513]/70">
-                      Manage your password and account security preferences.
+                      {language === "vi" ? "Quản lý mật khẩu và tùy chọn bảo mật tài khoản." : "Manage your password and account security preferences."}
                     </p>
                   </div>
 
@@ -655,17 +659,17 @@ export default function Settings() {
                     <div className="flex items-center gap-2">
                       <Lock className="w-4 h-4 text-[#991b1b]" />
                       <h3 className="font-serif text-sm font-semibold text-[#2c2c2c]">
-                        Change Password
+                        {t.security.title}
                       </h3>
                     </div>
                     <p className="font-serif text-xs text-[#8B4513]/70">
-                      Password must be at least 8 characters.
+                      {t.security.requirements}
                     </p>
 
                     {/* Current Password */}
                     <div className="space-y-2">
                       <Label htmlFor="currentPassword" className="font-serif text-sm font-medium text-[#2c2c2c]">
-                        Current Password
+                        {t.security.currentPassword}
                       </Label>
                       <Input
                         id="currentPassword"
@@ -676,7 +680,7 @@ export default function Settings() {
                           setPasswordError(null);
                           setPasswordSuccess(false);
                         }}
-                        placeholder="Enter current password"
+                        placeholder={t.security.currentPasswordPlaceholder}
                         className="font-serif border-[#8B4513]/20 focus:border-[#991b1b] focus:ring-[#991b1b]/20"
                         disabled={isChangingPassword}
                       />
@@ -685,7 +689,7 @@ export default function Settings() {
                     {/* New Password */}
                     <div className="space-y-2">
                       <Label htmlFor="newPassword" className="font-serif text-sm font-medium text-[#2c2c2c]">
-                        New Password
+                        {t.security.newPassword}
                       </Label>
                       <Input
                         id="newPassword"
@@ -696,7 +700,7 @@ export default function Settings() {
                           setPasswordError(null);
                           setPasswordSuccess(false);
                         }}
-                        placeholder="Enter new password"
+                        placeholder={t.security.newPasswordPlaceholder}
                         className="font-serif border-[#8B4513]/20 focus:border-[#991b1b] focus:ring-[#991b1b]/20"
                         disabled={isChangingPassword}
                       />
@@ -705,7 +709,7 @@ export default function Settings() {
                     {/* Confirm New Password */}
                     <div className="space-y-2">
                       <Label htmlFor="confirmPassword" className="font-serif text-sm font-medium text-[#2c2c2c]">
-                        Confirm New Password
+                        {t.security.confirmPassword}
                       </Label>
                       <Input
                         id="confirmPassword"
@@ -716,7 +720,7 @@ export default function Settings() {
                           setPasswordError(null);
                           setPasswordSuccess(false);
                         }}
-                        placeholder="Confirm new password"
+                        placeholder={t.security.confirmPasswordPlaceholder}
                         className="font-serif border-[#8B4513]/20 focus:border-[#991b1b] focus:ring-[#991b1b]/20"
                         disabled={isChangingPassword}
                       />
@@ -727,7 +731,7 @@ export default function Settings() {
                       <div className="p-3 bg-green-50 border border-green-200 rounded-lg flex items-center gap-2">
                         <CheckCircle className="w-4 h-4 text-green-600" />
                         <p className="font-serif text-sm text-green-700">
-                          Your password has been changed successfully.
+                          {t.security.passwordChanged}
                         </p>
                       </div>
                     )}
@@ -747,12 +751,12 @@ export default function Settings() {
                       {isChangingPassword ? (
                         <>
                           <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                          Changing Password...
+                          {t.security.changing}
                         </>
                       ) : (
                         <>
                           <Lock className="w-4 h-4 mr-2" />
-                          Change Password
+                          {t.security.changePassword}
                         </>
                       )}
                     </Button>
@@ -764,10 +768,10 @@ export default function Settings() {
                 <div className="space-y-6">
                   <div>
                     <h2 className="font-serif text-lg font-semibold text-[#2c2c2c] mb-4">
-                      Active Sessions
+                      {t.sessions.title}
                     </h2>
                     <p className="font-serif text-sm text-[#8B4513]/70">
-                      View and manage your active login sessions across devices.
+                      {t.sessions.description}
                     </p>
                   </div>
 
@@ -775,7 +779,7 @@ export default function Settings() {
                   {sessionsLoading && (
                     <div className="p-8 flex flex-col items-center justify-center">
                       <Loader2 className="w-8 h-8 text-[#991b1b] animate-spin mb-3" />
-                      <p className="font-serif text-sm text-[#8B4513]/70">Loading sessions...</p>
+                      <p className="font-serif text-sm text-[#8B4513]/70">{t.sessions.loading}</p>
                     </div>
                   )}
 
@@ -793,7 +797,7 @@ export default function Settings() {
                         className="font-serif border-red-300 text-red-600 hover:bg-red-50"
                       >
                         <RefreshCw className="w-4 h-4 mr-2" />
-                        Retry
+                        {language === "vi" ? "Thử Lại" : "Retry"}
                       </Button>
                     </div>
                   )}
@@ -835,13 +839,13 @@ export default function Settings() {
                                   </span>
                                   {sessionItem.isCurrent && (
                                     <span className="px-2 py-0.5 bg-[#991b1b] text-white text-xs font-serif rounded-full">
-                                      Current session
+                                      {t.sessions.currentSession}
                                     </span>
                                   )}
                                 </div>
                                 <div className="flex items-center gap-3 mt-1 flex-wrap">
                                   <span className="font-serif text-xs text-[#8B4513]/70">
-                                    Last active: {formatLastActive(sessionItem.updatedAt)}
+                                    {t.sessions.lastActive}: {formatLastActive(sessionItem.updatedAt)}
                                   </span>
                                   {sessionItem.ipAddress && (
                                     <span className="font-serif text-xs text-[#8B4513]/60 flex items-center gap-1">
@@ -863,12 +867,12 @@ export default function Settings() {
                                 {revokingSession === sessionItem.token ? (
                                   <>
                                     <Loader2 className="w-4 h-4 mr-1 animate-spin" />
-                                    Revoking...
+                                    {t.sessions.revoking}
                                   </>
                                 ) : (
                                   <>
                                     <LogOut className="w-4 h-4 mr-1" />
-                                    Revoke
+                                    {t.sessions.revoke}
                                   </>
                                 )}
                               </Button>
@@ -884,7 +888,7 @@ export default function Settings() {
                     <div className="p-8 text-center">
                       <Monitor className="w-12 h-12 text-[#8B4513]/30 mx-auto mb-3" />
                       <p className="font-serif text-sm text-[#8B4513]/60">
-                        No active sessions found.
+                        {t.sessions.noOtherSessions}
                       </p>
                       <Button
                         onClick={fetchSessions}
@@ -893,7 +897,7 @@ export default function Settings() {
                         className="font-serif mt-3 border-[#8B4513]/30 text-[#8B4513] hover:bg-[#8B4513]/5"
                       >
                         <RefreshCw className="w-4 h-4 mr-2" />
-                        Refresh
+                        {language === "vi" ? "Làm Mới" : "Refresh"}
                       </Button>
                     </div>
                   )}
@@ -910,17 +914,17 @@ export default function Settings() {
                         {revokingAll ? (
                           <>
                             <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                            Signing out all other devices...
+                            {t.sessions.revokingAll}
                           </>
                         ) : (
                           <>
                             <LogOut className="w-4 h-4 mr-2" />
-                            Sign out all other devices
+                            {t.sessions.revokeAll}
                           </>
                         )}
                       </Button>
                       <p className="font-serif text-xs text-[#8B4513]/60 text-center mt-2">
-                        This will sign you out from all devices except this one.
+                        {language === "vi" ? "Thao tác này sẽ đăng xuất bạn khỏi tất cả thiết bị ngoại trừ thiết bị này." : "This will sign you out from all devices except this one."}
                       </p>
                     </div>
                   )}

@@ -2,8 +2,13 @@ import { useState } from "react";
 import { requestPasswordReset } from "@/lib/auth-client";
 import { Link } from "wouter";
 import { Mail, ArrowLeft, Loader2, CheckCircle } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { authTranslations } from "@/translations/auth";
 
 export default function ForgotPassword() {
+  const { language } = useLanguage();
+  const t = authTranslations[language].forgotPassword;
+  
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -23,11 +28,11 @@ export default function ForgotPassword() {
           setSuccess(true);
         },
         onError: (ctx: any) => {
-          setError(ctx.error.message || "Failed to send reset email. Please try again.");
+          setError(ctx.error.message || t.sendFailed);
         },
       });
     } catch (err: any) {
-      setError(err?.message || "Something went wrong. Please try again.");
+      setError(err?.message || t.sendFailed);
     } finally {
       setIsSubmitting(false);
     }
@@ -41,21 +46,20 @@ export default function ForgotPassword() {
             <CheckCircle className="w-8 h-8 text-green-600" />
           </div>
           <h1 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">
-            Check Your Email
+            {t.checkEmail}
           </h1>
           <p className="font-serif text-[#8B4513]/70 mb-6">
-            We've sent a password reset link to <span className="font-semibold">{email}</span>. 
-            Please check your inbox and follow the instructions.
+            {t.sentInstructions.replace("{email}", email)}
           </p>
           <p className="font-serif text-sm text-[#8B4513]/50 mb-6">
-            Didn't receive the email? Check your spam folder or try again.
+            {t.didntReceive} {t.tryAgain}
           </p>
           <Link
             href="/login"
             className="inline-flex items-center gap-2 text-[#991b1b] hover:text-[#7a1515] transition-colors font-serif"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Sign In
+            {t.backToSignIn}
           </Link>
         </div>
       </div>
@@ -70,10 +74,10 @@ export default function ForgotPassword() {
             <Mail className="w-8 h-8 text-[#991b1b]" />
           </div>
           <h1 className="font-serif text-2xl font-bold text-[#2c2c2c]">
-            Forgot Password?
+            {t.title}
           </h1>
           <p className="font-serif text-sm text-[#8B4513]/70 mt-2">
-            Enter your email and we'll send you a link to reset your password
+            {t.subtitle}
           </p>
         </div>
 
@@ -89,14 +93,14 @@ export default function ForgotPassword() {
               htmlFor="email"
               className="block font-serif text-sm font-medium text-[#2c2c2c] mb-1"
             >
-              Email
+              {t.email}
             </label>
             <input
               id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="your@email.com"
+              placeholder={t.emailPlaceholder}
               className="w-full px-4 py-3 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-[#2c2c2c] placeholder:text-[#8B4513]/40 focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50 focus:border-[#991b1b] transition-all"
               required
               autoComplete="email"
@@ -111,10 +115,10 @@ export default function ForgotPassword() {
             {isSubmitting ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin" />
-                Sending...
+                {t.sending}
               </>
             ) : (
-              "Send Reset Link"
+              t.sendLink
             )}
           </button>
         </form>
@@ -124,7 +128,7 @@ export default function ForgotPassword() {
           className="flex items-center justify-center gap-2 mt-6 text-[#8B4513]/60 hover:text-[#991b1b] transition-colors font-serif text-sm"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to Sign In
+          {t.backToSignIn}
         </Link>
       </div>
     </div>

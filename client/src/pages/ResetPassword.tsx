@@ -2,9 +2,14 @@ import { useState, useEffect } from "react";
 import { resetPassword } from "@/lib/auth-client";
 import { Link, useLocation } from "wouter";
 import { Lock, ArrowLeft, Loader2, CheckCircle, XCircle } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { authTranslations } from "@/translations/auth";
 
 export default function ResetPassword() {
   const [location] = useLocation();
+  const { language } = useLanguage();
+  const t = authTranslations[language].resetPassword;
+  
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
@@ -33,17 +38,17 @@ export default function ResetPassword() {
     setError("");
 
     if (password !== confirmPassword) {
-      setError("Passwords do not match");
+      setError(t.passwordMismatch);
       return;
     }
 
     if (password.length < 8) {
-      setError("Password must be at least 8 characters");
+      setError(t.passwordTooShort);
       return;
     }
 
     if (!token) {
-      setError("Invalid or missing reset token");
+      setError(t.resetFailed);
       return;
     }
 
@@ -58,11 +63,11 @@ export default function ResetPassword() {
           setSuccess(true);
         },
         onError: (ctx) => {
-          setError(ctx.error.message || "Failed to reset password. Please try again.");
+          setError(ctx.error.message || t.resetFailed);
         },
       });
     } catch (err: any) {
-      setError(err?.message || "Something went wrong. Please try again.");
+      setError(err?.message || t.resetFailed);
     } finally {
       setIsSubmitting(false);
     }
@@ -76,16 +81,16 @@ export default function ResetPassword() {
             <XCircle className="w-8 h-8 text-red-600" />
           </div>
           <h1 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">
-            Invalid or Expired Link
+            {t.invalidToken}
           </h1>
           <p className="font-serif text-[#8B4513]/70 mb-6">
-            This password reset link is invalid or has expired. Please request a new one.
+            {t.invalidTokenMessage}
           </p>
           <Link
             href="/forgot-password"
             className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#991b1b] text-white rounded-xl font-serif font-semibold hover:bg-[#7a1515] transition-all duration-300 shadow-md"
           >
-            Request New Link
+            {t.requestNew}
           </Link>
         </div>
       </div>
@@ -100,16 +105,16 @@ export default function ResetPassword() {
             <CheckCircle className="w-8 h-8 text-green-600" />
           </div>
           <h1 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">
-            Password Reset Successfully
+            {t.success}
           </h1>
           <p className="font-serif text-[#8B4513]/70 mb-6">
-            Your password has been updated. You can now sign in with your new password.
+            {t.successMessage}
           </p>
           <Link
             href="/login"
             className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#991b1b] text-white rounded-xl font-serif font-semibold hover:bg-[#7a1515] transition-all duration-300 shadow-md"
           >
-            Sign In
+            {t.signIn}
           </Link>
         </div>
       </div>
@@ -124,10 +129,10 @@ export default function ResetPassword() {
             <Lock className="w-8 h-8 text-[#991b1b]" />
           </div>
           <h1 className="font-serif text-2xl font-bold text-[#2c2c2c]">
-            Reset Your Password
+            {t.title}
           </h1>
           <p className="font-serif text-sm text-[#8B4513]/70 mt-2">
-            Enter your new password below
+            {t.subtitle}
           </p>
         </div>
 
@@ -143,14 +148,14 @@ export default function ResetPassword() {
               htmlFor="password"
               className="block font-serif text-sm font-medium text-[#2c2c2c] mb-1"
             >
-              New Password
+              {t.newPassword}
             </label>
             <input
               id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter new password (min 8 characters)"
+              placeholder={t.newPasswordPlaceholder}
               className="w-full px-4 py-3 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-[#2c2c2c] placeholder:text-[#8B4513]/40 focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50 focus:border-[#991b1b] transition-all"
               required
               minLength={8}
@@ -163,14 +168,14 @@ export default function ResetPassword() {
               htmlFor="confirmPassword"
               className="block font-serif text-sm font-medium text-[#2c2c2c] mb-1"
             >
-              Confirm Password
+              {t.confirmPassword}
             </label>
             <input
               id="confirmPassword"
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="Confirm your new password"
+              placeholder={t.confirmPasswordPlaceholder}
               className="w-full px-4 py-3 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-[#2c2c2c] placeholder:text-[#8B4513]/40 focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50 focus:border-[#991b1b] transition-all"
               required
               minLength={8}
@@ -186,10 +191,10 @@ export default function ResetPassword() {
             {isSubmitting ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin" />
-                Resetting...
+                {t.resetting}
               </>
             ) : (
-              "Reset Password"
+              t.resetButton
             )}
           </button>
         </form>
@@ -199,7 +204,7 @@ export default function ResetPassword() {
           className="flex items-center justify-center gap-2 mt-6 text-[#8B4513]/60 hover:text-[#991b1b] transition-colors font-serif text-sm"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to Sign In
+          {t.backToSignIn}
         </Link>
       </div>
     </div>

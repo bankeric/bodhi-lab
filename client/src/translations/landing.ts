@@ -180,6 +180,8 @@ export const landingTranslations = {
         title: "Premium Package",
         subtitle: "Add hands-on support to accelerate your digital transformation",
         description: "Get expert guidance from setup to launch with our comprehensive onboarding program",
+        price: "$4,000",
+        priceUnit: "one-time",
         features: [
           "Five dedicated video training sessions tailored for your organization",
           "60 days of 1-on-1 personalized setup support",
@@ -460,6 +462,8 @@ export const landingTranslations = {
         title: "Gói Cao Cấp",
         subtitle: "Thêm hỗ trợ thực hành để tăng tốc chuyển đổi số của bạn",
         description: "Nhận hướng dẫn chuyên gia từ thiết lập đến ra mắt với chương trình đào tạo toàn diện của chúng tôi",
+        price: "$4,000",
+        priceUnit: "một lần",
         features: [
           "Năm buổi đào tạo video chuyên dụng được điều chỉnh cho tổ chức của bạn",
           "60 ngày hỗ trợ thiết lập 1-1 cá nhân hóa",

@@ -2,10 +2,15 @@ import { useState, useEffect } from "react";
 import { useSession, signIn, signUp, sendVerificationEmail } from "@/lib/auth-client";
 import { Redirect, Link, useLocation } from "wouter";
 import { Lock, ArrowLeft, Loader2, UserPlus, Mail, CheckCircle, RefreshCw } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { authTranslations } from "@/translations/auth";
 
 export default function Login() {
   const { data: session, isPending: sessionLoading } = useSession();
   const [, setLocation] = useLocation();
+  const { language } = useLanguage();
+  const t = authTranslations[language].login;
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -47,18 +52,18 @@ export default function Login() {
       const data = await response.json();
       
       if (response.ok) {
-        setSuccess("Verification email sent! Please check your inbox and spam folder.");
+        setSuccess(t.verificationSent);
         setShowResendVerification(false);
       } else if (response.status === 429) {
         // Rate limited
         const retryAfter = data.retryAfter || 60;
         setResendCooldown(retryAfter);
-        setError(`Too many requests. Please wait ${Math.ceil(retryAfter / 60)} minute(s) before requesting another email.`);
+        setError(t.tooManyRequests.replace("{minutes}", String(Math.ceil(retryAfter / 60))));
       } else {
-        setError(data.message || "Could not send verification email. Please try again.");
+        setError(data.message || t.authFailed);
       }
     } catch (err) {
-      setError("Could not send verification email. Please try again.");
+      setError(t.authFailed);
     } finally {
       setResendLoading(false);
     }
@@ -104,12 +109,12 @@ export default function Login() {
               console.log("[Login] sendVerificationEmail result:", err);
             }
             
-            setSuccess("Account created! Please check your email (including spam folder) to verify your account before signing in.");
+            setSuccess(t.accountCreated);
             setMode("signin");
             setPassword("");
           },
           onError: (ctx) => {
-            setError(ctx.error.message || "Could not create account. Please try again.");
+            setError(ctx.error.message || t.couldNotCreate);
           },
         });
       } else {
@@ -125,18 +130,18 @@ export default function Login() {
           onError: (ctx) => {
             const errorMessage = ctx.error.message?.toLowerCase() || "";
             if (errorMessage.includes("verify") || errorMessage.includes("verification") || errorMessage.includes("not verified")) {
-              setError("Please verify your email before signing in. Check your inbox for the verification link.");
+              setError(t.verifyEmail);
               setResendEmail(email);
               setShowResendVerification(true);
             } else {
-              setError(ctx.error.message || "Invalid email or password. Please try again.");
+              setError(ctx.error.message || t.invalidCredentials);
               setShowResendVerification(false);
             }
           },
         });
       }
     } catch (err: any) {
-      setError(err?.message || "Authentication failed. Please try again.");
+      setError(err?.message || t.authFailed);
     } finally {
       setIsSubmitting(false);
     }
@@ -154,12 +159,10 @@ export default function Login() {
             )}
           </div>
           <h1 className="font-serif text-2xl font-bold text-[#2c2c2c]">
-            {mode === "signin" ? "Sign In" : "Create Account"}
+            {mode === "signin" ? t.title : t.createAccount}
           </h1>
           <p className="font-serif text-sm text-[#8B4513]/70 mt-2">
-            {mode === "signin"
-              ? "Enter your credentials to access your dashboard"
-              : "Create a new account to get started"}
+            {mode === "signin" ? t.subtitle : t.createSubtitle}
           </p>
         </div>
 
@@ -176,7 +179,7 @@ export default function Login() {
                 <Mail className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
                 <div className="flex-1">
                   <p className="font-serif text-sm text-amber-800 mb-3">
-                    Didn't receive the verification email? We can send you a new one.
+                    {t.resendVerification}
                   </p>
                   <button
                     type="button"
@@ -187,17 +190,17 @@ export default function Login() {
                     {resendLoading ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin" />
-                        Sending...
+                        {t.sending}
                       </>
                     ) : resendCooldown > 0 ? (
                       <>
                         <RefreshCw className="w-4 h-4" />
-                        Wait {resendCooldown}s
+                        {t.wait} {resendCooldown}s
                       </>
                     ) : (
                       <>
                         <RefreshCw className="w-4 h-4" />
-                        Resend verification email
+                        {t.resendButton}
                       </>
                     )}
                   </button>
@@ -219,14 +222,14 @@ export default function Login() {
                 htmlFor="name"
                 className="block font-serif text-sm font-medium text-[#2c2c2c] mb-1"
               >
-                Name
+                {t.name}
               </label>
               <input
                 id="name"
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Your name"
+                placeholder={t.namePlaceholder}
                 className="w-full px-4 py-3 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-[#2c2c2c] placeholder:text-[#8B4513]/40 focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50 focus:border-[#991b1b] transition-all"
                 autoComplete="name"
               />
@@ -238,14 +241,14 @@ export default function Login() {
               htmlFor="email"
               className="block font-serif text-sm font-medium text-[#2c2c2c] mb-1"
             >
-              Email
+              {t.email}
             </label>
             <input
               id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="your@email.com"
+              placeholder={t.emailPlaceholder}
               className="w-full px-4 py-3 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-[#2c2c2c] placeholder:text-[#8B4513]/40 focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50 focus:border-[#991b1b] transition-all"
               required
               autoComplete="email"
@@ -258,14 +261,14 @@ export default function Login() {
                 htmlFor="password"
                 className="block font-serif text-sm font-medium text-[#2c2c2c]"
               >
-                Password
+                {t.password}
               </label>
               {mode === "signin" && (
                 <Link
                   href="/forgot-password"
                   className="font-serif text-xs text-[#991b1b] hover:text-[#7a1515] transition-colors"
                 >
-                  Forgot password?
+                  {t.forgotPassword}
                 </Link>
               )}
             </div>
@@ -274,9 +277,7 @@ export default function Login() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder={
-                mode === "signup" ? "Create a password (min 8 characters)" : "Enter your password"
-              }
+              placeholder={mode === "signup" ? t.createPasswordPlaceholder : t.passwordPlaceholder}
               className="w-full px-4 py-3 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-[#2c2c2c] placeholder:text-[#8B4513]/40 focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50 focus:border-[#991b1b] transition-all"
               required
               autoComplete={
@@ -294,12 +295,12 @@ export default function Login() {
             {isSubmitting ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin" />
-                {mode === "signin" ? "Signing in..." : "Creating account..."}
+                {mode === "signin" ? t.signingIn : t.creatingAccount}
               </>
             ) : mode === "signin" ? (
-              "Sign In"
+              t.signIn
             ) : (
-              "Create Account"
+              t.createAccount
             )}
           </button>
         </form>
@@ -307,9 +308,7 @@ export default function Login() {
         <div className="flex items-center gap-3 my-5">
           <div className="flex-1 h-px bg-[#8B4513]/20" />
           <span className="font-serif text-xs text-[#8B4513]/50">
-            {mode === "signin"
-              ? "Don't have an account?"
-              : "Already have an account?"}
+            {mode === "signin" ? t.noAccount : t.haveAccount}
           </span>
           <div className="flex-1 h-px bg-[#8B4513]/20" />
         </div>
@@ -325,7 +324,7 @@ export default function Login() {
           }}
           className="w-full px-6 py-3 bg-white border border-[#8B4513]/30 rounded-xl font-serif font-semibold text-[#2c2c2c] hover:bg-[#8B4513]/5 transition-all duration-300 shadow-sm"
         >
-          {mode === "signin" ? "Create Account" : "Sign In Instead"}
+          {mode === "signin" ? t.createAccount : t.signInInstead}
         </button>
 
         <Link
@@ -333,7 +332,7 @@ export default function Login() {
           className="flex items-center justify-center gap-2 mt-6 text-[#8B4513]/60 hover:text-[#991b1b] transition-colors font-serif text-sm"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to Home
+          {t.backToHome}
         </Link>
       </div>
     </div>

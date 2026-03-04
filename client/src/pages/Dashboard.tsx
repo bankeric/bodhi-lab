@@ -24,12 +24,16 @@ import {
   getSubscriptionDisplayStatus,
   type SubscriptionInfo,
 } from "@/lib/dashboard-utils";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { authTranslations } from "@/translations/auth";
 
 export default function Dashboard() {
   const { data: session } = useSession();
   const { openBillingPortal, attach } = useCustomer();
   const [, setLocation] = useLocation();
   const { toast } = useToast();
+  const { language } = useLanguage();
+  const t = authTranslations[language].dashboard;
   const [onboardingLoading, setOnboardingLoading] = useState(false);
 
   const {
@@ -105,7 +109,7 @@ export default function Dashboard() {
                 variant="outline"
                 className="flex items-center gap-2 font-serif text-sm border-[#8B4513]/30 text-[#8B4513] hover:bg-[#8B4513]/5"
               >
-                Home
+                {t.home}
               </Button>
             </Link>
             <Button
@@ -114,7 +118,7 @@ export default function Dashboard() {
               className="flex items-center gap-2 font-serif text-sm border-[#8B4513]/30 text-[#8B4513] hover:bg-[#8B4513]/5"
             >
               <LogOut className="w-4 h-4" />
-              Sign Out
+              {t.signOut}
             </Button>
           </div>
         </div>
@@ -127,7 +131,7 @@ export default function Dashboard() {
             <div className="flex items-center gap-2 mb-4">
               <CreditCard className="w-5 h-5 text-[#991b1b]" />
               <h2 className="font-serif text-lg font-semibold text-[#2c2c2c]">
-                Subscription
+                {t.subscription}
               </h2>
             </div>
 
@@ -138,7 +142,7 @@ export default function Dashboard() {
             ) : subError ? (
               <div className="text-center py-6">
                 <p className="font-serif text-sm text-red-600 mb-3">
-                  Could not load subscription info.
+                  {t.couldNotLoad}
                 </p>
                 <Button
                   variant="outline"
@@ -146,21 +150,21 @@ export default function Dashboard() {
                   onClick={() => refetchSub()}
                   className="font-serif text-sm"
                 >
-                  <RefreshCw className="w-4 h-4 mr-1" /> Retry
+                  <RefreshCw className="w-4 h-4 mr-1" /> {t.retry}
                 </Button>
               </div>
             ) : displayStatus?.hasActivePlan ? (
               <div className="space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div>
-                    <p className="font-serif text-sm text-[#8B4513]/60">Current Plan</p>
+                    <p className="font-serif text-sm text-[#8B4513]/60">{t.currentPlan}</p>
                     <p className="font-serif text-2xl font-bold text-[#2c2c2c]">
                       {displayStatus.planLabel}
                     </p>
                   </div>
                   <div className="text-left sm:text-right">
                     <p className="font-serif text-sm text-[#8B4513]/60">
-                      {displayStatus.isCancelling ? "Ends on" : "Renewal Date"}
+                      {displayStatus.isCancelling ? t.endsOn : t.renewalDate}
                     </p>
                     <p className="font-serif text-base font-medium text-[#2c2c2c]">
                       {displayStatus.renewalLabel}
@@ -174,10 +178,10 @@ export default function Dashboard() {
                     <AlertTriangle className="w-5 h-5 text-amber-600 flex-shrink-0" />
                     <div>
                       <p className="font-serif text-sm font-medium text-amber-800">
-                        Subscription Ending
+                        {t.subscriptionEnding}
                       </p>
                       <p className="font-serif text-xs text-amber-700">
-                        Your subscription will end on {displayStatus.renewalLabel}. You can resubscribe anytime.
+                        {t.subscriptionEndingDesc.replace("{date}", displayStatus.renewalLabel)}
                       </p>
                     </div>
                   </div>
@@ -189,10 +193,10 @@ export default function Dashboard() {
                     <Clock className="w-5 h-5 text-blue-600 flex-shrink-0" />
                     <div>
                       <p className="font-serif text-sm font-medium text-blue-800">
-                        Plan Change Scheduled
+                        {t.planChangeScheduled}
                       </p>
                       <p className="font-serif text-xs text-blue-700">
-                        Switching to {displayStatus.scheduledPlanLabel} on {displayStatus.renewalLabel}
+                        {t.planChangeScheduledDesc.replace("{plan}", displayStatus.scheduledPlanLabel || "").replace("{date}", displayStatus.renewalLabel)}
                       </p>
                     </div>
                   </div>
@@ -204,14 +208,14 @@ export default function Dashboard() {
                     className="bg-[#991b1b] text-white hover:bg-[#7a1515] font-serif"
                   >
                     <CreditCard className="w-4 h-4 mr-2" />
-                    Manage Billing
+                    {t.manageBilling}
                   </Button>
                   <Link href="/pricing">
                     <Button
                       variant="outline"
                       className="font-serif border-[#8B4513]/30 text-[#8B4513] hover:bg-[#8B4513]/5"
                     >
-                      Change Plan
+                      {t.changePlan}
                     </Button>
                   </Link>
                 </div>
@@ -219,11 +223,11 @@ export default function Dashboard() {
             ) : (
               <div className="text-center py-6">
                 <p className="font-serif text-[#8B4513]/70 mb-4">
-                  No active plan. Choose a plan to get started.
+                  {t.noPlanDesc}
                 </p>
                 <Link href="/pricing">
                   <Button className="bg-[#991b1b] text-white hover:bg-[#7a1515] font-serif">
-                    View Plans <ArrowRight className="w-4 h-4 ml-2" />
+                    {t.viewPlans} <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </Link>
               </div>
@@ -235,11 +239,11 @@ export default function Dashboard() {
             <div className="flex items-center gap-2 mb-4">
               <Globe className="w-5 h-5 text-[#991b1b]" />
               <h2 className="font-serif text-lg font-semibold text-[#2c2c2c]">
-                giac.ngo Space
+                {t.giacNgoSpace}
               </h2>
             </div>
             <p className="font-serif text-sm text-[#8B4513]/70">
-              Coming soon — your Space will be configured shortly.
+              {t.giacNgoSpaceDesc}
             </p>
           </Card>
 
@@ -248,18 +252,18 @@ export default function Dashboard() {
             <div className="flex items-center gap-2 mb-4">
               <MessageCircle className="w-5 h-5 text-[#991b1b]" />
               <h2 className="font-serif text-lg font-semibold text-[#2c2c2c]">
-                Support
+                {t.support}
               </h2>
             </div>
             <p className="font-serif text-sm text-[#8B4513]/70 mb-4">
-              Need help? Reach out to our team.
+              {t.supportDesc}
             </p>
             <Link href="/contact">
               <Button
                 variant="outline"
                 className="font-serif border-[#8B4513]/30 text-[#8B4513] hover:bg-[#8B4513]/5"
               >
-                Contact Us <ArrowRight className="w-4 h-4 ml-2" />
+                {t.contactUs} <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
           </Card>
@@ -269,19 +273,19 @@ export default function Dashboard() {
             <div className="flex items-center gap-2 mb-4">
               <Zap className="w-5 h-5 text-[#991b1b]" />
               <h2 className="font-serif text-lg font-semibold text-[#2c2c2c]">
-                Onboarding Package
+                {t.onboardingPackage}
               </h2>
-              <span className="ml-auto font-serif text-xl font-bold text-[#2c2c2c]">$899 <span className="text-xs font-normal text-[#8B4513]/60">one-time</span></span>
+              <span className="ml-auto font-serif text-xl font-bold text-[#2c2c2c]">$899 <span className="text-xs font-normal text-[#8B4513]/60">{t.oneTime}</span></span>
             </div>
             <p className="font-serif text-sm text-[#8B4513]/70 mb-4">
-              A complete, done-for-you setup so your community can go live with confidence.
+              {t.onboardingDesc}
             </p>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
               {[
-                "Custom website design & build",
-                "Full platform onboarding & configuration",
-                "Data migration from existing systems",
-                "Staff training sessions",
+                t.onboardingFeature1,
+                t.onboardingFeature2,
+                t.onboardingFeature3,
+                t.onboardingFeature4,
               ].map((f, i) => (
                 <li key={i} className="flex items-center gap-2 font-serif text-sm text-[#8B4513]/80">
                   <Check className="w-3.5 h-3.5 text-green-600 flex-shrink-0" />
@@ -295,7 +299,7 @@ export default function Dashboard() {
               className="bg-[#991b1b] text-white hover:bg-[#7a1515] font-serif"
             >
               {onboardingLoading ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
-              Add Onboarding
+              {t.addOnboarding}
             </Button>
           </Card>
         </div>
