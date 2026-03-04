@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSession, signIn, signUp } from "@/lib/auth-client";
 import { Redirect, Link, useLocation } from "wouter";
-import { Lock, ArrowLeft, Loader2, UserPlus } from "lucide-react";
+import { Lock, ArrowLeft, Loader2, UserPlus, Mail, CheckCircle } from "lucide-react";
 
 export default function Login() {
   const { data: session, isPending: sessionLoading } = useSession();
@@ -10,6 +10,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [mode, setMode] = useState<"signin" | "signup">("signin");
 
@@ -30,6 +31,7 @@ export default function Login() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    setSuccess("");
     setIsSubmitting(true);
 
     try {
@@ -41,10 +43,13 @@ export default function Login() {
           callbackURL: "/dashboard",
         }, {
           onSuccess: () => {
-            setLocation("/dashboard");
+            setSuccess("Account created! Please check your email to verify your account.");
+            setEmail("");
+            setPassword("");
+            setName("");
           },
           onError: (ctx) => {
-            setError(ctx.error.message || JSON.stringify(ctx.error) || "Could not create account. Please try again.");
+            setError(ctx.error.message || "Could not create account. Please try again.");
           },
         });
       } else {
@@ -58,7 +63,11 @@ export default function Login() {
             }
           },
           onError: (ctx) => {
-            setError(ctx.error.message || "Invalid email or password. Please try again.");
+            if (ctx.error.message?.includes("verify")) {
+              setError("Please verify your email before signing in. Check your inbox for the verification link.");
+            } else {
+              setError(ctx.error.message || "Invalid email or password. Please try again.");
+            }
           },
         });
       }
@@ -94,6 +103,13 @@ export default function Login() {
           {error && (
             <div className="p-3 bg-red-100 text-red-800 rounded-lg font-serif text-sm border border-red-200">
               {error}
+            </div>
+          )}
+
+          {success && (
+            <div className="p-3 bg-green-100 text-green-800 rounded-lg font-serif text-sm border border-green-200 flex items-start gap-2">
+              <CheckCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+              <span>{success}</span>
             </div>
           )}
 
@@ -136,21 +152,30 @@ export default function Login() {
             />
           </div>
 
-
           <div>
-            <label
-              htmlFor="password"
-              className="block font-serif text-sm font-medium text-[#2c2c2c] mb-1"
-            >
-              Password
-            </label>
+            <div className="flex justify-between items-center mb-1">
+              <label
+                htmlFor="password"
+                className="block font-serif text-sm font-medium text-[#2c2c2c]"
+              >
+                Password
+              </label>
+              {mode === "signin" && (
+                <Link
+                  href="/forgot-password"
+                  className="font-serif text-xs text-[#991b1b] hover:text-[#7a1515] transition-colors"
+                >
+                  Forgot password?
+                </Link>
+              )}
+            </div>
             <input
               id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder={
-                mode === "signup" ? "Create a password" : "Enter your password"
+                mode === "signup" ? "Create a password (min 8 characters)" : "Enter your password"
               }
               className="w-full px-4 py-3 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-[#2c2c2c] placeholder:text-[#8B4513]/40 focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50 focus:border-[#991b1b] transition-all"
               required
@@ -194,6 +219,7 @@ export default function Login() {
           onClick={() => {
             setMode(mode === "signin" ? "signup" : "signin");
             setError("");
+            setSuccess("");
           }}
           className="w-full px-6 py-3 bg-white border border-[#8B4513]/30 rounded-xl font-serif font-semibold text-[#2c2c2c] hover:bg-[#8B4513]/5 transition-all duration-300 shadow-sm"
         >

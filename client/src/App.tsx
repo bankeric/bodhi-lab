@@ -27,6 +27,8 @@ import Terms from "@/pages/Terms";
 import Admin from "@/pages/Admin";
 import Dashboard from "@/pages/Dashboard";
 import Login from "@/pages/Login";
+import ForgotPassword from "@/pages/ForgotPassword";
+import ResetPassword from "@/pages/ResetPassword";
 import Pricing from "@/pages/Pricing";
 import Contact from "@/pages/Contact";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
@@ -56,6 +58,8 @@ function Router() {
         </ProtectedRoute>
       </Route>
       <Route path="/login" component={Login} />
+      <Route path="/forgot-password" component={ForgotPassword} />
+      <Route path="/reset-password" component={ResetPassword} />
       <Route path="/pricing" component={Pricing} />
       <Route path="/contact" component={Contact} />
       <Route path="/docs/manifesto">
