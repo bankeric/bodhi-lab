@@ -816,12 +816,12 @@ export default function Landing() {
 
                 <div className="text-center">
                   <button
-                    onClick={() => handleSubscribe("premium")}
-                    disabled={loadingPlan === "premium"}
+                    onClick={() => handleSubscribe("premium-package")}
+                    disabled={loadingPlan === "premium-package"}
                     className="px-8 py-3 bg-[#991b1b] rounded-xl text-white font-serif font-semibold hover:bg-[#7a1515] transition-all duration-300 shadow-lg disabled:opacity-50"
                     data-testid="button-add-premium"
                   >
-                    {loadingPlan === "premium" ? "..." : t.pricing.premium.cta}
+                    {loadingPlan === "premium-package" ? "..." : t.pricing.premium.cta}
                   </button>
                 </div>
               </div>
