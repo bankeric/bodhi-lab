@@ -34,9 +34,9 @@ export const auth = betterAuth({
   ],
   emailAndPassword: {
     enabled: true,
-    requireEmailVerification: true,
+    requireEmailVerification: false,
     minPasswordLength: 8,
-    autoSignIn: false, // Don't auto sign in after signup, require email verification
+    autoSignIn: true, // Auto sign in after signup
     sendResetPassword: async ({ user, url }) => {
       const resend = getResend();
       if (!resend) {
@@ -65,7 +65,7 @@ export const auth = betterAuth({
     },
   },
   emailVerification: {
-    sendOnSignUp: true,
+    sendOnSignUp: false, // Don't require email verification
     autoSignInAfterVerification: true,
     sendVerificationEmail: async ({ user, url }) => {
       const resend = getResend();

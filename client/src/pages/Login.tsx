@@ -43,10 +43,7 @@ export default function Login() {
           callbackURL: "/dashboard",
         }, {
           onSuccess: () => {
-            setSuccess("Account created! Please check your email to verify your account.");
-            setEmail("");
-            setPassword("");
-            setName("");
+            setLocation("/dashboard");
           },
           onError: (ctx) => {
             setError(ctx.error.message || "Could not create account. Please try again.");
