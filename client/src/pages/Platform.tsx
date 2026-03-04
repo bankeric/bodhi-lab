@@ -926,7 +926,7 @@ export default function Platform() {
 
   return (
     <div className="min-h-screen bg-[#EFE0BD] text-[#8B4513] overflow-x-hidden">
-      <div className="fixed inset-0 z-0">
+      <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-b from-[#EFE0BD] via-[#E5D5B7] to-[#EFE0BD]"></div>
         <div
           className="absolute inset-0 opacity-5"
@@ -960,56 +960,40 @@ export default function Platform() {
                       {t.footer.company}
                     </h3>
                     <div className="space-y-3">
-                      <Link href="/about">
-                        <a className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-about">
+                      <Link href="/about" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-about">
                           <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
                           {t.footer.about}
-                        </a>
-                      </Link>
-                      <Link href="/career">
-                        <a className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-career">
+</Link>
+                      <Link href="/career" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-career">
                           <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
                           {t.footer.career}
-                        </a>
-                      </Link>
-                      <Link href="/terms">
-                        <a className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-terms">
+</Link>
+                      <Link href="/terms" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-terms">
                           <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
                           {t.footer.terms}
-                        </a>
-                      </Link>
-                      <Link href="/privacy">
-                        <a className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-privacy">
+</Link>
+                      <Link href="/privacy" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-privacy">
                           <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
                           {t.footer.privacy}
-                        </a>
-                      </Link>
+</Link>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <Link href="/">
-                <a className="font-serif text-[#991b1b] px-4 py-2 rounded-full bg-[#8B4513]/10 transition-colors" data-testid="link-platform">
+              <Link href="/" className="font-serif text-[#991b1b] px-4 py-2 rounded-full bg-[#8B4513]/10 transition-colors" data-testid="link-platform">
                   {t.header.platform}
-                </a>
-              </Link>
-              <Link href="/">
-                <a className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-services">
+</Link>
+              <Link href="/" className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-services">
                   {t.header.services}
-                </a>
-              </Link>
-              <Link href="/platform#pricing">
-                <a className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-pricing">
+</Link>
+              <Link href="/platform#pricing" className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-pricing">
                   {t.header.pricing}
-                </a>
-              </Link>
-              <Link href="/docs/overview">
-                <a className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-docs">
+</Link>
+              <Link href="/docs/overview" className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-docs">
                   {t.header.docs}
-                </a>
-              </Link>
+</Link>
               <LanguageSwitcher />
             </div>
           </div>
@@ -2108,30 +2092,24 @@ export default function Platform() {
                         </div>
                       )}
 
-                      <Link href="/docs/models">
-                        <a
-                          className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#991b1b] text-white rounded-xl hover:bg-[#7a1515] transition-colors font-serif font-semibold text-sm shadow-md"
+                      <Link href="/docs/models" className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#991b1b] text-white rounded-xl hover:bg-[#7a1515] transition-colors font-serif font-semibold text-sm shadow-md"
                           data-testid={`button-explore-${agent.id}`}
                         >
                           <img src={buddhaIcon} alt="Buddha" className="w-4 h-4 object-contain" />
                           {t.ai.marketplace.exploreButton}
-                        </a>
-                      </Link>
+</Link>
                     </div>
                   </div>
                 ))}
               </div>
 
               <div className="text-center">
-                <Link href="/docs/models">
-                  <a
-                    className="inline-flex items-center gap-2 px-8 py-4 bg-white/50 backdrop-blur-md border-2 border-[#991b1b] rounded-full text-[#991b1b] font-serif font-semibold text-lg hover:bg-[#991b1b] hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl"
+                <Link href="/docs/models" className="inline-flex items-center gap-2 px-8 py-4 bg-white/50 backdrop-blur-md border-2 border-[#991b1b] rounded-full text-[#991b1b] font-serif font-semibold text-lg hover:bg-[#991b1b] hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl"
                     data-testid="button-view-all-agents"
                   >
                     {t.ai.marketplace.viewAll.replace('{count}', buddhistAgents.length.toString())}
                     <ArrowRight className="w-5 h-5" />
-                  </a>
-                </Link>
+</Link>
               </div>
             </div>
           </section>
@@ -2320,14 +2298,11 @@ export default function Platform() {
                     ))}
                   </div>
 
-                  <Link href="/">
-                    <a
-                      className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-white border-2 border-[#991b1b] text-[#991b1b] rounded-xl hover:bg-[#991b1b] hover:text-white transition-all font-serif font-semibold"
+                  <Link href="/" className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-white border-2 border-[#991b1b] text-[#991b1b] rounded-xl hover:bg-[#991b1b] hover:text-white transition-all font-serif font-semibold"
                       data-testid="button-start-tier"
                     >
                       {t.pricing.getStarted}
-                    </a>
-                  </Link>
+</Link>
                 </div>
 
                 {/* Scale Tier (Featured) */}
@@ -2360,14 +2335,11 @@ export default function Platform() {
                     ))}
                   </div>
 
-                  <Link href="/">
-                    <a
-                      className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-[#991b1b] text-white rounded-xl hover:bg-[#7a1515] transition-colors font-serif font-semibold shadow-lg"
+                  <Link href="/" className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-[#991b1b] text-white rounded-xl hover:bg-[#7a1515] transition-colors font-serif font-semibold shadow-lg"
                       data-testid="button-scale-tier"
                     >
                       {t.pricing.getStarted}
-                    </a>
-                  </Link>
+</Link>
                 </div>
 
                 {/* Enterprise Tier */}
@@ -2396,14 +2368,11 @@ export default function Platform() {
                     ))}
                   </div>
 
-                  <Link href="/">
-                    <a
-                      className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-white border-2 border-[#991b1b] text-[#991b1b] rounded-xl hover:bg-[#991b1b] hover:text-white transition-all font-serif font-semibold"
+                  <Link href="/" className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-white border-2 border-[#991b1b] text-[#991b1b] rounded-xl hover:bg-[#991b1b] hover:text-white transition-all font-serif font-semibold"
                       data-testid="button-enterprise-tier"
                     >
                       {t.pricing.contactSales}
-                    </a>
-                  </Link>
+</Link>
                 </div>
               </div>
 
@@ -2611,21 +2580,15 @@ export default function Platform() {
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <img src={bodhiLogo} alt="Bodhi Technology Lab" className="h-11 brightness-110 contrast-125" />
               <div className="flex gap-6">
-                <Link href="/platform">
-                  <a className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
+                <Link href="/platform" className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
                     {t.footer.platform}
-                  </a>
-                </Link>
-                <Link href="/about">
-                  <a className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
+</Link>
+                <Link href="/about" className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
                     {t.footer.about}
-                  </a>
-                </Link>
-                <Link href="/docs/overview">
-                  <a className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
+</Link>
+                <Link href="/docs/overview" className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
                     {t.footer.docs}
-                  </a>
-                </Link>
+</Link>
               </div>
               <div className="font-serif text-[#8B4513]/50">© {new Date().getFullYear()} Bodhi Technology Lab</div>
             </div>

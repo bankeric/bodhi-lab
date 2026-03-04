@@ -15,7 +15,7 @@ export default function About() {
   useDocumentTitle("About Us", "Learn about Bodhi Technology Lab's mission to empower Buddhist temples, monasteries, and dharma centers with modern technology.");
   return (
     <div className="min-h-screen bg-[#EFE0BD] text-[#8B4513]">
-      <div className="fixed inset-0 z-0">
+      <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-b from-[#EFE0BD] via-[#E5D5B7] to-[#EFE0BD]"></div>
         <div
           className="absolute inset-0 opacity-5"
@@ -33,15 +33,11 @@ export default function About() {
               <img src={bodhiLogo} alt="Bodhi Technology Lab" className="h-12 brightness-110 contrast-125" />
             </Link>
             <div className="flex items-center gap-4">
-              <Link href="/platform">
-                <a className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-platform">
+              <Link href="/platform" className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-platform">
                   Platform
-                </a>
               </Link>
-              <Link href="/discovery">
-                <a className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-discovery">
+              <Link href="/discovery" className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-discovery">
                   Discovery
-                </a>
               </Link>
               <LanguageSwitcher />
             </div>
@@ -204,15 +200,11 @@ export default function About() {
               {t.cta.subtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/platform">
-                <a className="px-8 py-4 bg-white text-[#991b1b] font-serif font-bold text-lg rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300" data-testid="button-explore-platform">
+              <Link href="/platform" className="px-8 py-4 bg-white text-[#991b1b] font-serif font-bold text-lg rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300" data-testid="button-explore-platform">
                   {t.cta.explorePlatform}
-                </a>
               </Link>
-              <Link href="/career">
-                <a className="px-8 py-4 bg-white/10 backdrop-blur-md border-2 border-white text-white font-serif font-bold text-lg rounded-full hover:bg-white/20 transition-all duration-300" data-testid="button-view-careers">
+              <Link href="/career" className="px-8 py-4 bg-white/10 backdrop-blur-md border-2 border-white text-white font-serif font-bold text-lg rounded-full hover:bg-white/20 transition-all duration-300" data-testid="button-view-careers">
                   {t.cta.viewCareers}
-                </a>
               </Link>
             </div>
           </div>
@@ -223,25 +215,17 @@ export default function About() {
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <img src={bodhiLogo} alt="Bodhi Technology Lab" className="h-11 brightness-110 contrast-125" />
               <div className="flex gap-6">
-                <Link href="/about">
-                  <a className="font-serif text-[#991b1b] underline transition-colors" data-testid="link-footer-about">
+                <Link href="/about" className="font-serif text-[#991b1b] underline transition-colors" data-testid="link-footer-about">
                     {t.footer.about}
-                  </a>
                 </Link>
-                <Link href="/career">
-                  <a className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors" data-testid="link-footer-career">
+                <Link href="/career" className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors" data-testid="link-footer-career">
                     {t.footer.career}
-                  </a>
                 </Link>
-                <Link href="/terms">
-                  <a className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors" data-testid="link-footer-terms">
+                <Link href="/terms" className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors" data-testid="link-footer-terms">
                     {t.footer.terms}
-                  </a>
                 </Link>
-                <Link href="/privacy">
-                  <a className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors" data-testid="link-footer-privacy">
+                <Link href="/privacy" className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors" data-testid="link-footer-privacy">
                     {t.footer.privacy}
-                  </a>
                 </Link>
               </div>
               <div className="font-serif text-[#8B4513]/50">© {new Date().getFullYear()} Bodhi Technology Lab</div>

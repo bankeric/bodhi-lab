@@ -1,5 +1,6 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
+import rateLimit from "express-rate-limit";
 import { storage } from "./storage";
 import { Autumn } from "autumn-js";
 import { insertLeadSchema, updateLeadSchema, contactSchema } from "@shared/schema";
@@ -10,6 +11,29 @@ import { db } from "./db";
 import { user, verification } from "@shared/schema";
 import { eq } from "drizzle-orm";
 import crypto from "crypto";
+import { Webhook } from "svix";
+
+// ─── Cloudflare Turnstile Verification ───
+
+async function verifyTurnstileToken(token: string): Promise<boolean> {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) {
+    console.warn("TURNSTILE_SECRET_KEY not set — skipping bot check");
+    return true; // Allow in dev if not configured
+  }
+  try {
+    const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ secret, response: token }),
+    });
+    const data = await res.json() as { success: boolean };
+    return data.success;
+  } catch (err) {
+    console.error("Turnstile verification error:", err);
+    return false;
+  }
+}
 
 // ─── Rate Limiting for Verification Emails ───
 // In-memory rate limit tracking (server restart clears)
@@ -52,6 +76,23 @@ export function checkRateLimit(email: string): { allowed: boolean; retryAfter?: 
 
 
 export function registerRoutes(app: Express): void {
+  // ─── Rate Limiters for Public Endpoints ───
+  const formLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 5, // 5 submissions per 15 min per IP
+    message: { success: false, error: "Too many submissions. Please try again later." },
+    standardHeaders: true,
+    legacyHeaders: false,
+  });
+
+  const leadLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 5,
+    message: { success: false, error: "Too many requests. Please try again later." },
+    standardHeaders: true,
+    legacyHeaders: false,
+  });
+
   // ─── Public Routes ───
 
   // Test endpoint to verify Resend is working (development only)
@@ -86,7 +127,7 @@ export function registerRoutes(app: Express): void {
   }
 
   // Contact form submission
-  app.post("/api/contact", async (req, res) => {
+  app.post("/api/contact", formLimiter, async (req, res) => {
     try {
       const result = contactSchema.safeParse(req.body);
 
@@ -96,20 +137,52 @@ export function registerRoutes(app: Express): void {
           .json({ success: false, error: "Invalid contact data", details: result.error.issues });
       }
 
-      if (!isResendConfigured()) {
-        return res
-          .status(503)
-          .json({ success: false, error: "Email service is not configured" });
+      const contact = result.data;
+
+      // Verify Turnstile token if configured
+      const cfToken = req.body.cfTurnstileToken;
+      if (process.env.TURNSTILE_SECRET_KEY) {
+        if (!cfToken) {
+          return res.status(400).json({ success: false, error: "Captcha verification required" });
+        }
+        const valid = await verifyTurnstileToken(cfToken);
+        if (!valid) {
+          return res.status(403).json({ success: false, error: "Captcha verification failed" });
+        }
       }
 
-      await notifyNewContact(result.data);
+      // Always save to leads table so no submission is lost
+      const leadData = {
+        name: [contact.firstName, contact.lastName].filter(Boolean).join(" "),
+        phone: "",
+        email: contact.email,
+        package: "contact-form",
+        status: "new" as const,
+        interests: [
+          contact.organizationName && `Organization: ${contact.organizationName}`,
+          contact.role && `Role: ${contact.role}`,
+          contact.organizationType && `Type: ${contact.organizationType}`,
+          contact.communitySize && `Community size: ${contact.communitySize}`,
+          contact.message && `Message: ${contact.message}`,
+        ].filter(Boolean).join("\n") || null,
+      };
+      await storage.createLead(leadData);
+
+      // Also send email notification if Resend is configured
+      if (isResendConfigured()) {
+        try {
+          await notifyNewContact(contact);
+        } catch (emailErr) {
+          console.error("[Contact] Email notification failed (lead already saved):", emailErr);
+        }
+      }
 
       res.json({
         success: true,
         message: "Your message has been sent successfully",
       });
     } catch (error: any) {
-      console.error("Error sending contact notification:", error);
+      console.error("Error processing contact form:", error);
       res
         .status(500)
         .json({ success: false, error: "Failed to send message. Please try again later." });
@@ -187,7 +260,7 @@ export function registerRoutes(app: Express): void {
   });
 
   // Lead submission (subscription pop-up) — public
-  app.post("/api/leads", async (req, res) => {
+  app.post("/api/leads", leadLimiter, async (req, res) => {
     try {
       const result = insertLeadSchema.safeParse(req.body);
 
@@ -195,6 +268,18 @@ export function registerRoutes(app: Express): void {
         return res
           .status(400)
           .json({ success: false, error: "Invalid lead data", details: result.error.issues });
+      }
+
+      // Verify Turnstile token if configured
+      const cfToken = req.body.cfTurnstileToken;
+      if (process.env.TURNSTILE_SECRET_KEY) {
+        if (!cfToken) {
+          return res.status(400).json({ success: false, error: "Captcha verification required" });
+        }
+        const valid = await verifyTurnstileToken(cfToken);
+        if (!valid) {
+          return res.status(403).json({ success: false, error: "Captcha verification failed" });
+        }
       }
 
       const lead = await storage.createLead(result.data);
@@ -219,6 +304,22 @@ export function registerRoutes(app: Express): void {
   // ─── Autumn Webhook (subscription events) ───
   app.post("/api/webhooks/autumn", async (req, res) => {
     try {
+      // Verify webhook signature if secret is configured
+      const webhookSecret = process.env.AUTUMN_WEBHOOK_SECRET;
+      if (webhookSecret) {
+        const wh = new Webhook(webhookSecret);
+        try {
+          wh.verify(JSON.stringify(req.body), {
+            "svix-id": req.headers["svix-id"] as string,
+            "svix-timestamp": req.headers["svix-timestamp"] as string,
+            "svix-signature": req.headers["svix-signature"] as string,
+          });
+        } catch (err) {
+          console.error("[Autumn Webhook] Signature verification failed:", err);
+          return res.status(401).json({ error: "Invalid webhook signature" });
+        }
+      }
+
       const event = req.body;
       console.log("[Autumn Webhook]", event.type, event.data?.scenario);
 

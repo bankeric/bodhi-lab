@@ -69,9 +69,7 @@ export default function CenterDetail() {
       <div className="min-h-screen bg-[#EFE0BD] flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-serif font-bold text-[#2c2c2c] mb-2">Không tìm thấy cộng đồng</h2>
-          <Link href="/discovery">
-            <a className="text-[#991b1b] hover:underline font-serif">Quay lại trang khám phá</a>
-          </Link>
+          <Link href="/discovery" className="text-[#991b1b] hover:underline font-serif">Quay lại trang khám phá</Link>
         </div>
       </div>
     );
@@ -117,7 +115,7 @@ export default function CenterDetail() {
 
   return (
     <div className="min-h-screen bg-[#EFE0BD] text-[#8B4513] overflow-x-hidden">
-      <div className="fixed inset-0 z-0">
+      <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-b from-[#EFE0BD] via-[#E5D5B7] to-[#EFE0BD]"></div>
         <div
           className="absolute inset-0 opacity-5"
@@ -132,10 +130,8 @@ export default function CenterDetail() {
         <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#EFE0BD]/80 border-b border-[#8B4513]/20">
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
             <div className="relative group">
-              <Link href="/">
-                <a className="flex items-center" data-testid="link-brand">
+              <Link href="/" className="flex items-center" data-testid="link-brand">
                   <span className="font-serif font-bold text-[#991b1b] text-lg">Bodhi Technology Lab</span>
-                </a>
               </Link>
               
               {/* Dropdown Menu */}
@@ -150,28 +146,26 @@ export default function CenterDetail() {
                       Company
                     </h3>
                     <div className="space-y-3">
-                      <a href="#" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-career">
+                      <Link href="/career" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-career">
                         <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
                         Career
-                      </a>
-                      <a href="#" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-terms">
+                      </Link>
+                      <Link href="/terms" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-terms">
                         <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
                         Terms
-                      </a>
-                      <a href="#" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-privacy">
+                      </Link>
+                      <Link href="/privacy" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-privacy">
                         <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
                         Privacy
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <Link href="/platform">
-                <a className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-platform">
+              <Link href="/platform" className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-platform">
                   Platform
-                </a>
               </Link>
               <a href="/#capabilities" className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-services">
                 Services
@@ -179,15 +173,11 @@ export default function CenterDetail() {
               <a href="/#services" className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-pricing">
                 Pricing
               </a>
-              <Link href="/discovery">
-                <a className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-discovery">
+              <Link href="/discovery" className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-discovery">
                   Discovery
-                </a>
               </Link>
-              <Link href="/docs/overview">
-                <a className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-docs">
+              <Link href="/docs/overview" className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-docs">
                   Docs
-                </a>
               </Link>
             </div>
           </div>
@@ -205,12 +195,10 @@ export default function CenterDetail() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#2c2c2c]/70 to-[#2c2c2c]/20 z-10" />
 
-              <Link href="/discovery">
-                <a className="absolute top-6 left-6 flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-md text-[#2c2c2c] rounded-xl
+              <Link href="/discovery" className="absolute top-6 left-6 flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-md text-[#2c2c2c] rounded-xl
                   hover:bg-white transition-colors font-semibold z-20 shadow-md">
                   <ArrowLeft className="w-4 h-4" />
                   Quay lại
-                </a>
               </Link>
 
               <div className="absolute top-6 right-6 bg-[#991b1b] text-white px-4 py-2 rounded-full text-lg font-bold shadow-lg z-20">
@@ -797,20 +785,14 @@ export default function CenterDetail() {
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <span className="font-serif font-bold text-[#991b1b]">Bodhi Lab</span>
               <div className="flex gap-6">
-                <Link href="/docs/models">
-                  <a className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
+                <Link href="/docs/models" className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
                     Agent Models
-                  </a>
                 </Link>
-                <Link href="/discovery">
-                  <a className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
+                <Link href="/discovery" className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
                     Discovery
-                  </a>
                 </Link>
-                <Link href="/docs/manifesto">
-                  <a className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
+                <Link href="/docs/manifesto" className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
                     Docs
-                  </a>
                 </Link>
               </div>
               <div className="font-serif text-[#8B4513]/50">© {new Date().getFullYear()} Bodhi Technology Lab</div>

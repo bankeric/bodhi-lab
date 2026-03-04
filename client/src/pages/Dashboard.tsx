@@ -120,14 +120,13 @@ export default function Dashboard() {
             {getWelcomeMessage(session?.user?.name)}
           </h1>
           <div className="flex items-center gap-3">
-            <Link href="/">
-              <Button
-                variant="outline"
-                className="flex items-center gap-2 font-serif text-sm border-[#8B4513]/30 text-[#8B4513] hover:bg-[#8B4513]/5"
-              >
-                {t.home}
-              </Button>
-            </Link>
+            <Button
+              variant="outline"
+              asChild
+              className="flex items-center gap-2 font-serif text-sm border-[#8B4513]/30 text-[#8B4513] hover:bg-[#8B4513]/5"
+            >
+              <Link href="/">{t.home}</Link>
+            </Button>
             <Button
               variant="outline"
               onClick={handleSignOut}
@@ -226,14 +225,13 @@ export default function Dashboard() {
                     <CreditCard className="w-4 h-4 mr-2" />
                     {t.manageBilling}
                   </Button>
-                  <Link href="/pricing">
-                    <Button
-                      variant="outline"
-                      className="font-serif border-[#8B4513]/30 text-[#8B4513] hover:bg-[#8B4513]/5"
-                    >
-                      {t.changePlan}
-                    </Button>
-                  </Link>
+                  <Button
+                    variant="outline"
+                    asChild
+                    className="font-serif border-[#8B4513]/30 text-[#8B4513] hover:bg-[#8B4513]/5"
+                  >
+                    <Link href="/pricing">{t.changePlan}</Link>
+                  </Button>
                 </div>
               </div>
             ) : (
@@ -241,11 +239,11 @@ export default function Dashboard() {
                 <p className="font-serif text-[#8B4513]/70 mb-4">
                   {t.noPlanDesc}
                 </p>
-                <Link href="/pricing">
-                  <Button className="bg-[#991b1b] text-white hover:bg-[#7a1515] font-serif">
+                <Button asChild className="bg-[#991b1b] text-white hover:bg-[#7a1515] font-serif">
+                  <Link href="/pricing">
                     {t.viewPlans} <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </div>
             )}
           </Card>
@@ -274,14 +272,15 @@ export default function Dashboard() {
             <p className="font-serif text-sm text-[#8B4513]/70 mb-4">
               {t.supportDesc}
             </p>
-            <Link href="/contact">
-              <Button
-                variant="outline"
-                className="font-serif border-[#8B4513]/30 text-[#8B4513] hover:bg-[#8B4513]/5"
-              >
+            <Button
+              variant="outline"
+              asChild
+              className="font-serif border-[#8B4513]/30 text-[#8B4513] hover:bg-[#8B4513]/5"
+            >
+              <Link href="/contact">
                 {t.contactUs} <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </Card>
 
           {/* Onboarding Add-on Card */}

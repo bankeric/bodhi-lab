@@ -448,10 +448,8 @@ export default function Settings() {
               </p>
             </div>
           </div>
-          <Link href={getDashboardLink()}>
-            <button className="flex items-center gap-2 px-4 py-2 bg-[#991b1b] text-white rounded-lg font-serif text-sm hover:bg-[#7a1515] transition-all">
+          <Link href={getDashboardLink()} className="flex items-center gap-2 px-4 py-2 bg-[#991b1b] text-white rounded-lg font-serif text-sm hover:bg-[#7a1515] transition-all">
               <ArrowLeft className="w-4 h-4" /> {t.backToDashboard}
-            </button>
           </Link>
         </div>
       </header>

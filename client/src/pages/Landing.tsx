@@ -11,6 +11,7 @@ import { landingTranslations } from "@/translations/landing";
 import { useDocumentTitle } from "@/hooks/use-document-title";
 import { useCustomer } from "autumn-js/react";
 import { useToast } from "@/hooks/use-toast";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 // Buddhist artwork for agent cards (optimized WebP format)
 import agentArt1 from "@assets/agent-tam-an-artwork.webp";
@@ -94,6 +95,7 @@ export default function Landing() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{ success: boolean; message: string } | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -104,7 +106,7 @@ export default function Landing() {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(contactForm),
+        body: JSON.stringify({ ...contactForm, cfTurnstileToken: turnstileToken }),
       });
 
       const data = await response.json();
@@ -168,7 +170,7 @@ export default function Landing() {
 
   return (
     <div className="min-h-screen bg-[#EFE0BD] text-[#8B4513] overflow-x-hidden">
-      <div className="fixed inset-0 z-0">
+      <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-b from-[#EFE0BD] via-[#E5D5B7] to-[#EFE0BD]"></div>
         <div
           className="absolute inset-0 opacity-5"
@@ -390,7 +392,9 @@ export default function Landing() {
 
               <div className={`flex flex-wrap justify-center gap-4 transition-all duration-500 ${searchFocused ? "opacity-0 translate-y-10" : "opacity-100 translate-y-0"}`}>
                 <a
-                  href="#services"
+                  href="https://calendly.com/om-bodhilab/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="font-serif px-8 py-4 rounded-xl bg-[#991b1b] hover:bg-[#8B4513] text-white font-semibold shadow-lg transition-all duration-300 hover:scale-105 flex items-center gap-2"
                   data-testid="button-start-sprint"
                 >
@@ -1082,9 +1086,17 @@ export default function Landing() {
                     ></textarea>
                   </div>
 
+                  {import.meta.env.VITE_TURNSTILE_SITE_KEY && (
+                    <Turnstile
+                      siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+                      onSuccess={setTurnstileToken}
+                      onExpire={() => setTurnstileToken(null)}
+                    />
+                  )}
+
                   <button
                     type="submit"
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || (!!import.meta.env.VITE_TURNSTILE_SITE_KEY && !turnstileToken)}
                     className="w-full px-6 py-3 bg-[#991b1b] text-white rounded-xl font-serif font-semibold hover:bg-[#7a1515] transition-all duration-300 shadow-md text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                     data-testid="button-submit-contact"
                   >

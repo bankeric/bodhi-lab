@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 import { Link } from "wouter";
 import { Briefcase, Building2, User, Mail, Phone, MapPin, Users, Globe, Wrench, FileText, ClipboardList, PhoneCall, Settings, Rocket, Check, ArrowRight, ArrowLeft, Video, MessageSquare, Monitor, HeadphonesIcon, XCircle, AlertTriangle } from "lucide-react";
 import { TracingBeam } from "@/components/TracingBeam";
@@ -6,6 +7,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { processTranslations } from "@/translations/process";
 import { useDocumentTitle } from "@/hooks/use-document-title";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 const stepIcons = [ClipboardList, PhoneCall, Settings, Rocket];
 const commIcons = [Video, MessageSquare, Monitor, HeadphonesIcon];
@@ -42,6 +44,56 @@ export default function Process() {
     });
   };
 
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.templeName || !formData.contactName || !formData.email) return;
+
+    setIsSubmitting(true);
+    const nameParts = formData.contactName.trim().split(" ");
+    const firstName = nameParts[0] || formData.contactName;
+    const lastName = nameParts.slice(1).join(" ") || "";
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email: formData.email,
+          organizationName: formData.templeName,
+          role: "",
+          organizationType: "",
+          communitySize: formData.communitySize,
+          cfTurnstileToken: turnstileToken,
+          message: [
+            formData.location && `Location: ${formData.location}`,
+            formData.digitalPresence.length && `Digital presence: ${formData.digitalPresence.join(", ")}`,
+            formData.servicesNeeded.length && `Services needed: ${formData.servicesNeeded.join(", ")}`,
+            formData.notes && `Notes: ${formData.notes}`,
+          ].filter(Boolean).join("\n"),
+        }),
+      });
+
+      if (res.ok) {
+        setSubmitted(true);
+        toast({ title: "Request Sent!", description: "We'll be in touch within 24 hours." });
+      } else {
+        const data = await res.json();
+        toast({ title: "Error", description: data.error || "Failed to send. Please try again.", variant: "destructive" });
+      }
+    } catch {
+      toast({ title: "Network Error", description: "Please try again.", variant: "destructive" });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const steps = [t.steps.step1, t.steps.step2, t.steps.step3, t.steps.step4] as Array<{
     label: string; title: string; timeline: string; description: string; deliverables: string[]; price?: string;
     weHandle: string[]; youProvide: string[]; notIncluded?: string[];
@@ -51,7 +103,7 @@ export default function Process() {
 
   return (
     <div className="min-h-screen bg-[#EFE0BD] text-[#8B4513] overflow-x-hidden">
-      <div className="fixed inset-0 z-0">
+      <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-b from-[#EFE0BD] via-[#E5D5B7] to-[#EFE0BD]"></div>
         <div className="absolute inset-0 opacity-5" style={{ backgroundImage: `radial-gradient(rgba(139, 69, 19, 0.3) 1px, transparent 1px)`, backgroundSize: "30px 30px" }}></div>
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-[#991b1b]/10 blur-[100px] animate-pulse"></div>
@@ -354,7 +406,7 @@ export default function Process() {
                   </div>
                 </div>
 
-                <form onSubmit={(e) => e.preventDefault()}>
+                <form onSubmit={handleFormSubmit}>
                   {/* Step 1: Temple Info */}
                   {formStep === 0 && (
                     <div className="space-y-5">
@@ -477,9 +529,28 @@ export default function Process() {
                         {formData.servicesNeeded.length > 0 && <div className="flex gap-2 font-serif text-sm"><span className="text-[#8B4513]/50 w-28 flex-shrink-0">{t.form.servicesNeeded}:</span><span className="text-[#2c2c2c] font-medium">{formData.servicesNeeded.join(", ")}</span></div>}
                       </div>
 
-                      <button type="submit" className="w-full px-6 py-3 bg-[#991b1b] text-white rounded-xl font-serif font-semibold hover:bg-[#7a1515] transition-all duration-300 shadow-md" data-testid="button-submit-process">
-                        {t.form.submit}
-                      </button>
+                      {import.meta.env.VITE_TURNSTILE_SITE_KEY && (
+                        <Turnstile
+                          siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+                          onSuccess={setTurnstileToken}
+                          onExpire={() => setTurnstileToken(null)}
+                        />
+                      )}
+
+                      {submitted ? (
+                        <div className="p-4 bg-green-100 border border-green-200 rounded-xl text-center font-serif text-green-800">
+                          ✓ Request sent! We'll contact you within 24 hours.
+                        </div>
+                      ) : (
+                        <button
+                          type="submit"
+                          disabled={isSubmitting || !formData.templeName || !formData.contactName || !formData.email || (!!import.meta.env.VITE_TURNSTILE_SITE_KEY && !turnstileToken)}
+                          className="w-full px-6 py-3 bg-[#991b1b] text-white rounded-xl font-serif font-semibold hover:bg-[#7a1515] transition-all duration-300 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+                          data-testid="button-submit-process"
+                        >
+                          {isSubmitting ? "Sending..." : t.form.submit}
+                        </button>
+                      )}
                     </div>
                   )}
 
@@ -518,10 +589,10 @@ export default function Process() {
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <span className="font-serif font-bold text-[#991b1b]">{t.footer.brand}</span>
               <div className="flex gap-6">
-                <Link href="/"><a className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">{t.footer.platform}</a></Link>
-                <Link href="/"><a className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">{t.footer.services}</a></Link>
-                <Link href="/discovery"><a className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">{t.footer.discovery}</a></Link>
-                <Link href="/docs/overview"><a className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">{t.footer.docs}</a></Link>
+                <Link href="/" className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">{t.footer.platform}</Link>
+                <Link href="/" className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">{t.footer.services}</Link>
+                <Link href="/discovery" className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">{t.footer.discovery}</Link>
+                <Link href="/docs/overview" className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">{t.footer.docs}</Link>
               </div>
               <div className="font-serif text-[#8B4513]/50">{t.footer.copyright.replace('{year}', new Date().getFullYear().toString())}</div>
             </div>

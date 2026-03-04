@@ -197,7 +197,7 @@ export default function Discovery() {
 
   return (
     <div className="min-h-screen bg-[#EFE0BD] text-[#8B4513] overflow-x-hidden">
-      <div className="fixed inset-0 z-0">
+      <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-b from-[#EFE0BD] via-[#E5D5B7] to-[#EFE0BD]"></div>
         <div
           className="absolute inset-0 opacity-5"
@@ -217,10 +217,8 @@ export default function Discovery() {
         <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#EFE0BD]/80 border-b border-[#8B4513]/20">
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
             <div className="relative group">
-              <Link href="/">
-                <a className="flex items-center" data-testid="link-brand">
+              <Link href="/" className="flex items-center" data-testid="link-brand">
                   <span className="font-serif font-bold text-[#991b1b] text-lg">{t.header.brand}</span>
-                </a>
               </Link>
               
               {/* Dropdown Menu */}
@@ -235,28 +233,26 @@ export default function Discovery() {
                       {t.header.company}
                     </h3>
                     <div className="space-y-3">
-                      <a href="#" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-career">
+                      <Link href="/career" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-career">
                         <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
                         {t.header.companyDropdown.career}
-                      </a>
-                      <a href="#" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-terms">
+                      </Link>
+                      <Link href="/terms" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-terms">
                         <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
                         {t.header.companyDropdown.terms}
-                      </a>
-                      <a href="#" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-privacy">
+                      </Link>
+                      <Link href="/privacy" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-privacy">
                         <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
                         {t.header.companyDropdown.privacy}
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <Link href="/platform">
-                <a className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-platform">
+              <Link href="/platform" className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-platform">
                   {t.header.nav.platform}
-                </a>
               </Link>
               <a href="/#capabilities" className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-services">
                 {t.header.nav.services}
@@ -264,15 +260,11 @@ export default function Discovery() {
               <a href="/#services" className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-pricing">
                 {t.header.nav.pricing}
               </a>
-              <Link href="/discovery">
-                <a className="font-serif text-[#991b1b] px-4 py-2 rounded-full bg-[#8B4513]/10 transition-colors" data-testid="link-discovery">
+              <Link href="/discovery" className="font-serif text-[#991b1b] px-4 py-2 rounded-full bg-[#8B4513]/10 transition-colors" data-testid="link-discovery">
                   {t.header.nav.discovery}
-                </a>
               </Link>
-              <Link href="/docs/overview">
-                <a className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-docs">
+              <Link href="/docs/overview" className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-docs">
                   {t.header.nav.docs}
-                </a>
               </Link>
               <LanguageSwitcher />
             </div>
@@ -354,26 +346,18 @@ export default function Discovery() {
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <span className="font-serif font-bold text-[#991b1b]">{t.footer.brand}</span>
               <div className="flex gap-6">
-                <Link href="/">
-                  <a className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
+                <Link href="/" className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
                     {t.footer.platform}
-                  </a>
-                </Link>
-                <Link href="/">
-                  <a className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
+</Link>
+                <Link href="/" className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
                     {t.footer.services}
-                  </a>
-                </Link>
-                <Link href="/discovery">
-                  <a className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
+</Link>
+                <Link href="/discovery" className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
                     {t.footer.discovery}
-                  </a>
-                </Link>
-                <Link href="/docs/overview">
-                  <a className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
+</Link>
+                <Link href="/docs/overview" className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
                     {t.footer.docs}
-                  </a>
-                </Link>
+</Link>
               </div>
               <div className="font-serif text-[#8B4513]/50">{t.footer.copyright.replace('{year}', new Date().getFullYear().toString())}</div>
             </div>
