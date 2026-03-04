@@ -22,8 +22,8 @@ export function ProtectedRoute({ children, requiredRole }: ProtectedRouteProps) 
     return <Redirect to="/login" />;
   }
 
-  if (requiredRole && (session.user as any).role !== requiredRole) {
-    const userRole = (session.user as any).role;
+  if (requiredRole && (session.user as any)?.role !== requiredRole) {
+    const userRole = (session.user as any)?.role;
     const dashboardHref = userRole === "bodhi_admin" ? "/admin" : "/dashboard";
     
     return (
