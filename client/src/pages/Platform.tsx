@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { Link } from "wouter";
-import { Search, Heart, MessageCircle, Repeat2, Home, User, Bell, Hash, Radio, Clock, X, Mic, Hand, Share2, ArrowRight, CreditCard, Landmark } from "lucide-react";
+import { Link, useLocation } from "wouter";
+import { Search, Heart, MessageCircle, Repeat2, Home, User, Bell, Hash, Radio, Clock, X, Mic, Hand, Share2, ArrowRight, CreditCard, Landmark, Loader2 } from "lucide-react";
 import { SiCashapp, SiApplepay } from "react-icons/si";
 import { TracingBeam } from "@/components/TracingBeam";
 import { buddhistAgents } from "@shared/buddhistAgents";
 import { useToast } from "@/hooks/use-toast";
+import { useCustomer } from "autumn-js/react";
+import { useSession } from "@/lib/auth-client";
 import lotusIcon from "@assets/lotus-icon.webp";
 import bellIcon from "@assets/bell-icon.webp";
 import buddhaIcon from "@assets/buddha-icon.webp";
@@ -891,6 +893,29 @@ export default function Platform() {
   const [customAmount, setCustomAmount] = useState<string>("");
   const [paymentMethod, setPaymentMethod] = useState<'card' | 'cashapp' | 'applepay' | 'venmo' | 'bank'>('card');
   const { toast } = useToast();
+  const { data: session } = useSession();
+  const { attach } = useCustomer();
+  const [, setLocation] = useLocation();
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+
+  const handleAddOnPurchase = async (productId: string) => {
+    if (!session) {
+      setLocation("/login");
+      return;
+    }
+    setLoadingPlan(productId);
+    try {
+      await attach({ productId, successUrl: `${window.location.origin}/dashboard` });
+    } catch (err: any) {
+      toast({
+        title: "Checkout Error",
+        description: err?.message || "Could not start checkout. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoadingPlan(null);
+    }
+  };
 
   const handleDonationSubmit = async () => {
     toast({
@@ -2471,15 +2496,16 @@ export default function Platform() {
                   </div>
 
                   <div className="mt-8 text-center">
-                    <Link href="/">
-                      <a
-                        className="inline-flex items-center gap-2 px-8 py-4 bg-[#991b1b] text-white rounded-xl hover:bg-[#7a1515] transition-colors font-serif font-semibold text-lg shadow-lg"
-                        data-testid="button-premium-contact"
-                      >
-                        {t.pricing.premium.cta}
-                        <ArrowRight className="w-5 h-5" />
-                      </a>
-                    </Link>
+                    <button
+                      onClick={() => handleAddOnPurchase("premium-package")}
+                      disabled={loadingPlan === "premium-package"}
+                      className="inline-flex items-center gap-2 px-8 py-4 bg-[#991b1b] text-white rounded-xl hover:bg-[#7a1515] transition-colors font-serif font-semibold text-lg shadow-lg disabled:opacity-50"
+                      data-testid="button-premium-contact"
+                    >
+                      {loadingPlan === "premium-package" ? <Loader2 className="w-5 h-5 animate-spin" /> : null}
+                      {t.pricing.premium.cta}
+                      <ArrowRight className="w-5 h-5" />
+                    </button>
                   </div>
                 </div>
               </div>
@@ -2563,15 +2589,16 @@ export default function Platform() {
                   </div>
 
                   <div className="mt-8 text-center">
-                    <Link href="/onboarding">
-                      <a
-                        className="inline-flex items-center gap-2 px-8 py-4 bg-[#8B4513] text-white rounded-xl hover:bg-[#6d3610] transition-colors font-serif font-semibold text-lg shadow-lg"
-                        data-testid="button-onboarding-start"
-                      >
-                        {t.pricing.onboarding.cta}
-                        <ArrowRight className="w-5 h-5" />
-                      </a>
-                    </Link>
+                    <button
+                      onClick={() => handleAddOnPurchase("onboarding")}
+                      disabled={loadingPlan === "onboarding"}
+                      className="inline-flex items-center gap-2 px-8 py-4 bg-[#8B4513] text-white rounded-xl hover:bg-[#6d3610] transition-colors font-serif font-semibold text-lg shadow-lg disabled:opacity-50"
+                      data-testid="button-onboarding-start"
+                    >
+                      {loadingPlan === "onboarding" ? <Loader2 className="w-5 h-5 animate-spin" /> : null}
+                      {t.pricing.onboarding.cta}
+                      <ArrowRight className="w-5 h-5" />
+                    </button>
                   </div>
                 </div>
               </div>
