@@ -78,7 +78,7 @@ export default function Login() {
   }
 
   if (session) {
-    const role = (session.user as any).role;
+    const role = (session.user as any)?.role;
     if (role === "bodhi_admin") return <Redirect to="/admin" />;
     return <Redirect to="/dashboard" />;
   }
