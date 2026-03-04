@@ -63,7 +63,15 @@ export default function ResetPassword() {
           setSuccess(true);
         },
         onError: (ctx) => {
-          setError(ctx.error.message || t.resetFailed);
+          const msg = ctx.error.message || "";
+          // If the token is invalid/expired, show the dedicated error page
+          if (msg.toLowerCase().includes("invalid") && msg.toLowerCase().includes("token")) {
+            setTokenError(true);
+          } else if (msg === "INVALID_TOKEN" || ctx.error.code === "INVALID_TOKEN") {
+            setTokenError(true);
+          } else {
+            setError(msg || t.resetFailed);
+          }
         },
       });
     } catch (err: any) {

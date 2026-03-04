@@ -15,7 +15,7 @@ if (!process.env.BETTER_AUTH_SECRET) {
 // Determine the base URL based on environment
 const baseURL = process.env.NODE_ENV === "development" 
   ? "http://localhost:3000"
-  : (process.env.BETTER_AUTH_URL || "https://www.bodhilab.io");
+  : "https://www.bodhilab.io";
 
 console.log("[Auth] Initializing Better Auth configuration...");
 console.log("[Auth] RESEND_API_KEY configured:", !!process.env.RESEND_API_KEY);

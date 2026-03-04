@@ -22,7 +22,7 @@ export default function ForgotPassword() {
     try {
       await requestPasswordReset({
         email,
-        redirectTo: "/reset-password",
+        redirectTo: `${window.location.origin}/reset-password`,
       }, {
         onSuccess: () => {
           setSuccess(true);
