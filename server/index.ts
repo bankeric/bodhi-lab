@@ -13,14 +13,10 @@ import { registerRoutes, createAppServer } from "./routes";
 // doesn't exist on Vercel's serverless runtime.  We use a variable path
 // so esbuild cannot statically resolve and inline the module.
 type ViteHelpers = typeof import("./vite");
-let _viteHelpers: ViteHelpers | null = null;
 async function getViteHelpers(): Promise<ViteHelpers> {
-  if (!_viteHelpers) {
-    // Variable path prevents esbuild from bundling ./vite (and its "vite" dep)
-    const modulePath = "./vite" + "";
-    _viteHelpers = await import(/* @vite-ignore */ modulePath);
-  }
-  return _viteHelpers;
+  // Variable path prevents esbuild from bundling ./vite (and its "vite" dep)
+  const modulePath = "./vite" + "";
+  return import(/* @vite-ignore */ modulePath) as Promise<ViteHelpers>;
 }
 
 function log(message: string, source = "express") {

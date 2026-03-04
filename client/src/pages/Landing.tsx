@@ -392,7 +392,7 @@ export default function Landing() {
 
               <div className={`flex flex-wrap justify-center gap-4 transition-all duration-500 ${searchFocused ? "opacity-0 translate-y-10" : "opacity-100 translate-y-0"}`}>
                 <a
-                  href="https://calendly.com/om-bodhilab/30min"
+                  href="https://calendly.com/bodhilab"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-serif px-8 py-4 rounded-xl bg-[#991b1b] hover:bg-[#8B4513] text-white font-semibold shadow-lg transition-all duration-300 hover:scale-105 flex items-center gap-2"
