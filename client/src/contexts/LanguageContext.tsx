@@ -10,15 +10,34 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<Language>(() => {
+function getInitialLanguage(): Language {
+  if (typeof window === "undefined") return "en";
+  try {
     const saved = localStorage.getItem("language");
     return (saved === "vi" || saved === "en") ? saved : "en";
-  });
+  } catch {
+    return "en";
+  }
+}
+
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  const [language, setLanguageState] = useState<Language>("en");
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem("language", language);
-  }, [language]);
+    setLanguageState(getInitialLanguage());
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (mounted) {
+      try {
+        localStorage.setItem("language", language);
+      } catch {
+        // Ignore localStorage errors
+      }
+    }
+  }, [language, mounted]);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
