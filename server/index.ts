@@ -8,7 +8,30 @@ import { fromNodeHeaders } from "better-auth/node";
 import { autumnHandler } from "autumn-js/express";
 import { auth } from "./lib/auth";
 import { registerRoutes, createAppServer } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
+
+// Lazy-import vite helpers — they pull in "vite" (a devDependency) which
+// doesn't exist on Vercel's serverless runtime.  We use a variable path
+// so esbuild cannot statically resolve and inline the module.
+type ViteHelpers = typeof import("./vite");
+let _viteHelpers: ViteHelpers | null = null;
+async function getViteHelpers(): Promise<ViteHelpers> {
+  if (!_viteHelpers) {
+    // Variable path prevents esbuild from bundling ./vite (and its "vite" dep)
+    const modulePath = "./vite" + "";
+    _viteHelpers = await import(/* @vite-ignore */ modulePath);
+  }
+  return _viteHelpers;
+}
+
+function log(message: string, source = "express") {
+  const formattedTime = new Date().toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true,
+  });
+  console.log(`${formattedTime} [${source}] ${message}`);
+}
 
 const app = express();
 
@@ -157,6 +180,7 @@ async function initializeApp() {
       log("Running in Vercel serverless mode", "express");
     } else if (app.get("env") === "development") {
       // Development mode with Vite HMR
+      const { setupVite } = await getViteHelpers();
       const server = createAppServer(app);
       await setupVite(app, server);
 
@@ -166,6 +190,7 @@ async function initializeApp() {
       });
     } else {
       // Production but not Vercel (e.g., self-hosted)
+      const { serveStatic } = await getViteHelpers();
       serveStatic(app);
       const server = createAppServer(app);
       const port = parseInt(process.env.PORT || '5000', 10);
