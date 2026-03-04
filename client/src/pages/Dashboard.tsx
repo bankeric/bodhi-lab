@@ -35,6 +35,7 @@ export default function Dashboard() {
   const { language } = useLanguage();
   const t = authTranslations[language].dashboard;
   const [onboardingLoading, setOnboardingLoading] = useState(false);
+  const [premiumLoading, setPremiumLoading] = useState(false);
 
   const {
     data: subscription,
@@ -92,6 +93,21 @@ export default function Dashboard() {
       });
     } finally {
       setOnboardingLoading(false);
+    }
+  };
+
+  const handleAddPremiumPackage = async () => {
+    setPremiumLoading(true);
+    try {
+      await attach({ productId: "premium-package", successUrl: `${window.location.origin}/dashboard` });
+    } catch (err: any) {
+      toast({
+        title: "Checkout Error",
+        description: err?.message || "Could not start checkout. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setPremiumLoading(false);
     }
   };
 
@@ -300,6 +316,41 @@ export default function Dashboard() {
             >
               {onboardingLoading ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
               {t.addOnboarding}
+            </Button>
+          </Card>
+
+          {/* Premium Package Add-on Card */}
+          <Card className="bg-gradient-to-br from-[#991b1b]/5 to-[#8B4513]/5 backdrop-blur-md border-[#991b1b]/30 border-2 p-6 col-span-1 md:col-span-2">
+            <div className="flex items-center gap-2 mb-4">
+              <Zap className="w-5 h-5 text-[#991b1b]" />
+              <h2 className="font-serif text-lg font-semibold text-[#2c2c2c]">
+                {t.premiumPackage}
+              </h2>
+              <span className="ml-auto font-serif text-xl font-bold text-[#991b1b]">$4,000 <span className="text-xs font-normal text-[#8B4513]/60">{t.oneTime}</span></span>
+            </div>
+            <p className="font-serif text-sm text-[#8B4513]/70 mb-4">
+              {t.premiumPackageDesc}
+            </p>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
+              {[
+                t.premiumFeature1,
+                t.premiumFeature2,
+                t.premiumFeature3,
+                t.premiumFeature4,
+              ].map((f, i) => (
+                <li key={i} className="flex items-center gap-2 font-serif text-sm text-[#8B4513]/80">
+                  <Check className="w-3.5 h-3.5 text-[#991b1b] flex-shrink-0" />
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <Button
+              onClick={() => handleAddPremiumPackage()}
+              disabled={premiumLoading}
+              className="bg-[#991b1b] text-white hover:bg-[#7a1515] font-serif"
+            >
+              {premiumLoading ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
+              {t.addPremiumPackage}
             </Button>
           </Card>
         </div>

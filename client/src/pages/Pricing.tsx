@@ -331,6 +331,100 @@ export default function Pricing() {
           })}
         </div>
 
+        {/* Add-on Packages Section */}
+        <div className="max-w-5xl mx-auto mb-16">
+          <div className="text-center mb-8">
+            <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">
+              Add-on Packages
+            </h3>
+            <p className="font-serif text-[#8B4513]/70">
+              Enhance your experience with our one-time add-on packages
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Onboarding Package */}
+            <div className="bg-white/80 backdrop-blur-md rounded-2xl border border-[#8B4513]/20 p-6 flex flex-col">
+              <div className="flex items-center justify-between mb-4">
+                <h4 className="font-serif text-lg font-semibold text-[#2c2c2c]">
+                  Onboarding Package
+                </h4>
+                <span className="font-serif text-xl font-bold text-[#2c2c2c]">
+                  $899 <span className="text-xs font-normal text-[#8B4513]/60">one-time</span>
+                </span>
+              </div>
+              <p className="font-serif text-sm text-[#8B4513]/70 mb-4">
+                A complete, done-for-you setup so your community can go live with confidence.
+              </p>
+              <ul className="space-y-2 mb-6 flex-1">
+                <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
+                  <Check className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                  Custom website design & build
+                </li>
+                <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
+                  <Check className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                  Full platform onboarding & configuration
+                </li>
+                <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
+                  <Check className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                  Data migration from existing systems
+                </li>
+                <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
+                  <Check className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                  Staff training sessions
+                </li>
+              </ul>
+              <button
+                onClick={() => handlePlanAction({ id: "onboarding" as any, name: "Onboarding Package", price: "$899", priceValue: 899, period: "", description: "", features: [], highlighted: false })}
+                disabled={loadingPlan === "onboarding"}
+                className="w-full py-3 rounded-xl font-serif font-semibold bg-white border-2 border-[#991b1b] text-[#991b1b] hover:bg-[#991b1b] hover:text-white transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+              >
+                {loadingPlan === "onboarding" ? <Loader2 className="w-4 h-4 animate-spin" /> : "Add Onboarding"}
+              </button>
+            </div>
+
+            {/* Premium Package */}
+            <div className="bg-gradient-to-br from-[#991b1b]/5 to-[#8B4513]/5 backdrop-blur-md rounded-2xl border-2 border-[#991b1b]/30 p-6 flex flex-col">
+              <div className="flex items-center justify-between mb-4">
+                <h4 className="font-serif text-lg font-semibold text-[#2c2c2c]">
+                  Premium Package
+                </h4>
+                <span className="font-serif text-xl font-bold text-[#991b1b]">
+                  $4,000 <span className="text-xs font-normal text-[#8B4513]/60">one-time</span>
+                </span>
+              </div>
+              <p className="font-serif text-sm text-[#8B4513]/70 mb-4">
+                Get expert guidance from setup to launch with comprehensive onboarding, training, and migration support.
+              </p>
+              <ul className="space-y-2 mb-6 flex-1">
+                <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
+                  <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                  Five dedicated video training sessions
+                </li>
+                <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
+                  <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                  60 days of 1-on-1 personalized setup support
+                </li>
+                <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
+                  <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                  Complete data migration assistance
+                </li>
+                <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
+                  <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                  Proven launch resources and templates
+                </li>
+              </ul>
+              <button
+                onClick={() => handlePlanAction({ id: "premium-package" as any, name: "Premium Package", price: "$4,000", priceValue: 4000, period: "", description: "", features: [], highlighted: false })}
+                disabled={loadingPlan === "premium-package"}
+                className="w-full py-3 rounded-xl font-serif font-semibold bg-[#991b1b] text-white hover:bg-[#7a1515] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+              >
+                {loadingPlan === "premium-package" ? <Loader2 className="w-4 h-4 animate-spin" /> : "Add Premium Package"}
+              </button>
+            </div>
+          </div>
+        </div>
+
         {/* Cancel Subscription */}
         {currentPlanId && !subscription?.cancelAtPeriodEnd && (
           <div className="text-center">

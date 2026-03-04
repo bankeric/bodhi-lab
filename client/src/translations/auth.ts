@@ -114,7 +114,14 @@ export const authTranslations = {
       onboardingFeature3: "Data migration from existing systems",
       onboardingFeature4: "Staff training sessions",
       addOnboarding: "Add Onboarding",
-      oneTime: "one-time"
+      oneTime: "one-time",
+      premiumPackage: "Premium Package",
+      premiumPackageDesc: "Get expert guidance from setup to launch with comprehensive onboarding, training, and migration support.",
+      premiumFeature1: "Five dedicated video training sessions",
+      premiumFeature2: "60 days of 1-on-1 personalized setup support",
+      premiumFeature3: "Complete data migration assistance",
+      premiumFeature4: "Proven launch resources and templates",
+      addPremiumPackage: "Add Premium Package"
     },
     settings: {
       title: "Settings",
@@ -293,7 +300,14 @@ export const authTranslations = {
       onboardingFeature3: "Di chuyển dữ liệu từ hệ thống cũ",
       onboardingFeature4: "Đào tạo nhân viên",
       addOnboarding: "Thêm Gói Khởi Động",
-      oneTime: "một lần"
+      oneTime: "một lần",
+      premiumPackage: "Gói Cao Cấp",
+      premiumPackageDesc: "Nhận hướng dẫn chuyên gia từ thiết lập đến ra mắt với hỗ trợ đào tạo và di chuyển toàn diện.",
+      premiumFeature1: "Năm buổi đào tạo video chuyên dụng",
+      premiumFeature2: "60 ngày hỗ trợ thiết lập 1-1 cá nhân hóa",
+      premiumFeature3: "Hỗ trợ di chuyển dữ liệu hoàn chỉnh",
+      premiumFeature4: "Tài nguyên và mẫu ra mắt đã được chứng minh",
+      addPremiumPackage: "Thêm Gói Cao Cấp"
     },
     settings: {
       title: "Cài Đặt",
