@@ -3,7 +3,7 @@ import { DocsNav } from "@/components/DocsNav";
 import { Button } from "@/components/ui/button";
 import { TracingBeam } from "@/components/TracingBeam";
 import { Download, Share2, Menu, X, BookOpen, Coins, Server, Bot } from "lucide-react";
-import sutraIcon from "@/assets/sutra-icon.png";
+import sutraIcon from "@/assets/sutra-icon.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { docsTranslations } from "@/translations/docs";

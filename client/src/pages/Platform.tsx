@@ -5,38 +5,38 @@ import { SiCashapp, SiApplepay } from "react-icons/si";
 import { TracingBeam } from "@/components/TracingBeam";
 import { buddhistAgents } from "@shared/buddhistAgents";
 import { useToast } from "@/hooks/use-toast";
-import lotusIcon from "@assets/lotus-icon.png";
-import bellIcon from "@assets/bell-icon.png";
-import buddhaIcon from "@assets/buddha-icon.png";
-import sutraIcon from "@assets/sutra-scroll-icon.png";
-import bodhiLogo from "@assets/bodhi-technology-lab-logo.png";
+import lotusIcon from "@assets/lotus-icon.webp";
+import bellIcon from "@assets/bell-icon.webp";
+import buddhaIcon from "@assets/buddha-icon.webp";
+import sutraIcon from "@assets/sutra-scroll-icon.webp";
+import bodhiLogo from "@assets/bodhi-technology-lab-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { platformTranslations } from "@/translations/platform";
 import { useDocumentTitle } from "@/hooks/use-document-title";
 
-// Buddhist practitioner avatars
-import avatar1 from "@assets/practitioner-avatar-01.jpg";
-import avatar2 from "@assets/practitioner-meditation-guide.jpg";
-import avatar3 from "@assets/practitioner-mindfulness.jpg";
-import avatar4 from "@assets/practitioner-seated-meditation.jpg";
-import avatar5 from "@assets/practitioner-forest-retreat.jpg";
-import avatar6 from "@assets/practitioner-avatar-06.jpg";
-import avatar7 from "@assets/practitioner-avatar-07.jpg";
-import avatar8 from "@assets/practitioner-buddhist-nun.jpg";
-import avatar9 from "@assets/practitioner-avatar-09.jpg";
-import avatar10 from "@assets/practitioner-avatar-10.jpg";
-import avatar11 from "@assets/practitioner-master-shi-hengyi.jpg";
-import avatar12 from "@assets/practitioner-avatar-12.jpg";
-import avatar13 from "@assets/practitioner-avatar-13.jpg";
+// Buddhist practitioner avatars (optimized WebP format)
+import avatar1 from "@assets/practitioner-avatar-01.webp";
+import avatar2 from "@assets/practitioner-meditation-guide.webp";
+import avatar3 from "@assets/practitioner-mindfulness.webp";
+import avatar4 from "@assets/practitioner-seated-meditation.webp";
+import avatar5 from "@assets/practitioner-forest-retreat.webp";
+import avatar6 from "@assets/practitioner-avatar-06.webp";
+import avatar7 from "@assets/practitioner-avatar-07.webp";
+import avatar8 from "@assets/practitioner-buddhist-nun.webp";
+import avatar9 from "@assets/practitioner-avatar-09.webp";
+import avatar10 from "@assets/practitioner-avatar-10.webp";
+import avatar11 from "@assets/practitioner-master-shi-hengyi.webp";
+import avatar12 from "@assets/practitioner-avatar-12.webp";
+import avatar13 from "@assets/practitioner-avatar-13.webp";
 
-// Agent artwork images
-import agentArt1 from "@assets/agent-tam-an-artwork.png";
-import agentArt2 from "@assets/agent-giac-ngo-artwork.png";
-import agentArt3 from "@assets/agent-don-ngo-artwork.png";
-import agentArt4 from "@assets/agent-tinh-thuc-artwork.png";
-import agentArt5 from "@assets/agent-ke-van-ngo-artwork.png";
-import agentArt6 from "@assets/agent-van-tinh-artwork.png";
+// Agent artwork images (optimized WebP format)
+import agentArt1 from "@assets/agent-tam-an-artwork.webp";
+import agentArt2 from "@assets/agent-giac-ngo-artwork.webp";
+import agentArt3 from "@assets/agent-don-ngo-artwork.webp";
+import agentArt4 from "@assets/agent-tinh-thuc-artwork.webp";
+import agentArt5 from "@assets/agent-ke-van-ngo-artwork.webp";
+import agentArt6 from "@assets/agent-van-tinh-artwork.webp";
 
 // Mapping of agent IDs to artwork images
 const agentArtwork: Record<string, string> = {

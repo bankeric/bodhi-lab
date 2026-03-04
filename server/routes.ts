@@ -4,10 +4,86 @@ import { storage } from "./storage";
 import { Autumn } from "autumn-js";
 import { insertLeadSchema, updateLeadSchema, contactSchema } from "@shared/schema";
 import { requireAuth, requireRole } from "./middleware/auth";
-import { notifyNewLead, notifyNewContact, isResendConfigured } from "./services/notifications";
+import { notifyNewLead, notifyNewContact, notifyInvitation, isResendConfigured } from "./services/notifications";
+import { auth } from "./lib/auth";
+import { db } from "./db";
+import { user, verification } from "@shared/schema";
+import { eq } from "drizzle-orm";
+import crypto from "crypto";
+
+// ─── Rate Limiting for Verification Emails ───
+// In-memory rate limit tracking (server restart clears)
+const verificationRateLimits = new Map<string, { count: number; resetAt: Date }>();
+
+const RATE_LIMIT_MAX_REQUESTS = 3;
+const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000; // 15 minutes
+
+/**
+ * Check if an email is allowed to request a verification email.
+ * Enforces max 3 requests per 15 minutes per email address.
+ * @param email - The email address to check
+ * @returns Object with allowed status and optional retryAfter seconds
+ */
+export function checkRateLimit(email: string): { allowed: boolean; retryAfter?: number } {
+  const normalizedEmail = email.toLowerCase().trim();
+  const now = new Date();
+  const entry = verificationRateLimits.get(normalizedEmail);
+
+  // No entry or window has expired - allow and create/reset entry
+  if (!entry || entry.resetAt <= now) {
+    verificationRateLimits.set(normalizedEmail, {
+      count: 1,
+      resetAt: new Date(now.getTime() + RATE_LIMIT_WINDOW_MS),
+    });
+    return { allowed: true };
+  }
+
+  // Within window and under limit - allow and increment
+  if (entry.count < RATE_LIMIT_MAX_REQUESTS) {
+    entry.count += 1;
+    return { allowed: true };
+  }
+
+  // Rate limit exceeded - deny with retryAfter
+  const retryAfterMs = entry.resetAt.getTime() - now.getTime();
+  const retryAfterSeconds = Math.ceil(retryAfterMs / 1000);
+  return { allowed: false, retryAfter: retryAfterSeconds };
+}
+
 
 export function registerRoutes(app: Express): void {
   // ─── Public Routes ───
+
+  // Test endpoint to verify Resend is working (development only)
+  if (process.env.NODE_ENV === "development") {
+    app.post("/api/test-email", async (req, res) => {
+      try {
+        const { email } = req.body;
+        if (!email) {
+          return res.status(400).json({ success: false, message: "Email required" });
+        }
+
+        const resend = new (await import("resend")).Resend(process.env.RESEND_API_KEY);
+        const { data, error } = await resend.emails.send({
+          from: "Bodhi Technology Lab <auth@mail.bodhilab.io>",
+          to: email,
+          subject: "Test Email - Bodhi Technology Lab",
+          html: "<p>This is a test email to verify Resend is working.</p>",
+        });
+
+        if (error) {
+          console.error("[Test Email] Error:", error);
+          return res.status(500).json({ success: false, error });
+        }
+
+        console.log("[Test Email] Sent successfully:", data?.id);
+        res.json({ success: true, id: data?.id });
+      } catch (err: any) {
+        console.error("[Test Email] Exception:", err);
+        res.status(500).json({ success: false, error: err.message });
+      }
+    });
+  }
 
   // Contact form submission
   app.post("/api/contact", async (req, res) => {
@@ -37,6 +113,76 @@ export function registerRoutes(app: Express): void {
       res
         .status(500)
         .json({ success: false, error: "Failed to send message. Please try again later." });
+    }
+  });
+
+  // Resend verification email (rate-limited)
+  app.post("/api/auth/resend-verification", async (req, res) => {
+    try {
+      const { email } = req.body;
+
+      // Validate email is provided
+      if (!email || typeof email !== "string") {
+        return res.status(400).json({
+          success: false,
+          message: "Email address is required",
+        });
+      }
+
+      const normalizedEmail = email.toLowerCase().trim();
+
+      // Check rate limit before sending
+      const rateLimitResult = checkRateLimit(normalizedEmail);
+      if (!rateLimitResult.allowed) {
+        return res.status(429).json({
+          success: false,
+          message: `Too many requests. Please wait ${Math.ceil(rateLimitResult.retryAfter! / 60)} minutes before requesting another email.`,
+          retryAfter: rateLimitResult.retryAfter,
+        });
+      }
+
+      // Call Better Auth's sendVerificationEmail API
+      const result = await auth.api.sendVerificationEmail({
+        body: {
+          email: normalizedEmail,
+          callbackURL: "/login?verified=true",
+        },
+      });
+
+      // Check if the API call was successful
+      if (!result) {
+        return res.status(500).json({
+          success: false,
+          message: "Failed to send verification email. Please try again later.",
+        });
+      }
+
+      res.json({
+        success: true,
+        message: "Verification email sent. Please check your inbox.",
+      });
+    } catch (error: any) {
+      console.error("Error sending verification email:", error);
+      
+      // Handle specific error cases
+      if (error.message?.includes("User not found") || error.status === 404) {
+        return res.status(400).json({
+          success: false,
+          message: "No account found with this email address.",
+        });
+      }
+
+      if (error.message?.includes("already verified") || error.status === 400) {
+        return res.status(400).json({
+          success: false,
+          message: "This email is already verified. You can sign in.",
+        });
+      }
+
+      res.status(500).json({
+        success: false,
+        message: "Failed to send verification email. Please try again later.",
+      });
     }
   });
 
@@ -254,6 +400,115 @@ export function registerRoutes(app: Express): void {
     } catch (error: any) {
       console.error("Error fetching subscription:", error);
       res.status(500).json({ success: false, error: "Failed to fetch subscription info" });
+    }
+  });
+
+  // ─── Bodhi Admin Routes ───
+
+  // Invite a new temple admin (Bodhi Admin only)
+  // Requirements: 4.3, 4.4, 4.5, 4.6
+  app.post("/api/admin/invite-temple-admin", requireAuth, requireRole("bodhi_admin"), async (req, res) => {
+    try {
+      const { name, email } = req.body;
+
+      // Validate required fields
+      if (!name || typeof name !== "string" || name.trim().length === 0) {
+        return res.status(400).json({
+          success: false,
+          message: "Name is required",
+        });
+      }
+
+      if (!email || typeof email !== "string") {
+        return res.status(400).json({
+          success: false,
+          message: "Email is required",
+        });
+      }
+
+      const normalizedEmail = email.toLowerCase().trim();
+      const trimmedName = name.trim();
+
+      // Check if email already exists (Requirement 4.6)
+      const existingUser = await db.select().from(user).where(eq(user.email, normalizedEmail)).limit(1);
+      if (existingUser.length > 0) {
+        return res.status(409).json({
+          success: false,
+          message: "This email is already registered",
+        });
+      }
+
+      // Generate a random temporary password (user will set their own via invitation link)
+      const tempPassword = crypto.randomBytes(32).toString("hex");
+
+      // Create user with temple_admin role and emailVerified=false (Requirement 4.3)
+      const signUpResult = await auth.api.signUpEmail({
+        body: {
+          email: normalizedEmail,
+          password: tempPassword,
+          name: trimmedName,
+        },
+      });
+
+      if (!signUpResult?.user) {
+        return res.status(500).json({
+          success: false,
+          message: "Failed to create user account",
+        });
+      }
+
+      const newUserId = signUpResult.user.id;
+
+      // Update the user's role to temple_admin (Better Auth defaults may differ)
+      await db.update(user).set({ role: "temple_admin" }).where(eq(user.id, newUserId));
+
+      // Generate a custom password reset token with 72-hour expiration (Requirement 4.5)
+      const resetToken = crypto.randomBytes(32).toString("hex");
+      const expiresAt = new Date(Date.now() + 72 * 60 * 60 * 1000); // 72 hours
+
+      // Store the token in the verification table
+      await db.insert(verification).values({
+        id: crypto.randomUUID(),
+        identifier: normalizedEmail,
+        value: resetToken,
+        expiresAt,
+      });
+
+      // Build the set-password URL
+      const baseUrl = process.env.BETTER_AUTH_URL || "https://www.bodhilab.io";
+      const setPasswordUrl = `${baseUrl}/reset-password?token=${resetToken}`;
+
+      // Get inviter's name for the email
+      const inviterName = (req as any).session.user.name || "Bodhi Technology Lab";
+
+      // Send invitation email (Requirement 4.4)
+      await notifyInvitation({
+        email: normalizedEmail,
+        name: trimmedName,
+        inviterName,
+        setPasswordUrl,
+      });
+
+      res.json({
+        success: true,
+        message: "Invitation sent successfully",
+        userId: newUserId,
+      });
+    } catch (error: any) {
+      console.error("Error inviting temple admin:", error);
+
+      // Handle specific error cases
+      if (error.message?.includes("already exists") || error.code === "23505") {
+        return res.status(409).json({
+          success: false,
+          message: "This email is already registered",
+        });
+      }
+
+      res.status(500).json({
+        success: false,
+        message: "Failed to send invitation. Please try again later.",
+      });
     }
   });
 }

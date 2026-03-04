@@ -1,7 +1,7 @@
 import { Link } from "wouter";
-import buddhaIcon from "@assets/buddha-icon.png";
-import bellIcon from "@assets/bell-icon.png";
-import bodhiLogo from "@assets/bodhi-technology-lab-logo.png";
+import buddhaIcon from "@assets/buddha-icon.webp";
+import bellIcon from "@assets/bell-icon.webp";
+import bodhiLogo from "@assets/bodhi-technology-lab-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { privacyTranslations } from "@/translations/privacy";

@@ -73,7 +73,7 @@ async function sendLeadEmailNotification(lead: Lead): Promise<void> {
   `.trim();
 
   const { error } = await resend.emails.send({
-    from: "Bodhi Technology Lab <notifications@bodhilab.io>",
+    from: "Bodhi Technology Lab <notifications@mail.bodhilab.io>",
     to: recipients,
     replyTo: lead.email,
     subject: `New Lead: ${lead.name} — ${lead.package}`,
@@ -107,7 +107,7 @@ async function sendContactEmailNotification(contact: ContactData): Promise<void>
   `.trim();
 
   const { error } = await resend.emails.send({
-    from: "Bodhi Technology Lab <notifications@bodhilab.io>",
+    from: "Bodhi Technology Lab <notifications@mail.bodhilab.io>",
     to: recipients,
     replyTo: contact.email,
     subject: `New Contact: ${contact.firstName} ${contact.lastName} — ${contact.organizationName || "Individual"}`,
@@ -120,6 +120,118 @@ async function sendContactEmailNotification(contact: ContactData): Promise<void>
   }
 }
 
+/**
+ * Send welcome email to new temple admins after email verification
+ * Uses platform design system (serif font, #991b1b accent color)
+ */
+async function sendWelcomeEmail(user: { name: string; email: string }): Promise<void> {
+  const resend = getResendClient();
+  if (!resend) {
+    console.warn("Resend not configured — skipping welcome email");
+    return;
+  }
+
+  const dashboardUrl = process.env.BETTER_AUTH_URL
+    ? `${process.env.BETTER_AUTH_URL}/dashboard`
+    : "https://www.bodhilab.io/dashboard";
+
+  const html = `
+    <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+      <h2 style="color: #991b1b;">Welcome to Bodhi Technology Lab!</h2>
+      <p>Hello ${escapeHtml(user.name) || "there"},</p>
+      <p>Thank you for joining Bodhi Technology Lab! Your email has been verified and your account is now active.</p>
+
+      <h3 style="color: #991b1b; margin-top: 24px;">Getting Started</h3>
+      <p>As a temple administrator, you can now:</p>
+      <ul style="color: #333; line-height: 1.8;">
+        <li>Access your personalized dashboard to manage your temple</li>
+        <li>Configure your temple's profile and settings</li>
+        <li>Connect with your community through our platform</li>
+      </ul>
+
+      <p style="text-align: center; margin: 30px 0;">
+        <a href="${dashboardUrl}" style="background-color: #991b1b; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold;">Go to Dashboard</a>
+      </p>
+
+      <p style="color: #666; font-size: 14px;">If you have any questions, feel free to reach out to our support team. We're here to help you make the most of your experience.</p>
+
+      <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;" />
+      <p style="color: #888; font-size: 12px;">Bodhi Technology Lab - Mindful Technology for Spiritual Communities</p>
+    </div>
+  `.trim();
+
+  const { error } = await resend.emails.send({
+    from: "Bodhi Technology Lab <notifications@mail.bodhilab.io>",
+    to: user.email,
+    subject: "Welcome to Bodhi Technology Lab!",
+    html,
+  });
+
+  if (error) {
+    console.error("Resend welcome email error:", error);
+    // Don't throw - welcome email failure should not block user access (Requirement 3.4)
+  }
+}
+
+
+
+/**
+ * Send invitation email to new temple admins invited by bodhi admins
+ * Uses platform design system (serif font, #991b1b accent color)
+ * Includes inviter context and password-set link with 72-hour expiration
+ */
+async function sendInvitationEmail(params: {
+  email: string;
+  name: string;
+  inviterName: string;
+  setPasswordUrl: string;
+}): Promise<void> {
+  const resend = getResendClient();
+  if (!resend) {
+    console.warn("Resend not configured — skipping invitation email");
+    throw new Error("Email service not configured");
+  }
+
+  const html = `
+    <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+      <h2 style="color: #991b1b;">You've Been Invited to Bodhi Technology Lab!</h2>
+      <p>Hello ${escapeHtml(params.name) || "there"},</p>
+      <p>You've been invited by <strong>${escapeHtml(params.inviterName)}</strong> to join Bodhi Technology Lab as a temple administrator.</p>
+
+      <h3 style="color: #991b1b; margin-top: 24px;">About Bodhi Technology Lab</h3>
+      <p>Bodhi Technology Lab provides mindful technology solutions for spiritual communities. Our platform helps temples and religious organizations connect with their communities, manage operations, and grow their reach.</p>
+
+      <h3 style="color: #991b1b; margin-top: 24px;">Set Up Your Account</h3>
+      <p>To get started, please set your password by clicking the button below:</p>
+
+      <p style="text-align: center; margin: 30px 0;">
+        <a href="${escapeHtml(params.setPasswordUrl)}" style="background-color: #991b1b; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold;">Set Your Password</a>
+      </p>
+
+      <p style="color: #b91c1c; font-weight: bold; font-size: 14px;">⏰ This link will expire in 72 hours.</p>
+
+      <p style="color: #666; font-size: 14px; margin-top: 20px;">Once you've set your password, you'll be able to sign in and access your temple dashboard.</p>
+
+      <p style="color: #666; font-size: 14px;">If you didn't expect this invitation or have any questions, please contact our support team.</p>
+
+      <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;" />
+      <p style="color: #888; font-size: 12px;">Bodhi Technology Lab - Mindful Technology for Spiritual Communities</p>
+    </div>
+  `.trim();
+
+  const { error } = await resend.emails.send({
+    from: "Bodhi Technology Lab <notifications@mail.bodhilab.io>",
+    to: params.email,
+    subject: `${escapeHtml(params.inviterName)} invited you to Bodhi Technology Lab`,
+    html,
+  });
+
+  if (error) {
+    console.error("Resend invitation email error:", error);
+    throw error;
+  }
+}
+
 // ─── High-Level Orchestrators ───
 
 export async function notifyNewLead(lead: Lead): Promise<void> {
@@ -128,6 +240,19 @@ export async function notifyNewLead(lead: Lead): Promise<void> {
 
 export async function notifyNewContact(contact: ContactData): Promise<void> {
   await sendContactEmailNotification(contact);
+}
+
+export async function notifyWelcome(user: { name: string; email: string }): Promise<void> {
+  await sendWelcomeEmail(user);
+}
+
+export async function notifyInvitation(params: {
+  email: string;
+  name: string;
+  inviterName: string;
+  setPasswordUrl: string;
+}): Promise<void> {
+  await sendInvitationEmail(params);
 }
 
 export function isResendConfigured(): boolean {

@@ -17,8 +17,17 @@ import {
   StickyNote,
   Check,
   X,
+  Loader2,
 } from "lucide-react";
 import { Link, useLocation } from "wouter";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
 import {
   BarChart,
   Bar,
@@ -69,6 +78,61 @@ export default function Admin() {
   const [paymentFilter, setPaymentFilter] = useState("");
   const [editingNotes, setEditingNotes] = useState<string | null>(null);
   const [notesValue, setNotesValue] = useState("");
+
+  // Invite modal state
+  const [inviteModalOpen, setInviteModalOpen] = useState(false);
+  const [inviteName, setInviteName] = useState("");
+  const [inviteEmail, setInviteEmail] = useState("");
+  const [inviteError, setInviteError] = useState<string | null>(null);
+
+  const inviteTempleAdminMutation = useMutation({
+    mutationFn: async (data: { name: string; email: string }) => {
+      const response = await fetch("/api/admin/invite-temple-admin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(data),
+      });
+      const json = await response.json();
+      if (!response.ok) {
+        if (response.status === 409) {
+          throw new Error("This email is already registered");
+        }
+        throw new Error(json.message || "Failed to send invitation");
+      }
+      return json;
+    },
+    onSuccess: () => {
+      toast({
+        title: "Invitation Sent",
+        description: `An invitation email has been sent to ${inviteEmail}`,
+      });
+      setInviteModalOpen(false);
+      setInviteName("");
+      setInviteEmail("");
+      setInviteError(null);
+    },
+    onError: (error: Error) => {
+      setInviteError(error.message);
+    },
+  });
+
+  const handleInviteSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setInviteError(null);
+    if (!inviteName.trim() || !inviteEmail.trim()) {
+      setInviteError("Please fill in all fields");
+      return;
+    }
+    inviteTempleAdminMutation.mutate({ name: inviteName.trim(), email: inviteEmail.trim() });
+  };
+
+  const handleInviteModalClose = () => {
+    setInviteModalOpen(false);
+    setInviteName("");
+    setInviteEmail("");
+    setInviteError(null);
+  };
 
   const handleSignOut = async () => {
     try {
@@ -155,6 +219,12 @@ export default function Admin() {
             </div>
           </div>
           <div className="flex items-center gap-3">
+            <button
+              onClick={() => setInviteModalOpen(true)}
+              className="flex items-center gap-2 px-4 py-2 bg-[#991b1b] text-white rounded-lg font-serif text-sm hover:bg-[#7a1515] transition-all"
+            >
+              <UserPlus className="w-4 h-4" /> Invite Temple Admin
+            </button>
             <button onClick={() => refetch()} className="flex items-center gap-2 px-4 py-2 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#8B4513] hover:bg-[#8B4513]/5 transition-all">
               <RefreshCw className="w-4 h-4" /> Refresh
             </button>
@@ -431,6 +501,78 @@ export default function Admin() {
           </>
         )}
       </main>
+
+      {/* Invite Temple Admin Modal */}
+      <Dialog open={inviteModalOpen} onOpenChange={handleInviteModalClose}>
+        <DialogContent className="bg-white border border-[#8B4513]/20 sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="font-serif text-xl text-[#2c2c2c]">Invite Temple Admin</DialogTitle>
+            <DialogDescription className="font-serif text-sm text-[#8B4513]/70">
+              Send an invitation email to a new temple administrator.
+            </DialogDescription>
+          </DialogHeader>
+          <form onSubmit={handleInviteSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <label htmlFor="invite-name" className="font-serif text-sm font-medium text-[#2c2c2c]">
+                Name
+              </label>
+              <input
+                id="invite-name"
+                type="text"
+                value={inviteName}
+                onChange={(e) => setInviteName(e.target.value)}
+                placeholder="Enter full name"
+                className="w-full px-3 py-2 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#2c2c2c] placeholder:text-[#8B4513]/40 focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50"
+                disabled={inviteTempleAdminMutation.isPending}
+              />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="invite-email" className="font-serif text-sm font-medium text-[#2c2c2c]">
+                Email
+              </label>
+              <input
+                id="invite-email"
+                type="email"
+                value={inviteEmail}
+                onChange={(e) => setInviteEmail(e.target.value)}
+                placeholder="Enter email address"
+                className="w-full px-3 py-2 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#2c2c2c] placeholder:text-[#8B4513]/40 focus:outline-none focus:ring-2 focus:ring-[#991b1b]/50"
+                disabled={inviteTempleAdminMutation.isPending}
+              />
+            </div>
+            {inviteError && (
+              <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
+                <p className="font-serif text-sm text-red-700">{inviteError}</p>
+              </div>
+            )}
+            <DialogFooter className="gap-2 sm:gap-0">
+              <button
+                type="button"
+                onClick={handleInviteModalClose}
+                disabled={inviteTempleAdminMutation.isPending}
+                className="px-4 py-2 bg-white border border-[#8B4513]/30 rounded-lg font-serif text-sm text-[#8B4513] hover:bg-[#8B4513]/5 transition-all disabled:opacity-50"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                disabled={inviteTempleAdminMutation.isPending}
+                className="flex items-center gap-2 px-4 py-2 bg-[#991b1b] text-white rounded-lg font-serif text-sm hover:bg-[#7a1515] transition-all disabled:opacity-50"
+              >
+                {inviteTempleAdminMutation.isPending ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" /> Sending...
+                  </>
+                ) : (
+                  <>
+                    <Mail className="w-4 h-4" /> Send Invitation
+                  </>
+                )}
+              </button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

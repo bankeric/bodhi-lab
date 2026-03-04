@@ -31,6 +31,7 @@ import ForgotPassword from "@/pages/ForgotPassword";
 import ResetPassword from "@/pages/ResetPassword";
 import Pricing from "@/pages/Pricing";
 import Contact from "@/pages/Contact";
+import Settings from "@/pages/Settings";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import NotFound from "@/pages/not-found";
 
@@ -55,6 +56,11 @@ function Router() {
       <Route path="/dashboard">
         <ProtectedRoute requiredRole="temple_admin">
           <Dashboard />
+        </ProtectedRoute>
+      </Route>
+      <Route path="/settings">
+        <ProtectedRoute>
+          <Settings />
         </ProtectedRoute>
       </Route>
       <Route path="/login" component={Login} />

@@ -1,7 +1,7 @@
 import { Link } from "wouter";
-import sutraIcon from "@assets/sutra-scroll-icon.png";
-import bellIcon from "@assets/bell-icon.png";
-import bodhiLogo from "@assets/bodhi-technology-lab-logo.png";
+import sutraIcon from "@assets/sutra-scroll-icon.webp";
+import bellIcon from "@assets/bell-icon.webp";
+import bodhiLogo from "@assets/bodhi-technology-lab-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { termsTranslations } from "@/translations/terms";

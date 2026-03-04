@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { useSession, signIn, signUp } from "@/lib/auth-client";
+import { useState, useEffect } from "react";
+import { useSession, signIn, signUp, sendVerificationEmail } from "@/lib/auth-client";
 import { Redirect, Link, useLocation } from "wouter";
-import { Lock, ArrowLeft, Loader2, UserPlus, Mail, CheckCircle } from "lucide-react";
+import { Lock, ArrowLeft, Loader2, UserPlus, Mail, CheckCircle, RefreshCw } from "lucide-react";
 
 export default function Login() {
   const { data: session, isPending: sessionLoading } = useSession();
@@ -13,6 +13,56 @@ export default function Login() {
   const [success, setSuccess] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [mode, setMode] = useState<"signin" | "signup">("signin");
+  
+  // Resend verification email state
+  const [showResendVerification, setShowResendVerification] = useState(false);
+  const [resendEmail, setResendEmail] = useState("");
+  const [resendLoading, setResendLoading] = useState(false);
+  const [resendCooldown, setResendCooldown] = useState(0);
+
+  // Cooldown timer effect
+  useEffect(() => {
+    if (resendCooldown > 0) {
+      const timer = setTimeout(() => {
+        setResendCooldown(resendCooldown - 1);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [resendCooldown]);
+
+  const handleResendVerification = async () => {
+    if (!resendEmail || resendLoading || resendCooldown > 0) return;
+    
+    setResendLoading(true);
+    setError("");
+    setSuccess("");
+    
+    try {
+      const response = await fetch("/api/auth/resend-verification", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: resendEmail }),
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok) {
+        setSuccess("Verification email sent! Please check your inbox and spam folder.");
+        setShowResendVerification(false);
+      } else if (response.status === 429) {
+        // Rate limited
+        const retryAfter = data.retryAfter || 60;
+        setResendCooldown(retryAfter);
+        setError(`Too many requests. Please wait ${Math.ceil(retryAfter / 60)} minute(s) before requesting another email.`);
+      } else {
+        setError(data.message || "Could not send verification email. Please try again.");
+      }
+    } catch (err) {
+      setError("Could not send verification email. Please try again.");
+    } finally {
+      setResendLoading(false);
+    }
+  };
 
   if (sessionLoading) {
     return (
@@ -40,10 +90,23 @@ export default function Login() {
           email,
           password,
           name: name || email.split("@")[0],
-          callbackURL: "/dashboard",
+          callbackURL: "/login?verified=true",
         }, {
-          onSuccess: () => {
-            setLocation("/dashboard");
+          onSuccess: async () => {
+            // Send verification email manually (Better Auth's sendOnSignUp is unreliable)
+            try {
+              await sendVerificationEmail({
+                email,
+                callbackURL: "/login?verified=true",
+              });
+            } catch (err) {
+              // Ignore errors - email might already be sent by Better Auth
+              console.log("[Login] sendVerificationEmail result:", err);
+            }
+            
+            setSuccess("Account created! Please check your email (including spam folder) to verify your account before signing in.");
+            setMode("signin");
+            setPassword("");
           },
           onError: (ctx) => {
             setError(ctx.error.message || "Could not create account. Please try again.");
@@ -60,10 +123,14 @@ export default function Login() {
             }
           },
           onError: (ctx) => {
-            if (ctx.error.message?.includes("verify")) {
+            const errorMessage = ctx.error.message?.toLowerCase() || "";
+            if (errorMessage.includes("verify") || errorMessage.includes("verification") || errorMessage.includes("not verified")) {
               setError("Please verify your email before signing in. Check your inbox for the verification link.");
+              setResendEmail(email);
+              setShowResendVerification(true);
             } else {
               setError(ctx.error.message || "Invalid email or password. Please try again.");
+              setShowResendVerification(false);
             }
           },
         });
@@ -100,6 +167,42 @@ export default function Login() {
           {error && (
             <div className="p-3 bg-red-100 text-red-800 rounded-lg font-serif text-sm border border-red-200">
               {error}
+            </div>
+          )}
+
+          {showResendVerification && (
+            <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg">
+              <div className="flex items-start gap-3">
+                <Mail className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                <div className="flex-1">
+                  <p className="font-serif text-sm text-amber-800 mb-3">
+                    Didn't receive the verification email? We can send you a new one.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={handleResendVerification}
+                    disabled={resendLoading || resendCooldown > 0}
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-[#991b1b] text-white rounded-lg font-serif text-sm font-medium hover:bg-[#7a1515] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {resendLoading ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        Sending...
+                      </>
+                    ) : resendCooldown > 0 ? (
+                      <>
+                        <RefreshCw className="w-4 h-4" />
+                        Wait {resendCooldown}s
+                      </>
+                    ) : (
+                      <>
+                        <RefreshCw className="w-4 h-4" />
+                        Resend verification email
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
             </div>
           )}
 
@@ -217,6 +320,8 @@ export default function Login() {
             setMode(mode === "signin" ? "signup" : "signin");
             setError("");
             setSuccess("");
+            setShowResendVerification(false);
+            setResendEmail("");
           }}
           className="w-full px-6 py-3 bg-white border border-[#8B4513]/30 rounded-xl font-serif font-semibold text-[#2c2c2c] hover:bg-[#8B4513]/5 transition-all duration-300 shadow-sm"
         >

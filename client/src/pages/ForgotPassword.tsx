@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { forgetPassword } from "@/lib/auth-client";
+import { requestPasswordReset } from "@/lib/auth-client";
 import { Link } from "wouter";
 import { Mail, ArrowLeft, Loader2, CheckCircle } from "lucide-react";
 
@@ -15,7 +15,7 @@ export default function ForgotPassword() {
     setIsSubmitting(true);
 
     try {
-      await forgetPassword({
+      await requestPasswordReset({
         email,
         redirectTo: "/reset-password",
       }, {

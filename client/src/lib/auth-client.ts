@@ -9,12 +9,22 @@ export const authClient = createAuthClient({
   },
 });
 
+// Export auth methods - note: forgetPassword was renamed to requestPasswordReset in Better Auth 1.4
 export const { 
   useSession, 
   signIn, 
   signUp, 
   signOut,
-  forgetPassword,
+  requestPasswordReset,
   resetPassword,
   sendVerificationEmail,
+  changePassword,
+  updateUser,
+  listSessions,
+  revokeSession,
+  revokeOtherSessions,
+  changeEmail,
 } = authClient;
+
+// Alias for backward compatibility with existing code
+export const forgetPassword = requestPasswordReset;

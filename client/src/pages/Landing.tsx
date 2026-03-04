@@ -12,15 +12,15 @@ import { useDocumentTitle } from "@/hooks/use-document-title";
 import { useCustomer } from "autumn-js/react";
 import { useToast } from "@/hooks/use-toast";
 
-// Buddhist artwork for agent cards
-import agentArt1 from "@assets/agent-tam-an-artwork.png";
-import agentArt2 from "@assets/agent-giac-ngo-artwork.png";
-import agentArt3 from "@assets/agent-don-ngo-artwork.png";
-import agentArt4 from "@assets/agent-tinh-thuc-artwork.png";
-import agentArt5 from "@assets/agent-ke-van-ngo-artwork.png";
-import agentArt6 from "@assets/agent-van-tinh-artwork.png";
-import heroBackgroundImage from "@assets/hero-buddhist-temple-background.png";
-import bodhiLogo from "@assets/bodhi-technology-lab-logo.png";
+// Buddhist artwork for agent cards (optimized WebP format)
+import agentArt1 from "@assets/agent-tam-an-artwork.webp";
+import agentArt2 from "@assets/agent-giac-ngo-artwork.webp";
+import agentArt3 from "@assets/agent-don-ngo-artwork.webp";
+import agentArt4 from "@assets/agent-tinh-thuc-artwork.webp";
+import agentArt5 from "@assets/agent-ke-van-ngo-artwork.webp";
+import agentArt6 from "@assets/agent-van-tinh-artwork.webp";
+import heroBackgroundImage from "@assets/hero-buddhist-temple-background.webp";
+import bodhiLogo from "@assets/bodhi-technology-lab-logo.webp";
 
 // Mapping of agent IDs to artwork images (first 6 featured agents)
 const agentArtwork: Record<string, string> = {

@@ -4,12 +4,23 @@ import { organization } from "better-auth/plugins";
 import { poolDb } from "../db";
 import * as schema from "@shared/schema";
 import { Resend } from "resend";
+import { notifyWelcome } from "../services/notifications";
 
 if (!process.env.BETTER_AUTH_SECRET) {
   throw new Error(
     "BETTER_AUTH_SECRET is not set. Generate one with: openssl rand -base64 32"
   );
 }
+
+// Determine the base URL based on environment
+const baseURL = process.env.NODE_ENV === "development" 
+  ? "http://localhost:3000"
+  : (process.env.BETTER_AUTH_URL || "https://www.bodhilab.io");
+
+console.log("[Auth] Initializing Better Auth configuration...");
+console.log("[Auth] RESEND_API_KEY configured:", !!process.env.RESEND_API_KEY);
+console.log("[Auth] NODE_ENV:", process.env.NODE_ENV);
+console.log("[Auth] Base URL:", baseURL);
 
 // Lazy-init Resend client
 let resendClient: Resend | null = null;
@@ -24,7 +35,7 @@ function getResend(): Resend | null {
 export const auth = betterAuth({
   database: drizzleAdapter(poolDb, { provider: "pg", schema }),
   secret: process.env.BETTER_AUTH_SECRET,
-  baseURL: process.env.BETTER_AUTH_URL || "https://www.bodhilab.io",
+  baseURL,
   trustedOrigins: [
     "http://localhost:3000",
     "http://localhost:5000",
@@ -34,10 +45,11 @@ export const auth = betterAuth({
   ],
   emailAndPassword: {
     enabled: true,
-    requireEmailVerification: false,
+    requireEmailVerification: true, // Require email verification before sign-in
     minPasswordLength: 8,
-    autoSignIn: true, // Auto sign in after signup
+    autoSignIn: false, // Don't auto sign in, require verification first
     sendResetPassword: async ({ user, url }) => {
+      console.log("[Auth] sendResetPassword triggered for:", user.email);
       const resend = getResend();
       if (!resend) {
         console.error("Resend not configured - cannot send password reset email");
@@ -45,7 +57,7 @@ export const auth = betterAuth({
       }
       
       void resend.emails.send({
-        from: "Bodhi Technology Lab <auth@bodhilab.io>",
+        from: "Bodhi Technology Lab <auth@mail.bodhilab.io>",
         to: user.email,
         subject: "Reset Your Password - Bodhi Technology Lab",
         html: `
@@ -65,33 +77,71 @@ export const auth = betterAuth({
     },
   },
   emailVerification: {
-    sendOnSignUp: false, // Don't require email verification
+    sendOnSignUp: false, // Disabled - we send manually from client after sign-up
+    sendOnSignIn: true, // Send verification email when unverified user tries to sign in
     autoSignInAfterVerification: true,
+    expiresIn: 86400, // 24 hours for verification tokens
     sendVerificationEmail: async ({ user, url }) => {
+      console.log("[Auth] ========================================");
+      console.log("[Auth] sendVerificationEmail TRIGGERED!");
+      console.log("[Auth] User email:", user.email);
+      console.log("[Auth] User name:", user.name);
+      console.log("[Auth] Verification URL:", url);
+      console.log("[Auth] ========================================");
+      
       const resend = getResend();
       if (!resend) {
-        console.error("Resend not configured - cannot send verification email");
+        console.error("[Auth] Resend not configured - cannot send verification email");
         return;
       }
       
-      void resend.emails.send({
-        from: "Bodhi Technology Lab <auth@bodhilab.io>",
-        to: user.email,
-        subject: "Verify Your Email - Bodhi Technology Lab",
-        html: `
-          <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-            <h2 style="color: #991b1b;">Welcome to Bodhi Technology Lab!</h2>
-            <p>Hello ${user.name || "there"},</p>
-            <p>Thank you for creating an account. Please verify your email address by clicking the button below:</p>
-            <p style="text-align: center; margin: 30px 0;">
-              <a href="${url}" style="background-color: #991b1b; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold;">Verify Email</a>
-            </p>
-            <p style="color: #666; font-size: 14px;">If you didn't create this account, you can safely ignore this email.</p>
-            <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;" />
-            <p style="color: #888; font-size: 12px;">Bodhi Technology Lab - Mindful Technology for Spiritual Communities</p>
-          </div>
-        `,
-      });
+      console.log(`[Email] Sending verification email to ${user.email}`);
+      console.log(`[Email] Verification URL: ${url}`);
+      
+      // Use void to avoid awaiting (prevents timing attacks per Better Auth docs)
+      void (async () => {
+        try {
+          const { data, error } = await resend.emails.send({
+            from: "Bodhi Technology Lab <auth@mail.bodhilab.io>",
+            to: user.email,
+            subject: "Verify Your Email - Bodhi Technology Lab",
+            html: `
+              <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+                <h2 style="color: #991b1b;">Welcome to Bodhi Technology Lab!</h2>
+                <p>Hello ${user.name || "there"},</p>
+                <p>Thank you for creating an account. Please verify your email address by clicking the button below:</p>
+                <p style="text-align: center; margin: 30px 0;">
+                  <a href="${url}" style="background-color: #991b1b; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold;">Verify Email</a>
+                </p>
+                <p style="color: #666; font-size: 14px;">If you didn't create this account, you can safely ignore this email.</p>
+                <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;" />
+                <p style="color: #888; font-size: 12px;">Bodhi Technology Lab - Mindful Technology for Spiritual Communities</p>
+              </div>
+            `,
+          });
+          
+          if (error) {
+            console.error("[Email] Failed to send verification email:", error);
+          } else {
+            console.log("[Email] Verification email sent successfully:", data?.id);
+          }
+        } catch (err) {
+          console.error("[Email] Exception sending verification email:", err);
+        }
+      })();
+    },
+    async afterEmailVerification(user) {
+      // Send welcome email to temple admins after verification (Requirement 3.1)
+      // Log errors without blocking user access (Requirement 3.4)
+      // Cast user to include role field from additionalFields configuration
+      const userWithRole = user as typeof user & { role?: string };
+      if (userWithRole.role === "temple_admin") {
+        try {
+          await notifyWelcome({ name: user.name, email: user.email });
+        } catch (error) {
+          console.error("Failed to send welcome email to temple admin:", error);
+        }
+      }
     },
   },
   user: {
