@@ -190,6 +190,26 @@ export default function Pricing() {
     }
   };
 
+  const handleAddOnPurchase = async (productId: string) => {
+    if (!session) {
+      setLocation("/login");
+      return;
+    }
+
+    setLoadingPlan(productId);
+    try {
+      await attach({ productId, successUrl: `${window.location.origin}/dashboard` });
+    } catch (err: any) {
+      toast({
+        title: "Checkout Error",
+        description: err?.message || "Could not start checkout. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoadingPlan(null);
+    }
+  };
+
   const userRole = (session?.user as any)?.role;
   const backHref = !session ? "/" : userRole === "bodhi_admin" ? "/admin" : "/dashboard";
 
@@ -375,7 +395,7 @@ export default function Pricing() {
                 </li>
               </ul>
               <button
-                onClick={() => handlePlanAction({ id: "onboarding" as any, name: "Onboarding Package", price: "$899", priceValue: 899, period: "", description: "", features: [], highlighted: false })}
+                onClick={() => handleAddOnPurchase("onboarding")}
                 disabled={loadingPlan === "onboarding"}
                 className="w-full py-3 rounded-xl font-serif font-semibold bg-white border-2 border-[#991b1b] text-[#991b1b] hover:bg-[#991b1b] hover:text-white transition-all flex items-center justify-center gap-2 disabled:opacity-50"
               >
@@ -415,7 +435,7 @@ export default function Pricing() {
                 </li>
               </ul>
               <button
-                onClick={() => handlePlanAction({ id: "premium-package" as any, name: "Premium Package", price: "$4,000", priceValue: 4000, period: "", description: "", features: [], highlighted: false })}
+                onClick={() => handleAddOnPurchase("premium-package")}
                 disabled={loadingPlan === "premium-package"}
                 className="w-full py-3 rounded-xl font-serif font-semibold bg-[#991b1b] text-white hover:bg-[#7a1515] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
               >
