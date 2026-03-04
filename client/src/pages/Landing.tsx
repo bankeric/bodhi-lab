@@ -269,9 +269,9 @@ export default function Landing() {
                 {t.header.nav.docs}
               </Link>
               <LanguageSwitcher />
-              {session ? (
+              {session?.user ? (
                 <Link
-                  href={(session.user as any).role === "bodhi_admin" ? "/admin" : "/dashboard"}
+                  href={(session.user as any)?.role === "bodhi_admin" ? "/admin" : "/dashboard"}
                   className="font-serif px-4 py-2 rounded-full bg-[#991b1b] text-white hover:bg-[#7a1515] transition-colors text-sm font-semibold"
                   data-testid="link-dashboard"
                 >
@@ -327,9 +327,9 @@ export default function Landing() {
                 Contact
               </Link>
               <div className="pt-2 border-t border-[#8B4513]/20">
-                {session ? (
+                {session?.user ? (
                   <Link
-                    href={(session.user as any).role === "bodhi_admin" ? "/admin" : "/dashboard"}
+                    href={(session.user as any)?.role === "bodhi_admin" ? "/admin" : "/dashboard"}
                     onClick={() => setMobileMenuOpen(false)}
                     className="block text-center font-serif px-4 py-3 rounded-xl bg-[#991b1b] text-white hover:bg-[#7a1515] transition-colors font-semibold"
                   >
