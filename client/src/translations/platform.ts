@@ -266,7 +266,7 @@ export const platformTranslations = {
       onboarding: {
         badge: "Onboarding Package",
         title: "Onboarding Package",
-        price: "899",
+        price: "500",
         priceUnit: "one-time",
         subtitle: "everything you need to launch your temple's digital presence—done for you",
         website: {
@@ -568,7 +568,7 @@ export const platformTranslations = {
       onboarding: {
         badge: "Gói Khởi Động",
         title: "Gói Khởi Động",
-        price: "899",
+        price: "500",
         priceUnit: "một lần",
         subtitle: "tất cả những gì bạn cần để ra mắt hiện diện số của chùa—chúng tôi làm cho bạn",
         website: {

@@ -175,7 +175,7 @@ export const landingTranslations = {
       onboarding: {
         badge: "Onboarding Package",
         title: "Onboarding Package",
-        price: "$899",
+        price: "$500",
         priceUnit: "one-time",
         subtitle: "Everything you need to launch your temple's digital presence",
         description: "A complete, done-for-you setup so your community can go live with confidence",
@@ -439,7 +439,7 @@ export const landingTranslations = {
       onboarding: {
         badge: "Gói Khởi Động",
         title: "Gói Khởi Động",
-        price: "$899",
+        price: "$500",
         priceUnit: "một lần",
         subtitle: "Tất cả những gì bạn cần để ra mắt hiện diện số của chùa",
         description: "Thiết lập trọn gói để cộng đồng của bạn có thể hoạt động ngay với sự tự tin",

@@ -366,7 +366,7 @@ export default function Pricing() {
                   Onboarding Package
                 </h4>
                 <span className="font-serif text-xl font-bold text-[#2c2c2c]">
-                  $899 <span className="text-xs font-normal text-[#8B4513]/60">one-time</span>
+                  $500 <span className="text-xs font-normal text-[#8B4513]/60">one-time</span>
                 </span>
               </div>
               <p className="font-serif text-sm text-[#8B4513]/70 mb-4">

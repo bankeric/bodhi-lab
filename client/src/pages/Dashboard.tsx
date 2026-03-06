@@ -274,7 +274,7 @@ export default function Dashboard() {
               <h2 className="font-serif text-lg font-semibold text-[#2c2c2c]">
                 {t.onboardingPackage}
               </h2>
-              <span className="ml-auto font-serif text-xl font-bold text-[#2c2c2c]">$899 <span className="text-xs font-normal text-[#8B4513]/60">{t.oneTime}</span></span>
+              <span className="ml-auto font-serif text-xl font-bold text-[#2c2c2c]">$500 <span className="text-xs font-normal text-[#8B4513]/60">{t.oneTime}</span></span>
             </div>
             <p className="font-serif text-sm text-[#8B4513]/70 mb-4">
               {t.onboardingDesc}

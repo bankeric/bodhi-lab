@@ -93,7 +93,7 @@ export const processTranslations = {
         label: "Step 3",
         title: "Onboarding & Build",
         timeline: "Week 1–2",
-        price: "$899 one-time",
+        price: "$500 one-time",
         description: "Our team builds your custom website, configures the full platform, migrates your existing data, and digitizes paper documents. You receive a hands-on training session before launch. Two rounds of revisions are included.",
         deliverables: [
           "Custom website (up to 5 pages) designed to your temple's identity",
@@ -412,7 +412,7 @@ export const processTranslations = {
         label: "Bước 3",
         title: "Khởi Động & Xây Dựng",
         timeline: "Tuần 1–2",
-        price: "$899 một lần",
+        price: "$500 một lần",
         description: "Đội ngũ xây dựng website tùy chỉnh, cấu hình nền tảng, di chuyển dữ liệu hiện có và số hóa tài liệu giấy. Bạn nhận buổi đào tạo thực hành trước khi ra mắt. Bao gồm 2 vòng chỉnh sửa.",
         deliverables: [
           "Website tùy chỉnh (tối đa 5 trang) theo bản sắc ngôi chùa",
