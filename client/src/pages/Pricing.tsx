@@ -31,14 +31,14 @@ const PLANS: PlanConfig[] = [
   {
     id: "basic",
     name: "Lay Practitioner",
-    price: "$79",
-    priceValue: 79,
+    price: "$99",
+    priceValue: 99,
     period: "/month",
-    description: "Perfect for small to medium temples getting started with digital transformation",
+    description: "Website + cúng dường + 100 câu AI/tháng + thành viên",
     features: [
       "Shared website template & resource library",
-      "2.5% + $0.20 per card donation (0.8% + $0.20 bank transfer)",
-      "1,000 user limit",
+      "1 AI Dharma Agent",
+      "200 user limit",
       "2 admin seats",
       "Shared domain",
       "Email support",
@@ -52,15 +52,12 @@ const PLANS: PlanConfig[] = [
     price: "$199",
     priceValue: 199,
     period: "/month",
-    description: "Ideal for growing communities ready to expand their digital presence",
+    description: "Cơ Bản + livestream + 500 câu AI/tháng + bảng tin",
     features: [
       "Shared website template & resource library",
-      "1.5% + $0.20 per card donation (0.8% + $0.20 bank transfer)",
-      "AI Dharma Agent (standard usage)",
-      "5,000 user limit",
+      "3 AI Dharma Agent (standard usage)",
+      "1,000 user limit",
       "5 admin seats",
-      "Included mobile app",
-      "Custom domain",
       "Limited API access",
       "Email + product updates",
       "Daily backup, 7-day logs",
@@ -70,17 +67,16 @@ const PLANS: PlanConfig[] = [
   {
     id: "premium",
     name: "Sangha Community",
-    price: "$499+",
-    priceValue: 499,
+    price: "$299",
+    priceValue: 299,
     period: "/month",
-    description: "Comprehensive solution for large monasteries and temple networks",
+    description: "Tiêu Chuẩn + AI không giới hạn + tên miền riêng + ưu tiên hỗ trợ",
     features: [
       "Shared website template & resource library",
-      "Free donation processing",
+      "5 AI Dharma Agent (standard usage)",
       "AI Dharma Agent (fine-tuned, multi-instance)",
-      "10,000+ user limit",
-      "10+ admin seats",
-      "White-label native mobile app",
+      "5,000 user limit",
+      "10 admin seats",
       "Full brand suite (custom domain, logo, styling)",
       "Full API & developer dashboard",
       "Dedicated success manager + 24/7 support",
@@ -362,7 +358,7 @@ export default function Pricing() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 max-w-lg mx-auto gap-6">
             {/* Onboarding Package */}
             <div className="bg-white/80 backdrop-blur-md rounded-2xl border border-[#8B4513]/20 p-6 flex flex-col">
               <div className="flex items-center justify-between mb-4">
@@ -403,45 +399,6 @@ export default function Pricing() {
               </button>
             </div>
 
-            {/* Premium Package */}
-            <div className="bg-gradient-to-br from-[#991b1b]/5 to-[#8B4513]/5 backdrop-blur-md rounded-2xl border-2 border-[#991b1b]/30 p-6 flex flex-col">
-              <div className="flex items-center justify-between mb-4">
-                <h4 className="font-serif text-lg font-semibold text-[#2c2c2c]">
-                  Premium Package
-                </h4>
-                <span className="font-serif text-xl font-bold text-[#991b1b]">
-                  $4,000 <span className="text-xs font-normal text-[#8B4513]/60">one-time</span>
-                </span>
-              </div>
-              <p className="font-serif text-sm text-[#8B4513]/70 mb-4">
-                Get expert guidance from setup to launch with comprehensive onboarding, training, and migration support.
-              </p>
-              <ul className="space-y-2 mb-6 flex-1">
-                <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
-                  <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                  Five dedicated video training sessions
-                </li>
-                <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
-                  <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                  60 days of 1-on-1 personalized setup support
-                </li>
-                <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
-                  <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                  Complete data migration assistance
-                </li>
-                <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
-                  <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                  Proven launch resources and templates
-                </li>
-              </ul>
-              <button
-                onClick={() => handleAddOnPurchase("premium-package")}
-                disabled={loadingPlan === "premium-package"}
-                className="w-full py-3 rounded-xl font-serif font-semibold bg-[#991b1b] text-white hover:bg-[#7a1515] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
-              >
-                {loadingPlan === "premium-package" ? <Loader2 className="w-4 h-4 animate-spin" /> : "Add Premium Package"}
-              </button>
-            </div>
           </div>
         </div>
 

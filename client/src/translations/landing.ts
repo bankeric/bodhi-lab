@@ -123,13 +123,13 @@ export const landingTranslations = {
       subtitle: "Professional-grade platforms designed for Buddhist organizations of all sizes",
       start: {
         title: "Lay Practitioner",
-        price: "$79",
+        price: "$99",
         priceUnit: "/month",
-        description: "Perfect for small to medium temples getting started with digital transformation",
+        description: "Website + cúng dường + 100 câu AI/tháng + thành viên",
         features: [
           "Shared website template & resource library",
-          "2.5% + $0.20 per card donation (0.8% + $0.20 bank transfer)",
-          "1,000 user limit",
+          "1 AI Dharma Agent",
+          "200 user limit",
           "2 admin seats",
           "Shared domain",
           "Email support",
@@ -142,15 +142,12 @@ export const landingTranslations = {
         price: "$199",
         priceUnit: "/month",
         badge: "Most Popular",
-        description: "Ideal for growing communities ready to expand their digital presence",
+        description: "Cơ Bản + livestream + 500 câu AI/tháng + bảng tin",
         features: [
           "Shared website template & resource library",
-          "1.5% + $0.20 per card donation (0.8% + $0.20 bank transfer)",
-          "AI Dharma Agent (standard usage)",
-          "5,000 user limit",
+          "3 AI Dharma Agent (standard usage)",
+          "1,000 user limit",
           "5 admin seats",
-          "Included mobile app",
-          "Custom domain",
           "Limited API access",
           "Email + product updates",
           "Daily backup, 7-day logs"
@@ -159,36 +156,21 @@ export const landingTranslations = {
       },
       enterprise: {
         title: "Sangha Community",
-        price: "$499+",
+        price: "$299",
         priceUnit: "/month",
-        description: "Comprehensive solution for large monasteries and temple networks",
+        description: "Tiêu Chuẩn + AI không giới hạn + tên miền riêng + ưu tiên hỗ trợ",
         features: [
           "Shared website template & resource library",
-          "Free donation processing",
+          "5 AI Dharma Agent (standard usage)",
           "AI Dharma Agent (fine-tuned, multi-instance)",
-          "10,000+ user limit",
-          "10+ admin seats",
-          "White-label native mobile app",
+          "5,000 user limit",
+          "10 admin seats",
           "Full brand suite (custom domain, logo, styling)",
           "Full API & developer dashboard",
           "Dedicated success manager + 24/7 support",
           "Custom SLAs, security onboarding"
         ],
         cta: "Subscribe Now"
-      },
-      premium: {
-        title: "Premium Package",
-        subtitle: "Add hands-on support to accelerate your digital transformation",
-        description: "Get expert guidance from setup to launch with our comprehensive onboarding program",
-        price: "$4,000",
-        priceUnit: "one-time",
-        features: [
-          "Five dedicated video training sessions tailored for your organization",
-          "60 days of 1-on-1 personalized setup support",
-          "Effortless data migration—we transfer your library, donation records, and user data",
-          "Proven launch resources including templates, outreach materials, and Dharma-aligned guides"
-        ],
-        cta: "Add Premium Package"
       },
       onboarding: {
         badge: "Onboarding Package",
@@ -405,13 +387,13 @@ export const landingTranslations = {
       subtitle: "Nền tảng chuyên nghiệp được thiết kế cho các tổ chức Phật giáo với mọi quy mô",
       start: {
         title: "Cư Sĩ",
-        price: "$79",
+        price: "$99",
         priceUnit: "/tháng",
-        description: "Hoàn hảo cho các chùa nhỏ và vừa bắt đầu chuyển đổi số",
+        description: "Website + cúng dường + 100 câu AI/tháng + thành viên",
         features: [
           "Mẫu trang web & thư viện tài nguyên chung",
-          "2.5% + $0.20 mỗi cúng dường qua thẻ (0.8% + $0.20 chuyển khoản)",
-          "Giới hạn 1.000 người dùng",
+          "1 Đại lý AI Phật Pháp",
+          "Giới hạn 200 người dùng",
           "2 ghế quản trị",
           "Tên miền chung",
           "Hỗ trợ qua email",
@@ -424,15 +406,12 @@ export const landingTranslations = {
         price: "$199",
         priceUnit: "/tháng",
         badge: "Phổ Biến Nhất",
-        description: "Lý tưởng cho cộng đồng đang phát triển sẵn sàng mở rộng hiện diện số",
+        description: "Cơ Bản + livestream + 500 câu AI/tháng + bảng tin",
         features: [
           "Mẫu trang web & thư viện tài nguyên chung",
-          "1.5% + $0.20 mỗi cúng dường qua thẻ (0.8% + $0.20 chuyển khoản)",
-          "Đại lý AI Phật Pháp (sử dụng tiêu chuẩn)",
-          "Giới hạn 5.000 người dùng",
+          "3 Đại lý AI Phật Pháp (sử dụng tiêu chuẩn)",
+          "Giới hạn 1.000 người dùng",
           "5 ghế quản trị",
-          "Ứng dụng di động đi kèm",
-          "Tên miền tùy chỉnh",
           "Truy cập API giới hạn",
           "Email + cập nhật sản phẩm",
           "Sao lưu hàng ngày, nhật ký 7 ngày"
@@ -441,36 +420,21 @@ export const landingTranslations = {
       },
       enterprise: {
         title: "Tăng Đoàn",
-        price: "$499+",
+        price: "$299",
         priceUnit: "/tháng",
-        description: "Giải pháp toàn diện cho tu viện lớn và mạng lưới chùa chiền",
+        description: "Tiêu Chuẩn + AI không giới hạn + tên miền riêng + ưu tiên hỗ trợ",
         features: [
           "Mẫu trang web & thư viện tài nguyên chung",
-          "Xử lý cúng dường miễn phí",
+          "5 Đại lý AI Phật Pháp (sử dụng tiêu chuẩn)",
           "Đại lý AI Phật Pháp (tinh chỉnh, đa thực thể)",
-          "Giới hạn 10.000+ người dùng",
-          "10+ ghế quản trị",
-          "Ứng dụng di động nhãn trắng",
+          "Giới hạn 5.000 người dùng",
+          "10 ghế quản trị",
           "Bộ thương hiệu đầy đủ (tên miền, logo, phong cách tùy chỉnh)",
           "API đầy đủ & bảng điều khiển nhà phát triển",
           "Người quản lý chuyên dụng + hỗ trợ 24/7",
           "SLA tùy chỉnh, đào tạo bảo mật"
         ],
         cta: "Đăng Ký Ngay"
-      },
-      premium: {
-        title: "Gói Cao Cấp",
-        subtitle: "Thêm hỗ trợ thực hành để tăng tốc chuyển đổi số của bạn",
-        description: "Nhận hướng dẫn chuyên gia từ thiết lập đến ra mắt với chương trình đào tạo toàn diện của chúng tôi",
-        price: "$4,000",
-        priceUnit: "một lần",
-        features: [
-          "Năm buổi đào tạo video chuyên dụng được điều chỉnh cho tổ chức của bạn",
-          "60 ngày hỗ trợ thiết lập 1-1 cá nhân hóa",
-          "Di chuyển dữ liệu dễ dàng—chúng tôi chuyển thư viện, hồ sơ cúng dường và dữ liệu người dùng của bạn",
-          "Tài nguyên ra mắt đã được chứng minh bao gồm mẫu, tài liệu tiếp cận và hướng dẫn phù hợp Phật Pháp"
-        ],
-        cta: "Thêm Gói Cao Cấp"
       },
       onboarding: {
         badge: "Gói Khởi Động",

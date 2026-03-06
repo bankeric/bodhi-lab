@@ -217,80 +217,51 @@ export const platformTranslations = {
       contactSales: "Contact Sales",
       start: {
         name: "Lay Practitioner",
-        price: "79",
-        description: "perfect for small temples or meditation centers getting started with digital transformation",
+        price: "99",
+        description: "Website + cúng dường + 100 câu AI/tháng + thành viên",
         features: [
-          "Website Builder & Library: One shared template",
-          "Donation Fees: 2.5% + $0.20 per card (0.8% + $0.20 for bank transfer)",
-          "AI Dharma Agent: No",
-          "User Limit: 1,000 users",
-          "Admin Seats: 2",
-          "Mobile App: No",
-          "Domain/Branding: Shared domain",
-          "API Access: No",
-          "Support: Email",
-          "Backup & Logs: Basic"
+          "Shared website template & resource library",
+          "1 AI Dharma Agent",
+          "200 user limit",
+          "2 admin seats",
+          "Shared domain",
+          "Email support",
+          "Basic backup & logs"
         ]
       },
       scale: {
         name: "Devoted Practitioner",
         price: "199",
-        description: "for growing communities needing AI agents and mobile app",
+        description: "Cơ Bản + livestream + 500 câu AI/tháng + bảng tin",
         features: [
-          "Website Builder & Library: One shared template",
-          "Donation Fees: 1.5% + $0.20 per card (0.8% + $0.20 for bank transfer)",
-          "AI Dharma Agent: Yes (standard usage)",
-          "User Limit: 5,000 users",
-          "Admin Seats: 5",
-          "Mobile App: Included",
-          "Domain/Branding: Custom domain",
-          "API Access: Limited",
-          "Support: Email + product updates",
-          "Backup & Logs: Daily backup, 7-day logs"
+          "Shared website template & resource library",
+          "3 AI Dharma Agent (standard usage)",
+          "1,000 user limit",
+          "5 admin seats",
+          "Limited API access",
+          "Email + product updates",
+          "Daily backup, 7-day logs"
         ]
       },
       enterprise: {
         name: "Sangha Community",
-        price: "499+",
-        description: "comprehensive solution for large monastery networks with custom needs",
+        price: "299",
+        description: "Tiêu Chuẩn + AI không giới hạn + tên miền riêng + ưu tiên hỗ trợ",
         features: [
-          "Website Builder & Library: One shared template",
-          "Donation Fees: Free (we don't charge fees)",
-          "AI Dharma Agent: Yes (fine-tuned, multi-instance)",
-          "User Limit: 10,000+ users",
-          "Admin Seats: 10+",
-          "Mobile App: White-label native app",
-          "Domain/Branding: Full brand suite (BYO domain, logo, style)",
-          "API Access: Full API & developer dashboard",
-          "Support: Dedicated success manager + 24/7 response",
-          "Backup & Logs: Custom SLAs, security onboarding"
+          "Shared website template & resource library",
+          "5 AI Dharma Agent (standard usage)",
+          "AI Dharma Agent (fine-tuned, multi-instance)",
+          "5,000 user limit",
+          "10 admin seats",
+          "Full brand suite (custom domain, logo, styling)",
+          "Full API & developer dashboard",
+          "Dedicated success manager + 24/7 support",
+          "Custom SLAs, security onboarding"
         ]
       },
       note: {
         title: "Note:",
         text: "all plans include one shared website & library template. other features scale by tier. contact us to discuss your specific needs."
-      },
-      premium: {
-        badge: "Premium Package",
-        title: "Premium Package",
-        subtitle: "accelerate your launch with comprehensive onboarding, training, and migration support",
-        training: {
-          title: "Hands-On Product Training",
-          description: "Five dedicated video sessions tailored for your organization."
-        },
-        support: {
-          title: "Personalized Setup Support",
-          description: "60 days of 1-on-1 onboarding with our team."
-        },
-        migration: {
-          title: "Effortless Data Transfer",
-          description: "We will migrate your existing library, donation records, or user data."
-        },
-        resources: {
-          title: "Proven Launch Resources",
-          description: "Templates, outreach materials, and Dharma-aligned onboarding guides."
-        },
-        cta: "Contact Us About Premium Package"
       },
       onboarding: {
         badge: "Onboarding Package",
@@ -548,17 +519,14 @@ export const platformTranslations = {
       contactSales: "Liên Hệ Tư Vấn",
       start: {
         name: "Cư Sĩ",
-        price: "79",
-        description: "hoàn hảo cho các ngôi chùa nhỏ hoặc trung tâm thiền mới bắt đầu số hóa",
+        price: "99",
+        description: "Website + cúng dường + 100 câu AI/tháng + thành viên",
         features: [
-          "Website Builder & Library: Một mẫu chia sẻ",
-          "Phí Quyên Góp: 2.5% + $0.20 mỗi thẻ (0.8% + $0.20 cho chuyển khoản)",
-          "AI Dharma Agent: Không có",
-          "Giới hạn thành viên: 1,000 người dùng",
-          "Quản trị: 2 tài khoản admin",
-          "Ứng dụng di động: Không có",
-          "Domain/Branding: Domain chia sẻ",
-          "API Access: Không có",
+          "Mẫu trang web & thư viện tài nguyên chung",
+          "1 Đại lý AI Phật Pháp",
+          "Giới hạn 200 người dùng",
+          "2 tài khoản admin",
+          "Domain chia sẻ",
           "Hỗ trợ: Email",
           "Backup & Logs: Cơ bản"
         ]
@@ -566,62 +534,36 @@ export const platformTranslations = {
       scale: {
         name: "Hành Giả",
         price: "199",
-        description: "cho cộng đồng đang phát triển cần AI agents và mobile app",
+        description: "Cơ Bản + livestream + 500 câu AI/tháng + bảng tin",
         features: [
-          "Website Builder & Library: Một mẫu chia sẻ",
-          "Phí Quyên Góp: 1.5% + $0.20 mỗi thẻ (0.8% + $0.20 cho chuyển khoản)",
-          "AI Dharma Agent: Có (sử dụng tiêu chuẩn)",
-          "Giới hạn thành viên: 5,000 người dùng",
-          "Quản trị: 5 tài khoản admin",
-          "Ứng dụng di động: Bao gồm",
-          "Domain/Branding: Custom domain",
-          "API Access: Giới hạn",
-          "Hỗ trợ: Email + cập nhật sản phẩm",
-          "Backup & Logs: Sao lưu hàng ngày, logs 7 ngày"
+          "Mẫu trang web & thư viện tài nguyên chung",
+          "3 Đại lý AI Phật Pháp (sử dụng tiêu chuẩn)",
+          "Giới hạn 1.000 người dùng",
+          "5 tài khoản admin",
+          "Truy cập API giới hạn",
+          "Email + cập nhật sản phẩm",
+          "Sao lưu hàng ngày, logs 7 ngày"
         ]
       },
       enterprise: {
         name: "Tăng Đoàn",
-        price: "499+",
-        description: "giải pháp toàn diện cho mạng lưới tu viện lớn với nhu cầu tùy chỉnh",
+        price: "299",
+        description: "Tiêu Chuẩn + AI không giới hạn + tên miền riêng + ưu tiên hỗ trợ",
         features: [
-          "Website Builder & Library: Một mẫu chia sẻ",
-          "Phí Quyên Góp: Miễn phí (chúng tôi không lấy phí)",
-          "AI Dharma Agent: Có (fine-tuned, multi-instance)",
-          "Giới hạn thành viên: 10,000+ người dùng",
-          "Quản trị: 10+ tài khoản admin",
-          "Ứng dụng di động: White-label native app",
-          "Domain/Branding: Bộ nhận diện thương hiệu đầy đủ",
-          "API Access: API đầy đủ & developer dashboard",
-          "Hỗ trợ: Quản lý thành công chuyên dụng + phản hồi 24/7",
-          "Backup & Logs: SLA tùy chỉnh, onboarding bảo mật"
+          "Mẫu trang web & thư viện tài nguyên chung",
+          "5 Đại lý AI Phật Pháp (sử dụng tiêu chuẩn)",
+          "Đại lý AI Phật Pháp (tinh chỉnh, đa thực thể)",
+          "Giới hạn 5.000 người dùng",
+          "10 tài khoản admin",
+          "Bộ nhận diện thương hiệu đầy đủ",
+          "API đầy đủ & developer dashboard",
+          "Quản lý thành công chuyên dụng + phản hồi 24/7",
+          "SLA tùy chỉnh, onboarding bảo mật"
         ]
       },
       note: {
         title: "Lưu ý:",
         text: "tất cả các gói đều bao gồm một mẫu website & library được chia sẻ. các tính năng khác được mở rộng theo từng tier. liên hệ chúng tôi để thảo luận về nhu cầu cụ thể của bạn."
-      },
-      premium: {
-        badge: "Gói Premium",
-        title: "Gói Premium",
-        subtitle: "tăng tốc khởi động của bạn với hỗ trợ onboarding, đào tạo và di chuyển dữ liệu toàn diện",
-        training: {
-          title: "Đào Tạo Sản Phẩm Thực Hành",
-          description: "Năm buổi video chuyên dụng được tùy chỉnh cho tổ chức của bạn."
-        },
-        support: {
-          title: "Hỗ Trợ Thiết Lập Cá Nhân Hóa",
-          description: "60 ngày onboarding 1-on-1 với đội ngũ của chúng tôi."
-        },
-        migration: {
-          title: "Chuyển Đổi Dữ Liệu Dễ Dàng",
-          description: "Chúng tôi sẽ di chuyển thư viện hiện có, hồ sơ quyên góp hoặc dữ liệu người dùng của bạn."
-        },
-        resources: {
-          title: "Tài Nguyên Khởi Động Đã Được Chứng Minh",
-          description: "Mẫu, tài liệu tiếp cận và hướng dẫn onboarding phù hợp với Phật Pháp."
-        },
-        cta: "Liên Hệ Về Gói Premium"
       },
       onboarding: {
         badge: "Gói Khởi Động",
