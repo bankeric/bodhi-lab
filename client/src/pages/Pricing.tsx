@@ -358,7 +358,7 @@ export default function Pricing() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 max-w-lg mx-auto gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 max-w-3xl mx-auto gap-6">
             {/* Onboarding Package */}
             <div className="bg-white/80 backdrop-blur-md rounded-2xl border border-[#8B4513]/20 p-6 flex flex-col">
               <div className="flex items-center justify-between mb-4">
@@ -375,7 +375,7 @@ export default function Pricing() {
               <ul className="space-y-2 mb-6 flex-1">
                 <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
                   <Check className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                  Custom website design & build
+                  Space & AI Agent setup on giac.ngo
                 </li>
                 <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
                   <Check className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
@@ -383,7 +383,7 @@ export default function Pricing() {
                 </li>
                 <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
                   <Check className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                  Data migration from existing systems
+                  Data migration & document digitization
                 </li>
                 <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
                   <Check className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
@@ -396,6 +396,51 @@ export default function Pricing() {
                 className="w-full py-3 rounded-xl font-serif font-semibold bg-white border-2 border-[#991b1b] text-[#991b1b] hover:bg-[#991b1b] hover:text-white transition-all flex items-center justify-center gap-2 disabled:opacity-50"
               >
                 {loadingPlan === "onboarding" ? <Loader2 className="w-4 h-4 animate-spin" /> : "Add Onboarding"}
+              </button>
+            </div>
+
+            {/* Full Whitelabel Add-on */}
+            <div className="bg-white/80 backdrop-blur-md rounded-2xl border border-[#991b1b]/30 p-6 flex flex-col ring-1 ring-[#991b1b]/10">
+              <div className="flex items-center justify-between mb-4">
+                <h4 className="font-serif text-lg font-semibold text-[#2c2c2c]">
+                  Full Whitelabel
+                </h4>
+                <span className="font-serif text-xl font-bold text-[#2c2c2c]">
+                  +$100 <span className="text-xs font-normal text-[#8B4513]/60">/month</span>
+                </span>
+              </div>
+              <p className="font-serif text-sm text-[#8B4513]/70 mb-4">
+                Standalone platform with your own domain and full branding — completely independent from giac.ngo.
+              </p>
+              <ul className="space-y-2 mb-6 flex-1">
+                <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
+                  <Check className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                  Custom domain with SSL certificate
+                </li>
+                <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
+                  <Check className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                  Standalone temple platform
+                </li>
+                <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
+                  <Check className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                  Full brand customization (logo, colors, styling)
+                </li>
+                <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
+                  <Check className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                  Independent from giac.ngo ecosystem
+                </li>
+              </ul>
+              <div className="bg-[#EFE0BD]/50 rounded-lg p-3 mb-4">
+                <p className="font-serif text-xs text-[#8B4513]/60 text-center">
+                  Partial whitelabel (sub-space on giac.ngo) is included free with all plans
+                </p>
+              </div>
+              <button
+                onClick={() => handleAddOnPurchase("full-whitelabel")}
+                disabled={loadingPlan === "full-whitelabel"}
+                className="w-full py-3 rounded-xl font-serif font-semibold bg-white border-2 border-[#991b1b] text-[#991b1b] hover:bg-[#991b1b] hover:text-white transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+              >
+                {loadingPlan === "full-whitelabel" ? <Loader2 className="w-4 h-4 animate-spin" /> : "Add Full Whitelabel"}
               </button>
             </div>
 

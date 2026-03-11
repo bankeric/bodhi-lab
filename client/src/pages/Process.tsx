@@ -253,12 +253,19 @@ export default function Process() {
                             {language === 'en' ? 'You Provide' : 'Bạn Cung Cấp'}
                           </h4>
                           <div className="space-y-2">
-                            {step.youProvide.map((item, i) => (
-                              <div key={i} className="flex items-start gap-2">
-                                <Check className="w-3.5 h-3.5 text-[#8B4513] flex-shrink-0 mt-0.5" />
-                                <span className="font-serif text-xs text-[#2c2c2c]">{item}</span>
-                              </div>
-                            ))}
+                            {step.youProvide.map((item, i) => {
+                              const isHeader = item.startsWith('🏠') || item.startsWith('🤖') || item.startsWith('👤');
+                              return isHeader ? (
+                                <div key={i} className={`font-serif text-xs font-bold text-[#8B4513] ${i > 0 ? 'mt-3 pt-3 border-t border-[#8B4513]/10' : ''}`}>
+                                  {item}
+                                </div>
+                              ) : (
+                                <div key={i} className="flex items-start gap-2 pl-1">
+                                  <Check className="w-3.5 h-3.5 text-[#8B4513] flex-shrink-0 mt-0.5" />
+                                  <span className="font-serif text-xs text-[#2c2c2c]">{item}</span>
+                                </div>
+                              );
+                            })}
                           </div>
                         </div>
                       </div>

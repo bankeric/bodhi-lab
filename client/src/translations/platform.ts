@@ -270,8 +270,8 @@ export const platformTranslations = {
         priceUnit: "one-time",
         subtitle: "everything you need to launch your temple's digital presence—done for you",
         website: {
-          title: "Custom Website Build",
-          description: "A fully designed website tailored to your temple's identity and community needs."
+          title: "Space & AI Agent Setup",
+          description: "We create and configure your Space and AI Dharma Agent on giac.ngo."
         },
         setup: {
           title: "Full Platform Onboarding",
@@ -286,6 +286,21 @@ export const platformTranslations = {
           description: "Seamless transfer of existing data plus an initial training session for your team."
         },
         cta: "Start Onboarding"
+      },
+      fullWhitelabel: {
+        badge: "Full Whitelabel",
+        title: "Full Whitelabel",
+        price: "100",
+        priceUnit: "/month",
+        subtitle: "standalone platform with your own domain—completely independent from giac.ngo",
+        description: "Custom domain, full branding, completely independent. Partial whitelabel (sub-space on giac.ngo) is included free with all plans.",
+        features: [
+          "Custom domain with SSL certificate",
+          "Standalone temple platform",
+          "Full brand customization (logo, colors, styling)",
+          "Independent from giac.ngo ecosystem"
+        ],
+        cta: "Add Full Whitelabel"
       }
     },
 
@@ -572,8 +587,8 @@ export const platformTranslations = {
         priceUnit: "một lần",
         subtitle: "tất cả những gì bạn cần để ra mắt hiện diện số của chùa—chúng tôi làm cho bạn",
         website: {
-          title: "Xây Dựng Website Tùy Chỉnh",
-          description: "Trang web được thiết kế hoàn chỉnh theo bản sắc và nhu cầu cộng đồng của ngôi chùa."
+          title: "Tạo Space & AI Agent",
+          description: "Chúng tôi tạo và cấu hình Space và AI Agent Phật Pháp trên giac.ngo."
         },
         setup: {
           title: "Thiết Lập Nền Tảng Hoàn Chỉnh",
@@ -588,6 +603,21 @@ export const platformTranslations = {
           description: "Chuyển dữ liệu hiện có liền mạch cùng buổi đào tạo ban đầu cho đội ngũ của bạn."
         },
         cta: "Bắt Đầu Khởi Động"
+      },
+      fullWhitelabel: {
+        badge: "Full Whitelabel",
+        title: "Full Whitelabel",
+        price: "100",
+        priceUnit: "/tháng",
+        subtitle: "nền tảng độc lập với tên miền riêng—hoàn toàn tách biệt khỏi giac.ngo",
+        description: "Tên miền riêng, thương hiệu đầy đủ, hoàn toàn độc lập. Partial whitelabel (không gian con trên giac.ngo) được bao gồm miễn phí với tất cả các gói.",
+        features: [
+          "Tên miền riêng với chứng chỉ SSL",
+          "Nền tảng chùa độc lập",
+          "Tùy chỉnh thương hiệu đầy đủ (logo, màu sắc, phong cách)",
+          "Độc lập khỏi hệ sinh thái giac.ngo"
+        ],
+        cta: "Thêm Full Whitelabel"
       }
     },
 
