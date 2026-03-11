@@ -138,7 +138,13 @@ export default function Pricing() {
 
     setLoadingPlan(plan.id);
     try {
-      await attach({ productId: plan.id, successUrl: `${window.location.origin}/dashboard` });
+      if (action === "subscribe") {
+        // New subscription: bundle onboarding fee in the same checkout
+        await attach({ productIds: [plan.id, "onboarding"], successUrl: `${window.location.origin}/dashboard` });
+      } else {
+        // Upgrade/downgrade: just change the plan
+        await attach({ productId: plan.id, successUrl: `${window.location.origin}/dashboard` });
+      }
       // Refetch subscription after action
       setTimeout(() => refetchSub(), 2000);
     } catch (err: any) {
@@ -314,6 +320,10 @@ export default function Pricing() {
                       {f}
                     </li>
                   ))}
+                  <li className="flex items-start gap-2 font-serif text-sm text-[#991b1b]/70 pt-2 border-t border-[#8B4513]/10">
+                    <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                    $500 onboarding included in first checkout
+                  </li>
                 </ul>
                 <button
                   onClick={() => handlePlanAction(plan)}
@@ -347,58 +357,21 @@ export default function Pricing() {
           })}
         </div>
 
-        {/* Add-on Packages Section */}
+        {/* Add-on Section */}
         <div className="max-w-5xl mx-auto mb-16">
-          <div className="text-center mb-8">
-            <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">
-              Add-on Packages
-            </h3>
-            <p className="font-serif text-[#8B4513]/70">
-              Enhance your experience with our one-time add-on packages
+          <div className="text-center mb-4">
+            <p className="font-serif text-sm text-[#8B4513]/60 bg-[#8B4513]/5 inline-block px-4 py-2 rounded-full">
+              All plans include the $500 onboarding fee (Space setup, AI Agent, data migration, training) in your first checkout.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 max-w-3xl mx-auto gap-6">
-            {/* Onboarding Package */}
-            <div className="bg-white/80 backdrop-blur-md rounded-2xl border border-[#8B4513]/20 p-6 flex flex-col">
-              <div className="flex items-center justify-between mb-4">
-                <h4 className="font-serif text-lg font-semibold text-[#2c2c2c]">
-                  Onboarding Package
-                </h4>
-                <span className="font-serif text-xl font-bold text-[#2c2c2c]">
-                  $500 <span className="text-xs font-normal text-[#8B4513]/60">one-time</span>
-                </span>
-              </div>
-              <p className="font-serif text-sm text-[#8B4513]/70 mb-4">
-                A complete, done-for-you setup so your community can go live with confidence.
-              </p>
-              <ul className="space-y-2 mb-6 flex-1">
-                <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
-                  <Check className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                  Space & AI Agent setup on giac.ngo
-                </li>
-                <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
-                  <Check className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                  Full platform onboarding & configuration
-                </li>
-                <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
-                  <Check className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                  Data migration & document digitization
-                </li>
-                <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
-                  <Check className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                  Staff training sessions
-                </li>
-              </ul>
-              <button
-                onClick={() => handleAddOnPurchase("onboarding")}
-                disabled={loadingPlan === "onboarding"}
-                className="w-full py-3 rounded-xl font-serif font-semibold bg-white border-2 border-[#991b1b] text-[#991b1b] hover:bg-[#991b1b] hover:text-white transition-all flex items-center justify-center gap-2 disabled:opacity-50"
-              >
-                {loadingPlan === "onboarding" ? <Loader2 className="w-4 h-4 animate-spin" /> : "Add Onboarding"}
-              </button>
-            </div>
+          <div className="text-center mb-8">
+            <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">
+              Optional Add-on
+            </h3>
+          </div>
 
+          <div className="max-w-lg mx-auto">
             {/* Full Whitelabel Add-on */}
             <div className="bg-white/80 backdrop-blur-md rounded-2xl border border-[#991b1b]/30 p-6 flex flex-col ring-1 ring-[#991b1b]/10">
               <div className="flex items-center justify-between mb-4">
@@ -443,7 +416,6 @@ export default function Pricing() {
                 {loadingPlan === "full-whitelabel" ? <Loader2 className="w-4 h-4 animate-spin" /> : "Add Full Whitelabel"}
               </button>
             </div>
-
           </div>
         </div>
 

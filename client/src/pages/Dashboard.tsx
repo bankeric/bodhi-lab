@@ -14,7 +14,6 @@ import {
   Loader2,
   RefreshCw,
   ArrowRight,
-  Zap,
   Check,
   Clock,
   AlertTriangle,
@@ -34,7 +33,6 @@ export default function Dashboard() {
   const { toast } = useToast();
   const { language } = useLanguage();
   const t = authTranslations[language].dashboard;
-  const [onboardingLoading, setOnboardingLoading] = useState(false);
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
 
   const {
@@ -81,20 +79,6 @@ export default function Dashboard() {
     }
   };
 
-  const handleAddOnboarding = async () => {
-    setOnboardingLoading(true);
-    try {
-      await attach({ productId: "onboarding", successUrl: `${window.location.origin}/dashboard` });
-    } catch (err: any) {
-      toast({
-        title: "Checkout Error",
-        description: err?.message || "Could not start checkout. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setOnboardingLoading(false);
-    }
-  };
 
   const handleAddOnPurchase = async (productId: string) => {
     setLoadingPlan(productId);
@@ -283,43 +267,8 @@ export default function Dashboard() {
             </Button>
           </Card>
 
-          {/* Onboarding Add-on Card */}
-          <Card className="bg-white/80 backdrop-blur-md border-[#8B4513]/20 p-6">
-            <div className="flex items-center gap-2 mb-4">
-              <Zap className="w-5 h-5 text-[#991b1b]" />
-              <h2 className="font-serif text-lg font-semibold text-[#2c2c2c]">
-                {t.onboardingPackage}
-              </h2>
-              <span className="ml-auto font-serif text-xl font-bold text-[#2c2c2c]">$500 <span className="text-xs font-normal text-[#8B4513]/60">{t.oneTime}</span></span>
-            </div>
-            <p className="font-serif text-sm text-[#8B4513]/70 mb-4">
-              {t.onboardingDesc}
-            </p>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
-              {[
-                t.onboardingFeature1,
-                t.onboardingFeature2,
-                t.onboardingFeature3,
-                t.onboardingFeature4,
-              ].map((f, i) => (
-                <li key={i} className="flex items-center gap-2 font-serif text-sm text-[#8B4513]/80">
-                  <Check className="w-3.5 h-3.5 text-green-600 flex-shrink-0" />
-                  {f}
-                </li>
-              ))}
-            </ul>
-            <Button
-              onClick={() => handleAddOnboarding()}
-              disabled={onboardingLoading}
-              className="bg-[#991b1b] text-white hover:bg-[#7a1515] font-serif"
-            >
-              {onboardingLoading ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
-              {t.addOnboarding}
-            </Button>
-          </Card>
-
           {/* Full Whitelabel Add-on Card */}
-          <Card className="bg-white/80 backdrop-blur-md border-[#991b1b]/20 p-6 ring-1 ring-[#991b1b]/10">
+          <Card className="bg-white/80 backdrop-blur-md border-[#991b1b]/20 p-6 ring-1 ring-[#991b1b]/10 col-span-1 md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
               <Globe className="w-5 h-5 text-[#991b1b]" />
               <h2 className="font-serif text-lg font-semibold text-[#2c2c2c]">

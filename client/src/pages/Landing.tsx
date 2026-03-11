@@ -149,7 +149,13 @@ export default function Landing() {
     }
     setLoadingPlan(productId);
     try {
-      await attach({ productId, successUrl: `${window.location.origin}/dashboard` });
+      // For plan subscriptions, bundle onboarding fee in the same checkout
+      const isPlan = ["basic", "standard", "premium"].includes(productId);
+      if (isPlan) {
+        await attach({ productIds: [productId, "onboarding"], successUrl: `${window.location.origin}/dashboard` });
+      } else {
+        await attach({ productId, successUrl: `${window.location.origin}/dashboard` });
+      }
     } catch (err: any) {
       toast({
         title: "Checkout Error",
@@ -800,44 +806,13 @@ export default function Landing() {
               </div>
             </div>
 
-            {/* Onboarding Package Section */}
+            {/* Bundled note + Full Whitelabel Section */}
             <div className="max-w-4xl mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Onboarding Package */}
-                <div className="bg-gradient-to-br from-[#8B4513]/5 to-[#991b1b]/5 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#8B4513]/30 shadow-xl p-8">
-                  <div className="text-center mb-6">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#8B4513] text-white rounded-full text-xs font-bold uppercase tracking-wide mb-4">
-                      {t.pricing.onboarding.badge}
-                    </div>
-                    <h3 className="font-serif text-2xl font-bold text-[#991b1b] mb-2">{t.pricing.onboarding.title}</h3>
-                    <div className="flex items-baseline justify-center gap-2 mb-4">
-                      <span className="font-mono text-3xl font-bold text-[#991b1b]">{t.pricing.onboarding.price}</span>
-                      <span className="font-serif text-[#8B4513]/70">{t.pricing.onboarding.priceUnit}</span>
-                    </div>
-                    <p className="font-serif text-sm text-[#8B4513]/70">{t.pricing.onboarding.subtitle}</p>
-                  </div>
+              <p className="font-serif text-sm text-[#8B4513]/60 text-center mb-6 bg-[#8B4513]/5 inline-block px-4 py-2 rounded-full mx-auto" style={{ display: 'block', maxWidth: 'fit-content', margin: '0 auto 1.5rem' }}>
+                All plans include the $500 onboarding fee (Space setup, AI Agent, data migration, training) in your first checkout.
+              </p>
 
-                  <div className="space-y-3 mb-6">
-                    {t.pricing.onboarding.features.map((feature, index) => (
-                      <div key={index} className="flex items-start gap-3 bg-white/50 backdrop-blur-sm rounded-xl p-3">
-                        <Check className="w-4 h-4 text-[#8B4513] flex-shrink-0 mt-0.5" />
-                        <span className="font-serif text-sm text-[#2c2c2c]">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="text-center">
-                    <button
-                      onClick={() => handleSubscribe("onboarding")}
-                      disabled={loadingPlan === "onboarding"}
-                      className="inline-flex items-center gap-2 px-8 py-3 bg-[#8B4513] rounded-xl text-white font-serif font-semibold hover:bg-[#6d3610] transition-all duration-300 shadow-lg disabled:opacity-50"
-                      data-testid="button-start-onboarding"
-                    >
-                      {loadingPlan === "onboarding" ? "..." : t.pricing.onboarding.cta}
-                    </button>
-                  </div>
-                </div>
-
+              <div className="max-w-lg mx-auto">
                 {/* Full Whitelabel */}
                 <div className="bg-gradient-to-br from-[#991b1b]/5 to-[#8B4513]/5 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#991b1b]/30 shadow-xl p-8">
                   <div className="text-center mb-6">
