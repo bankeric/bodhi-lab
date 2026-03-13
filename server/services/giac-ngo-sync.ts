@@ -1,14 +1,41 @@
 import { db } from "../db";
-import { user, giacNgoSyncLog } from "../../shared/schema";
+import { user, subscriptions, giacNgoSyncLog } from "../../shared/schema";
 import { eq } from "drizzle-orm";
 
 // ─── Interfaces ───
 
+interface SyncParams {
+  userId: string;
+  scenario: string;
+  productId: string;
+  productName?: string;
+  currentPeriodStart?: string | null;
+  currentPeriodEnd?: string | null;
+  cancelAtPeriodEnd?: boolean;
+  scheduledProductId?: string | null;
+  scheduledProductName?: string | null;
+}
+
 interface SyncPayload {
+  // User info
   user_id: string;
   email: string;
+  name: string;
+  role: string;
+  // Plan info
   plan: string;
+  plan_name: string | null;
   status: string;
+  scenario: string;
+  // Billing period
+  current_period_start: string | null;
+  current_period_end: string | null;
+  cancel_at_period_end: boolean;
+  // Scheduled changes
+  scheduled_plan: string | null;
+  scheduled_plan_name: string | null;
+  // Meta
+  timestamp: string;
 }
 
 // ─── Scenario Mapping ───
@@ -45,11 +72,7 @@ export function mapScenarioToPlan(_scenario: string, productId: string): string 
  * Gọi Giác Ngộ API để đồng bộ trạng thái subscription.
  * Fire-and-forget — tự xử lý mọi lỗi, không bao giờ throw exception.
  */
-export async function syncToGiacNgo(params: {
-  userId: string;
-  scenario: string;
-  productId: string;
-}): Promise<void> {
+export async function syncToGiacNgo(params: SyncParams): Promise<void> {
   try {
     const apiUrl = process.env.GIAC_NGO_API_URL;
     const apiKey = process.env.GIAC_NGO_API_KEY;
@@ -59,9 +82,9 @@ export async function syncToGiacNgo(params: {
       return;
     }
 
-    // Query user email from DB
+    // Query user info from DB
     const [foundUser] = await db
-      .select({ email: user.email })
+      .select({ email: user.email, name: user.name, role: user.role })
       .from(user)
       .where(eq(user.id, params.userId))
       .limit(1);
@@ -71,12 +94,22 @@ export async function syncToGiacNgo(params: {
       return;
     }
 
-    // Build payload
+    // Build enriched payload
     const payload: SyncPayload = {
       user_id: params.userId,
       email: foundUser.email,
+      name: foundUser.name,
+      role: foundUser.role,
       plan: mapScenarioToPlan(params.scenario, params.productId),
+      plan_name: params.productName || null,
       status: mapScenarioToStatus(params.scenario),
+      scenario: params.scenario,
+      current_period_start: params.currentPeriodStart || null,
+      current_period_end: params.currentPeriodEnd || null,
+      cancel_at_period_end: params.cancelAtPeriodEnd ?? false,
+      scheduled_plan: params.scheduledProductId || null,
+      scheduled_plan_name: params.scheduledProductName || null,
+      timestamp: new Date().toISOString(),
     };
 
     const payloadJson = JSON.stringify(payload);

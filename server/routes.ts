@@ -390,8 +390,17 @@ export function registerRoutes(app: Express): void {
         });
 
         // Fire-and-forget sync to Giác Ngộ — không await để không block webhook response
-        syncToGiacNgo({ userId, scenario, productId: updated_product.id })
-          .catch(err => console.error("[Giác Ngộ Sync] Unexpected error:", err));
+        syncToGiacNgo({
+          userId,
+          scenario,
+          productId: updated_product.id,
+          productName: updated_product.name || null,
+          currentPeriodStart: activeSubscription?.current_period_start || null,
+          currentPeriodEnd: activeSubscription?.current_period_end || null,
+          cancelAtPeriodEnd,
+          scheduledProductId,
+          scheduledProductName,
+        }).catch(err => console.error("[Giác Ngộ Sync] Unexpected error:", err));
 
         console.log(`[Autumn Webhook] Updated subscription for user ${userId}: ${scenario}`);
       }
