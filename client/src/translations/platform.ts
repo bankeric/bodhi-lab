@@ -217,43 +217,41 @@ export const platformTranslations = {
       contactSales: "Contact Sales",
       start: {
         name: "Lay Practitioner",
-        price: "99",
-        description: "Website + cúng dường + 100 câu AI/tháng + thành viên",
+        price: "199",
+        description: "Dedicated website + donations + 1 AI agent + community tools",
         features: [
-          "Shared website template & resource library",
+          "Dedicated website with custom domain",
           "1 AI Dharma Agent",
-          "200 user limit",
+          "100 member limit",
           "2 admin seats",
-          "Shared domain",
+          "Full branding (logo, colors, styling)",
           "Email support",
           "Basic backup & logs"
         ]
       },
       scale: {
         name: "Devoted Practitioner",
-        price: "199",
-        description: "Cơ Bản + livestream + 500 câu AI/tháng + bảng tin",
+        price: "349",
+        description: "Everything in Lay Practitioner + API access + more agents",
         features: [
-          "Shared website template & resource library",
-          "3 AI Dharma Agent (standard usage)",
-          "1,000 user limit",
+          "Dedicated website with custom domain",
+          "3 AI Dharma Agents (standard usage)",
+          "500 member limit",
           "5 admin seats",
-          "Limited API access",
+          "API access for integrations",
           "Email + product updates",
           "Daily backup, 7-day logs"
         ]
       },
       enterprise: {
         name: "Sangha Community",
-        price: "299",
-        description: "Tiêu Chuẩn + AI không giới hạn + tên miền riêng + ưu tiên hỗ trợ",
+        price: "499",
+        description: "Everything in Devoted Practitioner + unlimited members + dedicated support",
         features: [
-          "Shared website template & resource library",
-          "5 AI Dharma Agent (standard usage)",
-          "AI Dharma Agent (fine-tuned, multi-instance)",
-          "5,000 user limit",
+          "Dedicated website with custom domain",
+          "5+ AI Dharma Agents (fine-tuned, multi-instance)",
+          "Unlimited members",
           "10 admin seats",
-          "Full brand suite (custom domain, logo, styling)",
           "Full API & developer dashboard",
           "Dedicated success manager + 24/7 support",
           "Custom SLAs, security onboarding"
@@ -261,7 +259,7 @@ export const platformTranslations = {
       },
       note: {
         title: "Note:",
-        text: "all plans include one shared website & library template. other features scale by tier. contact us to discuss your specific needs."
+        text: "every plan includes a dedicated whitelabel website with your own domain and full branding. features scale by tier. contact us to discuss your specific needs."
       },
       onboarding: {
         badge: "Onboarding Package",
@@ -270,8 +268,8 @@ export const platformTranslations = {
         priceUnit: "one-time",
         subtitle: "everything you need to launch your temple's digital presence—done for you",
         website: {
-          title: "Space & AI Agent Setup",
-          description: "We create and configure your Space and AI Dharma Agent on giac.ngo."
+          title: "Dedicated Website & AI Agent Setup",
+          description: "We build and configure your dedicated website and AI Dharma Agent with your custom domain."
         },
         setup: {
           title: "Full Platform Onboarding",
@@ -286,21 +284,6 @@ export const platformTranslations = {
           description: "Seamless transfer of existing data plus an initial training session for your team."
         },
         cta: "Start Onboarding"
-      },
-      fullWhitelabel: {
-        badge: "Full Whitelabel",
-        title: "Full Whitelabel",
-        price: "100",
-        priceUnit: "/month",
-        subtitle: "standalone platform with your own domain—completely independent from giac.ngo",
-        description: "Custom domain, full branding, completely independent. Partial whitelabel (sub-space on giac.ngo) is included free with all plans.",
-        features: [
-          "Custom domain with SSL certificate",
-          "Standalone temple platform",
-          "Full brand customization (logo, colors, styling)",
-          "Independent from giac.ngo ecosystem"
-        ],
-        cta: "Add Full Whitelabel"
       }
     },
 
@@ -534,43 +517,41 @@ export const platformTranslations = {
       contactSales: "Liên Hệ Tư Vấn",
       start: {
         name: "Cư Sĩ",
-        price: "99",
-        description: "Website + cúng dường + 100 câu AI/tháng + thành viên",
+        price: "199",
+        description: "Website riêng + cúng dường + 1 AI agent + công cụ cộng đồng",
         features: [
-          "Mẫu trang web & thư viện tài nguyên chung",
+          "Website riêng với tên miền tùy chỉnh",
           "1 Đại lý AI Phật Pháp",
-          "Giới hạn 200 người dùng",
+          "Giới hạn 100 thành viên",
           "2 tài khoản admin",
-          "Domain chia sẻ",
+          "Thương hiệu đầy đủ (logo, màu sắc, phong cách)",
           "Hỗ trợ: Email",
           "Backup & Logs: Cơ bản"
         ]
       },
       scale: {
         name: "Hành Giả",
-        price: "199",
-        description: "Cơ Bản + livestream + 500 câu AI/tháng + bảng tin",
+        price: "349",
+        description: "Tất cả trong Cư Sĩ + API + nhiều agent hơn",
         features: [
-          "Mẫu trang web & thư viện tài nguyên chung",
+          "Website riêng với tên miền tùy chỉnh",
           "3 Đại lý AI Phật Pháp (sử dụng tiêu chuẩn)",
-          "Giới hạn 1.000 người dùng",
+          "Giới hạn 500 thành viên",
           "5 tài khoản admin",
-          "Truy cập API giới hạn",
+          "Truy cập API cho tích hợp",
           "Email + cập nhật sản phẩm",
           "Sao lưu hàng ngày, logs 7 ngày"
         ]
       },
       enterprise: {
         name: "Tăng Đoàn",
-        price: "299",
-        description: "Tiêu Chuẩn + AI không giới hạn + tên miền riêng + ưu tiên hỗ trợ",
+        price: "499",
+        description: "Tất cả trong Hành Giả + thành viên không giới hạn + hỗ trợ chuyên dụng",
         features: [
-          "Mẫu trang web & thư viện tài nguyên chung",
-          "5 Đại lý AI Phật Pháp (sử dụng tiêu chuẩn)",
-          "Đại lý AI Phật Pháp (tinh chỉnh, đa thực thể)",
-          "Giới hạn 5.000 người dùng",
+          "Website riêng với tên miền tùy chỉnh",
+          "5+ Đại lý AI Phật Pháp (tinh chỉnh, đa thực thể)",
+          "Thành viên không giới hạn",
           "10 tài khoản admin",
-          "Bộ nhận diện thương hiệu đầy đủ",
           "API đầy đủ & developer dashboard",
           "Quản lý thành công chuyên dụng + phản hồi 24/7",
           "SLA tùy chỉnh, onboarding bảo mật"
@@ -578,7 +559,7 @@ export const platformTranslations = {
       },
       note: {
         title: "Lưu ý:",
-        text: "tất cả các gói đều bao gồm một mẫu website & library được chia sẻ. các tính năng khác được mở rộng theo từng tier. liên hệ chúng tôi để thảo luận về nhu cầu cụ thể của bạn."
+        text: "tất cả các gói đều bao gồm website riêng với tên miền tùy chỉnh và thương hiệu đầy đủ. các tính năng khác được mở rộng theo từng tier. liên hệ chúng tôi để thảo luận về nhu cầu cụ thể của bạn."
       },
       onboarding: {
         badge: "Gói Khởi Động",
@@ -587,8 +568,8 @@ export const platformTranslations = {
         priceUnit: "một lần",
         subtitle: "tất cả những gì bạn cần để ra mắt hiện diện số của chùa—chúng tôi làm cho bạn",
         website: {
-          title: "Tạo Space & AI Agent",
-          description: "Chúng tôi tạo và cấu hình Space và AI Agent Phật Pháp trên giac.ngo."
+          title: "Thiết Lập Website Riêng & AI Agent",
+          description: "Chúng tôi xây dựng và cấu hình website riêng và AI Agent Phật Pháp với tên miền tùy chỉnh của bạn."
         },
         setup: {
           title: "Thiết Lập Nền Tảng Hoàn Chỉnh",
@@ -603,21 +584,6 @@ export const platformTranslations = {
           description: "Chuyển dữ liệu hiện có liền mạch cùng buổi đào tạo ban đầu cho đội ngũ của bạn."
         },
         cta: "Bắt Đầu Khởi Động"
-      },
-      fullWhitelabel: {
-        badge: "Full Whitelabel",
-        title: "Full Whitelabel",
-        price: "100",
-        priceUnit: "/tháng",
-        subtitle: "nền tảng độc lập với tên miền riêng—hoàn toàn tách biệt khỏi giac.ngo",
-        description: "Tên miền riêng, thương hiệu đầy đủ, hoàn toàn độc lập. Partial whitelabel (không gian con trên giac.ngo) được bao gồm miễn phí với tất cả các gói.",
-        features: [
-          "Tên miền riêng với chứng chỉ SSL",
-          "Nền tảng chùa độc lập",
-          "Tùy chỉnh thương hiệu đầy đủ (logo, màu sắc, phong cách)",
-          "Độc lập khỏi hệ sinh thái giac.ngo"
-        ],
-        cta: "Thêm Full Whitelabel"
       }
     },
 

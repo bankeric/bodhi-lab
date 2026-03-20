@@ -244,3 +244,181 @@ export const giacNgoSyncLog = pgTable(
 
 export type GiacNgoSyncLog = typeof giacNgoSyncLog.$inferSelect;
 export type InsertGiacNgoSyncLog = typeof giacNgoSyncLog.$inferInsert;
+
+// ─── Temple Onboarding Table ───
+
+export const templeOnboarding = pgTable(
+  "temple_onboarding",
+  {
+    id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+    userId: text("user_id")
+      .notNull()
+      .unique()
+      .references(() => user.id, { onDelete: "cascade" }),
+    templeName: text("temple_name").notNull().default(""),
+    tradition: text("tradition").notNull().default("[]"),
+    location: text("location"),
+    language: text("language").notNull().default("vi"),
+    logoUrl: text("logo_url"),
+    primaryColor: text("primary_color"),
+    theme: text("theme"),
+    contentDriveUrl: text("content_drive_url"),
+    spaceType: text("space_type").notNull().default("dedicated"),
+    customDomain: text("custom_domain"),
+    existingWebsite: text("existing_website"),
+    doctrinalMode: text("doctrinal_mode"),
+    responseStyle: text("response_style"),
+    aiNotes: text("ai_notes"),
+    notes: text("notes"),
+    status: text("status").notNull().default("draft"),
+    submittedAt: timestamp("submitted_at"),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at")
+      .defaultNow()
+      .$onUpdate(() => new Date())
+      .notNull(),
+  },
+  (table) => [
+    index("temple_onboarding_userId_idx").on(table.userId),
+    index("temple_onboarding_status_idx").on(table.status),
+  ]
+);
+
+export type TempleOnboarding = typeof templeOnboarding.$inferSelect;
+export type InsertTempleOnboarding = typeof templeOnboarding.$inferInsert;
+
+export const onboardingSchema = z.object({
+  templeName: z.string().max(255).optional(),
+  tradition: z.string().max(1000).optional(),
+  location: z.string().max(500).optional(),
+  language: z.enum(["vi", "en"]).optional(),
+  logoUrl: z.string().max(3_000_000).optional().nullable(),
+  primaryColor: z.string().max(20).optional().nullable(),
+  theme: z.string().max(50).optional().nullable(),
+  contentDriveUrl: z.string().url().max(2000).optional().nullable().or(z.literal("")),
+  spaceType: z.enum(["dedicated", "full-whitelabel"]).optional(),
+  customDomain: z.string().max(255).optional().nullable(),
+  existingWebsite: z.string().max(500).optional().nullable(),
+  doctrinalMode: z.string().max(50).optional().nullable(),
+  responseStyle: z.string().max(50).optional().nullable(),
+  aiNotes: z.string().max(2000).optional().nullable(),
+  notes: z.string().max(2000).optional().nullable(),
+});
+
+// ─── Temple API Keys Table ───
+
+export const templeApiKeys = pgTable(
+  "temple_api_keys",
+  {
+    id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    apiKey: text("api_key").notNull().unique(),
+    domain: text("domain"), // client website domain
+    label: text("label"), // friendly name e.g. "Production"
+    revokedAt: timestamp("revoked_at"),
+    lastUsedAt: timestamp("last_used_at"),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  },
+  (table) => [
+    index("temple_api_keys_userId_idx").on(table.userId),
+    index("temple_api_keys_apiKey_idx").on(table.apiKey),
+  ]
+);
+
+export type TempleApiKey = typeof templeApiKeys.$inferSelect;
+export type InsertTempleApiKey = typeof templeApiKeys.$inferInsert;
+
+// ─── Temple Site Metrics Table ───
+
+export const templeSiteMetrics = pgTable(
+  "temple_site_metrics",
+  {
+    id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    date: timestamp("date").notNull(), // snapshot date
+    // User metrics
+    totalUsers: integer("total_users").notNull().default(0),
+    paidUsers: integer("paid_users").notNull().default(0),
+    activeUsers: integer("active_users").notNull().default(0), // active in last 30 days
+    newUsersToday: integer("new_users_today").notNull().default(0),
+    // Engagement metrics
+    totalSessions: integer("total_sessions").notNull().default(0),
+    pageViews: integer("page_views").notNull().default(0),
+    avgSessionDuration: integer("avg_session_duration").notNull().default(0), // seconds
+    // Content metrics
+    totalSutras: integer("total_sutras").notNull().default(0),
+    totalDharmaContent: integer("total_dharma_content").notNull().default(0),
+    aiConversations: integer("ai_conversations").notNull().default(0),
+    // Revenue metrics
+    monthlyRevenue: integer("monthly_revenue").notNull().default(0), // cents
+    totalDonations: integer("total_donations").notNull().default(0), // cents
+    // Storage
+    storageUsedMb: integer("storage_used_mb").notNull().default(0),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  },
+  (table) => [
+    index("temple_site_metrics_userId_idx").on(table.userId),
+    index("temple_site_metrics_date_idx").on(table.date),
+    index("temple_site_metrics_userId_date_idx").on(table.userId, table.date),
+  ]
+);
+
+export type TempleSiteMetrics = typeof templeSiteMetrics.$inferSelect;
+export type InsertTempleSiteMetrics = typeof templeSiteMetrics.$inferInsert;
+
+// ─── Plan Limits Configuration ───
+
+export const PLAN_LIMITS: Record<string, {
+  maxUsers: number;
+  maxStorageMb: number;
+  maxAiConversations: number;
+  maxDharmaContent: number;
+  maxSutras: number;
+  label: string;
+}> = {
+  basic: {
+    maxUsers: 100,
+    maxStorageMb: 500,
+    maxAiConversations: 500,
+    maxDharmaContent: 50,
+    maxSutras: 20,
+    label: "Lay Practitioner",
+  },
+  standard: {
+    maxUsers: 500,
+    maxStorageMb: 2000,
+    maxAiConversations: 2000,
+    maxDharmaContent: 200,
+    maxSutras: 100,
+    label: "Devoted Practitioner",
+  },
+  premium: {
+    maxUsers: -1, // unlimited
+    maxStorageMb: 10000,
+    maxAiConversations: -1,
+    maxDharmaContent: -1,
+    maxSutras: -1,
+    label: "Sangha Community",
+  },
+};
+
+// Zod schema for metrics push from client sites
+export const siteMetricsPushSchema = z.object({
+  totalUsers: z.number().int().min(0),
+  paidUsers: z.number().int().min(0),
+  activeUsers: z.number().int().min(0),
+  newUsersToday: z.number().int().min(0),
+  totalSessions: z.number().int().min(0),
+  pageViews: z.number().int().min(0),
+  avgSessionDuration: z.number().int().min(0),
+  totalSutras: z.number().int().min(0),
+  totalDharmaContent: z.number().int().min(0),
+  aiConversations: z.number().int().min(0),
+  monthlyRevenue: z.number().int().min(0),
+  totalDonations: z.number().int().min(0),
+  storageUsedMb: z.number().int().min(0),
+});

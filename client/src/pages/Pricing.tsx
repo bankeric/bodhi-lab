@@ -31,16 +31,19 @@ const PLANS: PlanConfig[] = [
   {
     id: "basic",
     name: "Lay Practitioner",
-    price: "$99",
-    priceValue: 99,
+    price: "$199",
+    priceValue: 199,
     period: "/month",
-    description: "Website + cúng dường + 100 câu AI/tháng + thành viên",
+    description: "Dedicated website + AI agent + donation tools + community management",
     features: [
-      "Shared website template & resource library",
+      "Dedicated whitelabel website with your domain",
+      "Custom branding (logo, colors, styling)",
       "1 AI Dharma Agent",
-      "200 user limit",
+      "100 community members",
       "2 admin seats",
-      "Shared domain",
+      "Donation processing (Stripe)",
+      "Content library & event calendar",
+      "SSL certificate included",
       "Email support",
       "Basic backup & logs",
     ],
@@ -49,16 +52,20 @@ const PLANS: PlanConfig[] = [
   {
     id: "standard",
     name: "Devoted Practitioner",
-    price: "$199",
-    priceValue: 199,
+    price: "$349",
+    priceValue: 349,
     period: "/month",
-    description: "Cơ Bản + livestream + 500 câu AI/tháng + bảng tin",
+    description: "Everything in Basic + more AI agents + API access + larger community",
     features: [
-      "Shared website template & resource library",
-      "3 AI Dharma Agent (standard usage)",
-      "1,000 user limit",
+      "Dedicated whitelabel website with your domain",
+      "Custom branding (logo, colors, styling)",
+      "3 AI Dharma Agents",
+      "500 community members",
       "5 admin seats",
-      "Limited API access",
+      "API access for integrations",
+      "Donation processing (Stripe)",
+      "Content library & event calendar",
+      "SSL certificate included",
       "Email + product updates",
       "Daily backup, 7-day logs",
     ],
@@ -67,18 +74,20 @@ const PLANS: PlanConfig[] = [
   {
     id: "premium",
     name: "Sangha Community",
-    price: "$299",
-    priceValue: 299,
+    price: "$499",
+    priceValue: 499,
     period: "/month",
-    description: "Tiêu Chuẩn + AI không giới hạn + tên miền riêng + ưu tiên hỗ trợ",
+    description: "Everything in Standard + unlimited AI + full API + dedicated support",
     features: [
-      "Shared website template & resource library",
-      "5 AI Dharma Agent (standard usage)",
-      "AI Dharma Agent (fine-tuned, multi-instance)",
-      "5,000 user limit",
-      "10 admin seats",
+      "Dedicated whitelabel website with your domain",
       "Full brand suite (custom domain, logo, styling)",
+      "5+ AI Dharma Agents (fine-tuned, multi-instance)",
+      "Unlimited community members",
+      "10 admin seats",
       "Full API & developer dashboard",
+      "Donation processing (Stripe)",
+      "Content library & event calendar",
+      "SSL certificate included",
       "Dedicated success manager + 24/7 support",
       "Custom SLAs, security onboarding",
     ],
@@ -246,7 +255,7 @@ export default function Pricing() {
             Choose Your Plan
           </h2>
           <p className="font-serif text-[#8B4513]/70 max-w-lg mx-auto">
-            Empower your temple community with the right tools. All plans include a 14-day free trial.
+            Every plan includes a dedicated whitelabel website with your own domain and branding. All plans include a 14-day free trial.
           </p>
           {subscription?.cancelAtPeriodEnd && (
             <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-amber-100 text-amber-800 rounded-lg font-serif text-sm">
@@ -357,65 +366,12 @@ export default function Pricing() {
           })}
         </div>
 
-        {/* Add-on Section */}
+        {/* Included Note */}
         <div className="max-w-5xl mx-auto mb-16">
           <div className="text-center mb-4">
             <p className="font-serif text-sm text-[#8B4513]/60 bg-[#8B4513]/5 inline-block px-4 py-2 rounded-full">
-              All plans include the $500 onboarding fee (Space setup, AI Agent, data migration, training) in your first checkout.
+              All plans include a dedicated whitelabel website with your own domain, custom branding, and the $500 onboarding fee in your first checkout.
             </p>
-          </div>
-
-          <div className="text-center mb-8">
-            <h3 className="font-serif text-2xl font-bold text-[#2c2c2c] mb-2">
-              Optional Add-on
-            </h3>
-          </div>
-
-          <div className="max-w-lg mx-auto">
-            {/* Full Whitelabel Add-on */}
-            <div className="bg-white/80 backdrop-blur-md rounded-2xl border border-[#991b1b]/30 p-6 flex flex-col ring-1 ring-[#991b1b]/10">
-              <div className="flex items-center justify-between mb-4">
-                <h4 className="font-serif text-lg font-semibold text-[#2c2c2c]">
-                  Full Whitelabel
-                </h4>
-                <span className="font-serif text-xl font-bold text-[#2c2c2c]">
-                  +$100 <span className="text-xs font-normal text-[#8B4513]/60">/month</span>
-                </span>
-              </div>
-              <p className="font-serif text-sm text-[#8B4513]/70 mb-4">
-                Standalone platform with your own domain and full branding — completely independent from giac.ngo.
-              </p>
-              <ul className="space-y-2 mb-6 flex-1">
-                <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
-                  <Check className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                  Custom domain with SSL certificate
-                </li>
-                <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
-                  <Check className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                  Standalone temple platform
-                </li>
-                <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
-                  <Check className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                  Full brand customization (logo, colors, styling)
-                </li>
-                <li className="flex items-start gap-2 font-serif text-sm text-[#8B4513]/80">
-                  <Check className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                  Independent from giac.ngo ecosystem
-                </li>
-              </ul>
-              <div className="bg-[#EFE0BD]/50 rounded-lg p-3 mb-4">
-                <p className="font-serif text-xs text-[#8B4513]/60 text-center">
-                  Partial whitelabel (sub-space on giac.ngo) is included free with all plans
-                </p>
-              </div>
-              <button
-                onClick={() => handleAddOnPurchase("full-whitelabel")}
-                disabled={loadingPlan === "full-whitelabel"}
-                className="w-full py-3 rounded-xl font-serif font-semibold bg-white border-2 border-[#991b1b] text-[#991b1b] hover:bg-[#991b1b] hover:text-white transition-all flex items-center justify-center gap-2 disabled:opacity-50"
-              >
-                {loadingPlan === "full-whitelabel" ? <Loader2 className="w-4 h-4 animate-spin" /> : "Add Full Whitelabel"}
-              </button>
-            </div>
           </div>
         </div>
 

@@ -52,6 +52,8 @@ import {
   planTierLabels,
 } from "@/lib/admin-utils";
 import type { Lead } from "@shared/schema";
+import AdminOnboarding from "@/components/AdminOnboarding";
+import AdminClientMetrics from "@/components/AdminClientMetrics";
 
 const statusColors: Record<string, string> = {
   new: "bg-blue-100 text-blue-800 border-blue-200",
@@ -498,6 +500,12 @@ export default function Admin() {
                 ))}
               </div>
             )}
+            
+            {/* Onboarding Submissions */}
+            <AdminOnboarding />
+
+            {/* Client Metrics */}
+            <AdminClientMetrics />
           </>
         )}
       </main>

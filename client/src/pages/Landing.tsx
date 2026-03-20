@@ -806,52 +806,11 @@ export default function Landing() {
               </div>
             </div>
 
-            {/* Bundled note + Full Whitelabel Section */}
+            {/* Bundled note */}
             <div className="max-w-4xl mx-auto">
               <p className="font-serif text-sm text-[#8B4513]/60 text-center mb-6 bg-[#8B4513]/5 inline-block px-4 py-2 rounded-full mx-auto" style={{ display: 'block', maxWidth: 'fit-content', margin: '0 auto 1.5rem' }}>
-                All plans include the $500 onboarding fee (Space setup, AI Agent, data migration, training) in your first checkout.
+                Every plan includes a dedicated whitelabel website with your own domain, custom branding, and the $500 onboarding fee in your first checkout.
               </p>
-
-              <div className="max-w-lg mx-auto">
-                {/* Full Whitelabel */}
-                <div className="bg-gradient-to-br from-[#991b1b]/5 to-[#8B4513]/5 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-[#991b1b]/30 shadow-xl p-8">
-                  <div className="text-center mb-6">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#991b1b] text-white rounded-full text-xs font-bold uppercase tracking-wide mb-4">
-                      {t.pricing.fullWhitelabel.badge}
-                    </div>
-                    <h3 className="font-serif text-2xl font-bold text-[#991b1b] mb-2">{t.pricing.fullWhitelabel.title}</h3>
-                    <div className="flex items-baseline justify-center gap-2 mb-4">
-                      <span className="font-mono text-3xl font-bold text-[#991b1b]">{t.pricing.fullWhitelabel.price}</span>
-                      <span className="font-serif text-[#8B4513]/70">{t.pricing.fullWhitelabel.priceUnit}</span>
-                    </div>
-                    <p className="font-serif text-sm text-[#8B4513]/70">{t.pricing.fullWhitelabel.subtitle}</p>
-                  </div>
-
-                  <div className="space-y-3 mb-4">
-                    {t.pricing.fullWhitelabel.features.map((feature, index) => (
-                      <div key={index} className="flex items-start gap-3 bg-white/50 backdrop-blur-sm rounded-xl p-3">
-                        <Check className="w-4 h-4 text-[#991b1b] flex-shrink-0 mt-0.5" />
-                        <span className="font-serif text-sm text-[#2c2c2c]">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <p className="font-serif text-xs text-[#8B4513]/50 text-center mb-4">
-                    {t.pricing.fullWhitelabel.description}
-                  </p>
-
-                  <div className="text-center">
-                    <button
-                      onClick={() => handleSubscribe("full-whitelabel")}
-                      disabled={loadingPlan === "full-whitelabel"}
-                      className="inline-flex items-center gap-2 px-8 py-3 bg-[#991b1b] rounded-xl text-white font-serif font-semibold hover:bg-[#7a1515] transition-all duration-300 shadow-lg disabled:opacity-50"
-                      data-testid="button-add-whitelabel"
-                    >
-                      {loadingPlan === "full-whitelabel" ? "..." : t.pricing.fullWhitelabel.cta}
-                    </button>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </section>

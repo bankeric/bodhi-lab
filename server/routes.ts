@@ -3,7 +3,7 @@ import { createServer, type Server } from "http";
 import rateLimit from "express-rate-limit";
 import { storage } from "./storage";
 import { Autumn } from "autumn-js";
-import { insertLeadSchema, updateLeadSchema, contactSchema } from "@shared/schema";
+import { insertLeadSchema, updateLeadSchema, contactSchema, onboardingSchema, siteMetricsPushSchema, PLAN_LIMITS } from "@shared/schema";
 import { requireAuth, requireRole } from "./middleware/auth";
 import { notifyNewLead, notifyNewContact, notifyInvitation, isResendConfigured } from "./services/notifications";
 import { auth } from "./lib/auth";
@@ -518,6 +518,58 @@ export function registerRoutes(app: Express): void {
     }
   });
 
+  // ─── Temple Onboarding Routes ───
+
+  // Get onboarding record for current temple_admin
+  app.get("/api/temple/onboarding", requireAuth, requireRole("temple_admin"), async (req, res) => {
+    try {
+      const userId = (req as any).session.user.id;
+      const record = await storage.getOnboardingByUserId(userId);
+      res.json({ success: true, data: record || null });
+    } catch (error: any) {
+      console.error("Error fetching onboarding:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch onboarding data" });
+    }
+  });
+
+  // Save/update onboarding draft
+  app.put("/api/temple/onboarding", requireAuth, requireRole("temple_admin"), async (req, res) => {
+    try {
+      const userId = (req as any).session.user.id;
+      const parsed = onboardingSchema.safeParse(req.body);
+      if (!parsed.success) {
+        return res.status(400).json({ success: false, error: "Invalid data", details: parsed.error.issues });
+      }
+      const record = await storage.upsertOnboarding(userId, parsed.data as any);
+      res.json({ success: true, data: record });
+    } catch (error: any) {
+      console.error("Error saving onboarding:", error);
+      res.status(500).json({ success: false, error: "Failed to save onboarding data" });
+    }
+  });
+
+  // Submit onboarding
+  app.post("/api/temple/onboarding/submit", requireAuth, requireRole("temple_admin"), async (req, res) => {
+    try {
+      const userId = (req as any).session.user.id;
+      const existing = await storage.getOnboardingByUserId(userId);
+      if (!existing) {
+        return res.status(400).json({ success: false, error: "No onboarding data found. Please fill out the form first." });
+      }
+      if (existing.status === "submitted" || existing.status === "processing" || existing.status === "completed") {
+        return res.status(400).json({ success: false, error: "Onboarding already submitted." });
+      }
+      const record = await storage.upsertOnboarding(userId, {
+        status: "submitted",
+        submittedAt: new Date(),
+      } as any);
+      res.json({ success: true, data: record });
+    } catch (error: any) {
+      console.error("Error submitting onboarding:", error);
+      res.status(500).json({ success: false, error: "Failed to submit onboarding" });
+    }
+  });
+
   // ─── Bodhi Admin Routes ───
 
   // Invite a new temple admin (Bodhi Admin only)
@@ -624,6 +676,199 @@ export function registerRoutes(app: Express): void {
         success: false,
         message: "Failed to send invitation. Please try again later.",
       });
+    }
+  });
+
+  // Get all onboarding submissions — Bodhi Admin only
+  app.get("/api/admin/onboarding", requireAuth, requireRole("bodhi_admin"), async (req, res) => {
+    try {
+      const records = await storage.getAllOnboardings();
+      res.json({ success: true, data: records });
+    } catch (error: any) {
+      console.error("Error fetching onboarding list:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch onboarding list" });
+    }
+  });
+
+  // Update onboarding status — Bodhi Admin only
+  app.patch("/api/admin/onboarding/:id/status", requireAuth, requireRole("bodhi_admin"), async (req, res) => {
+    try {
+      const { status } = req.body;
+      if (!["draft", "submitted", "processing", "completed"].includes(status)) {
+        return res.status(400).json({ success: false, error: "Invalid status" });
+      }
+      const record = await storage.updateOnboardingStatus(req.params.id, status);
+      if (!record) {
+        return res.status(404).json({ success: false, error: "Onboarding record not found" });
+      }
+      res.json({ success: true, data: record });
+    } catch (error: any) {
+      console.error("Error updating onboarding status:", error);
+      res.status(500).json({ success: false, error: "Failed to update status" });
+    }
+  });
+
+  // ─── Temple API Key Routes ───
+
+  // Generate a new API key for temple_admin
+  app.post("/api/temple/api-keys", requireAuth, requireRole("temple_admin"), async (req, res) => {
+    try {
+      const userId = (req as any).session.user.id;
+      const { domain, label } = req.body || {};
+      const key = await storage.createApiKey(userId, domain, label);
+      res.json({ success: true, data: key });
+    } catch (error: any) {
+      console.error("Error creating API key:", error);
+      res.status(500).json({ success: false, error: "Failed to create API key" });
+    }
+  });
+
+  // List API keys for temple_admin
+  app.get("/api/temple/api-keys", requireAuth, requireRole("temple_admin"), async (req, res) => {
+    try {
+      const userId = (req as any).session.user.id;
+      const keys = await storage.getApiKeysByUserId(userId);
+      // Mask the key for security — only show last 8 chars
+      const masked = keys.map((k) => ({
+        ...k,
+        apiKey: k.revokedAt ? "***revoked***" : `btl_...${k.apiKey.slice(-8)}`,
+      }));
+      res.json({ success: true, data: masked });
+    } catch (error: any) {
+      console.error("Error fetching API keys:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch API keys" });
+    }
+  });
+
+  // Revoke an API key
+  app.delete("/api/temple/api-keys/:id", requireAuth, requireRole("temple_admin"), async (req, res) => {
+    try {
+      const userId = (req as any).session.user.id;
+      const key = await storage.revokeApiKey(req.params.id, userId);
+      if (!key) {
+        return res.status(404).json({ success: false, error: "API key not found" });
+      }
+      res.json({ success: true, data: { id: key.id, revokedAt: key.revokedAt } });
+    } catch (error: any) {
+      console.error("Error revoking API key:", error);
+      res.status(500).json({ success: false, error: "Failed to revoke API key" });
+    }
+  });
+
+  // ─── Temple Metrics Routes ───
+
+  // Get metrics for temple_admin (their own site)
+  app.get("/api/temple/metrics", requireAuth, requireRole("temple_admin"), async (req, res) => {
+    try {
+      const userId = (req as any).session.user.id;
+      const latest = await storage.getLatestMetrics(userId);
+      const days = parseInt(req.query.days as string) || 30;
+      const history = await storage.getMetricsHistory(userId, days);
+
+      // Get subscription to determine plan limits
+      const sub = await storage.getSubscriptionByUserId(userId);
+      const planId = sub?.productId || "basic";
+      const limits = PLAN_LIMITS[planId] || PLAN_LIMITS.basic;
+
+      res.json({
+        success: true,
+        data: {
+          current: latest || null,
+          history,
+          limits,
+          planId,
+        },
+      });
+    } catch (error: any) {
+      console.error("Error fetching metrics:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch metrics" });
+    }
+  });
+
+  // ─── Client Site Metrics Push (API Key auth) ───
+
+  app.post("/api/client/metrics", async (req, res) => {
+    try {
+      const authHeader = req.headers.authorization;
+      if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        return res.status(401).json({ success: false, error: "Missing API key" });
+      }
+
+      const apiKey = authHeader.slice(7);
+      const keyRecord = await storage.getActiveApiKey(apiKey);
+      if (!keyRecord) {
+        return res.status(401).json({ success: false, error: "Invalid or revoked API key" });
+      }
+
+      const parsed = siteMetricsPushSchema.safeParse(req.body);
+      if (!parsed.success) {
+        return res.status(400).json({ success: false, error: "Invalid metrics data", details: parsed.error.issues });
+      }
+
+      // Update last used timestamp
+      storage.touchApiKeyUsage(keyRecord.id).catch(() => {});
+
+      const metrics = await storage.pushSiteMetrics(keyRecord.userId, parsed.data as any);
+      res.json({ success: true, data: { id: metrics.id, date: metrics.date } });
+    } catch (error: any) {
+      console.error("Error pushing metrics:", error);
+      res.status(500).json({ success: false, error: "Failed to push metrics" });
+    }
+  });
+
+  // ─── Bodhi Admin: All Client Metrics ───
+
+  // Get all clients' latest metrics (admin overview)
+  app.get("/api/admin/client-metrics", requireAuth, requireRole("bodhi_admin"), async (req, res) => {
+    try {
+      const allMetrics = await storage.getAllLatestMetrics();
+      res.json({ success: true, data: allMetrics });
+    } catch (error: any) {
+      console.error("Error fetching all client metrics:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch client metrics" });
+    }
+  });
+
+  // Get specific client's metrics history (admin drill-down)
+  app.get("/api/admin/client-metrics/:userId", requireAuth, requireRole("bodhi_admin"), async (req, res) => {
+    try {
+      const { userId: targetUserId } = req.params;
+      const days = parseInt(req.query.days as string) || 30;
+      const latest = await storage.getLatestMetrics(targetUserId);
+      const history = await storage.getMetricsHistory(targetUserId, days);
+
+      // Get subscription for plan limits
+      const sub = await storage.getSubscriptionByUserId(targetUserId);
+      const planId = sub?.productId || "basic";
+      const limits = PLAN_LIMITS[planId] || PLAN_LIMITS.basic;
+
+      res.json({
+        success: true,
+        data: {
+          current: latest || null,
+          history,
+          limits,
+          planId,
+        },
+      });
+    } catch (error: any) {
+      console.error("Error fetching client metrics:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch client metrics" });
+    }
+  });
+
+  // Admin: manage API keys for any client
+  app.get("/api/admin/api-keys/:userId", requireAuth, requireRole("bodhi_admin"), async (req, res) => {
+    try {
+      const keys = await storage.getApiKeysByUserId(req.params.userId);
+      const masked = keys.map((k) => ({
+        ...k,
+        apiKey: k.revokedAt ? "***revoked***" : `btl_...${k.apiKey.slice(-8)}`,
+      }));
+      res.json({ success: true, data: masked });
+    } catch (error: any) {
+      console.error("Error fetching client API keys:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch API keys" });
     }
   });
 }

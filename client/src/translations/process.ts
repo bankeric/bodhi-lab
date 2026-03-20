@@ -94,9 +94,9 @@ export const processTranslations = {
         title: "Onboarding & Build",
         timeline: "Week 1–2",
         price: "$500 one-time",
-        description: "Our team creates your Space and AI Agent on giac.ngo, migrates your existing data, and digitizes paper documents. You receive a hands-on training session before launch.",
+        description: "Our team builds your dedicated website and AI Agent, migrates your existing data, and digitizes paper documents. You receive a hands-on training session before launch.",
         deliverables: [
-          "Space created and configured on giac.ngo",
+          "Dedicated website built and configured with your custom domain",
           "AI Dharma Agent set up and trained for your community",
           "Owner account created with full admin access",
           "Document classification & digitization (up to 500 pages included)",
@@ -104,7 +104,7 @@ export const processTranslations = {
           "1-hour training session for up to 3 staff members",
         ],
         weHandle: [
-          "Create and configure your Space on giac.ngo",
+          "Build and configure your dedicated website with custom domain",
           "Set up and train your AI Dharma Agent",
           "Create your Owner account with admin permissions",
           "Scan, classify, and digitize your paper documents (up to 500 pages)",
@@ -198,7 +198,7 @@ export const processTranslations = {
       weHandle: {
         title: "We Handle (Included in Your Package)",
         items: [
-          "Create & configure your Space on giac.ngo",
+          "Build & configure your dedicated website with custom domain",
           "Set up & train your AI Dharma Agent",
           "Create Owner account with admin access",
           "Document scanning, classification & digitization (up to 500 pages)",
@@ -412,9 +412,9 @@ export const processTranslations = {
         title: "Khởi Động & Xây Dựng",
         timeline: "Tuần 1–2",
         price: "$500 một lần",
-        description: "Đội ngũ tạo Space và AI Agent trên giac.ngo, di chuyển dữ liệu hiện có và số hóa tài liệu giấy. Bạn nhận buổi đào tạo thực hành trước khi ra mắt.",
+        description: "Đội ngũ xây dựng website riêng và AI Agent, di chuyển dữ liệu hiện có và số hóa tài liệu giấy. Bạn nhận buổi đào tạo thực hành trước khi ra mắt.",
         deliverables: [
-          "Space được tạo và cấu hình trên giac.ngo",
+          "Website riêng được xây dựng và cấu hình với tên miền tùy chỉnh",
           "AI Agent Phật Pháp được thiết lập và huấn luyện cho cộng đồng",
           "Tài khoản Owner được tạo với quyền quản trị đầy đủ",
           "Phân loại & số hóa tài liệu (tối đa 500 trang)",
@@ -422,7 +422,7 @@ export const processTranslations = {
           "Buổi đào tạo 1 giờ cho tối đa 3 nhân viên",
         ],
         weHandle: [
-          "Tạo và cấu hình Space trên giac.ngo",
+          "Xây dựng và cấu hình website riêng với tên miền tùy chỉnh",
           "Thiết lập và huấn luyện AI Agent Phật Pháp",
           "Tạo tài khoản Owner với quyền quản trị",
           "Quét, phân loại & số hóa tài liệu giấy (tối đa 500 trang)",
@@ -516,7 +516,7 @@ export const processTranslations = {
       weHandle: {
         title: "Chúng Tôi Lo Liệu (Bao Gồm Trong Gói)",
         items: [
-          "Tạo & cấu hình Space trên giac.ngo",
+          "Xây dựng & cấu hình website riêng với tên miền tùy chỉnh",
           "Thiết lập & huấn luyện AI Agent Phật Pháp",
           "Tạo tài khoản Owner với quyền quản trị",
           "Quét, phân loại & số hóa tài liệu (tối đa 500 trang)",
