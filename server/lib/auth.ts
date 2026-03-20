@@ -50,30 +50,41 @@ export const auth = betterAuth({
     autoSignIn: false, // Don't auto sign in, require verification first
     sendResetPassword: async ({ user, url }) => {
       console.log("[Auth] sendResetPassword triggered for:", user.email);
+      console.log("[Auth] Reset URL:", url);
       const resend = getResend();
       if (!resend) {
-        console.error("Resend not configured - cannot send password reset email");
+        console.error("[Auth] Resend not configured - cannot send password reset email");
         return;
       }
       
-      void resend.emails.send({
-        from: "Bodhi Technology Lab <auth@mail.bodhilab.io>",
-        to: user.email,
-        subject: "Reset Your Password - Bodhi Technology Lab",
-        html: `
-          <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-            <h2 style="color: #991b1b;">Reset Your Password</h2>
-            <p>Hello ${user.name || "there"},</p>
-            <p>We received a request to reset your password. Click the button below to create a new password:</p>
-            <p style="text-align: center; margin: 30px 0;">
-              <a href="${url}" style="background-color: #991b1b; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold;">Reset Password</a>
-            </p>
-            <p style="color: #666; font-size: 14px;">If you didn't request this, you can safely ignore this email. This link will expire in 1 hour.</p>
-            <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;" />
-            <p style="color: #888; font-size: 12px;">Bodhi Technology Lab - Mindful Technology for Spiritual Communities</p>
-          </div>
-        `,
-      });
+      try {
+        const { data, error } = await resend.emails.send({
+          from: "Bodhi Technology Lab <auth@mail.bodhilab.io>",
+          to: user.email,
+          subject: "Reset Your Password - Bodhi Technology Lab",
+          html: `
+            <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+              <h2 style="color: #991b1b;">Reset Your Password</h2>
+              <p>Hello ${user.name || "there"},</p>
+              <p>We received a request to reset your password. Click the button below to create a new password:</p>
+              <p style="text-align: center; margin: 30px 0;">
+                <a href="${url}" style="background-color: #991b1b; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold;">Reset Password</a>
+              </p>
+              <p style="color: #666; font-size: 14px;">If you didn't request this, you can safely ignore this email. This link will expire in 1 hour.</p>
+              <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;" />
+              <p style="color: #888; font-size: 12px;">Bodhi Technology Lab - Mindful Technology for Spiritual Communities</p>
+            </div>
+          `,
+        });
+        
+        if (error) {
+          console.error("[Auth] Failed to send reset password email:", error);
+        } else {
+          console.log("[Auth] Reset password email sent successfully:", data?.id);
+        }
+      } catch (err) {
+        console.error("[Auth] Exception sending reset password email:", err);
+      }
     },
   },
   emailVerification: {
