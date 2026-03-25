@@ -25,6 +25,7 @@ import { authTranslations } from "@/translations/auth";
 import OnboardingChecklist from "@/components/OnboardingChecklist";
 import SiteMetrics from "@/components/SiteMetrics";
 import ApiKeyManager from "@/components/ApiKeyManager";
+import TempleExternalStats from "@/components/TempleExternalStats";
 
 export default function Dashboard() {
   const { data: session } = useSession();
@@ -217,6 +218,9 @@ export default function Dashboard() {
 
           {/* Site Metrics */}
           <SiteMetrics />
+
+          {/* External Temple Stats (from temple's own site) */}
+          <TempleExternalStats />
 
           {/* Onboarding Checklist */}
           <OnboardingChecklist />

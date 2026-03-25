@@ -871,6 +871,141 @@ export function registerRoutes(app: Express): void {
       res.status(500).json({ success: false, error: "Failed to fetch API keys" });
     }
   });
+
+  // ─── Temple External API Management (Super Admin) ───
+
+  // List all external temple APIs
+  app.get("/api/admin/temple-apis", requireAuth, requireRole("bodhi_admin"), async (req, res) => {
+    try {
+      const apis = await storage.getAllTempleExternalApis();
+      // Mask auth tokens for security
+      const masked = apis.map((api) => ({
+        ...api,
+        authToken: api.authToken ? "***masked***" : null,
+      }));
+      res.json({ success: true, data: masked });
+    } catch (error: any) {
+      console.error("Error fetching temple APIs:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch temple APIs" });
+    }
+  });
+
+  // Create a new external temple API configuration
+  app.post("/api/admin/temple-apis", requireAuth, requireRole("bodhi_admin"), async (req, res) => {
+    try {
+      const { templeExternalApiSchema } = await import("@shared/schema");
+      const parsed = templeExternalApiSchema.safeParse(req.body);
+      if (!parsed.success) {
+        return res.status(400).json({ success: false, error: "Invalid data", details: parsed.error.issues });
+      }
+
+      // Get the userId from the request body (which temple admin this belongs to)
+      const { userId } = req.body;
+      if (!userId) {
+        return res.status(400).json({ success: false, error: "userId is required" });
+      }
+
+      const api = await storage.createTempleExternalApi({
+        ...parsed.data,
+        userId,
+      });
+      res.json({ success: true, data: { ...api, authToken: api.authToken ? "***masked***" : null } });
+    } catch (error: any) {
+      console.error("Error creating temple API:", error);
+      if (error.code === "23505") {
+        return res.status(409).json({ success: false, error: "A temple with this slug already exists" });
+      }
+      res.status(500).json({ success: false, error: "Failed to create temple API" });
+    }
+  });
+
+  // Update an external temple API configuration
+  app.patch("/api/admin/temple-apis/:id", requireAuth, requireRole("bodhi_admin"), async (req, res) => {
+    try {
+      const { templeExternalApiSchema } = await import("@shared/schema");
+      const parsed = templeExternalApiSchema.partial().safeParse(req.body);
+      if (!parsed.success) {
+        return res.status(400).json({ success: false, error: "Invalid data", details: parsed.error.issues });
+      }
+
+      const api = await storage.updateTempleExternalApi(req.params.id, parsed.data);
+      if (!api) {
+        return res.status(404).json({ success: false, error: "Temple API not found" });
+      }
+      res.json({ success: true, data: { ...api, authToken: api.authToken ? "***masked***" : null } });
+    } catch (error: any) {
+      console.error("Error updating temple API:", error);
+      res.status(500).json({ success: false, error: "Failed to update temple API" });
+    }
+  });
+
+  // Delete an external temple API configuration
+  app.delete("/api/admin/temple-apis/:id", requireAuth, requireRole("bodhi_admin"), async (req, res) => {
+    try {
+      const deleted = await storage.deleteTempleExternalApi(req.params.id);
+      if (!deleted) {
+        return res.status(404).json({ success: false, error: "Temple API not found" });
+      }
+      res.json({ success: true });
+    } catch (error: any) {
+      console.error("Error deleting temple API:", error);
+      res.status(500).json({ success: false, error: "Failed to delete temple API" });
+    }
+  });
+
+  // Sync all external temple APIs (MUST be before :id/sync to avoid Express matching "sync-all" as :id)
+  app.post("/api/admin/temple-apis/sync-all", requireAuth, requireRole("bodhi_admin"), async (req, res) => {
+    try {
+      const { syncAllExternalTempleStats } = await import("./services/temple-external-api");
+      const result = await syncAllExternalTempleStats();
+      res.json({ success: true, data: result });
+    } catch (error: any) {
+      console.error("Error syncing all temple APIs:", error);
+      res.status(500).json({ success: false, error: "Failed to sync temple APIs" });
+    }
+  });
+
+  // Sync stats from a specific external temple API
+  app.post("/api/admin/temple-apis/:id/sync", requireAuth, requireRole("bodhi_admin"), async (req, res) => {
+    try {
+      const { syncExternalTempleStats } = await import("./services/temple-external-api");
+      const result = await syncExternalTempleStats(req.params.id);
+      if (!result.success) {
+        return res.status(400).json({ success: false, error: result.error });
+      }
+      res.json({ success: true });
+    } catch (error: any) {
+      console.error("Error syncing temple API:", error);
+      res.status(500).json({ success: false, error: "Failed to sync temple API" });
+    }
+  });
+
+  // Get all external temple stats (aggregated view for super admin)
+  app.get("/api/admin/temple-external-stats", requireAuth, requireRole("bodhi_admin"), async (req, res) => {
+    try {
+      const { getAllExternalTempleStats } = await import("./services/temple-external-api");
+      const stats = await getAllExternalTempleStats();
+      res.json({ success: true, data: stats });
+    } catch (error: any) {
+      console.error("Error fetching external temple stats:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch external temple stats" });
+    }
+  });
+
+  // ─── Temple Admin: View Their Own External Stats ───
+
+  // Get external stats for the logged-in temple admin
+  app.get("/api/temple/external-stats", requireAuth, requireRole("temple_admin"), async (req, res) => {
+    try {
+      const userId = (req as any).session.user.id;
+      const { getExternalTempleStatsForUser } = await import("./services/temple-external-api");
+      const stats = await getExternalTempleStatsForUser(userId);
+      res.json({ success: true, data: stats });
+    } catch (error: any) {
+      console.error("Error fetching temple external stats:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch external stats" });
+    }
+  });
 }
 
 // Create server only when needed (for local development)

@@ -422,3 +422,80 @@ export const siteMetricsPushSchema = z.object({
   totalDonations: z.number().int().min(0),
   storageUsedMb: z.number().int().min(0),
 });
+
+// ─── Temple External API Configuration Table ───
+
+export const templeExternalApis = pgTable(
+  "temple_external_apis",
+  {
+    id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    templeName: text("temple_name").notNull(),
+    slug: text("slug").notNull().unique(), // e.g., "tathata"
+    baseUrl: text("base_url").notNull(), // e.g., "https://tathata.bodhilab.io"
+    statsEndpoint: text("stats_endpoint").notNull().default("/api/dashboard/stats"),
+    authType: text("auth_type").notNull().default("bearer"), // bearer, api_key, none
+    authToken: text("auth_token"), // encrypted token
+    isActive: boolean("is_active").notNull().default(true),
+    lastSyncAt: timestamp("last_sync_at"),
+    lastSyncStatus: text("last_sync_status"), // success, error
+    lastSyncError: text("last_sync_error"),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at")
+      .defaultNow()
+      .$onUpdate(() => new Date())
+      .notNull(),
+  },
+  (table) => [
+    index("temple_external_apis_userId_idx").on(table.userId),
+    index("temple_external_apis_slug_idx").on(table.slug),
+  ]
+);
+
+export type TempleExternalApi = typeof templeExternalApis.$inferSelect;
+export type InsertTempleExternalApi = typeof templeExternalApis.$inferInsert;
+
+export const templeExternalApiSchema = z.object({
+  templeName: z.string().min(1).max(255),
+  slug: z.string().min(1).max(50).regex(/^[a-z0-9-]+$/, "Slug must be lowercase alphanumeric with dashes"),
+  baseUrl: z.string().url().max(500),
+  statsEndpoint: z.string().max(255).default("/api/dashboard/stats"),
+  authType: z.enum(["bearer", "api_key", "none"]).default("bearer"),
+  authToken: z.string().max(500).optional(),
+  isActive: z.boolean().default(true),
+});
+
+// ─── Temple External API Cached Stats Table ───
+
+export const templeExternalStats = pgTable(
+  "temple_external_stats",
+  {
+    id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+    apiId: varchar("api_id")
+      .notNull()
+      .references(() => templeExternalApis.id, { onDelete: "cascade" }),
+    date: timestamp("date").notNull(),
+    // Cached stats from external API
+    totalUsers: integer("total_users").default(0),
+    paidUsers: integer("paid_users").default(0),
+    activeUsers: integer("active_users").default(0),
+    totalSessions: integer("total_sessions").default(0),
+    pageViews: integer("page_views").default(0),
+    aiConversations: integer("ai_conversations").default(0),
+    monthlyRevenue: integer("monthly_revenue").default(0),
+    totalDonations: integer("total_donations").default(0),
+    storageUsedMb: integer("storage_used_mb").default(0),
+    // Raw response for debugging
+    rawResponse: text("raw_response"),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  },
+  (table) => [
+    index("temple_external_stats_apiId_idx").on(table.apiId),
+    index("temple_external_stats_date_idx").on(table.date),
+  ]
+);
+
+export type TempleExternalStats = typeof templeExternalStats.$inferSelect;
+export type InsertTempleExternalStats = typeof templeExternalStats.$inferInsert;

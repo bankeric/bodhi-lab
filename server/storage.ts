@@ -1,4 +1,4 @@
-import { type Lead, type InsertLead, leads, type Subscription, type InsertSubscription, subscriptions, type TempleOnboarding, templeOnboarding, type TempleApiKey, templeApiKeys, type TempleSiteMetrics, type InsertTempleSiteMetrics, templeSiteMetrics } from "@shared/schema";
+import { type Lead, type InsertLead, leads, type Subscription, type InsertSubscription, subscriptions, type TempleOnboarding, templeOnboarding, type TempleApiKey, templeApiKeys, type TempleSiteMetrics, type InsertTempleSiteMetrics, templeSiteMetrics, type TempleExternalApi, type InsertTempleExternalApi, templeExternalApis } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, and, gte, lte, isNull } from "drizzle-orm";
 import { randomUUID, randomBytes } from "crypto";
@@ -342,6 +342,67 @@ export class DatabaseStorage implements IStorage {
       }
     }
     return latest;
+  }
+
+  // ─── Temple External API Methods ───
+
+  async getAllTempleExternalApis(): Promise<TempleExternalApi[]> {
+    return await db
+      .select()
+      .from(templeExternalApis)
+      .orderBy(desc(templeExternalApis.createdAt));
+  }
+
+  async getTempleExternalApiById(id: string): Promise<TempleExternalApi | undefined> {
+    const result = await db
+      .select()
+      .from(templeExternalApis)
+      .where(eq(templeExternalApis.id, id))
+      .limit(1);
+    return result[0];
+  }
+
+  async getTempleExternalApiByUserId(userId: string): Promise<TempleExternalApi | undefined> {
+    const result = await db
+      .select()
+      .from(templeExternalApis)
+      .where(eq(templeExternalApis.userId, userId))
+      .limit(1);
+    return result[0];
+  }
+
+  async createTempleExternalApi(data: InsertTempleExternalApi): Promise<TempleExternalApi> {
+    const id = randomUUID();
+    await db.insert(templeExternalApis).values({
+      id,
+      ...data,
+    });
+    const result = await db
+      .select()
+      .from(templeExternalApis)
+      .where(eq(templeExternalApis.id, id))
+      .limit(1);
+    return result[0];
+  }
+
+  async updateTempleExternalApi(id: string, data: Partial<TempleExternalApi>): Promise<TempleExternalApi | undefined> {
+    await db
+      .update(templeExternalApis)
+      .set(data)
+      .where(eq(templeExternalApis.id, id));
+    const result = await db
+      .select()
+      .from(templeExternalApis)
+      .where(eq(templeExternalApis.id, id))
+      .limit(1);
+    return result[0];
+  }
+
+  async deleteTempleExternalApi(id: string): Promise<boolean> {
+    const result = await db
+      .delete(templeExternalApis)
+      .where(eq(templeExternalApis.id, id));
+    return true;
   }
 }
 

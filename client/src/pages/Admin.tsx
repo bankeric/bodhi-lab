@@ -54,6 +54,8 @@ import {
 import type { Lead } from "@shared/schema";
 import AdminOnboarding from "@/components/AdminOnboarding";
 import AdminClientMetrics from "@/components/AdminClientMetrics";
+import AdminTempleApis from "@/components/AdminTempleApis";
+import AdminExternalTempleStats from "@/components/AdminExternalTempleStats";
 
 const statusColors: Record<string, string> = {
   new: "bg-blue-100 text-blue-800 border-blue-200",
@@ -506,6 +508,12 @@ export default function Admin() {
 
             {/* Client Metrics */}
             <AdminClientMetrics />
+
+            {/* External Temple Stats */}
+            <AdminExternalTempleStats />
+
+            {/* Temple API Management */}
+            <AdminTempleApis />
           </>
         )}
       </main>
