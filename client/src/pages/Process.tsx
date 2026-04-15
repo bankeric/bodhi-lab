@@ -492,18 +492,20 @@ export default function Process() {
                         </div>
                       </div>
 
-                      {/* Solutions For You button */}
-                      <div className="flex justify-center mb-4">
-                        <button
-                          type="button"
-                          onClick={() => { setCurrentSlide(0); setSlidesOpen(true); }}
-                          data-testid={`button-solutions-for-you-${index}`}
-                          className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#991b1b] text-white rounded-xl font-serif font-semibold text-sm hover:bg-[#7a1515] transition-all duration-300 shadow-md"
-                        >
-                          <Presentation className="w-4 h-4" />
-                          {language === 'en' ? 'Solutions For You' : 'Giải Pháp Cho Bạn'}
-                        </button>
-                      </div>
+                      {/* Solutions For You button — only on steps 1 & 2 */}
+                      {index < 2 && (
+                        <div className="flex justify-center mb-4">
+                          <button
+                            type="button"
+                            onClick={() => { setCurrentSlide(0); setSlidesOpen(true); }}
+                            data-testid={`button-solutions-for-you-${index}`}
+                            className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#991b1b] text-white rounded-xl font-serif font-semibold text-sm hover:bg-[#7a1515] transition-all duration-300 shadow-md"
+                          >
+                            <Presentation className="w-4 h-4" />
+                            {language === 'en' ? 'Solutions For You' : 'Giải Pháp Cho Bạn'}
+                          </button>
+                        </div>
+                      )}
 
                       {/* Not Included (only for steps that have it) */}
                       {step.notIncluded && step.notIncluded.length > 0 && (
