@@ -56,217 +56,241 @@ export default function Process() {
   const slides = [
     {
       label: "01",
-      title: "Bodhi Technology Lab",
-      subtitle: isVi ? '"Nơi trí tuệ cổ xưa gặp gỡ công nghệ hiện đại"' : '"Where ancient wisdom meets modern technology"',
-      tagline: isVi ? "Giải Pháp Công Nghệ Phật Giáo cho Các Tổ Chức Hiện Đại" : "Buddhist Technology Solutions for Modern Organizations",
-      content: [],
+      title: isVi ? "Di Chuyển Dữ Liệu & Onboarding" : "Migration & Onboarding",
+      subtitle: isVi ? "Chúng tôi xử lý toàn bộ quá trình chuyển đổi — từ giấy tờ đến nền tảng số" : "We handle the entire transition — from paper records to digital platform",
+      content: [
+        {
+          heading: isVi ? "Những gì chúng tôi di chuyển:" : "What we migrate:",
+          items: isVi ? [
+            "Hồ sơ giấy tờ: quét, phân loại, sắp xếp tối đa 500 trang (thêm $0,50/trang)",
+            "Hồ sơ kỹ thuật số: thư mục Google Drive với cấu trúc gợi ý (Kinh sách, Âm thanh, Ảnh, Video, Tài liệu)",
+            "Dữ liệu thành viên: bảng tính, xuất CSV, CRM cũ, danh sách nhập tay",
+            "Lịch sử cúng dường, hồ sơ tham dự sự kiện",
+          ] : [
+            "Paper records: scan, classify, organize up to 500 pages (additional at $0.50/page)",
+            "Digital records: Google Drive folder with suggested structure (Sutras, Audio, Photos, Videos, Documents)",
+            "Member data: spreadsheets, CSV exports, old CRMs, manually typed lists",
+            "Donation history, event attendance records",
+          ],
+        },
+        {
+          heading: isVi ? "Danh sách kiểm tra Onboarding (6 bước, tự động lưu):" : "Onboarding checklist (6 steps, auto-saves):",
+          items: isVi ? [
+            "1. Thông tin chùa: tên, truyền thống, địa điểm, ngôn ngữ",
+            "2. Thương hiệu: tải lên logo, màu sắc chính, phong cách giao diện",
+            "3. Nội dung: URL thư mục dùng chung với phương tiện và tài liệu của chùa",
+            "4. Kỹ thuật: tên miền tùy chỉnh, URL website hiện tại",
+            "5. Tùy chỉnh AI: chế độ giáo lý, phong cách phản hồi, hướng dẫn tùy chỉnh",
+            "6. Xem lại & Nộp — Theo dõi trạng thái: Nháp → Đã nộp → Đang xây dựng → Hoàn thành",
+          ] : [
+            "1. Temple Info: name, tradition(s), location, language",
+            "2. Branding: logo upload, primary color, theme style",
+            "3. Content: shared folder URL with temple's media and documents",
+            "4. Technical: custom domain, existing website URL",
+            "5. AI Preferences: doctrinal mode, response style, custom instructions",
+            "6. Review & Submit — Status tracking: Draft → Submitted → Being Built → Completed",
+          ],
+        },
+        {
+          heading: isVi ? "Thời gian điển hình:" : "Typical timeline:",
+          items: isVi ? [
+            "14 ngày từ khi nộp đến khi website đi vào hoạt động",
+          ] : [
+            "14 days from submission to live website",
+          ],
+        },
+      ],
     },
     {
       label: "02",
-      title: isVi ? "Vấn Đề Hiện Tại" : "The Problem",
-      subtitle: isVi ? "Tại sao các cộng đồng Phật giáo cần công nghệ chuyên biệt" : "Why Buddhist communities need purpose-built technology",
+      title: isVi ? "Bảng Giá" : "Pricing",
+      subtitle: isVi ? "Ba gói linh hoạt — thử miễn phí 14 ngày, không ràng buộc" : "Three flexible plans — 14-day free trial, no lock-in",
       content: [
-        { items: isVi ? [
-          "Chỉ ~20% phật tử dưới 30 tuổi tham gia sinh hoạt thường xuyên",
-          "Quản lý cúng dường thủ công — sổ giấy, Excel, ghi chú",
-          "Các buổi pháp thoại chỉ diễn ra một lần rồi biến mất, không lưu trữ số",
-          "Dữ liệu thành viên nằm rải rác trên Facebook, Google Sheets hoặc giấy tờ — chùa không sở hữu",
-          "Cộng đồng đa ngôn ngữ (người lớn tuổi tiếng Việt + thế hệ trẻ tiếng Anh) không có nền tảng thống nhất",
-          "Các công cụ phổ thông (WordPress, GoFundMe, Mailchimp) không hiểu bối cảnh Phật giáo",
-        ] : [
-          "Only ~20% of temple attendees under 30 participate regularly",
-          "Donation management is manual — paper ledgers, Excel, notebooks",
-          "Dharma talks happen once and vanish with no digital archive",
-          "Member data lives on Facebook, Google Sheets, or paper — temples don't own it",
-          "Multilingual communities (Vietnamese elders + English-speaking youth) have no unified platform",
-          "Generic tools (WordPress, GoFundMe, Mailchimp) don't understand Buddhist context",
-        ]},
+        {
+          heading: isVi ? "Phật Tử Tại Gia — $199/tháng" : "Lay Practitioner — $199/month",
+          items: isVi ? [
+            "100 thành viên • 1 AI Agent • 2 tài khoản quản trị",
+            "Website riêng, tên miền tùy chỉnh, thương hiệu đầy đủ, hỗ trợ qua email",
+          ] : [
+            "100 members • 1 AI Agent • 2 admin seats",
+            "Dedicated website, custom domain, full branding, email support",
+          ],
+        },
+        {
+          heading: isVi ? "Phật Tử Tinh Tấn — $349/tháng" : "Devoted Practitioner — $349/month",
+          items: isVi ? [
+            "500 thành viên • 3 AI Agents • 5 tài khoản quản trị",
+            "+ Truy cập API, sao lưu hàng ngày, nhật ký 7 ngày",
+          ] : [
+            "500 members • 3 AI Agents • 5 admin seats",
+            "+ API access, daily backups, 7-day logs",
+          ],
+        },
+        {
+          heading: isVi ? "Cộng Đồng Tăng Đoàn — $499/tháng" : "Sangha Community — $499/month",
+          items: isVi ? [
+            "Thành viên không giới hạn • 5+ AI Agents (fine-tuned) • 10 tài khoản quản trị",
+            "+ API đầy đủ, bảng điều khiển nhà phát triển, quản lý thành công riêng, hỗ trợ 24/7, SLA tùy chỉnh",
+          ] : [
+            "Unlimited members • 5+ AI Agents (fine-tuned) • 10 admin seats",
+            "+ Full API, developer dashboard, dedicated success manager, 24/7 support, custom SLAs",
+          ],
+        },
+        {
+          heading: isVi ? "Phí Onboarding:" : "Onboarding fee:",
+          items: isVi ? [
+            "$500 một lần (thiết lập website, cấu hình AI, di chuyển dữ liệu, số hóa, đào tạo)",
+            "Tất cả các gói: thử miễn phí 14 ngày, không ràng buộc, hủy bất cứ lúc nào",
+          ] : [
+            "$500 one-time (website setup, AI config, data migration, digitization, training)",
+            "All plans: 14-day free trial, no lock-in, cancel anytime",
+          ],
+        },
       ],
     },
     {
       label: "03",
-      title: isVi ? "Giải Pháp Của Chúng Tôi" : "Our Solution",
-      subtitle: isVi ? "Nền tảng white-label được xây dựng riêng cho chùa, tu viện và trung tâm Phật pháp." : "A white-label platform purpose-built for Buddhist temples, monasteries, and dharma centers.",
+      title: isVi ? "Tại Sao Không Dùng WordPress / Facebook / Công Cụ Phổ Thông?" : "Why Not WordPress / Facebook / Generic Tools?",
+      subtitle: isVi ? "Các công cụ phổ thông không được xây dựng cho cộng đồng Phật giáo" : "Generic tools were not built for Buddhist communities",
       content: [
-        { heading: isVi ? "Mỗi khách hàng nhận được:" : "Every client gets:", items: isVi ? [
-          "Website riêng với tên miền tùy chỉnh và thương hiệu đầy đủ",
-          "AI Dharma Agents được đào tạo theo giáo lý của tông phái",
-          "Hệ thống nhận cúng dường với hồi hướng công đức",
-          "Thư viện nội dung, lịch sự kiện, công cụ cộng đồng",
-          "Bảng điều khiển số liệu thời gian thực",
-          "Chủ quyền dữ liệu hoàn toàn — chùa sở hữu mọi thứ",
-        ] : [
-          "Their own dedicated website with custom domain and full branding",
-          "AI Dharma Agents trained on their lineage's teachings",
-          "Donation processing with merit dedication",
-          "Content library, event calendar, community tools",
-          "Metrics dashboard with real-time stats",
-          "Complete data sovereignty — temple owns everything",
-        ]},
+        {
+          heading: isVi ? "So với WordPress:" : "vs WordPress:",
+          items: isVi ? [
+            "WordPress = website thông thường bạn phải tự xây dựng, bảo trì và bảo mật",
+            "Bodhi = nền tảng chuyên dụng với AI agents, công cụ dāna, quản lý sự kiện, thư viện nội dung — tất cả có sẵn và được duy trì",
+          ] : [
+            "WordPress = generic website you build, maintain, secure yourself",
+            "Bodhi = purpose-built platform with AI agents, dāna tools, event management, content library — all pre-built and maintained",
+          ],
+        },
+        {
+          heading: isVi ? "So với Facebook:" : "vs Facebook:",
+          items: isVi ? [
+            "Facebook sở hữu dữ liệu của bạn, kiểm soát hiển thị bằng thuật toán, trộn lẫn nội dung tâm linh với quảng cáo",
+            "Bodhi = bạn sở hữu dữ liệu, kiểm soát trải nghiệm, môi trường tập trung dưới thương hiệu của bạn",
+          ] : [
+            "Facebook owns your data, controls reach with algorithms, mixes spiritual content with ads",
+            "Bodhi = you own your data, control the experience, focused environment under your brand",
+          ],
+        },
+        {
+          heading: isVi ? "So với Nền Tảng Cúng Dường Thông Thường (GoFundMe, PayPal):" : "vs Generic Donation Platforms (GoFundMe, PayPal):",
+          items: isVi ? [
+            "Họ xử lý giao dịch — họ không hiểu dāna",
+            "Không có hồi hướng công đức, không có trích dẫn kinh, không có bối cảnh tâm linh",
+            "Bodhi = giao diện bố thí được thiết kế cho sự rộng lượng Phật giáo",
+          ] : [
+            "They process transactions — they don't understand dāna",
+            "No merit dedication, no sutra quotes, no spiritual framing",
+            "Bodhi = giving interface designed for Buddhist generosity",
+          ],
+        },
       ],
     },
     {
       label: "04",
-      title: isVi ? "Quy Trình — 4 Bước, 2 Tuần" : "How It Works — 4 Steps, 2 Weeks",
-      subtitle: isVi ? "Từ khám phá đến ra mắt trong chưa đầy hai tuần" : "From discovery to go-live in under two weeks",
-      content: isVi ? [
-        { heading: "Bước 1: Biểu Mẫu Khám Phá (Ngày 1)", items: [
-          "Chùa nộp thông tin: tên, truyền thống, quy mô cộng đồng",
-          "Phân công quản lý dự án chuyên trách",
-          "Lên lịch tư vấn trong vòng 2–3 ngày làm việc",
-        ]},
-        { heading: "Bước 2: Tư Vấn Miễn Phí (Ngày 3–5)", items: [
-          "Cuộc gọi video 30 phút với demo nền tảng trực tiếp",
-          "Đề xuất bằng văn bản giao trong vòng 48 giờ",
-        ]},
-        { heading: "Bước 3: Onboarding & Xây Dựng (Tuần 1–2)", items: [
-          "Phí onboarding một lần $500: website, cấu hình AI, di chuyển dữ liệu, số hóa tài liệu (500 trang), đào tạo 1 giờ",
-        ]},
-        { heading: "Bước 4: Ra Mắt (Tuần 2+)", items: [
-          "Kiểm tra QA đầy đủ, trỏ tên miền, SSL",
-          "30 ngày hỗ trợ sau ra mắt — phản hồi trong 24 giờ",
-          "Liên tục: cập nhật hàng tháng, vá bảo mật, sao lưu hàng ngày, uptime 99.9%",
-        ]},
-      ] : [
-        { heading: "Step 1: Discovery Form (Day 1)", items: [
-          "Temple submits name, tradition, community size",
-          "Dedicated project manager assigned",
-          "Consultation scheduled within 2–3 business days",
-        ]},
-        { heading: "Step 2: Free Consultation (Day 3–5)", items: [
-          "30-minute video call with live platform demo",
-          "Written proposal delivered within 48 hours",
-        ]},
-        { heading: "Step 3: Onboarding & Build (Week 1–2)", items: [
-          "$500 one-time onboarding: dedicated website, AI config, data migration, digitization (500 pages), 1-hour training",
-        ]},
-        { heading: "Step 4: Go Live (Week 2+)", items: [
-          "Full QA, domain pointing, SSL",
-          "30 days post-launch support — 24-hour response",
-          "Ongoing: monthly updates, security patches, daily backups, 99.9% uptime",
-        ]},
+      title: isVi ? "Triết Lý Của Chúng Tôi" : "Our Philosophy",
+      subtitle: isVi ? '"Thành công không được đo bằng số lượng người dùng, mà bằng số lượng chúng sinh giác ngộ."' : '"Success is not measured by user count, but by the number of awakened beings."',
+      content: [
+        {
+          heading: isVi ? "Giá Trị Cốt Lõi:" : "Core Values:",
+          items: isVi ? [
+            "Tôn trọng Truyền thống: công nghệ là phương tiện, Pháp là người lái",
+            "Chủ Quyền Tự Viện: các tu viện tự do, không bị ràng buộc bởi xích kỹ thuật số",
+            "Rõ Ràng & Phù Hợp với Chánh Pháp: không phí ẩn, không khai thác dữ liệu",
+            "Bình Đẳng Cho Mọi Chúng Sinh: công cụ sẵn sàng từ khi ra đời, ai cũng có thể sử dụng",
+          ] : [
+            "Respect for Tradition: technology is the vehicle, Dharma is the driver",
+            "Temple Sovereignty: monasteries free, not bound by digital chains",
+            "Clarity & Alignment with Dharma: no hidden fees, no data exploitation",
+            "Equality for All Beings: tools ready at birth, anyone can use them",
+          ],
+        },
+        {
+          heading: "",
+          items: isVi ? [
+            '"Tạo không gian cho SỰ TĨNH LẶNG. Biến đổi công nghệ — vốn dĩ ồn ào — thành nơi mỗi người có thể trở về đối thoại với chính mình. Đó là cuộc cách mạng thực sự."',
+          ] : [
+            '"Create space for STILLNESS. Transform technology — inherently noisy — into a place where each person can return to dialogue with themselves. That is the true revolution."',
+          ],
+        },
       ],
     },
     {
       label: "05",
-      title: isVi ? "Tính Năng Nền Tảng" : "Platform Capabilities",
-      subtitle: isVi ? "Tám công cụ tích hợp trong một nền tảng thống nhất" : "Eight integrated tools in one unified platform",
-      content: isVi ? [
-        { heading: "Thương Hiệu White-Label", items: ["Tên miền, logo, màu sắc, giao diện tùy chỉnh — không hiển thị thương hiệu Bodhi với người dùng cuối"] },
-        { heading: "AI Dharma Agents", items: ["12 agent trên 4 thừa giáo lý — cấu hình theo từng chùa, đa ngôn ngữ"] },
-        { heading: "Công Cụ Cúng Dường (Dāna)", items: ["Cúng dường một lần hoặc định kỳ, hồi hướng công đức, tiền chuyển thẳng tới tài khoản Stripe của chùa"] },
-        { heading: "Thư Viện Tài Liệu & Tài Nguyên", items: ["Kho kinh sách, pháp thoại, video có thể tìm kiếm — kiểm soát truy cập và lịch sử phiên bản"] },
-        { heading: "Lịch Sự Kiện & Nhắc Nhở", items: ["Mẫu sự kiện tái diễn, theo dõi RSVP, nhắc nhở tự động, hỗ trợ múi giờ toàn cầu"] },
-        { heading: "Diễn Đàn Cộng Đồng", items: ["Kiểm duyệt Chánh Ngữ, nhóm học tập, đăng ẩn danh cho câu hỏi tâm linh nhạy cảm"] },
-        { heading: "CRM & Quản Lý Thành Viên", items: ["Cơ sở dữ liệu tập trung cho thành viên, nhà hảo tâm, tình nguyện viên — phân loại theo tông phái & ngôn ngữ"] },
-        { heading: "Bảng Điều Khiển Số Liệu", items: ["Thống kê theo từng chùa, xu hướng 30 ngày, sử dụng so với giới hạn — xem tổng hợp mạng lưới"] },
-      ] : [
-        { heading: "White-Label Branding", items: ["Custom domain, logo, colors, and theme — no Bodhi branding visible to end users"] },
-        { heading: "AI Dharma Agents", items: ["12 agents across 4 doctrinal vehicles — configurable per temple, multilingual"] },
-        { heading: "Donation Tools (Dāna)", items: ["One-time or recurring dāna, merit dedication, funds direct to temple's own Stripe account"] },
-        { heading: "Document & Resource Library", items: ["Searchable sutras, dharma talks, videos — with access control and version history"] },
-        { heading: "Event & Reminder Calendar", items: ["Recurring templates, RSVP tracking, automated reminders, multi-timezone support"] },
-        { heading: "Community Forum", items: ["Right Speech moderation, study groups, anonymous posting for sensitive questions"] },
-        { heading: "CRM & Member Management", items: ["Centralized database for members, donors, volunteers — segment by tradition & language"] },
-        { heading: "Metrics Dashboard", items: ["Per-temple stats, 30-day trends, usage vs. limits — federation aggregated view available"] },
+      title: isVi ? "Đội Ngũ & Uy Tín" : "Team & Credibility",
+      subtitle: isVi ? "Được xây dựng bởi các kỹ sư và tu sĩ từ khắp nơi trên thế giới" : "Built by engineers and monastics from around the world",
+      content: [
+        {
+          heading: isVi ? "Năng lực của chúng tôi:" : "Our capabilities:",
+          items: isVi ? [
+            "200+ kỹ sư và tu sĩ cộng tác",
+            "Quy trình được chứng nhận ISO 9001/27001",
+            "Mạng lưới phi tập trung toàn cầu",
+            "Nền tảng song ngữ: Tiếng Anh + Tiếng Việt",
+            "AI agents phản hồi bằng Tiếng Việt, Anh, Trung, Tây Tạng",
+            "Phục vụ tất cả các truyền thống: Thiền, Tịnh Độ, Theravāda, Kim Cang Thừa, Tây Tạng",
+          ] : [
+            "200+ engineers and monastics collaborating",
+            "ISO 9001/27001 certified processes",
+            "Global decentralized network",
+            "Bilingual platform: English + Vietnamese",
+            "AI agents respond in Vietnamese, English, Chinese, Tibetan",
+            "Serving all traditions: Zen, Pure Land, Theravāda, Vajrayāna, Tibetan",
+          ],
+        },
       ],
     },
     {
       label: "06",
-      title: isVi ? "Kiến Trúc Đa Khách Hàng" : "Multi-Tenant Architecture",
-      subtitle: isVi ? '"Mạng Lưới Tự Viện" — tách biệt nhưng kết nối' : '"Monastery Network" — isolated yet connected',
-      content: isVi ? [
-        { heading: "Giao Diện Giám Đốc Liên Mạng", items: [
-          "Số liệu tổng hợp trên toàn bộ chùa trong mạng lưới",
-          "Tổng số khách hàng, người dùng trả phí, doanh thu, xu hướng 30 ngày",
-          "Nhấp vào từng chùa để xem chi tiết",
-          "Tìm kiếm theo tên chùa hoặc email",
-        ]},
-        { heading: "Giao Diện Admin Từng Chùa", items: [
-          "Chỉ xem dữ liệu của mình — thành viên, cúng dường, nội dung, hội thoại AI, lưu trữ",
-          "Không có chuyển đổi, bộ lọc hay 'đổi không gian làm việc'",
-          "Cô lập dữ liệu hoàn toàn",
-        ]},
-      ] : [
-        { heading: "Federation Director View", items: [
-          "Aggregated metrics across all temples in the network",
-          "Total clients, combined paid users, total revenue, 30-day trends",
-          "Click into any temple for individual breakdown",
-          "Search by temple name or email",
-        ]},
-        { heading: "Individual Temple Admin View", items: [
-          "Only sees their own data — members, donations, content, AI conversations, storage",
-          "No toggle, no filter, no 'switch workspace'",
-          "Complete data isolation",
-        ]},
+      title: isVi ? "Luồng Demo Trực Tiếp (Được Khuyến Nghị)" : "Live Demo Flow (Recommended)",
+      subtitle: isVi ? "Hướng dẫn từng bước để trình bày nền tảng hiệu quả nhất" : "Step-by-step walkthrough for the most effective platform presentation",
+      content: [
+        {
+          heading: isVi ? "Thứ tự demo đề xuất:" : "Recommended demo order:",
+          items: isVi ? [
+            "1. Trang chủ — nêu bật AI agents và khả năng nền tảng",
+            "2. Trang giá — đi qua 3 gói (tất cả đều bao gồm website riêng)",
+            "3. Bảng điều khiển chùa mẫu — thông tin đăng ký, số liệu, cổng thanh toán, danh sách kiểm tra onboarding",
+            "4. Tương tác AI Dharma Agent trực tiếp (demo trực tiếp nếu có)",
+            "5. CRM quản trị — pipeline khách hàng tiềm năng, tổng quan số liệu khách hàng, thống kê toàn mạng",
+            "6. Biểu mẫu liên hệ hoặc đặt lịch Calendly",
+          ] : [
+            "1. Landing page — highlight AI agents and platform capabilities",
+            "2. Pricing page — walk through 3 tiers (all include dedicated website)",
+            "3. Sample temple dashboard — subscription info, metrics, billing portal, onboarding checklist",
+            "4. AI Dharma Agent interaction (live demo if available)",
+            "5. Admin CRM — lead pipeline, client metrics overview, network-wide stats",
+            "6. Contact form or Calendly booking",
+          ],
+        },
       ],
     },
     {
       label: "07",
-      title: isVi ? "Chủ Quyền Dữ Liệu" : "Data Sovereignty",
-      subtitle: isVi ? "Dữ liệu của bạn thuộc về bạn — mãi mãi" : "Your data belongs to you — always",
+      title: isVi ? "Liên Hệ & Tài Nguyên" : "Contact & Resources",
+      subtitle: isVi ? "Mọi thứ bạn cần để bắt đầu hành trình số hóa cộng đồng Phật giáo" : "Everything you need to start your Buddhist community's digital journey",
       content: [
-        { items: isVi ? [
-          "Mỗi chùa có không gian cơ sở dữ liệu riêng biệt",
-          "Danh sách thành viên, hồ sơ cúng dường, nội dung — tất cả thuộc về chùa",
-          "Không gộp chung với khách hàng khác, không dùng để huấn luyện mô hình AI",
-          "Xuất dữ liệu đầy đủ bất cứ lúc nào (CSV, JSON)",
-          "Không ràng buộc hợp đồng — hủy qua cổng thanh toán",
-          "Lưu giữ 30 ngày sau khi hủy, sau đó xóa vĩnh viễn",
-          "Tiền cúng dường chuyển thẳng tới tài khoản Stripe của chùa",
-          "Mã hóa trong quá trình truyền (HTTPS) và khi lưu trữ",
-        ] : [
-          "Each temple gets isolated database space",
-          "Member lists, donation records, content — all belong to the temple",
-          "Not pooled across clients, not used to train other models",
-          "Full data export anytime (CSV, JSON)",
-          "No lock-in contracts — cancel from billing portal",
-          "30-day retention after cancellation, then permanent deletion",
-          "Donations go directly to temple's own Stripe account",
-          "Encrypted in transit (HTTPS) and at rest",
-        ]},
-      ],
-    },
-    {
-      label: "08",
-      title: isVi ? "Tìm Hiểu Sâu Về AI Agent" : "AI Agent Deep Dive",
-      subtitle: isVi ? "Có thể cấu hình, an toàn và vững chắc về giáo lý" : "Configurable, safe, and doctrinally grounded",
-      content: isVi ? [
-        { heading: "Cách cấu hình agent", items: [
-          "Chùa chọn chế độ giáo lý: Thiền, Tịnh Độ, Theravāda, Kim Cang Thừa, Phật Giáo Tổng Quát",
-          "Chùa chọn phong cách phản hồi: Từ Bi, Trang Nghiêm, Cân Bằng",
-          "Chùa tải lên giáo lý riêng qua Google Drive",
-          "Chùa thêm ghi chú AI tùy chỉnh — chủ đề cần đề cập hoặc tránh",
-        ]},
-        { heading: "Cơ chế bảo vệ tích hợp", items: [
-          "Agent nhường quyền cho thầy giáo thọ với các câu hỏi sâu",
-          "Không tư vấn y tế, không khẳng định về giác ngộ",
-          "Kiểm duyệt Chánh Ngữ cho diễn đàn cộng đồng",
-        ]},
-        { heading: "4 Thừa Giáo Lý", items: [
-          "Tiểu Thừa (Nền Tảng): chánh niệm căn bản, Ngũ Giới, giảm căng thẳng",
-          "Trung Thừa (Tuệ Giác): vipassana, tự vấn, duyên khởi",
-          "Đại Thừa (Bồ Tát): từ bi + tuệ giác, chỉ thẳng tâm",
-          "Phật Thừa (Tối Thượng): đốn ngộ, vô niệm, vượt mọi giáo lý",
-        ]},
-      ] : [
-        { heading: "How agents are configured", items: [
-          "Temple selects doctrinal mode: Zen, Pure Land, Theravāda, Vajrayāna, General Buddhist",
-          "Temple chooses response style: Compassionate, Formal, Balanced",
-          "Temple uploads own teachings via Google Drive",
-          "Temple adds custom AI notes — topics to address or avoid",
-        ]},
-        { heading: "Built-in guardrails", items: [
-          "Agents defer to human teachers for deep questions",
-          "No medical advice, no definitive claims about enlightenment",
-          "Right Speech moderation for community forums",
-        ]},
-        { heading: "4 Doctrinal Vehicles", items: [
-          "Tiểu Thừa (Foundation): basic mindfulness, Five Precepts, stress reduction",
-          "Trung Thừa (Insight): vipassana, self-inquiry, dependent origination",
-          "Đại Thừa (Bodhisattva): compassion + wisdom, direct pointing",
-          "Phật Thừa (Ultimate): sudden awakening, non-conceptual, beyond all teachings",
-        ]},
+        {
+          heading: isVi ? "Liên kết quan trọng:" : "Key links:",
+          items: [
+            "Website: bodhilab.io",
+            "Platform features: bodhilab.io/platform",
+            "Process overview: bodhilab.io/process",
+            "Pricing: bodhilab.io/pricing",
+            "Contact: bodhilab.io/contact",
+            "Book a demo: calendly.com/bodhilab",
+            "Documentation: bodhilab.io/docs/overview",
+          ],
+        },
+        {
+          heading: "",
+          items: isVi ? [
+            "Thử miễn phí 14 ngày trên tất cả các gói. Không ràng buộc. Hủy bất cứ lúc nào.",
+          ] : [
+            "14-day free trial on all plans. No lock-in. Cancel anytime.",
+          ],
+        },
       ],
     },
   ];
