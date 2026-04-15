@@ -269,6 +269,218 @@ export default function Process() {
         ]},
       ],
     },
+    {
+      label: "09",
+      title: isVi ? "Di Chuyển Dữ Liệu & Onboarding" : "Migration & Onboarding",
+      subtitle: isVi ? "Chúng tôi xử lý mọi thứ — bạn chỉ cần cung cấp tài liệu" : "We handle everything — you just provide the materials",
+      content: isVi ? [
+        { heading: "Chúng tôi di chuyển:", items: [
+          "Hồ sơ giấy: quét, phân loại, tổ chức tới 500 trang (thêm $0.50/trang)",
+          "Hồ sơ số: thư mục Google Drive với cấu trúc gợi ý (Kinh, Âm thanh, Ảnh, Video, Tài liệu)",
+          "Dữ liệu thành viên: bảng tính, xuất CSV, CRM cũ, danh sách nhập tay",
+          "Lịch sử cúng dường, hồ sơ tham dự sự kiện",
+        ]},
+        { heading: "Checklist onboarding (6 bước, tự động lưu):", items: [
+          "1. Thông tin chùa: tên, tông phái, địa điểm, ngôn ngữ",
+          "2. Thương hiệu: tải logo, màu chính, phong cách giao diện",
+          "3. Nội dung: URL thư mục chứa tài liệu và media của chùa",
+          "4. Kỹ thuật: tên miền tùy chỉnh, URL website hiện tại",
+          "5. Tùy chọn AI: chế độ giáo lý, phong cách phản hồi, hướng dẫn tùy chỉnh",
+          "6. Xem lại & Gửi",
+        ]},
+        { heading: "Theo dõi trạng thái & thời gian:", items: [
+          "Trạng thái: Bản Nháp → Đã Gửi → Đang Xây Dựng → Hoàn Thành",
+          "Thời gian điển hình: 14 ngày từ khi gửi đến khi website ra mắt",
+        ]},
+      ] : [
+        { heading: "What we migrate:", items: [
+          "Paper records: scan, classify, organize up to 500 pages (additional at $0.50/page)",
+          "Digital records: Google Drive folder with suggested structure (Sutras, Audio, Photos, Videos, Documents)",
+          "Member data: spreadsheets, CSV exports, old CRMs, manually typed lists",
+          "Donation history, event attendance records",
+        ]},
+        { heading: "Onboarding checklist (6 steps, auto-saves):", items: [
+          "1. Temple Info: name, tradition(s), location, language",
+          "2. Branding: logo upload, primary color, theme style",
+          "3. Content: shared folder URL with temple's media and documents",
+          "4. Technical: custom domain, existing website URL",
+          "5. AI Preferences: doctrinal mode, response style, custom instructions",
+          "6. Review & Submit",
+        ]},
+        { heading: "Status tracking & timeline:", items: [
+          "Status: Draft → Submitted → Being Built → Completed",
+          "Typical timeline: 14 days from submission to live website",
+        ]},
+      ],
+    },
+    {
+      label: "10",
+      title: isVi ? "Bảng Giá" : "Pricing",
+      subtitle: isVi ? "Ba gói — tất cả đều bao gồm website riêng, thử miễn phí 14 ngày" : "Three plans — all include a dedicated website, 14-day free trial",
+      content: isVi ? [
+        { heading: "Hành Giả Cư Sĩ — $199/tháng", items: [
+          "100 thành viên • 1 AI Agent • 2 ghế Admin",
+          "Website riêng, tên miền tùy chỉnh, thương hiệu đầy đủ, hỗ trợ email",
+        ]},
+        { heading: "Hành Giả Tinh Tấn — $349/tháng", items: [
+          "500 thành viên • 3 AI Agent • 5 ghế Admin",
+          "+ Truy cập API, sao lưu hàng ngày, nhật ký 7 ngày",
+        ]},
+        { heading: "Cộng Đồng Tăng Đoàn — $499/tháng", items: [
+          "Không giới hạn thành viên • 5+ Agent (tinh chỉnh) • 10 ghế Admin",
+          "+ API đầy đủ, bảng điều khiển lập trình, quản lý thành công chuyên trách, hỗ trợ 24/7",
+        ]},
+        { heading: "Onboarding & điều khoản:", items: [
+          "Phí onboarding một lần: $500 (thiết lập website, cấu hình AI, di chuyển dữ liệu, số hóa, đào tạo)",
+          "Tất cả gói: thử miễn phí 14 ngày, không ràng buộc, hủy bất cứ lúc nào",
+        ]},
+      ] : [
+        { heading: "Lay Practitioner — $199/mo", items: [
+          "100 members • 1 AI Agent • 2 Admin Seats",
+          "Dedicated website, custom domain, full branding, email support",
+        ]},
+        { heading: "Devoted Practitioner — $349/mo", items: [
+          "500 members • 3 AI Agents • 5 Admin Seats",
+          "+ API access, daily backups, 7-day logs",
+        ]},
+        { heading: "Sangha Community — $499/mo", items: [
+          "Unlimited members • 5+ Agents (fine-tuned) • 10 Admin Seats",
+          "+ Full API, developer dashboard, dedicated success manager, 24/7 support, custom SLAs",
+        ]},
+        { heading: "Onboarding & terms:", items: [
+          "One-time onboarding: $500 (website setup, AI config, data migration, digitization, training)",
+          "All plans: 14-day free trial, no lock-in, cancel anytime",
+        ]},
+      ],
+    },
+    {
+      label: "11",
+      title: isVi ? "Tại Sao Không Dùng WordPress / Facebook?" : "Why Not WordPress / Facebook / Generic Tools?",
+      subtitle: isVi ? "So sánh thực tế — Bodhi được xây dựng cho Phật giáo, không phải phổ thông" : "A real comparison — Bodhi is built for Buddhism, not for everyone",
+      content: isVi ? [
+        { heading: "vs WordPress:", items: [
+          "WordPress = website phổ thông bạn phải tự xây dựng, bảo trì, bảo mật",
+          "Bodhi = nền tảng chuyên biệt với AI agent, dāna, quản lý sự kiện, thư viện nội dung — tất cả có sẵn và được duy trì",
+        ]},
+        { heading: "vs Facebook:", items: [
+          "Facebook sở hữu dữ liệu của bạn, kiểm soát tiếp cận bằng thuật toán, trộn nội dung tâm linh với quảng cáo",
+          "Bodhi = bạn sở hữu dữ liệu, kiểm soát trải nghiệm, môi trường tập trung dưới thương hiệu của bạn",
+        ]},
+        { heading: "vs Nền tảng cúng dường phổ thông (GoFundMe, PayPal):", items: [
+          "Họ xử lý giao dịch — họ không hiểu dāna",
+          "Không có hồi hướng công đức, không có trích dẫn kinh, không có khung tâm linh",
+          "Bodhi = giao diện bố thí được thiết kế cho sự hào phóng của Phật tử",
+        ]},
+      ] : [
+        { heading: "vs WordPress:", items: [
+          "WordPress = generic website you build, maintain, secure yourself",
+          "Bodhi = purpose-built platform with AI agents, dāna tools, event management, content library — all pre-built and maintained",
+        ]},
+        { heading: "vs Facebook:", items: [
+          "Facebook owns your data, controls reach with algorithms, mixes spiritual content with ads",
+          "Bodhi = you own your data, control the experience, focused environment under your brand",
+        ]},
+        { heading: "vs Generic Donation Platforms (GoFundMe, PayPal):", items: [
+          "They process transactions — they don't understand dāna",
+          "No merit dedication, no sutra quotes, no spiritual framing",
+          "Bodhi = giving interface designed for Buddhist generosity",
+        ]},
+      ],
+    },
+    {
+      label: "12",
+      title: isVi ? "Triết Lý Của Chúng Tôi" : "Our Philosophy",
+      subtitle: isVi ? '"Thành công không đo bằng số người dùng, mà bằng số chúng sinh giác ngộ."' : '"Success is not measured by user count, but by the number of awakened beings."',
+      content: isVi ? [
+        { heading: "Giá trị cốt lõi:", items: [
+          "Tôn trọng Truyền thống: công nghệ là phương tiện, Pháp là người lái",
+          "Chủ quyền Tự viện: tu viện tự do, không bị xiềng xích kỹ thuật số",
+          "Minh bạch & Phù hợp với Pháp: không phí ẩn, không khai thác dữ liệu",
+          "Bình đẳng cho Tất cả Chúng sinh: công cụ sẵn sàng từ khi sinh ra, ai cũng có thể dùng",
+        ]},
+        { heading: "Tầm nhìn:", items: [
+          "\"Tạo không gian cho SỰ TĨNH LẶNG. Biến công nghệ — vốn ồn ào — thành nơi mỗi người có thể trở về đối thoại với chính mình. Đó là cuộc cách mạng thực sự.\"",
+        ]},
+      ] : [
+        { heading: "Core Values:", items: [
+          "Respect for Tradition: technology is the vehicle, Dharma is the driver",
+          "Temple Sovereignty: monasteries free, not bound by digital chains",
+          "Clarity & Alignment with Dharma: no hidden fees, no data exploitation",
+          "Equality for All Beings: tools ready at birth, anyone can use them",
+        ]},
+        { heading: "Our vision:", items: [
+          "\"Create space for STILLNESS. Transform technology — inherently noisy — into a place where each person can return to dialogue with themselves. That is the true revolution.\"",
+        ]},
+      ],
+    },
+    {
+      label: "13",
+      title: isVi ? "Đội Ngũ & Uy Tín" : "Team & Credibility",
+      subtitle: isVi ? "Một mạng lưới toàn cầu gồm các kỹ sư và tu sĩ" : "A global network of engineers and monastics",
+      content: [
+        { items: isVi ? [
+          "200+ kỹ sư và tu sĩ cộng tác",
+          "Quy trình được chứng nhận ISO 9001/27001",
+          "Mạng lưới phi tập trung toàn cầu",
+          "Nền tảng song ngữ: Tiếng Anh + Tiếng Việt",
+          "AI agent phản hồi bằng tiếng Việt, Anh, Hoa, Tạng",
+          "Phục vụ tất cả tông phái: Thiền, Tịnh Độ, Theravāda, Kim Cang Thừa, Tây Tạng",
+        ] : [
+          "200+ engineers and monastics collaborating",
+          "ISO 9001/27001 certified processes",
+          "Global decentralized network",
+          "Bilingual platform: English + Vietnamese",
+          "AI agents respond in Vietnamese, English, Chinese, Tibetan",
+          "Serving all traditions: Zen, Pure Land, Theravāda, Vajrayāna, Tibetan",
+        ]},
+      ],
+    },
+    {
+      label: "14",
+      title: isVi ? "Luồng Demo Trực Tiếp" : "Live Demo Flow (Recommended)",
+      subtitle: isVi ? "Trình tự gợi ý để trình diễn nền tảng" : "Recommended sequence for presenting the platform",
+      content: [
+        { items: isVi ? [
+          "1. Trang Landing — làm nổi bật AI agent và tính năng nền tảng",
+          "2. Trang Giá — đi qua 3 gói (tất cả bao gồm website riêng)",
+          "3. Bảng điều khiển mẫu — thông tin gói, số liệu, cổng thanh toán, checklist onboarding",
+          "4. Tương tác AI Dharma Agent (demo trực tiếp nếu có)",
+          "5. Admin CRM — quy trình lead, tổng quan số liệu khách hàng, thống kê toàn mạng",
+          "6. Biểu mẫu liên hệ hoặc đặt lịch Calendly",
+        ] : [
+          "1. Landing page — highlight AI agents and platform capabilities",
+          "2. Pricing page — walk through 3 tiers (all include dedicated website)",
+          "3. Sample temple dashboard — subscription info, metrics, billing portal, onboarding checklist",
+          "4. AI Dharma Agent interaction (live demo if available)",
+          "5. Admin CRM — lead pipeline, client metrics overview, network-wide stats",
+          "6. Contact form or Calendly booking",
+        ]},
+      ],
+    },
+    {
+      label: "15",
+      title: isVi ? "Kêu Gọi Hành Động" : "Call to Action",
+      subtitle: isVi ? "Dùng thử miễn phí 14 ngày. Không ràng buộc. Hủy bất cứ lúc nào." : "14-day free trial on all plans. No lock-in. Cancel anytime.",
+      content: [
+        { heading: isVi ? "Liên hệ & Tài nguyên:" : "Links & Resources:", items: isVi ? [
+          "Website: bodhilab.io",
+          "Tính năng nền tảng: bodhilab.io/platform",
+          "Quy trình: bodhilab.io/process",
+          "Bảng giá: bodhilab.io/pricing",
+          "Liên hệ: bodhilab.io/contact",
+          "Đặt lịch demo: calendly.com/bodhilab",
+          "Tài liệu: bodhilab.io/docs/overview",
+        ] : [
+          "Website: bodhilab.io",
+          "Platform features: bodhilab.io/platform",
+          "Process overview: bodhilab.io/process",
+          "Pricing: bodhilab.io/pricing",
+          "Contact: bodhilab.io/contact",
+          "Book a demo: calendly.com/bodhilab",
+          "Documentation: bodhilab.io/docs/overview",
+        ]},
+      ],
+    },
   ];
 
   const handleFormSubmit = async (e: React.FormEvent) => {
