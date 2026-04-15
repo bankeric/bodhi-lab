@@ -53,10 +53,13 @@ const allowedOrigins = [
   process.env.NODE_ENV === "development" ? "http://localhost:3000" : "",
 ].filter(Boolean);
 
+// Replit dev domain pattern
+const replitDevPattern = /^https:\/\/[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+\.replit\.dev$/;
+
 app.use(cors({
   origin: (origin, callback) => {
     // Allow requests with no origin (same-origin, server-to-server, mobile apps)
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (!origin || allowedOrigins.includes(origin) || replitDevPattern.test(origin)) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
