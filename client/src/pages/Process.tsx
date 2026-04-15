@@ -270,6 +270,18 @@ export default function Process() {
                         </div>
                       </div>
 
+                      {/* Solutions For You button */}
+                      <div className="flex justify-center mb-4">
+                        <a
+                          href="#form"
+                          data-testid={`button-solutions-for-you-${index}`}
+                          className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#991b1b] text-white rounded-xl font-serif font-semibold text-sm hover:bg-[#7a1515] transition-all duration-300 shadow-md"
+                        >
+                          {language === 'en' ? 'Solutions For You' : 'Giải Pháp Cho Bạn'}
+                          <ArrowRight className="w-4 h-4" />
+                        </a>
+                      </div>
+
                       {/* Not Included (only for steps that have it) */}
                       {step.notIncluded && step.notIncluded.length > 0 && (
                         <div className="bg-[#f5f0e8] rounded-xl p-5 border border-dashed border-[#8B4513]/20">
