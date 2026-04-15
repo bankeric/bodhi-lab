@@ -1,0 +1,141 @@
+Slide 1: Title
+Bodhi Technology Lab
+"Where ancient wisdom meets modern technology"
+Buddhist Technology Solutions for Modern Organizations
+
+---
+Slide 2: The Problem
+- Only ~20% of temple attendees under 30 participate regularly
+- Donation management is manual (paper ledgers, Excel, notebooks)
+- Dharma talks happen once and vanish (no digital archive)
+- Member data lives on Facebook, Google Sheets, or paper — temples don't own it
+- Multilingual communities (Vietnamese elders + English-speaking youth) have no unified platform
+- Generic tools (WordPress, GoFundMe, Mailchimp) don't understand Buddhist context
+
+---
+Slide 3: Our Solution
+A white-label digital platform purpose-built for Buddhist temples, monasteries, and dharma centers.
+Every client gets:
+- Their own dedicated website with custom domain and full branding
+- AI Dharma Agents trained on their lineage's teachings
+- Donation processing with merit dedication
+- Content library, event calendar, community tools
+- Metrics dashboard with real-time stats
+- Complete data sovereignty — temple owns everything
+
+---
+Slide 4: How It Works — 4 Steps, 2 Weeks
+Step 1: Discovery Form (Day 1)
+- Temple submits name, tradition, community size
+- Dedicated project manager assigned
+- Consultation scheduled within 2-3 business days
+Step 2: Free Consultation (Day 3-5)
+- 30-minute video call
+- Live platform demo and feature walkthrough
+- Written proposal delivered within 48 hours (pricing, scope, timeline)
+Step 3: Onboarding & Build (Week 1-2)
+- Temple fills 6-step checklist: Temple Info → Branding → Content → Technical → AI Preferences → Review
+- $500 one-time onboarding fee covers:
+  - Dedicated website built with custom domain
+  - AI Agent configuration and training
+  - Data migration (members, donations, library)
+  - Paper document digitization (up to 500 pages)
+  - 1-hour training session for up to 3 staff
+Step 4: Go Live (Week 2+)
+- Full QA testing, domain pointing, SSL
+- 30 days dedicated post-launch support (24-hour response)
+- Ongoing: monthly updates, security patches, daily backups, 99.9% uptime
+
+---
+Slide 5: Platform Capabilities Overview
+1. White-Label Branding
+  - Custom domain, logo, colors, theme (Lotus, Zen Garden, Golden Temple, Minimal, Bodhi)
+  - Complete white-labeling — no Bodhi branding visible to end users
+  - Example: giac.ngo looks and feels like Giác Ngộ, not like a tech platform
+2. AI Dharma Agents
+  - 12 specialized agents across 4 doctrinal vehicles (Tiểu Thừa, Trung Thừa, Đại Thừa, Phật Thừa)
+  - Configurable per temple: doctrinal mode, response style (compassionate, formal, balanced)
+  - Multilingual: Vietnamese, English, Chinese, Tibetan
+  - Top agents by usage:
+    - Chánh Niệm: 13,800 practitioners (Four Foundations of Mindfulness, Làng Mai)
+    - Giác Ngộ: 8,900 practitioners (direct awakening, Zen, koan-style)
+    - Vấn Tỉnh: 7,200 practitioners (self-inquiry)
+    - Kệ Vấn Ngộ: 5,300 practitioners (verse-based awakening)
+    - Tâm An: 4,700 practitioners (healing, stress reduction)
+  - Models: GPT-4o (9 agents), GPT-5 (3 advanced agents)
+3. Donation Tools (Dāna Infrastructure)
+  - One-time or recurring dāna via cards, bank transfers, QR codes
+  - Merit dedication built into the giving flow
+  - Funds go directly to temple's own Stripe account (2.9% + $0.30, no markup)
+  - Tax receipt generation for qualifying temples
+  - Anonymous donation option
+4. Document & Resource Library
+  - Searchable repository: sutras (PDF, EPUB), dharma talks (MP3), videos (MP4), photos
+  - Full-text search, tagging by topic/teacher/lineage
+  - Access control: public, members-only, ordained-only
+  - Version history for evolving translations
+  - Offline download for retreats
+5. Event & Reminder Calendar
+  - Recurring event templates (Vesak, Uposatha, daily meditation, weekly talks)
+  - RSVP tracking with capacity limits
+  - Automated reminders: email, SMS, push (24h, 1h, 15min before)
+  - Multi-timezone support for global sangha
+  - Attendance analytics
+6. Community Forum (Sangha Engagement)
+  - Right Speech moderation with AI-assisted content flagging
+  - Study groups and circles around specific sutras or practices
+  - Anonymous posting for sensitive spiritual questions
+  - Customizable moderation rules per temple
+7. CRM & Member Management
+  - Centralized database: members, donors, volunteers
+  - Track engagement, donations, event attendance
+  - Segment by tradition, language, practice level
+  - Usage vs. plan limits with progress bars and overage alerts
+8. Metrics Dashboard
+  - Per-temple: total users, paid users, active users, page views, AI conversations, revenue, donations, storage
+  - 30-day trend charts
+  - Usage vs. limits with 80% capacity warnings
+  - Network-level (for federations): aggregated view across all temples with per-temple drill-down
+
+---
+Slide 6: Multi-Tenant Architecture ("Monastery Network")
+Federation Director View:
+- Aggregated metrics across all temples in the network
+- Total clients, combined paid users, total revenue, 30-day trends
+- Click into any temple for individual breakdown
+- Search by temple name or email
+Individual Temple Admin View:
+- Only sees their own data — members, donations, content, AI conversations, storage
+- No toggle, no filter, no "switch workspace"
+- Complete data isolation
+
+---
+Slide 7: Data Sovereignty
+- Each temple gets isolated database space
+- Member lists, donation records, uploaded content — all belong to the temple
+- Not pooled across clients, not used to train other models
+- Full data export anytime (CSV, JSON)
+- No lock-in contracts — cancel from billing portal
+- 30-day retention after cancellation, then permanent deletion
+- Donations go directly to temple's own Stripe account
+- Encrypted in transit (HTTPS) and at rest
+- Temple admins can only access their own community data
+
+---
+Slide 8: AI Agent Deep Dive
+How agents are configured per temple:
+1. Temple selects doctrinal mode: Zen, Pure Land, Theravāda, Vajrayāna, General Buddhist
+2. Temple chooses response style: Compassionate, Formal, Balanced
+3. Temple uploads own teachings via Google Drive (sutras, dharma talks, instructions)
+4. Temple can add custom AI notes (specific instructions, topics to address or avoid)
+Built-in guardrails:
+- Each agent has scoped system prompt defining what it will/won't do
+- Agents defer to human teachers for deep questions
+- Terms of service: "AI agents are tools for guidance, not substitutes for qualified teachers"
+- Right Speech moderation for community forums
+- Ethical safeguards: no medical advice, no definitive claims about enlightenment
+4 Doctrinal Vehicles:
+- Tiểu Thừa (Foundation): basic mindfulness, Five Precepts, stress reduction
+- Trung Thừa (Insight): vipassana, self-inquiry, dependent origination
+- Đại Thừa (Bodhisattva): compassion + wisdom, direct pointing, verse-based awakening
+- Phật Thừa (Ultimate): sudden awakening, non-conceptual, beyond all teachings

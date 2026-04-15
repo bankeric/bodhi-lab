@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "wouter";
-import { Briefcase, Building2, User, Mail, Phone, MapPin, Users, Globe, Wrench, FileText, ClipboardList, PhoneCall, Settings, Rocket, Check, ArrowRight, ArrowLeft, Video, MessageSquare, Monitor, HeadphonesIcon, XCircle, AlertTriangle } from "lucide-react";
+import { Briefcase, Building2, User, Mail, Phone, MapPin, Users, Globe, Wrench, FileText, ClipboardList, PhoneCall, Settings, Rocket, Check, ArrowRight, ArrowLeft, Video, MessageSquare, Monitor, HeadphonesIcon, XCircle, AlertTriangle, X, ChevronLeft, ChevronRight, Presentation } from "lucide-react";
 import { TracingBeam } from "@/components/TracingBeam";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
@@ -48,6 +48,147 @@ export default function Process() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+
+  const [slidesOpen, setSlidesOpen] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slides = [
+    {
+      label: "01",
+      title: "Bodhi Technology Lab",
+      subtitle: '"Where ancient wisdom meets modern technology"',
+      tagline: "Buddhist Technology Solutions for Modern Organizations",
+      content: [],
+    },
+    {
+      label: "02",
+      title: "The Problem",
+      subtitle: "Why Buddhist communities need purpose-built technology",
+      content: [
+        { items: [
+          "Only ~20% of temple attendees under 30 participate regularly",
+          "Donation management is manual — paper ledgers, Excel, notebooks",
+          "Dharma talks happen once and vanish with no digital archive",
+          "Member data lives on Facebook, Google Sheets, or paper — temples don't own it",
+          "Multilingual communities (Vietnamese elders + English-speaking youth) have no unified platform",
+          "Generic tools (WordPress, GoFundMe, Mailchimp) don't understand Buddhist context",
+        ]},
+      ],
+    },
+    {
+      label: "03",
+      title: "Our Solution",
+      subtitle: "A white-label platform purpose-built for Buddhist temples, monasteries, and dharma centers.",
+      content: [
+        { heading: "Every client gets:", items: [
+          "Their own dedicated website with custom domain and full branding",
+          "AI Dharma Agents trained on their lineage's teachings",
+          "Donation processing with merit dedication",
+          "Content library, event calendar, community tools",
+          "Metrics dashboard with real-time stats",
+          "Complete data sovereignty — temple owns everything",
+        ]},
+      ],
+    },
+    {
+      label: "04",
+      title: "How It Works — 4 Steps, 2 Weeks",
+      subtitle: "From discovery to go-live in under two weeks",
+      content: [
+        { heading: "Step 1: Discovery Form (Day 1)", items: [
+          "Temple submits name, tradition, community size",
+          "Dedicated project manager assigned",
+          "Consultation scheduled within 2–3 business days",
+        ]},
+        { heading: "Step 2: Free Consultation (Day 3–5)", items: [
+          "30-minute video call with live platform demo",
+          "Written proposal delivered within 48 hours",
+        ]},
+        { heading: "Step 3: Onboarding & Build (Week 1–2)", items: [
+          "$500 one-time onboarding: dedicated website, AI config, data migration, digitization (500 pages), 1-hour training",
+        ]},
+        { heading: "Step 4: Go Live (Week 2+)", items: [
+          "Full QA, domain pointing, SSL",
+          "30 days post-launch support — 24-hour response",
+          "Ongoing: monthly updates, security patches, daily backups, 99.9% uptime",
+        ]},
+      ],
+    },
+    {
+      label: "05",
+      title: "Platform Capabilities",
+      subtitle: "Eight integrated tools in one unified platform",
+      content: [
+        { heading: "White-Label Branding", items: ["Custom domain, logo, colors, and theme — no Bodhi branding visible to end users"] },
+        { heading: "AI Dharma Agents", items: ["12 agents across 4 doctrinal vehicles — configurable per temple, multilingual"] },
+        { heading: "Donation Tools (Dāna)", items: ["One-time or recurring dāna, merit dedication, funds direct to temple's own Stripe account"] },
+        { heading: "Document & Resource Library", items: ["Searchable sutras, dharma talks, videos — with access control and version history"] },
+        { heading: "Event & Reminder Calendar", items: ["Recurring templates, RSVP tracking, automated reminders, multi-timezone support"] },
+        { heading: "Community Forum", items: ["Right Speech moderation, study groups, anonymous posting for sensitive questions"] },
+        { heading: "CRM & Member Management", items: ["Centralized database for members, donors, volunteers — segment by tradition & language"] },
+        { heading: "Metrics Dashboard", items: ["Per-temple stats, 30-day trends, usage vs. limits — federation aggregated view available"] },
+      ],
+    },
+    {
+      label: "06",
+      title: "Multi-Tenant Architecture",
+      subtitle: '"Monastery Network" — isolated yet connected',
+      content: [
+        { heading: "Federation Director View", items: [
+          "Aggregated metrics across all temples in the network",
+          "Total clients, combined paid users, total revenue, 30-day trends",
+          "Click into any temple for individual breakdown",
+          "Search by temple name or email",
+        ]},
+        { heading: "Individual Temple Admin View", items: [
+          "Only sees their own data — members, donations, content, AI conversations, storage",
+          "No toggle, no filter, no 'switch workspace'",
+          "Complete data isolation",
+        ]},
+      ],
+    },
+    {
+      label: "07",
+      title: "Data Sovereignty",
+      subtitle: "Your data belongs to you — always",
+      content: [
+        { items: [
+          "Each temple gets isolated database space",
+          "Member lists, donation records, content — all belong to the temple",
+          "Not pooled across clients, not used to train other models",
+          "Full data export anytime (CSV, JSON)",
+          "No lock-in contracts — cancel from billing portal",
+          "30-day retention after cancellation, then permanent deletion",
+          "Donations go directly to temple's own Stripe account",
+          "Encrypted in transit (HTTPS) and at rest",
+        ]},
+      ],
+    },
+    {
+      label: "08",
+      title: "AI Agent Deep Dive",
+      subtitle: "Configurable, safe, and doctrinally grounded",
+      content: [
+        { heading: "How agents are configured", items: [
+          "Temple selects doctrinal mode: Zen, Pure Land, Theravāda, Vajrayāna, General Buddhist",
+          "Temple chooses response style: Compassionate, Formal, Balanced",
+          "Temple uploads own teachings via Google Drive",
+          "Temple adds custom AI notes — topics to address or avoid",
+        ]},
+        { heading: "Built-in guardrails", items: [
+          "Agents defer to human teachers for deep questions",
+          "No medical advice, no definitive claims about enlightenment",
+          "Right Speech moderation for community forums",
+        ]},
+        { heading: "4 Doctrinal Vehicles", items: [
+          "Tiểu Thừa (Foundation): basic mindfulness, Five Precepts, stress reduction",
+          "Trung Thừa (Insight): vipassana, self-inquiry, dependent origination",
+          "Đại Thừa (Bodhisattva): compassion + wisdom, direct pointing",
+          "Phật Thừa (Ultimate): sudden awakening, non-conceptual, beyond all teachings",
+        ]},
+      ],
+    },
+  ];
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -272,14 +413,15 @@ export default function Process() {
 
                       {/* Solutions For You button */}
                       <div className="flex justify-center mb-4">
-                        <a
-                          href="#form"
+                        <button
+                          type="button"
+                          onClick={() => { setCurrentSlide(0); setSlidesOpen(true); }}
                           data-testid={`button-solutions-for-you-${index}`}
                           className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#991b1b] text-white rounded-xl font-serif font-semibold text-sm hover:bg-[#7a1515] transition-all duration-300 shadow-md"
                         >
+                          <Presentation className="w-4 h-4" />
                           {language === 'en' ? 'Solutions For You' : 'Giải Pháp Cho Bạn'}
-                          <ArrowRight className="w-4 h-4" />
-                        </a>
+                        </button>
                       </div>
 
                       {/* Not Included (only for steps that have it) */}
@@ -601,6 +743,137 @@ export default function Process() {
             </div>
           </section>
         </TracingBeam>
+
+        {/* Slides Presentation Modal */}
+        {slidesOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4" data-testid="modal-slides">
+            {/* Backdrop */}
+            <div
+              className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+              onClick={() => setSlidesOpen(false)}
+            />
+
+            {/* Slide panel */}
+            <div className="relative w-full max-w-3xl bg-[#FAF6EE] rounded-2xl shadow-2xl border border-[#8B4513]/20 overflow-hidden flex flex-col" style={{ minHeight: 480 }}>
+
+              {/* Header bar */}
+              <div className="flex items-center justify-between px-6 py-4 bg-[#991b1b] text-white flex-shrink-0">
+                <div className="flex items-center gap-2">
+                  <Presentation className="w-4 h-4 opacity-80" />
+                  <span className="font-mono text-xs font-bold uppercase tracking-widest opacity-80">Solutions For You</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="font-mono text-xs font-bold opacity-70">{currentSlide + 1} / {slides.length}</span>
+                  <button
+                    onClick={() => setSlidesOpen(false)}
+                    className="w-7 h-7 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors"
+                    data-testid="button-close-slides"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Progress bar */}
+              <div className="h-1 bg-[#8B4513]/10 flex-shrink-0">
+                <div
+                  className="h-full bg-[#991b1b] transition-all duration-500 ease-out"
+                  style={{ width: `${((currentSlide + 1) / slides.length) * 100}%` }}
+                />
+              </div>
+
+              {/* Slide content */}
+              <div className="flex-1 overflow-y-auto px-8 py-8">
+                {(() => {
+                  const slide = slides[currentSlide];
+                  return (
+                    <div className="space-y-6">
+                      {/* Slide label + title */}
+                      <div>
+                        <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#991b1b]">Slide {slide.label}</span>
+                        <h2 className="font-serif text-2xl md:text-3xl font-bold text-[#2c2c2c] mt-1 leading-tight">{slide.title}</h2>
+                        {slide.subtitle && (
+                          <p className="font-serif text-base text-[#8B4513]/70 mt-2 italic">{slide.subtitle}</p>
+                        )}
+                        {'tagline' in slide && slide.tagline && (
+                          <p className="font-serif text-sm font-semibold text-[#991b1b] mt-3">{slide.tagline}</p>
+                        )}
+                      </div>
+
+                      {/* Slide body */}
+                      {slide.content.length > 0 && (
+                        <div className="space-y-5">
+                          {slide.content.map((section, si) => (
+                            <div key={si} className="bg-white/70 rounded-xl p-5 border border-[#8B4513]/10">
+                              {'heading' in section && section.heading && (
+                                <h3 className="font-serif text-sm font-bold text-[#991b1b] mb-3 uppercase tracking-wide">{section.heading}</h3>
+                              )}
+                              <ul className="space-y-2">
+                                {section.items.map((item, ii) => (
+                                  <li key={ii} className="flex items-start gap-2.5">
+                                    <Check className="w-3.5 h-3.5 text-[#991b1b] flex-shrink-0 mt-0.5" />
+                                    <span className="font-serif text-sm text-[#2c2c2c] leading-relaxed">{item}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })()}
+              </div>
+
+              {/* Navigation footer */}
+              <div className="flex items-center justify-between px-6 py-4 bg-[#EFE0BD]/60 border-t border-[#8B4513]/15 flex-shrink-0">
+                <button
+                  onClick={() => setCurrentSlide((s) => Math.max(0, s - 1))}
+                  disabled={currentSlide === 0}
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-lg font-serif text-sm font-semibold text-[#8B4513] hover:bg-[#8B4513]/10 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                  data-testid="button-slide-prev"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                  Previous
+                </button>
+
+                {/* Dot indicators */}
+                <div className="flex items-center gap-1.5">
+                  {slides.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setCurrentSlide(i)}
+                      className={`rounded-full transition-all duration-300 ${
+                        i === currentSlide ? "w-5 h-2 bg-[#991b1b]" : "w-2 h-2 bg-[#8B4513]/30 hover:bg-[#8B4513]/60"
+                      }`}
+                      data-testid={`button-slide-dot-${i}`}
+                    />
+                  ))}
+                </div>
+
+                {currentSlide < slides.length - 1 ? (
+                  <button
+                    onClick={() => setCurrentSlide((s) => Math.min(slides.length - 1, s + 1))}
+                    className="flex items-center gap-1.5 px-4 py-2 rounded-lg font-serif text-sm font-semibold bg-[#991b1b] text-white hover:bg-[#7a1515] transition-all"
+                    data-testid="button-slide-next"
+                  >
+                    Next
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setSlidesOpen(false)}
+                    className="flex items-center gap-1.5 px-4 py-2 rounded-lg font-serif text-sm font-semibold bg-[#991b1b] text-white hover:bg-[#7a1515] transition-all"
+                    data-testid="button-slide-done"
+                  >
+                    Done
+                    <Check className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Footer */}
         <footer className="border-t border-[#8B4513]/20 py-8 bg-[#EFE0BD]/50 backdrop-blur-sm">
