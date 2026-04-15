@@ -754,7 +754,7 @@ export default function Process() {
             />
 
             {/* Slide panel */}
-            <div className="relative w-full max-w-3xl bg-[#FAF6EE] rounded-2xl shadow-2xl border border-[#8B4513]/20 overflow-hidden flex flex-col" style={{ minHeight: 480 }}>
+            <div className="relative w-full max-w-3xl bg-[#FAF6EE] rounded-2xl shadow-2xl border border-[#8B4513]/20 overflow-hidden flex flex-col" style={{ maxHeight: "90vh" }}>
 
               {/* Header bar */}
               <div className="flex items-center justify-between px-6 py-4 bg-[#991b1b] text-white flex-shrink-0">
