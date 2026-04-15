@@ -52,20 +52,28 @@ export default function Process() {
   const [slidesOpen, setSlidesOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  const isVi = language === 'vi';
   const slides = [
     {
       label: "01",
       title: "Bodhi Technology Lab",
-      subtitle: '"Where ancient wisdom meets modern technology"',
-      tagline: "Buddhist Technology Solutions for Modern Organizations",
+      subtitle: isVi ? '"Nơi trí tuệ cổ xưa gặp gỡ công nghệ hiện đại"' : '"Where ancient wisdom meets modern technology"',
+      tagline: isVi ? "Giải Pháp Công Nghệ Phật Giáo cho Các Tổ Chức Hiện Đại" : "Buddhist Technology Solutions for Modern Organizations",
       content: [],
     },
     {
       label: "02",
-      title: "The Problem",
-      subtitle: "Why Buddhist communities need purpose-built technology",
+      title: isVi ? "Vấn Đề Hiện Tại" : "The Problem",
+      subtitle: isVi ? "Tại sao các cộng đồng Phật giáo cần công nghệ chuyên biệt" : "Why Buddhist communities need purpose-built technology",
       content: [
-        { items: [
+        { items: isVi ? [
+          "Chỉ ~20% phật tử dưới 30 tuổi tham gia sinh hoạt thường xuyên",
+          "Quản lý cúng dường thủ công — sổ giấy, Excel, ghi chú",
+          "Các buổi pháp thoại chỉ diễn ra một lần rồi biến mất, không lưu trữ số",
+          "Dữ liệu thành viên nằm rải rác trên Facebook, Google Sheets hoặc giấy tờ — chùa không sở hữu",
+          "Cộng đồng đa ngôn ngữ (người lớn tuổi tiếng Việt + thế hệ trẻ tiếng Anh) không có nền tảng thống nhất",
+          "Các công cụ phổ thông (WordPress, GoFundMe, Mailchimp) không hiểu bối cảnh Phật giáo",
+        ] : [
           "Only ~20% of temple attendees under 30 participate regularly",
           "Donation management is manual — paper ledgers, Excel, notebooks",
           "Dharma talks happen once and vanish with no digital archive",
@@ -77,10 +85,17 @@ export default function Process() {
     },
     {
       label: "03",
-      title: "Our Solution",
-      subtitle: "A white-label platform purpose-built for Buddhist temples, monasteries, and dharma centers.",
+      title: isVi ? "Giải Pháp Của Chúng Tôi" : "Our Solution",
+      subtitle: isVi ? "Nền tảng white-label được xây dựng riêng cho chùa, tu viện và trung tâm Phật pháp." : "A white-label platform purpose-built for Buddhist temples, monasteries, and dharma centers.",
       content: [
-        { heading: "Every client gets:", items: [
+        { heading: isVi ? "Mỗi khách hàng nhận được:" : "Every client gets:", items: isVi ? [
+          "Website riêng với tên miền tùy chỉnh và thương hiệu đầy đủ",
+          "AI Dharma Agents được đào tạo theo giáo lý của tông phái",
+          "Hệ thống nhận cúng dường với hồi hướng công đức",
+          "Thư viện nội dung, lịch sự kiện, công cụ cộng đồng",
+          "Bảng điều khiển số liệu thời gian thực",
+          "Chủ quyền dữ liệu hoàn toàn — chùa sở hữu mọi thứ",
+        ] : [
           "Their own dedicated website with custom domain and full branding",
           "AI Dharma Agents trained on their lineage's teachings",
           "Donation processing with merit dedication",
@@ -92,9 +107,27 @@ export default function Process() {
     },
     {
       label: "04",
-      title: "How It Works — 4 Steps, 2 Weeks",
-      subtitle: "From discovery to go-live in under two weeks",
-      content: [
+      title: isVi ? "Quy Trình — 4 Bước, 2 Tuần" : "How It Works — 4 Steps, 2 Weeks",
+      subtitle: isVi ? "Từ khám phá đến ra mắt trong chưa đầy hai tuần" : "From discovery to go-live in under two weeks",
+      content: isVi ? [
+        { heading: "Bước 1: Biểu Mẫu Khám Phá (Ngày 1)", items: [
+          "Chùa nộp thông tin: tên, truyền thống, quy mô cộng đồng",
+          "Phân công quản lý dự án chuyên trách",
+          "Lên lịch tư vấn trong vòng 2–3 ngày làm việc",
+        ]},
+        { heading: "Bước 2: Tư Vấn Miễn Phí (Ngày 3–5)", items: [
+          "Cuộc gọi video 30 phút với demo nền tảng trực tiếp",
+          "Đề xuất bằng văn bản giao trong vòng 48 giờ",
+        ]},
+        { heading: "Bước 3: Onboarding & Xây Dựng (Tuần 1–2)", items: [
+          "Phí onboarding một lần $500: website, cấu hình AI, di chuyển dữ liệu, số hóa tài liệu (500 trang), đào tạo 1 giờ",
+        ]},
+        { heading: "Bước 4: Ra Mắt (Tuần 2+)", items: [
+          "Kiểm tra QA đầy đủ, trỏ tên miền, SSL",
+          "30 ngày hỗ trợ sau ra mắt — phản hồi trong 24 giờ",
+          "Liên tục: cập nhật hàng tháng, vá bảo mật, sao lưu hàng ngày, uptime 99.9%",
+        ]},
+      ] : [
         { heading: "Step 1: Discovery Form (Day 1)", items: [
           "Temple submits name, tradition, community size",
           "Dedicated project manager assigned",
@@ -116,9 +149,18 @@ export default function Process() {
     },
     {
       label: "05",
-      title: "Platform Capabilities",
-      subtitle: "Eight integrated tools in one unified platform",
-      content: [
+      title: isVi ? "Tính Năng Nền Tảng" : "Platform Capabilities",
+      subtitle: isVi ? "Tám công cụ tích hợp trong một nền tảng thống nhất" : "Eight integrated tools in one unified platform",
+      content: isVi ? [
+        { heading: "Thương Hiệu White-Label", items: ["Tên miền, logo, màu sắc, giao diện tùy chỉnh — không hiển thị thương hiệu Bodhi với người dùng cuối"] },
+        { heading: "AI Dharma Agents", items: ["12 agent trên 4 thừa giáo lý — cấu hình theo từng chùa, đa ngôn ngữ"] },
+        { heading: "Công Cụ Cúng Dường (Dāna)", items: ["Cúng dường một lần hoặc định kỳ, hồi hướng công đức, tiền chuyển thẳng tới tài khoản Stripe của chùa"] },
+        { heading: "Thư Viện Tài Liệu & Tài Nguyên", items: ["Kho kinh sách, pháp thoại, video có thể tìm kiếm — kiểm soát truy cập và lịch sử phiên bản"] },
+        { heading: "Lịch Sự Kiện & Nhắc Nhở", items: ["Mẫu sự kiện tái diễn, theo dõi RSVP, nhắc nhở tự động, hỗ trợ múi giờ toàn cầu"] },
+        { heading: "Diễn Đàn Cộng Đồng", items: ["Kiểm duyệt Chánh Ngữ, nhóm học tập, đăng ẩn danh cho câu hỏi tâm linh nhạy cảm"] },
+        { heading: "CRM & Quản Lý Thành Viên", items: ["Cơ sở dữ liệu tập trung cho thành viên, nhà hảo tâm, tình nguyện viên — phân loại theo tông phái & ngôn ngữ"] },
+        { heading: "Bảng Điều Khiển Số Liệu", items: ["Thống kê theo từng chùa, xu hướng 30 ngày, sử dụng so với giới hạn — xem tổng hợp mạng lưới"] },
+      ] : [
         { heading: "White-Label Branding", items: ["Custom domain, logo, colors, and theme — no Bodhi branding visible to end users"] },
         { heading: "AI Dharma Agents", items: ["12 agents across 4 doctrinal vehicles — configurable per temple, multilingual"] },
         { heading: "Donation Tools (Dāna)", items: ["One-time or recurring dāna, merit dedication, funds direct to temple's own Stripe account"] },
@@ -131,9 +173,21 @@ export default function Process() {
     },
     {
       label: "06",
-      title: "Multi-Tenant Architecture",
-      subtitle: '"Monastery Network" — isolated yet connected',
-      content: [
+      title: isVi ? "Kiến Trúc Đa Khách Hàng" : "Multi-Tenant Architecture",
+      subtitle: isVi ? '"Mạng Lưới Tự Viện" — tách biệt nhưng kết nối' : '"Monastery Network" — isolated yet connected',
+      content: isVi ? [
+        { heading: "Giao Diện Giám Đốc Liên Mạng", items: [
+          "Số liệu tổng hợp trên toàn bộ chùa trong mạng lưới",
+          "Tổng số khách hàng, người dùng trả phí, doanh thu, xu hướng 30 ngày",
+          "Nhấp vào từng chùa để xem chi tiết",
+          "Tìm kiếm theo tên chùa hoặc email",
+        ]},
+        { heading: "Giao Diện Admin Từng Chùa", items: [
+          "Chỉ xem dữ liệu của mình — thành viên, cúng dường, nội dung, hội thoại AI, lưu trữ",
+          "Không có chuyển đổi, bộ lọc hay 'đổi không gian làm việc'",
+          "Cô lập dữ liệu hoàn toàn",
+        ]},
+      ] : [
         { heading: "Federation Director View", items: [
           "Aggregated metrics across all temples in the network",
           "Total clients, combined paid users, total revenue, 30-day trends",
@@ -149,10 +203,19 @@ export default function Process() {
     },
     {
       label: "07",
-      title: "Data Sovereignty",
-      subtitle: "Your data belongs to you — always",
+      title: isVi ? "Chủ Quyền Dữ Liệu" : "Data Sovereignty",
+      subtitle: isVi ? "Dữ liệu của bạn thuộc về bạn — mãi mãi" : "Your data belongs to you — always",
       content: [
-        { items: [
+        { items: isVi ? [
+          "Mỗi chùa có không gian cơ sở dữ liệu riêng biệt",
+          "Danh sách thành viên, hồ sơ cúng dường, nội dung — tất cả thuộc về chùa",
+          "Không gộp chung với khách hàng khác, không dùng để huấn luyện mô hình AI",
+          "Xuất dữ liệu đầy đủ bất cứ lúc nào (CSV, JSON)",
+          "Không ràng buộc hợp đồng — hủy qua cổng thanh toán",
+          "Lưu giữ 30 ngày sau khi hủy, sau đó xóa vĩnh viễn",
+          "Tiền cúng dường chuyển thẳng tới tài khoản Stripe của chùa",
+          "Mã hóa trong quá trình truyền (HTTPS) và khi lưu trữ",
+        ] : [
           "Each temple gets isolated database space",
           "Member lists, donation records, content — all belong to the temple",
           "Not pooled across clients, not used to train other models",
@@ -166,9 +229,27 @@ export default function Process() {
     },
     {
       label: "08",
-      title: "AI Agent Deep Dive",
-      subtitle: "Configurable, safe, and doctrinally grounded",
-      content: [
+      title: isVi ? "Tìm Hiểu Sâu Về AI Agent" : "AI Agent Deep Dive",
+      subtitle: isVi ? "Có thể cấu hình, an toàn và vững chắc về giáo lý" : "Configurable, safe, and doctrinally grounded",
+      content: isVi ? [
+        { heading: "Cách cấu hình agent", items: [
+          "Chùa chọn chế độ giáo lý: Thiền, Tịnh Độ, Theravāda, Kim Cang Thừa, Phật Giáo Tổng Quát",
+          "Chùa chọn phong cách phản hồi: Từ Bi, Trang Nghiêm, Cân Bằng",
+          "Chùa tải lên giáo lý riêng qua Google Drive",
+          "Chùa thêm ghi chú AI tùy chỉnh — chủ đề cần đề cập hoặc tránh",
+        ]},
+        { heading: "Cơ chế bảo vệ tích hợp", items: [
+          "Agent nhường quyền cho thầy giáo thọ với các câu hỏi sâu",
+          "Không tư vấn y tế, không khẳng định về giác ngộ",
+          "Kiểm duyệt Chánh Ngữ cho diễn đàn cộng đồng",
+        ]},
+        { heading: "4 Thừa Giáo Lý", items: [
+          "Tiểu Thừa (Nền Tảng): chánh niệm căn bản, Ngũ Giới, giảm căng thẳng",
+          "Trung Thừa (Tuệ Giác): vipassana, tự vấn, duyên khởi",
+          "Đại Thừa (Bồ Tát): từ bi + tuệ giác, chỉ thẳng tâm",
+          "Phật Thừa (Tối Thượng): đốn ngộ, vô niệm, vượt mọi giáo lý",
+        ]},
+      ] : [
         { heading: "How agents are configured", items: [
           "Temple selects doctrinal mode: Zen, Pure Land, Theravāda, Vajrayāna, General Buddhist",
           "Temple chooses response style: Compassionate, Formal, Balanced",
@@ -760,7 +841,7 @@ export default function Process() {
               <div className="flex items-center justify-between px-6 py-4 bg-[#991b1b] text-white flex-shrink-0">
                 <div className="flex items-center gap-2">
                   <Presentation className="w-4 h-4 opacity-80" />
-                  <span className="font-mono text-xs font-bold uppercase tracking-widest opacity-80">Solutions For You</span>
+                  <span className="font-mono text-xs font-bold uppercase tracking-widest opacity-80">{isVi ? 'Giải Pháp Cho Bạn' : 'Solutions For You'}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="font-mono text-xs font-bold opacity-70">{currentSlide + 1} / {slides.length}</span>
@@ -834,7 +915,7 @@ export default function Process() {
                   data-testid="button-slide-prev"
                 >
                   <ChevronLeft className="w-4 h-4" />
-                  Previous
+                  {isVi ? 'Trước' : 'Previous'}
                 </button>
 
                 {/* Dot indicators */}
@@ -857,7 +938,7 @@ export default function Process() {
                     className="flex items-center gap-1.5 px-4 py-2 rounded-lg font-serif text-sm font-semibold bg-[#991b1b] text-white hover:bg-[#7a1515] transition-all"
                     data-testid="button-slide-next"
                   >
-                    Next
+                    {isVi ? 'Tiếp' : 'Next'}
                     <ChevronRight className="w-4 h-4" />
                   </button>
                 ) : (
@@ -866,7 +947,7 @@ export default function Process() {
                     className="flex items-center gap-1.5 px-4 py-2 rounded-lg font-serif text-sm font-semibold bg-[#991b1b] text-white hover:bg-[#7a1515] transition-all"
                     data-testid="button-slide-done"
                   >
-                    Done
+                    {isVi ? 'Xong' : 'Done'}
                     <Check className="w-4 h-4" />
                   </button>
                 )}
