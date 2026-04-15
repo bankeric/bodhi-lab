@@ -13,8 +13,10 @@ if (!process.env.BETTER_AUTH_SECRET) {
 }
 
 // Determine the base URL based on environment
-const baseURL = process.env.NODE_ENV === "development" 
-  ? "http://localhost:3000"
+const baseURL = process.env.REPLIT_DEV_DOMAIN
+  ? `https://${process.env.REPLIT_DEV_DOMAIN}`
+  : process.env.NODE_ENV === "development"
+  ? "http://localhost:5000"
   : "https://www.bodhilab.io";
 
 console.log("[Auth] Initializing Better Auth configuration...");
@@ -42,6 +44,7 @@ export const auth = betterAuth({
     "http://localhost:5173",
     "https://bodhilab.io",
     "https://www.bodhilab.io",
+    ...(process.env.REPLIT_DEV_DOMAIN ? [`https://${process.env.REPLIT_DEV_DOMAIN}`] : []),
   ],
   emailAndPassword: {
     enabled: true,
