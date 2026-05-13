@@ -156,11 +156,6 @@ export function DocsNav({ navigation }: DocsNavProps) {
               About
             </span>
           </Link>
-          <Link href="/contact">
-            <span className="block font-serif text-sm text-foreground hover:text-primary transition-colors cursor-pointer">
-              Contact
-            </span>
-          </Link>
         </div>
       </div>
     </div>

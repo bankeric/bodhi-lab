@@ -5,8 +5,6 @@ export const discoveryTranslations = {
       company: "Company",
       nav: {
         platform: "Platform",
-        services: "Services",
-        pricing: "Pricing",
         discovery: "Discovery",
         docs: "Docs"
       },
@@ -18,18 +16,19 @@ export const discoveryTranslations = {
     },
 
     hero: {
-      title: "Discover Community",
-      subtitle: "Explore real-world examples of how Buddhist organizations leverage our platform. These are sample implementations showcasing our technology capabilities—each center can be customized to your specific needs.",
-      searchPlaceholder: "Search for communities, temples, meditation centers...",
-      badge: "Example Implementation"
+      title: "AI in Buddhism",
+      subtitle: "A research directory of temples, monastic bodies, Buddhist organizations, and projects applying AI to Dharma learning, translation, robotics, and digital preservation.",
+      searchPlaceholder: "Search AI Dharma projects, temples, robotics, research...",
+      badge: "AI + Buddhism"
     },
 
     categories: {
       all: "All",
-      monastery: "Monasteries",
-      meditationCenter: "Meditation Centers",
+      aiDharma: "AI Dharma",
+      robotics: "Robotics",
+      research: "Research",
       temple: "Temples",
-      retreatCenter: "Retreat Centers"
+      buddhistOrganization: "Organizations"
     },
 
     status: {
@@ -40,26 +39,25 @@ export const discoveryTranslations = {
     },
 
     centerCard: {
-      donateButton: "Donate",
-      membersLabel: "Members",
+      donateButton: "Visit Source",
+      membersLabel: "Reach",
       ratingLabel: "Rating"
     },
 
     results: {
       found: "Found",
-      communities: "communities",
-      community: "community"
+      communities: "AI Buddhism entries",
+      community: "AI Buddhism entry"
     },
 
     emptyState: {
-      title: "No Communities Found",
-      description: "Try searching with different keywords or select a different category"
+      title: "No Entries Found",
+      description: "Try searching for a project, technology, tradition, or location"
     },
 
     footer: {
       brand: "Bodhi Lab",
       platform: "Platform",
-      services: "Services",
       discovery: "Discovery",
       docs: "Docs",
       copyright: "© {year} Bodhi Technology Lab"
@@ -72,8 +70,6 @@ export const discoveryTranslations = {
       company: "Công Ty",
       nav: {
         platform: "Nền Tảng",
-        services: "Dịch Vụ",
-        pricing: "Bảng Giá",
         discovery: "Khám Phá",
         docs: "Tài Liệu"
       },
@@ -85,18 +81,19 @@ export const discoveryTranslations = {
     },
 
     hero: {
-      title: "Khám Phá Cộng Đồng",
-      subtitle: "Khám phá các ví dụ thực tế về cách các tổ chức Phật giáo tận dụng nền tảng của chúng tôi. Đây là những triển khai mẫu thể hiện khả năng công nghệ—mỗi trung tâm có thể được tùy chỉnh theo nhu cầu cụ thể của bạn.",
-      searchPlaceholder: "Tìm kiếm cộng đồng, chùa chiền, thiền viện...",
-      badge: "Triển Khai Mẫu"
+      title: "AI trong Phật giáo",
+      subtitle: "Danh mục nghiên cứu về chùa, tăng đoàn, tổ chức Phật giáo và dự án đang ứng dụng AI cho học Pháp, dịch thuật, robot và bảo tồn số.",
+      searchPlaceholder: "Tìm dự án AI Phật pháp, chùa, robot, nghiên cứu...",
+      badge: "AI + Phật giáo"
     },
 
     categories: {
       all: "Tất cả",
-      monastery: "Chùa Chiền",
-      meditationCenter: "Thiền Viện",
-      temple: "Đền Tháp",
-      retreatCenter: "Trung Tâm Tu Tập"
+      aiDharma: "AI Phật pháp",
+      robotics: "Robot",
+      research: "Nghiên cứu",
+      temple: "Chùa",
+      buddhistOrganization: "Tổ chức"
     },
 
     status: {
@@ -107,26 +104,25 @@ export const discoveryTranslations = {
     },
 
     centerCard: {
-      donateButton: "Cúng dường",
-      membersLabel: "Thành viên",
+      donateButton: "Xem nguồn",
+      membersLabel: "Quy mô",
       ratingLabel: "Đánh giá"
     },
 
     results: {
       found: "Tìm thấy",
-      communities: "cộng đồng",
-      community: "cộng đồng"
+      communities: "mục AI Phật giáo",
+      community: "mục AI Phật giáo"
     },
 
     emptyState: {
-      title: "Không tìm thấy cộng đồng",
-      description: "Thử tìm kiếm với từ khóa khác hoặc chọn danh mục khác"
+      title: "Không tìm thấy mục nào",
+      description: "Thử tìm theo dự án, công nghệ, truyền thống hoặc địa điểm"
     },
 
     footer: {
       brand: "Bodhi Lab",
       platform: "Nền Tảng",
-      services: "Dịch Vụ",
       discovery: "Khám Phá",
       docs: "Tài Liệu",
       copyright: "© {year} Bodhi Technology Lab"

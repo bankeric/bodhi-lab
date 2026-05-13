@@ -53,7 +53,6 @@ export function DocsLayout({ children }: DocsLayoutProps) {
       children: [
         { id: "models", title: t.layout.navigation.agents.sections.models, href: "/docs/models" },
         { id: "quick-start", title: t.layout.navigation.agents.sections.quickStart, href: "/docs/quick-start" },
-        { id: "pricing", title: t.layout.navigation.agents.sections.pricing, href: "/docs/pricing" },
       ],
     },
   ];

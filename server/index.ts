@@ -51,6 +51,7 @@ const allowedOrigins = [
   process.env.NODE_ENV === "development" ? "http://localhost:5173" : "",
   process.env.NODE_ENV === "development" ? "http://localhost:5000" : "",
   process.env.NODE_ENV === "development" ? "http://localhost:3000" : "",
+  process.env.NODE_ENV === "development" ? "http://localhost:3001" : "",
 ].filter(Boolean);
 
 // Replit dev domain pattern

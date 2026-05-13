@@ -228,10 +228,6 @@ export default function Landing() {
                         <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
                         {t.header.company.privacy}
                       </Link>
-                      <Link href="/contact" className="group/item flex items-center gap-2 font-serif text-[#8B4513]/80 hover:text-[#991b1b] transition-all text-sm py-1.5 px-2 rounded-lg hover:bg-[#991b1b]/10" data-testid="link-contact">
-                        <div className="w-1 h-1 rounded-full bg-[#8B4513]/40 group-hover/item:bg-[#991b1b]"></div>
-                        Contact
-                      </Link>
                     </div>
                     
                     {/* Social Media */}
@@ -260,18 +256,11 @@ export default function Landing() {
               >
                 {t.header.nav.services}
               </a>
-              <Link 
-                href="/pricing"
-                className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" 
-                data-testid="link-pricing"
-              >
-                {t.header.nav.pricing}
-              </Link>
               <Link href="/platform" className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-platform">
                 {t.header.nav.platform}
               </Link>
-              <Link href="/process" className="font-serif text-[#991b1b] px-4 py-2 rounded-full bg-[#991b1b]/10 hover:bg-[#991b1b]/20 transition-colors" data-testid="link-process">
-                {t.hero.cta.howItWorks}
+              <Link href="/discovery" className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-discovery">
+                {t.header.nav.discovery}
               </Link>
               <Link href="/docs/overview" className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-docs">
                 {t.header.nav.docs}
@@ -316,23 +305,17 @@ export default function Landing() {
               <a href="#capabilities" onClick={() => setMobileMenuOpen(false)} className="block font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-lg hover:bg-[#8B4513]/5 transition-colors">
                 {t.header.nav.services}
               </a>
-              <Link href="/pricing" onClick={() => setMobileMenuOpen(false)} className="block font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-lg hover:bg-[#8B4513]/5 transition-colors">
-                {t.header.nav.pricing}
-              </Link>
               <Link href="/platform" onClick={() => setMobileMenuOpen(false)} className="block font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-lg hover:bg-[#8B4513]/5 transition-colors">
                 {t.header.nav.platform}
               </Link>
-              <Link href="/process" onClick={() => setMobileMenuOpen(false)} className="block font-serif text-[#991b1b] px-4 py-2 rounded-lg bg-[#991b1b]/10 hover:bg-[#991b1b]/20 transition-colors">
-                {t.hero.cta.howItWorks}
+              <Link href="/discovery" onClick={() => setMobileMenuOpen(false)} className="block font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-lg hover:bg-[#8B4513]/5 transition-colors">
+                {t.header.nav.discovery}
               </Link>
               <Link href="/docs/overview" onClick={() => setMobileMenuOpen(false)} className="block font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-lg hover:bg-[#8B4513]/5 transition-colors">
                 {t.header.nav.docs}
               </Link>
               <Link href="/about" onClick={() => setMobileMenuOpen(false)} className="block font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-lg hover:bg-[#8B4513]/5 transition-colors">
                 About
-              </Link>
-              <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="block font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-lg hover:bg-[#8B4513]/5 transition-colors">
-                Contact
               </Link>
               <div className="pt-2 border-t border-[#8B4513]/20">
                 {session?.user ? (
@@ -398,29 +381,19 @@ export default function Landing() {
 
               <div className={`flex flex-wrap justify-center gap-4 transition-all duration-500 ${searchFocused ? "opacity-0 translate-y-10" : "opacity-100 translate-y-0"}`}>
                 <a
-                  href="https://calendly.com/bodhilab"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#capabilities"
                   className="font-serif px-8 py-4 rounded-xl bg-[#991b1b] hover:bg-[#8B4513] text-white font-semibold shadow-lg transition-all duration-300 hover:scale-105 flex items-center gap-2"
                   data-testid="button-start-sprint"
                 >
                   {t.hero.cta.startSprint}
                   <ArrowRight className="h-5 w-5" />
                 </a>
-                <a
-                  href="#capabilities"
+                <Link
+                  href="/discovery"
                   className="font-serif px-8 py-4 rounded-xl bg-white/50 backdrop-blur-md hover:bg-white/70 text-[#991b1b] font-semibold border-2 border-[#8B4513]/20 transition-all duration-300 hover:scale-105"
                   data-testid="button-explore-platform"
                 >
                   {t.hero.cta.explorePlatform}
-                </a>
-                <Link
-                  href="/process"
-                  className="font-serif px-8 py-4 rounded-xl bg-white/50 backdrop-blur-md hover:bg-white/70 text-[#8B4513] font-semibold border-2 border-[#8B4513]/20 transition-all duration-300 hover:scale-105 flex items-center gap-2"
-                  data-testid="button-how-it-works"
-                >
-                  {t.hero.cta.howItWorks}
-                  <ArrowRight className="h-5 w-5" />
                 </Link>
               </div>
 
@@ -681,18 +654,12 @@ export default function Landing() {
                 {t.capabilities.cta}
                 <ArrowRight className="w-5 h-5" />
               </Link>
-              <Link
-                href="/process"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-[#8B4513] rounded-full text-white font-serif font-semibold text-lg hover:bg-[#6d3610] transition-all duration-300 shadow-lg hover:shadow-xl"
-                data-testid="button-how-it-works-capabilities"
-              >
-                {t.hero.cta.howItWorks}
-                <ArrowRight className="w-5 h-5" />
-              </Link>
             </div>
           </div>
         </section>
 
+        {false && (
+        <>
         {/* Pricing Section */}
         <section id="services" className="py-16 px-4 bg-[#EFE0BD]/50">
           <div className="max-w-7xl mx-auto">
@@ -883,8 +850,8 @@ export default function Landing() {
 
                 <form className="space-y-4" onSubmit={handleContactSubmit}>
                   {submitStatus && (
-                    <div className={`p-3 rounded-lg font-serif text-sm ${submitStatus.success ? 'bg-green-100 text-green-800 border border-green-200' : 'bg-red-100 text-red-800 border border-red-200'}`} data-testid="status-contact-form">
-                      {submitStatus.message}
+                    <div className={`p-3 rounded-lg font-serif text-sm ${submitStatus?.success ? 'bg-green-100 text-green-800 border border-green-200' : 'bg-red-100 text-red-800 border border-red-200'}`} data-testid="status-contact-form">
+                      {submitStatus?.message}
                     </div>
                   )}
                   <div className="grid grid-cols-2 gap-4">
@@ -1055,6 +1022,8 @@ export default function Landing() {
             </div>
           </div>
         </section>
+        </>
+        )}
         </TracingBeam>
 
         <footer className="border-t border-[#8B4513]/20 py-8 bg-[#EFE0BD]/50 backdrop-blur-sm">
