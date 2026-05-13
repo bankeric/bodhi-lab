@@ -185,7 +185,7 @@ export default function CenterDetail() {
               <img
                 src={center.image}
                 alt={center.name}
-                className="absolute inset-0 w-full h-full object-cover"
+                className={`absolute inset-0 w-full h-full ${center.imageFit === "contain" ? "object-contain bg-white p-10" : "object-cover"}`}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#2c2c2c]/70 to-[#2c2c2c]/20 z-10" />
 
