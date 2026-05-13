@@ -89,7 +89,7 @@ export default function Discovery() {
               <img
                 src={center.image}
                 alt={center.name}
-                className="w-full h-full object-cover"
+                className={`w-full h-full ${center.imageFit === "contain" ? "object-contain bg-white p-8" : "object-cover"}`}
               />
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60"></div>
             </>
