@@ -10,7 +10,7 @@ export const landingTranslations = {
         privacy: "Privacy"
       },
       nav: {
-        services: "Services",
+        services: "Lab",
         pricing: "Pricing",
         platform: "Platform",
         discovery: "Discovery",
@@ -20,17 +20,17 @@ export const landingTranslations = {
 
     hero: {
       title: "Bodhi Technology Lab",
-      subtitle: "Buddhist Technology Solutions for Modern Organizations",
-      description: "White-label platforms for temples, monasteries, and dharma centers—empowering Buddhist communities with donation tools, AI guidance, and resource libraries.",
+      subtitle: "A Technology Lab for AI, Dharma, and Contemplative Systems",
+      description: "We research and build Buddhist AI agents, digital scripture infrastructure, and community-owned tools for temples, monasteries, and dharma organizations.",
       cta: {
-        startSprint: "Schedule a Consultation",
-        explorePlatform: "See Our Solutions",
+        startSprint: "Explore Lab Focus",
+        explorePlatform: "Discover AI Buddhism",
         howItWorks: "How It Works"
       },
       features: [
-        "White-Label Platform",
-        "Donation & Event Tools",
-        "Buddhist AI Guidance",
+        "Buddhist AI Research",
+        "Scripture Knowledge Systems",
+        "Community-Owned Infrastructure",
         "Full Data Sovereignty"
       ],
       stats: {
@@ -58,9 +58,9 @@ export const landingTranslations = {
     },
 
     capabilities: {
-      title: "Platform Capabilities",
-      subtitle: "White-label tools designed to help your temple thrive, self-fund, and preserve your lineage with dignity and sovereignty",
-      cta: "Explore Our Services",
+      title: "Lab Focus",
+      subtitle: "Research and product infrastructure for Buddhist organizations exploring AI with doctrinal care, transparent data, and long-term community sovereignty",
+      cta: "Explore the Platform",
       customBranding: {
         title: "Custom Branding",
         description: "Easily adapt the interface to your monastery's identity. Upload logos, choose color palettes, and map custom domains. Pre-loaded themes evoke Buddhist serenity.",
@@ -102,9 +102,9 @@ export const landingTranslations = {
         tags: ["24/7 Support", "Multi-Platform", "Custom Training"]
       },
       marketingAutomation: {
-        title: "Marketing Automation System",
-        description: "Create automated email campaigns for donor engagement, member retention, and event promotion. Track performance with built-in analytics and optimize your outreach with data-driven insights.",
-        tags: ["Email Campaigns", "Analytics", "Event Promotion"]
+        title: "Community Communications",
+        description: "Coordinate announcements, study cohorts, and event updates with respectful automation. Analytics are used to improve clarity and care, not to maximize commercial conversion.",
+        tags: ["Announcements", "Analytics", "Event Updates"]
       },
       whiteLabel: {
         title: "White-Label Platform",
@@ -272,7 +272,7 @@ export const landingTranslations = {
         privacy: "Bảo Mật"
       },
       nav: {
-        services: "Dịch Vụ",
+        services: "Phòng Lab",
         pricing: "Bảng Giá",
         platform: "Nền Tảng",
         discovery: "Khám Phá",
@@ -282,17 +282,17 @@ export const landingTranslations = {
 
     hero: {
       title: "Bodhi Technology Lab",
-      subtitle: "Giải pháp công nghệ Phật giáo cho các tổ chức hiện đại",
-      description: "Nền tảng nhãn trắng cho chùa, tu viện và trung tâm pháp—trao quyền cộng đồng Phật giáo với công cụ cúng dường, hướng dẫn AI và thư viện tài nguyên. Công nghệ nơi đây, không vì lợi danh - chỉ một lòng thành, hộ trì Chánh Pháp.",
+      subtitle: "Phòng thí nghiệm công nghệ cho AI, Phật pháp và hệ thống chiêm nghiệm",
+      description: "Chúng tôi nghiên cứu và xây dựng AI Phật giáo, hạ tầng kinh điển số, và công cụ do cộng đồng sở hữu cho chùa, tu viện và tổ chức Phật giáo.",
       cta: {
-        startSprint: "Đặt lịch tư vấn",
-        explorePlatform: "Xem giải pháp",
+        startSprint: "Khám phá phòng lab",
+        explorePlatform: "Khám phá AI Phật giáo",
         howItWorks: "Quy Trình"
       },
       features: [
-        "Nền tảng nhãn trắng",
-        "Công cụ cúng dường & sự kiện",
-        "Hướng dẫn AI Phật giáo",
+        "Nghiên cứu AI Phật giáo",
+        "Hệ thống tri thức kinh điển",
+        "Hạ tầng do cộng đồng sở hữu",
         "Chủ quyền dữ liệu đầy đủ"
       ],
       stats: {
@@ -320,9 +320,9 @@ export const landingTranslations = {
     },
 
     capabilities: {
-      title: "Khả Năng Nền Tảng",
-      subtitle: "Công cụ nhãn trắng được thiết kế để giúp chùa của bạn phát triển, tự tài trợ và bảo tồn dòng truyền thừa với phẩm giá và chủ quyền",
-      cta: "Khám Phá Dịch Vụ Của Chúng Tôi",
+      title: "Trọng tâm phòng lab",
+      subtitle: "Nghiên cứu và hạ tầng sản phẩm cho các tổ chức Phật giáo khám phá AI với sự cẩn trọng giáo lý, dữ liệu minh bạch và chủ quyền cộng đồng lâu dài",
+      cta: "Khám phá nền tảng",
       customBranding: {
         title: "Thương Hiệu Tùy Chỉnh",
         description: "Dễ dàng điều chỉnh giao diện theo bản sắc của tu viện bạn. Tải lên logo, chọn bảng màu và ánh xạ tên miền tùy chỉnh. Các chủ đề được tải sẵn gợi lên sự thanh thản của Phật giáo.",
@@ -364,9 +364,9 @@ export const landingTranslations = {
         tags: ["Hỗ Trợ 24/7", "Đa Nền Tảng", "Đào Tạo Tùy Chỉnh"]
       },
       marketingAutomation: {
-        title: "Hệ Thống Marketing Tự Động",
-        description: "Tạo chiến dịch email tự động để thu hút người quyên góp, giữ chân thành viên và quảng bá sự kiện. Theo dõi hiệu suất với phân tích tích hợp và tối ưu hóa tiếp cận bằng thông tin chi tiết dựa trên dữ liệu.",
-        tags: ["Chiến Dịch Email", "Phân Tích", "Quảng Bá Sự Kiện"]
+        title: "Truyền thông cộng đồng",
+        description: "Điều phối thông báo, nhóm học và cập nhật sự kiện bằng tự động hóa có chừng mực. Phân tích được dùng để tăng sự rõ ràng và chăm sóc, không phải để tối đa hóa chuyển đổi thương mại.",
+        tags: ["Thông Báo", "Phân Tích", "Cập Nhật Sự Kiện"]
       },
       whiteLabel: {
         title: "Nền Tảng White-Label",

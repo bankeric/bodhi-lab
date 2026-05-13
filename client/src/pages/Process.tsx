@@ -902,8 +902,8 @@ export default function Process() {
                         {slide.subtitle && (
                           <p className="font-serif text-base text-[#8B4513]/70 mt-2 italic">{slide.subtitle}</p>
                         )}
-                        {'tagline' in slide && slide.tagline && (
-                          <p className="font-serif text-sm font-semibold text-[#991b1b] mt-3">{slide.tagline}</p>
+                        {'tagline' in slide && Boolean(slide.tagline) && (
+                          <p className="font-serif text-sm font-semibold text-[#991b1b] mt-3">{String(slide.tagline)}</p>
                         )}
                       </div>
 

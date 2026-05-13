@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { PasswordGate } from "@/components/PasswordGate";
 
 // Lazy load all pages for code splitting
 const Landing = lazy(() => import("@/pages/Landing"));
@@ -59,8 +60,16 @@ function Router() {
         <Route path="/" component={Landing} />
         <Route path="/platform" component={Platform} />
         <Route path="/discovery" component={Discovery} />
-        <Route path="/onboarding" component={Onboarding} />
-        <Route path="/process" component={Process} />
+        <Route path="/onboarding">
+          <PasswordGate title="Private Onboarding">
+            <Onboarding />
+          </PasswordGate>
+        </Route>
+        <Route path="/process">
+          <PasswordGate title="Private Process">
+            <Process />
+          </PasswordGate>
+        </Route>
         <Route path="/center/:id" component={CenterDetail} />
         <Route path="/about" component={About} />
         <Route path="/career" component={Career} />
@@ -84,8 +93,16 @@ function Router() {
         <Route path="/login" component={Login} />
         <Route path="/forgot-password" component={ForgotPassword} />
         <Route path="/reset-password" component={ResetPassword} />
-        <Route path="/pricing" component={Pricing} />
-        <Route path="/contact" component={Contact} />
+        <Route path="/pricing">
+          <PasswordGate title="Private Service Details">
+            <Pricing />
+          </PasswordGate>
+        </Route>
+        <Route path="/contact">
+          <PasswordGate title="Private Contact">
+            <Contact />
+          </PasswordGate>
+        </Route>
         <Route path="/docs/manifesto">
           <DocsLayout>
             <Manifesto />
@@ -128,7 +145,9 @@ function Router() {
         </Route>
         <Route path="/docs/pricing">
           <DocsLayout>
-            <TokenPricing />
+            <PasswordGate title="Private Pricing Docs">
+              <TokenPricing />
+            </PasswordGate>
           </DocsLayout>
         </Route>
         <Route component={NotFound} />

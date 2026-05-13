@@ -408,16 +408,16 @@ export default function Overview() {
           </p>
           
           <div className="space-y-4 max-w-2xl mx-auto pt-4">
-            <h3 className="font-serif text-xl font-semibold text-foreground text-center">Ready to begin?</h3>
+            <h3 className="font-serif text-xl font-semibold text-foreground text-center">Explore the lab</h3>
             <div className="flex flex-col md:flex-row gap-4 justify-center">
-              <a href="/#services" className="inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground rounded-lg font-serif font-semibold hover:bg-primary/90 transition-colors" data-testid="button-start-sprint">
-                Start a Sprint
+              <a href="/platform" className="inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground rounded-lg font-serif font-semibold hover:bg-primary/90 transition-colors" data-testid="button-start-sprint">
+                Platform
               </a>
-              <a href="/#services" className="inline-flex items-center justify-center px-6 py-3 border-2 border-primary text-primary rounded-lg font-serif font-semibold hover:bg-primary/10 transition-colors" data-testid="button-hire-pod">
-                Hire a Pod
+              <a href="/discovery" className="inline-flex items-center justify-center px-6 py-3 border-2 border-primary text-primary rounded-lg font-serif font-semibold hover:bg-primary/10 transition-colors" data-testid="button-hire-pod">
+                Discovery
               </a>
-              <a href="/#services" className="inline-flex items-center justify-center px-6 py-3 border-2 border-primary text-primary rounded-lg font-serif font-semibold hover:bg-primary/10 transition-colors" data-testid="button-deploy">
-                Deploy
+              <a href="/docs/models" className="inline-flex items-center justify-center px-6 py-3 border-2 border-primary text-primary rounded-lg font-serif font-semibold hover:bg-primary/10 transition-colors" data-testid="button-deploy">
+                Agent Models
               </a>
             </div>
             <p className="text-center text-muted-foreground font-serif italic pt-4">

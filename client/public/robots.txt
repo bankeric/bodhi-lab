@@ -3,6 +3,11 @@ Allow: /
 Disallow: /admin
 Disallow: /dashboard
 Disallow: /login
+Disallow: /pricing
+Disallow: /contact
+Disallow: /onboarding
+Disallow: /process
+Disallow: /docs/pricing
 Disallow: /api/
 
 Sitemap: https://bodhilab.io/sitemap.xml

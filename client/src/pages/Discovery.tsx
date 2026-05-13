@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Search, MapPin, Users, Star, Sparkles, Briefcase, BookOpen, Calendar, HandHeart } from "lucide-react";
+import { Search, MapPin, Users, Star, Briefcase, ExternalLink } from "lucide-react";
 import { buddhistCenters } from "@shared/buddhistCenters";
 import { Link } from "wouter";
 import { TracingBeam } from "@/components/TracingBeam";
@@ -12,16 +12,17 @@ import { useDocumentTitle } from "@/hooks/use-document-title";
 export default function Discovery() {
   const { language } = useLanguage();
   const t = discoveryTranslations[language];
-  useDocumentTitle("Discovery", "Explore Buddhist temples, monasteries, and meditation centers powered by Bodhi Technology Lab.");
+  useDocumentTitle("Discovery", "Explore temples and Buddhist organizations applying AI to Dharma learning, translation, robotics, and digital preservation.");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
   const categories = [
-    { id: "all", label: t.categories.all, icon: "🏛️" },
-    { id: "monastery", label: t.categories.monastery, icon: "🏯" },
-    { id: "meditation-center", label: t.categories.meditationCenter, icon: "🧘" },
-    { id: "temple", label: t.categories.temple, icon: "⛩️" },
-    { id: "retreat-center", label: t.categories.retreatCenter, icon: "🌄" },
+    { id: "all", label: t.categories.all, icon: "✦" },
+    { id: "ai-dharma", label: t.categories.aiDharma, icon: "☸" },
+    { id: "robotics", label: t.categories.robotics, icon: "◈" },
+    { id: "research", label: t.categories.research, icon: "◇" },
+    { id: "temple", label: t.categories.temple, icon: "⌂" },
+    { id: "buddhist-organization", label: t.categories.buddhistOrganization, icon: "◎" },
   ];
 
   const filteredCenters = buddhistCenters.filter((center) => {
@@ -75,8 +76,7 @@ export default function Discovery() {
     };
 
     return (
-      <Link href={`/center/${center.id}`}>
-        <a>
+      <a href={center.website || "#"} target="_blank" rel="noopener noreferrer">
           <motion.div
             whileHover={{ scale: 1.02 }}
             className="bg-white/50 backdrop-blur-md border border-[#8B4513]/30 rounded-2xl overflow-hidden
@@ -184,14 +184,13 @@ export default function Discovery() {
                 hover:bg-[#7a1515] transition-colors font-serif font-semibold text-xs"
               data-testid={`button-explore-center-${center.id}`}
             >
-              <Sparkles className="w-3 h-3" />
+              <ExternalLink className="w-3 h-3" />
               {t.centerCard.donateButton}
             </button>
           </div>
         </div>
           </motion.div>
-        </a>
-      </Link>
+      </a>
     );
   };
 
@@ -254,12 +253,6 @@ export default function Discovery() {
               <Link href="/platform" className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-platform">
                   {t.header.nav.platform}
               </Link>
-              <a href="/#capabilities" className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-services">
-                {t.header.nav.services}
-              </a>
-              <a href="/#services" className="font-serif text-[#8B4513]/70 hover:text-[#991b1b] px-4 py-2 rounded-full hover:bg-[#8B4513]/5 transition-colors" data-testid="link-pricing">
-                {t.header.nav.pricing}
-              </a>
               <Link href="/discovery" className="font-serif text-[#991b1b] px-4 py-2 rounded-full bg-[#8B4513]/10 transition-colors" data-testid="link-discovery">
                   {t.header.nav.discovery}
               </Link>
@@ -348,9 +341,6 @@ export default function Discovery() {
               <div className="flex gap-6">
                 <Link href="/" className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
                     {t.footer.platform}
-</Link>
-                <Link href="/" className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
-                    {t.footer.services}
 </Link>
                 <Link href="/discovery" className="font-serif text-[#8B4513]/50 hover:text-[#991b1b] transition-colors">
                     {t.footer.discovery}
